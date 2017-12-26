@@ -1,13 +1,13 @@
 package app.modele.rowMapper;
 
 import app.modele.entity.*;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 @Component
 public class CreneauRowMapper extends AbstractRowMapper<Creneau> {
@@ -28,11 +28,11 @@ public class CreneauRowMapper extends AbstractRowMapper<Creneau> {
         super("creneau");
     }
 
-    public CreneauRowMapper(Pair<String, String>... columnName) {
+    public CreneauRowMapper(Map.Entry<String, String>... columnName) {
         super(columnName);
     }
 
-    public CreneauRowMapper(String tableName, Pair<String, String>... columnName) {
+    public CreneauRowMapper(String tableName, Map.Entry<String, String>... columnName) {
         super(tableName, columnName);
     }
 

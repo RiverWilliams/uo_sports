@@ -1,11 +1,11 @@
 package app.modele.rowMapper;
 
 import app.modele.entity.Lieu;
-import javafx.util.Pair;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 @Component
 public class LieuRowMapper extends AbstractRowMapper<Lieu> {
@@ -14,11 +14,11 @@ public class LieuRowMapper extends AbstractRowMapper<Lieu> {
         super("lieu");
     }
 
-    public LieuRowMapper(Pair<String, String>... columnName) {
+    public LieuRowMapper(Map.Entry<String, String>... columnName) {
         super(columnName);
     }
 
-    public LieuRowMapper(String tableName, Pair<String, String>... columnName) {
+    public LieuRowMapper(String tableName, Map.Entry<String, String>... columnName) {
         super(tableName, columnName);
     }
 

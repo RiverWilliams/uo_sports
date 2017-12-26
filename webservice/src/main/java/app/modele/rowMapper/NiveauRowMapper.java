@@ -1,11 +1,11 @@
 package app.modele.rowMapper;
 
 import app.modele.entity.Niveau;
-import javafx.util.Pair;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 @Component
 public class NiveauRowMapper extends AbstractRowMapper<Niveau> {
@@ -14,11 +14,11 @@ public class NiveauRowMapper extends AbstractRowMapper<Niveau> {
         super("niveau");
     }
 
-    public NiveauRowMapper(Pair<String, String>... columnName) {
+    public NiveauRowMapper(Map.Entry<String, String>... columnName) {
         super(columnName);
     }
 
-    public NiveauRowMapper(String tableName, Pair<String, String>... columnName) {
+    public NiveauRowMapper(String tableName, Map.Entry<String, String>... columnName) {
         super(tableName, columnName);
     }
 

@@ -1,11 +1,11 @@
 package app.modele.rowMapper;
 
 import app.modele.entity.CategoriePersonne;
-import javafx.util.Pair;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 @Component
 public class CategoriePersonneRowMapper extends AbstractRowMapper<CategoriePersonne> {
@@ -14,11 +14,11 @@ public class CategoriePersonneRowMapper extends AbstractRowMapper<CategoriePerso
         super("categorie_personne");
     }
 
-    public CategoriePersonneRowMapper(Pair<String, String>... columnName) {
+    public CategoriePersonneRowMapper(Map.Entry<String, String>... columnName) {
         super(columnName);
     }
 
-    public CategoriePersonneRowMapper(String tableName, Pair<String, String>... columnName) {
+    public CategoriePersonneRowMapper(String tableName, Map.Entry<String, String>... columnName) {
         super(tableName, columnName);
     }
 

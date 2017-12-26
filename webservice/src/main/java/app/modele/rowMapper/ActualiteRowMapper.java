@@ -1,11 +1,11 @@
 package app.modele.rowMapper;
 
 import app.modele.entity.Actualite;
-import javafx.util.Pair;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 @Component
 public class ActualiteRowMapper extends AbstractRowMapper<Actualite> {
@@ -14,11 +14,11 @@ public class ActualiteRowMapper extends AbstractRowMapper<Actualite> {
         super("actualite");
     }
 
-    public ActualiteRowMapper(Pair<String, String>... columnName) {
+    public ActualiteRowMapper(Map.Entry<String, String>... columnName) {
         super(columnName);
     }
 
-    public ActualiteRowMapper(String tableName, Pair<String, String>... columnName) {
+    public ActualiteRowMapper(String tableName, Map.Entry<String, String>... columnName) {
         super(tableName, columnName);
     }
 
