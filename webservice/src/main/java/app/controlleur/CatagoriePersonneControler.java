@@ -2,7 +2,10 @@ package app.controlleur;
 
 import app.exception.apiException.NotFoundApiException;
 import app.modele.entity.CategoriePersonne;
+import app.modele.relation.Demande;
+import app.modele.entity.PieceInscription;
 import app.modele.service.ICategoriePersonneService;
+import app.modele.service.IDemandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,21 @@ public class CatagoriePersonneControler {
     @Autowired
     private ICategoriePersonneService categoriePersonneService;
 
+    @Autowired
+    private IDemandeService demandeService;
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        categoriePersonneService.deleteById(id);
+    }
+
+    @DeleteMapping("/{idCategorie}/pieces_inscription/{idPiece}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePieceInscription(@PathVariable long idCategorie, @PathVariable long idPiece) {
+        demandeService.delete(new Demande(idCategorie, idPiece));
+    }
+
     @GetMapping
     public List<CategoriePersonne> findAll() {
         return categoriePersonneService.findAll();
@@ -34,16 +52,9 @@ public class CatagoriePersonneControler {
         return byId;
     }
 
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Validated(CategoriePersonne.Update.class) CategoriePersonne categoriePersonne) {
-        categoriePersonneService.update(categoriePersonne);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        categoriePersonneService.deleteById(id);
+    @GetMapping("/{idCategorie}/pieces_inscription")
+    public List<PieceInscription> getAllPieceInscription(@PathVariable Long idCategorie) {
+        return categoriePersonneService.findAllPiece(idCategorie);
     }
 
     @PostMapping
@@ -51,6 +62,12 @@ public class CatagoriePersonneControler {
         final Long key = categoriePersonneService.insert(categoriePersonne);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Validated(CategoriePersonne.Update.class) CategoriePersonne categoriePersonne) {
+        categoriePersonneService.update(categoriePersonne);
     }
 
 }

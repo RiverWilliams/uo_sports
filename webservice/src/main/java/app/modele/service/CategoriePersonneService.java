@@ -4,6 +4,7 @@ import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
 import app.modele.dao.ICategoriePersonneDAO;
 import app.modele.entity.CategoriePersonne;
+import app.modele.entity.PieceInscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,11 @@ public class CategoriePersonneService implements ICategoriePersonneService {
     @Override
     public List<CategoriePersonne> findAll() {
         return categoriePersonneDAO.findAll();
+    }
+
+    @Override
+    public List<PieceInscription> findAllPiece(Long idCategorie) {
+        return categoriePersonneDAO.findAllPiece(idCategorie);
     }
 
     @Override

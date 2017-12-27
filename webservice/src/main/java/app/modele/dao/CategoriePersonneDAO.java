@@ -2,6 +2,7 @@ package app.modele.dao;
 
 import app.exception.DeleteChildBeforeParentException;
 import app.modele.entity.CategoriePersonne;
+import app.modele.entity.PieceInscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -74,5 +75,15 @@ public class CategoriePersonneDAO extends AbstractDao implements ICategoriePerso
         //language=SQL
         final String sql = "UPDATE categorie_personne SET nom=?,prix=? WHERE id=?";
         getJdbcTemplate().update(sql, entity.getNom(), entity.getPrix(), entity.getId());
+    }
+
+    @Autowired
+    private RowMapper<PieceInscription> pieceInscriptionRowMapper;
+
+    @Override
+    public List<PieceInscription> findAllPiece(Long id_categorie) {
+        //language=SQL
+        final String sql = "SELECT piece_inscription.* FROM (SELECT id_piece_inscription FROM demande WHERE id_categorie_personne=?) demande JOIN piece_inscription ON demande.id_piece_inscription=piece_inscription.id";
+        return getJdbcTemplate().query(sql, pieceInscriptionRowMapper, id_categorie);
     }
 }
