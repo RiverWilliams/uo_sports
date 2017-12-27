@@ -7,7 +7,7 @@ public interface IServiceEntity<T, ID> {
 
     List<T> findAll();
 
-    T findById(ID id) ;
+    T findById(ID id);
 
     ID insert(T entity);
 

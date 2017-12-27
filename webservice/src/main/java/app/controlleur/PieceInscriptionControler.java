@@ -1,6 +1,5 @@
 package app.controlleur;
 
-import app.exception.apiException.NotFoundApiException;
 import app.modele.entity.PieceInscription;
 import app.modele.service.IPieceInscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,12 @@ public class PieceInscriptionControler {
     @Autowired
     private IPieceInscriptionService pieceInscriptionService;
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        pieceInscriptionService.deleteById(id);
+    }
+
     @GetMapping
     public List<PieceInscription> findAll() {
         return pieceInscriptionService.findAll();
@@ -27,23 +32,7 @@ public class PieceInscriptionControler {
 
     @GetMapping("/{id}")
     public PieceInscription findById(@PathVariable Long id) {
-        final PieceInscription byId = pieceInscriptionService.findById(id);
-        if (byId == null) {
-            throw new NotFoundApiException("La piece " + id + " n'existe pas.");
-        }
-        return byId;
-    }
-
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Validated(PieceInscription.Update.class) PieceInscription pieceInscription) {
-        pieceInscriptionService.update(pieceInscription);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        pieceInscriptionService.deleteById(id);
+        return pieceInscriptionService.findById(id);
     }
 
     @PostMapping
@@ -51,6 +40,12 @@ public class PieceInscriptionControler {
         final Long key = pieceInscriptionService.insert(pieceInscription);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Validated(PieceInscription.Update.class) PieceInscription pieceInscription) {
+        pieceInscriptionService.update(pieceInscription);
     }
 
 }

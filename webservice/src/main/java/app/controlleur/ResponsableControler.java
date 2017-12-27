@@ -1,6 +1,5 @@
 package app.controlleur;
 
-import app.exception.apiException.NotFoundApiException;
 import app.modele.entity.Responsable;
 import app.modele.service.IResponsableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,12 @@ public class ResponsableControler {
     @Autowired
     private IResponsableService responsableService;
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        responsableService.deleteById(id);
+    }
+
     @GetMapping
     public List<Responsable> findAll() {
         return responsableService.findAll();
@@ -27,23 +32,7 @@ public class ResponsableControler {
 
     @GetMapping("/{id}")
     public Responsable findById(@PathVariable Long id) {
-        final Responsable byId = responsableService.findById(id);
-        if (byId == null) {
-            throw new NotFoundApiException("Le responsable " + id + " n'existe pas.");
-        }
-        return byId;
-    }
-
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Validated(Responsable.Update.class) Responsable responsable) {
-        responsableService.update(responsable);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        responsableService.deleteById(id);
+        return responsableService.findById(id);
     }
 
     @PostMapping
@@ -51,6 +40,12 @@ public class ResponsableControler {
         final Long key = responsableService.insert(responsable);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Validated(Responsable.Update.class) Responsable responsable) {
+        responsableService.update(responsable);
     }
 
 }

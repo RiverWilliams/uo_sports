@@ -1,6 +1,5 @@
 package app.controlleur;
 
-import app.exception.apiException.NotFoundApiException;
 import app.modele.entity.Personne;
 import app.modele.service.IPersonneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,12 @@ public class PersonneControler {
     @Autowired
     private IPersonneService personneService;
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        personneService.deleteById(id);
+    }
+
     @GetMapping
     public List<Personne> findAll() {
         return personneService.findAll();
@@ -27,23 +32,7 @@ public class PersonneControler {
 
     @GetMapping("/{id}")
     public Personne findById(@PathVariable Long id) {
-        final Personne byId = personneService.findById(id);
-        if (byId == null) {
-            throw new NotFoundApiException("La personne " + id + " n'existe pas.");
-        }
-        return byId;
-    }
-
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Validated(Personne.Update.class) Personne personne) {
-        personneService.update(personne);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        personneService.deleteById(id);
+        return personneService.findById(id);
     }
 
     @PostMapping
@@ -51,6 +40,12 @@ public class PersonneControler {
         final Long key = personneService.insert(personne);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Validated(Personne.Update.class) Personne personne) {
+        personneService.update(personne);
     }
 
 }

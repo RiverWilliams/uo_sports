@@ -3,6 +3,7 @@ package app.modele.service;
 import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
 import app.exception.apiException.ForeignKeyViolationApiException;
+import app.exception.apiException.NotFoundApiException;
 import app.modele.dao.ICategoriePersonneDAO;
 import app.modele.dao.IPersonneDAO;
 import app.modele.entity.Personne;
@@ -14,6 +15,16 @@ import java.util.List;
 @Service
 public class PersonneService implements IPersonneService {
 
+    @Autowired
+    private IPersonneDAO personneDAO;
+    @Autowired
+    private ICategoriePersonneDAO categoriePersonneDAO;
+
+    private void checkExist(Long id) {
+        if (!personneDAO.exist(id)) {
+            throwNotFoundApiException(id);
+        }
+    }
 
     private boolean checkForeignKey(Personne personne) {
         if (!categoriePersonneDAO.exist(personne.getCategoriePersonne().getId())) {
@@ -21,12 +32,6 @@ public class PersonneService implements IPersonneService {
         }
         return true;
     }
-
-    @Autowired
-    private IPersonneDAO personneDAO;
-
-    @Autowired
-    private ICategoriePersonneDAO categoriePersonneDAO;
 
     @Override
     public void deleteById(Long aLong) {
@@ -51,6 +56,10 @@ public class PersonneService implements IPersonneService {
     public Long insert(Personne entity) {
         checkForeignKey(entity);
         return personneDAO.insert(entity);
+    }
+
+    private void throwNotFoundApiException(long id) {
+        throw new NotFoundApiException("La personne " + id + " n'existe pas.");
     }
 
     @Override

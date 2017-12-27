@@ -25,6 +25,10 @@ public abstract class AbstractRowMapper<T> implements RowMapper<T> {
         return columnName.getOrDefault(key, defaultValue);
     }
 
+    public String getTableName() {
+        return tableName;
+    }
+
     private void setColumnName(String tableName, Map.Entry<String, String>... columnName) {
         final String prefix = tableName == null ? "" : tableName + ".";
         for (Map.Entry<String, String> name : columnName) {
@@ -32,16 +36,12 @@ public abstract class AbstractRowMapper<T> implements RowMapper<T> {
         }
     }
 
-    public String getTableName() {
-        return tableName;
+    public void setColumnName(Map.Entry<String, String>... columnName) {
+        setColumnName(null, columnName);
     }
 
     public void setColumnNameWithTableName(Map.Entry<String, String>... columnName) {
         setColumnName(getTableName(), columnName);
-    }
-
-    public void setColumnName(Map.Entry<String, String>... columnName) {
-        setColumnName(null, columnName);
     }
 
 }

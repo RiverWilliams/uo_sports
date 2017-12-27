@@ -1,6 +1,5 @@
 package app.controlleur;
 
-import app.exception.apiException.NotFoundApiException;
 import app.modele.entity.Lieu;
 import app.modele.service.ILieuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,12 @@ public class LieuControler {
     @Autowired
     private ILieuService lieuService;
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        lieuService.deleteById(id);
+    }
+
     @GetMapping
     public List<Lieu> findAll() {
         return lieuService.findAll();
@@ -27,23 +32,7 @@ public class LieuControler {
 
     @GetMapping("/{id}")
     public Lieu findById(@PathVariable Long id) {
-        final Lieu byId = lieuService.findById(id);
-        if (byId == null) {
-            throw new NotFoundApiException("Le lieu " + id + " n'existe pas.");
-        }
-        return byId;
-    }
-
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Validated(Lieu.Update.class) Lieu lieu) {
-        lieuService.update(lieu);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        lieuService.deleteById(id);
+        return lieuService.findById(id);
     }
 
     @PostMapping
@@ -51,6 +40,12 @@ public class LieuControler {
         final Long key = lieuService.insert(lieu);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Validated(Lieu.Update.class) Lieu lieu) {
+        lieuService.update(lieu);
     }
 
 }

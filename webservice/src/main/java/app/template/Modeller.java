@@ -12,14 +12,14 @@ import java.io.Writer;
 
 public class Modeller {
 
-    public void merge(Context context, Writer writer) throws ResourceNotFoundException, ParseErrorException, MethodInvocationException, IOException {
-        template.merge(context, writer);
-    }
-
     private Template template;
 
     public Modeller(VelocityEngine velocityEngine, String template) throws Exception {
         this.template = velocityEngine.getTemplate(template);
+    }
+
+    public void merge(Context context, Writer writer) throws ResourceNotFoundException, ParseErrorException, MethodInvocationException, IOException {
+        template.merge(context, writer);
     }
 
 

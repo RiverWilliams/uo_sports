@@ -2,6 +2,7 @@ package app.modele.service;
 
 import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
+import app.exception.apiException.NotFoundApiException;
 import app.modele.dao.ISportDAO;
 import app.modele.entity.Activite;
 import app.modele.entity.Actualite;
@@ -17,6 +18,12 @@ public class SportService implements ISportService {
 
     @Autowired
     private ISportDAO sportDAO;
+
+    private void checkExist(Long id) {
+        if (!sportDAO.exist(id)) {
+            throwNotFoundApiException(id);
+        }
+    }
 
     @Override
     public void deleteById(Long aLong) {
@@ -39,22 +46,30 @@ public class SportService implements ISportService {
 
     @Override
     public List<Activite> getActivites(Long idSport) {
+        checkExist(idSport);
         return sportDAO.getActivites(idSport);
     }
 
     @Override
     public List<Actualite> getActualites(Long idSport) {
+        checkExist(idSport);
+
         return sportDAO.getActualite(idSport);
     }
 
     @Override
     public List<CategorieSport> getCategoriesSports(Long idSport) {
+        checkExist(idSport);
         return sportDAO.getCategoriesSports(idSport);
     }
 
     @Override
     public Long insert(Sport entity) {
         return sportDAO.insert(entity);
+    }
+
+    private void throwNotFoundApiException(long id) {
+        throw new NotFoundApiException("Le sport " + id + " n'existe pas.");
     }
 
     @Override

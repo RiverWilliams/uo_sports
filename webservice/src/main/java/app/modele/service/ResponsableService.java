@@ -2,6 +2,7 @@ package app.modele.service;
 
 import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
+import app.exception.apiException.NotFoundApiException;
 import app.modele.dao.IResponsableDAO;
 import app.modele.entity.Responsable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import java.util.List;
 
 @Service
 public class ResponsableService implements IResponsableService {
-
     @Autowired
     private IResponsableDAO responsableDAO;
 
@@ -37,6 +37,10 @@ public class ResponsableService implements IResponsableService {
     @Override
     public Long insert(Responsable entity) {
         return responsableDAO.insert(entity);
+    }
+
+    private void throwNotFoundApiException(long id) {
+        throw new NotFoundApiException("Le responsable " + id + " n'existe pas.");
     }
 
     @Override

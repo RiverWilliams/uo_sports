@@ -14,7 +14,7 @@ class GestionExceptionMySql {
             final SQLException cause = (SQLException) e.getCause();
             if (cause.getErrorCode() == 1451) { //vendorCode trouve avec le débugger
                 throw new DeleteChildBeforeParentException(e);
-            }else {
+            } else {
                 throw e;
             }
         }

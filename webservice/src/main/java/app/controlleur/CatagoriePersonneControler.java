@@ -1,9 +1,8 @@
 package app.controlleur;
 
-import app.exception.apiException.NotFoundApiException;
 import app.modele.entity.CategoriePersonne;
-import app.modele.relation.Demande;
 import app.modele.entity.PieceInscription;
+import app.modele.relation.Demande;
 import app.modele.service.ICategoriePersonneService;
 import app.modele.service.IDemandeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +44,7 @@ public class CatagoriePersonneControler {
 
     @GetMapping("/{id}")
     public CategoriePersonne findById(@PathVariable Long id) {
-        final CategoriePersonne byId = categoriePersonneService.findById(id);
-        if (byId == null) {
-            throw new NotFoundApiException("La categorie de personne " + id + " n'existe pas.");
-        }
-        return byId;
+        return categoriePersonneService.findById(id);
     }
 
     @GetMapping("/{idCategorie}/pieces")

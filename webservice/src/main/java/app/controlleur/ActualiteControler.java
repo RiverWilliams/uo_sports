@@ -1,6 +1,6 @@
 package app.controlleur;
 
-import app.exception.apiException.NotFoundApiException;
+import app.modele.entity.Activite;
 import app.modele.entity.Actualite;
 import app.modele.entity.CategorieSport;
 import app.modele.entity.Sport;
@@ -45,11 +45,12 @@ public class ActualiteControler {
 
     @GetMapping("/{id}")
     public Actualite findById(@PathVariable Long id) {
-        final Actualite byId = actualiteService.findById(id);
-        if (byId == null) {
-            throw new NotFoundApiException("L'actualite " + id + " n'existe pas.");
-        }
-        return byId;
+        return actualiteService.findById(id);
+    }
+
+    @GetMapping("/{idActualite}/activites")
+    public List<Activite> getActivites(@PathVariable Long idActualite) {
+        return actualiteService.getActivites(idActualite);
     }
 
     @GetMapping("/{idActualite}/categories_sports")

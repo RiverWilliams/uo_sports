@@ -1,6 +1,5 @@
 package app.controlleur;
 
-import app.exception.apiException.NotFoundApiException;
 import app.modele.entity.Creneau;
 import app.modele.service.ICreneauService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,12 @@ public class CreneauControler {
     @Autowired
     private ICreneauService creneauService;
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        creneauService.deleteById(id);
+    }
+
     @GetMapping
     public List<Creneau> findAll() {
         return creneauService.findAll();
@@ -27,23 +32,7 @@ public class CreneauControler {
 
     @GetMapping("/{id}")
     public Creneau findById(@PathVariable Long id) {
-        final Creneau byId = creneauService.findById(id);
-        if (byId == null) {
-            throw new NotFoundApiException("Le creneau " + id + " n'existe pas.");
-        }
-        return byId;
-    }
-
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Validated(Creneau.Update.class) Creneau creneau) {
-        creneauService.update(creneau);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        creneauService.deleteById(id);
+        return creneauService.findById(id);
     }
 
     @PostMapping
@@ -51,6 +40,12 @@ public class CreneauControler {
         final Long key = creneauService.insert(creneau);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Validated(Creneau.Update.class) Creneau creneau) {
+        creneauService.update(creneau);
     }
 
 }

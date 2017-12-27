@@ -1,6 +1,7 @@
 package app.modele.dao;
 
 import app.exception.DeleteChildBeforeParentException;
+import app.modele.entity.Activite;
 import app.modele.entity.Actualite;
 import app.modele.entity.CategorieSport;
 import app.modele.entity.Sport;
@@ -24,6 +25,9 @@ public class ActualiteDAO extends AbstractDao implements IActualiteDAO {
 
     @Autowired
     private RowMapper<CategorieSport> categorieSportRowMapper;
+
+    @Autowired
+    private RowMapper<Activite> activiteRowMapper;
 
     @Autowired
     public ActualiteDAO(DataSource dataSource) {
@@ -58,6 +62,20 @@ public class ActualiteDAO extends AbstractDao implements IActualiteDAO {
             return null;
         else
             return actualitex.get(0);
+    }
+
+    @Override
+    public List<Activite> getActivites(Long idActualite) {
+        //language=SQL
+        final String sql = "SELECT activite.*" +
+                "FROM (SELECT de_type.id_activite" +
+                "      FROM (SELECT id_sport" +
+                "            FROM concerne" +
+                "            WHERE id_actualite = ?) d" +
+                "        JOIN de_type ON d.id_sport = de_type.id_activite) d" +
+                "  JOIN activite ON d.id_activite = activite.id";
+
+        return getJdbcTemplate().query(sql, activiteRowMapper, idActualite);
     }
 
     @Override

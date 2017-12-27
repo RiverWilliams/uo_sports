@@ -1,6 +1,5 @@
 package app.controlleur;
 
-import app.exception.apiException.NotFoundApiException;
 import app.modele.entity.Activite;
 import app.modele.entity.Actualite;
 import app.modele.entity.CategorieSport;
@@ -23,6 +22,12 @@ public class CategorieSportControler {
     @Autowired
     private ICategorieSportService categorieSportService;
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        categorieSportService.deleteById(id);
+    }
+
     @GetMapping
     public List<CategorieSport> findAll() {
         return categorieSportService.findAll();
@@ -30,23 +35,22 @@ public class CategorieSportControler {
 
     @GetMapping("/{id}")
     public CategorieSport findById(@PathVariable Long id) {
-        final CategorieSport byId = categorieSportService.findById(id);
-        if (byId == null) {
-            throw new NotFoundApiException("La categorie de sport " + id + " n'existe pas.");
-        }
-        return byId;
+        return categorieSportService.findById(id);
     }
 
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Validated(CategorieSport.Update.class) CategorieSport categorieSport) {
-        categorieSportService.update(categorieSport);
+    @GetMapping("/{idCategorie}/activites")
+    public List<Activite> getActivites(@PathVariable Long idCategorie) {
+        return categorieSportService.getActivites(idCategorie);
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        categorieSportService.deleteById(id);
+    @GetMapping("/{idCategorie}/actualites")
+    public List<Actualite> getActualites(@PathVariable Long idCategorie) {
+        return categorieSportService.getActualites(idCategorie);
+    }
+
+    @GetMapping("/{idCategorie}/sports")
+    public List<Sport> getSports(@PathVariable Long idCategorie) {
+        return categorieSportService.getSports(idCategorie);
     }
 
     @PostMapping
@@ -56,20 +60,10 @@ public class CategorieSportControler {
         return ResponseEntity.created(uri).build();
     }
 
-
-    @GetMapping("/{idCategorie}/sports")
-    public List<Sport> getSports(@PathVariable Long idCategorie) {
-        return categorieSportService.getSports(idCategorie);
-    }
-
-    @GetMapping("/{idCategorie}/actualites")
-    public List<Actualite> getActualites(@PathVariable Long idCategorie) {
-        return categorieSportService.getActualites(idCategorie);
-    }
-
-    @GetMapping("/{idCategorie}/activites")
-    public List<Activite> getActivites(@PathVariable Long idCategorie) {
-        return categorieSportService.getActivites(idCategorie);
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Validated(CategorieSport.Update.class) CategorieSport categorieSport) {
+        categorieSportService.update(categorieSport);
     }
 
 }

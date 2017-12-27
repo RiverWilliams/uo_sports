@@ -2,6 +2,7 @@ package app.modele.service;
 
 import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
+import app.exception.apiException.NotFoundApiException;
 import app.modele.dao.ICategoriePersonneDAO;
 import app.modele.entity.CategoriePersonne;
 import app.modele.entity.PieceInscription;
@@ -12,9 +13,14 @@ import java.util.List;
 
 @Service
 public class CategoriePersonneService implements ICategoriePersonneService {
-
     @Autowired
     private ICategoriePersonneDAO categoriePersonneDAO;
+
+    private void checkExist(Long id) {
+        if (!categoriePersonneDAO.exist(id)) {
+            throwNotFoundApiException(id);
+        }
+    }
 
     @Override
     public void deleteById(Long aLong) {
@@ -31,18 +37,23 @@ public class CategoriePersonneService implements ICategoriePersonneService {
     }
 
     @Override
-    public List<PieceInscription> getPieces(Long idCategorie) {
-        return categoriePersonneDAO.getPieces(idCategorie);
-    }
-
-    @Override
     public CategoriePersonne findById(Long aLong) {
         return categoriePersonneDAO.findById(aLong);
     }
 
     @Override
+    public List<PieceInscription> getPieces(Long idCategorie) {
+        checkExist(idCategorie);
+        return categoriePersonneDAO.getPieces(idCategorie);
+    }
+
+    @Override
     public Long insert(CategoriePersonne entity) {
         return categoriePersonneDAO.insert(entity);
+    }
+
+    private void throwNotFoundApiException(long id) {
+        throw new NotFoundApiException("La categorie de personne " + id + " n'existe pas.");
     }
 
     @Override

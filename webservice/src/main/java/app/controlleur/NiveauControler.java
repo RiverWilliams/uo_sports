@@ -1,6 +1,5 @@
 package app.controlleur;
 
-import app.exception.apiException.NotFoundApiException;
 import app.modele.entity.Niveau;
 import app.modele.service.INiveauService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,12 @@ public class NiveauControler {
     @Autowired
     private INiveauService niveauService;
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        niveauService.deleteById(id);
+    }
+
     @GetMapping
     public List<Niveau> findAll() {
         return niveauService.findAll();
@@ -27,23 +32,7 @@ public class NiveauControler {
 
     @GetMapping("/{id}")
     public Niveau findById(@PathVariable Long id) {
-        final Niveau byId = niveauService.findById(id);
-        if (byId == null) {
-            throw new NotFoundApiException("Le niveau " + id + " n'existe pas.");
-        }
-        return byId;
-    }
-
-    @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody @Validated(Niveau.Update.class) Niveau niveau) {
-        niveauService.update(niveau);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        niveauService.deleteById(id);
+        return niveauService.findById(id);
     }
 
     @PostMapping
@@ -51,6 +40,12 @@ public class NiveauControler {
         final Long key = niveauService.insert(niveau);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody @Validated(Niveau.Update.class) Niveau niveau) {
+        niveauService.update(niveau);
     }
 
 }
