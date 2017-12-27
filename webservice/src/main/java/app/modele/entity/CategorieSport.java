@@ -1,7 +1,5 @@
 package app.modele.entity;
 
-import app.modele.relation.Appartient;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 

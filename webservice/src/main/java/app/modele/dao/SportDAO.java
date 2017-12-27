@@ -66,14 +66,14 @@ public class SportDAO extends AbstractDao implements ISportDAO {
     @Override
     public List<Activite> getActivites(Long idSport) {
         //language=SQL
-        final String sql = "SELECT activite.* FROM (SELECT id_activite FROM de_type WHERE id_sport=?) de_type JOIN activite ON activite.id=de_type.id_sport";
+        final String sql = "SELECT activite.* FROM (SELECT id_activite FROM de_type WHERE id_sport=?) de_type JOIN activite ON activite.id=de_type.id_activite";
         return getJdbcTemplate().query(sql, activiteRowMapper, idSport);
     }
 
     @Override
     public List<Actualite> getActualite(Long idSport) {
         //language=SQL
-        final String sql = "SELECT actualite.* FROM (SELECT id_actualite FROM concerne WHERE id_sport=?) concerne JOIN actualite ON actualite.id=concerne.id_sport";
+        final String sql = "SELECT actualite.* FROM (SELECT id_actualite FROM concerne WHERE id_sport=?) concerne JOIN actualite ON actualite.id=concerne.id_actualite";
         return getJdbcTemplate().query(sql, actualiteRowMapper, idSport);
     }
 
