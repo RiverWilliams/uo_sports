@@ -7,13 +7,7 @@ import java.sql.Date;
 public class Actualite {
 
 
-    public interface Insert extends Default {
-    }
-
-    public interface Update extends Insert {
-    }
-
-    @NotNull(groups = Update.class)
+    @NotNull(groups = {Update.class})
     private Long id;
     private String titre;
     private String image;
@@ -22,46 +16,6 @@ public class Actualite {
     private Date dateDebut;
     private Date dateFin;
     private Date dateMiseEnLigne;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getDescCourte() {
-        return descCourte;
-    }
-
-    public void setDescCourte(String descCourte) {
-        this.descCourte = descCourte;
-    }
-
-    public String getDescLongue() {
-        return descLongue;
-    }
-
-    public void setDescLongue(String descLongue) {
-        this.descLongue = descLongue;
-    }
 
     public Date getDateDebut() {
         return dateDebut;
@@ -85,5 +39,51 @@ public class Actualite {
 
     public void setDateMiseEnLigne(Date dateMiseEnLigne) {
         this.dateMiseEnLigne = dateMiseEnLigne;
+    }
+
+    public String getDescCourte() {
+        return descCourte;
+    }
+
+    public void setDescCourte(String descCourte) {
+        this.descCourte = descCourte;
+    }
+
+    public String getDescLongue() {
+        return descLongue;
+    }
+
+    public void setDescLongue(String descLongue) {
+        this.descLongue = descLongue;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public interface Insert extends Default {
+    }
+
+    public interface Update extends Insert {
     }
 }

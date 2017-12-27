@@ -3,7 +3,10 @@ package app.modele.service;
 import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
 import app.modele.dao.ICategorieSportDAO;
+import app.modele.entity.Activite;
+import app.modele.entity.Actualite;
 import app.modele.entity.CategorieSport;
+import app.modele.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,21 @@ public class CategorieSportService implements ICategorieSportService {
     @Override
     public CategorieSport findById(Long aLong) {
         return categorieSportDAO.findById(aLong);
+    }
+
+    @Override
+    public List<Activite> getActivites(Long idCategorie) {
+        return categorieSportDAO.getActivites(idCategorie);
+    }
+
+    @Override
+    public List<Actualite> getActualites(Long idCategorie) {
+        return categorieSportDAO.getActualites(idCategorie);
+    }
+
+    @Override
+    public List<Sport> getSports(Long idCategorie) {
+        return categorieSportDAO.getSports(idCategorie);
     }
 
     @Override

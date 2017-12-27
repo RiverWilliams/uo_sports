@@ -7,17 +7,11 @@ import java.sql.Time;
 
 public class Creneau {
 
-    public interface Insert extends Default{}
-
-    public interface Update extends Insert {
-    }
-
-    @NotNull(groups = Update.class)
+    @NotNull(groups = {Update.class})
     private Long id;
     private Time heureDebut;
     private Time heureFin;
     private Integer effectif;
-
     @Valid
     @NotNull
     private Niveau niveau;
@@ -31,12 +25,20 @@ public class Creneau {
     @NotNull
     private Activite activite;
 
-    public Long getId() {
-        return id;
+    public Activite getActivite() {
+        return activite;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setActivite(Activite activite) {
+        this.activite = activite;
+    }
+
+    public Integer getEffectif() {
+        return effectif;
+    }
+
+    public void setEffectif(Integer effectif) {
+        this.effectif = effectif;
     }
 
     public Time getHeureDebut() {
@@ -55,20 +57,12 @@ public class Creneau {
         this.heureFin = heureFin;
     }
 
-    public Integer getEffectif() {
-        return effectif;
+    public Long getId() {
+        return id;
     }
 
-    public void setEffectif(Integer effectif) {
-        this.effectif = effectif;
-    }
-
-    public Niveau getNiveau() {
-        return niveau;
-    }
-
-    public void setNiveau(Niveau niveau) {
-        this.niveau = niveau;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Lieu getLieu() {
@@ -79,6 +73,14 @@ public class Creneau {
         this.lieu = lieu;
     }
 
+    public Niveau getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(Niveau niveau) {
+        this.niveau = niveau;
+    }
+
     public Responsable getResponsable() {
         return responsable;
     }
@@ -87,11 +89,9 @@ public class Creneau {
         this.responsable = responsable;
     }
 
-    public Activite getActivite() {
-        return activite;
+    public interface Insert extends Default {
     }
 
-    public void setActivite(Activite activite) {
-        this.activite = activite;
+    public interface Update extends Insert {
     }
 }

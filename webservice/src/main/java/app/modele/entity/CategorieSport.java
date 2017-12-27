@@ -1,16 +1,13 @@
 package app.modele.entity;
 
+import app.modele.relation.Appartient;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
 public class CategorieSport {
 
-    public interface Insert extends Default{}
-
-    public interface Update extends Insert {
-    }
-
-    @NotNull(groups = Update.class)
+    @NotNull(groups = {Update.class})
     private Long id;
     private String nom;
 
@@ -28,5 +25,11 @@ public class CategorieSport {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public interface Insert extends Default {
+    }
+
+    public interface Update extends Insert {
     }
 }

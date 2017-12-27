@@ -1,8 +1,8 @@
 package app.modele.service;
 
 public interface IServiceRelation<T> {
-    void delete(T id);
+    void delete(T relation);
 
-    void insert(T entity);
+    void insert(T relation);
 
 }

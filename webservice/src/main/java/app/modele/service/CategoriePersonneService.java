@@ -31,8 +31,8 @@ public class CategoriePersonneService implements ICategoriePersonneService {
     }
 
     @Override
-    public List<PieceInscription> findAllPiece(Long idCategorie) {
-        return categoriePersonneDAO.findAllPiece(idCategorie);
+    public List<PieceInscription> getPieces(Long idCategorie) {
+        return categoriePersonneDAO.getPieces(idCategorie);
     }
 
     @Override

@@ -2,6 +2,8 @@ package app.modele.dao;
 
 import app.exception.DeleteChildBeforeParentException;
 import app.modele.entity.Actualite;
+import app.modele.entity.CategorieSport;
+import app.modele.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -16,7 +18,12 @@ import java.util.List;
 @Repository
 public class ActualiteDAO extends AbstractDao implements IActualiteDAO {
     @Autowired
+    RowMapper<Sport> sportRowMapper;
+    @Autowired
     private RowMapper<Actualite> actualiteRowMapper;
+
+    @Autowired
+    private RowMapper<CategorieSport> categorieSportRowMapper;
 
     @Autowired
     public ActualiteDAO(DataSource dataSource) {
@@ -51,6 +58,27 @@ public class ActualiteDAO extends AbstractDao implements IActualiteDAO {
             return null;
         else
             return actualitex.get(0);
+    }
+
+    @Override
+    public List<CategorieSport> getCategoriesSports(Long idActualite) {
+        //language=SQL
+        final String sql = "SELECT categorie_sport.*" +
+                "FROM (SELECT appartient.id_categorie_sport" +
+                "      FROM (SELECT id_sport" +
+                "            FROM concerne" +
+                "            WHERE id_actualite = ?) d" +
+                "        JOIN appartient ON d.id_sport = appartient.id_sport) a" +
+                "  JOIN categorie_sport ON a.id_categorie_sport = categorie_sport.id";
+
+        return getJdbcTemplate().query(sql, categorieSportRowMapper, idActualite);
+    }
+
+    @Override
+    public List<Sport> getSports(Long idActualite) {
+        //language=SQL
+        final String sql = "SELECT sport.* FROM (SELECT id_sport FROM concerne WHERE id_actualite=?) concerne JOIN sport ON sport.id=concerne.id_sport";
+        return getJdbcTemplate().query(sql, sportRowMapper, idActualite);
     }
 
     @Override

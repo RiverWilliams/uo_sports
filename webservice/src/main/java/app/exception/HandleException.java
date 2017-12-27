@@ -1,4 +1,4 @@
-package app.controlleur;
+package app.exception;
 
 import app.exception.apiException.ApiException;
 import app.exception.apiException.MethodArgumentNotValidApiException;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class ExceptionControler {
+public class HandleException {
 
     @ExceptionHandler(ApiException.class)
     protected ResponseEntity<Object> handleApiException(ApiException ex) {

@@ -5,12 +5,7 @@ import javax.validation.groups.Default;
 
 public class CategoriePersonne {
 
-    public interface Insert extends Default{}
-
-    public interface Update extends Insert {
-    }
-
-    @NotNull(groups = {Update.class, Personne.Update.class})
+    @NotNull(groups = {Update.class, Personne.Insert.class})
     private Long id;
     private String nom;
     private Float prix;
@@ -37,5 +32,11 @@ public class CategoriePersonne {
 
     public void setPrix(Float prix) {
         this.prix = prix;
+    }
+
+    public interface Insert extends Default {
+    }
+
+    public interface Update extends Insert {
     }
 }

@@ -15,10 +15,10 @@ public class DemandeDAO extends AbstractDao implements IDemandeDAO {
     }
 
     @Override
-    public void delete(Demande id) {
+    public void delete(Demande relation) {
         //language=SQL
         final String sql = "DELETE FROM demande WHERE id_categorie_personne=? AND id_piece_inscription=?";
-        getJdbcTemplate().update(sql, id.getIdCategoriePersonne(), id.getIdPieceInscription());
+        getJdbcTemplate().update(sql, relation.getIdCategoriePersonne(), relation.getIdPieceInscription());
     }
 
     @Override

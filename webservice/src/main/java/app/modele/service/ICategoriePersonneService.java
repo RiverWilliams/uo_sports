@@ -1,7 +1,10 @@
 package app.modele.service;
 
 import app.modele.entity.CategoriePersonne;
+import app.modele.entity.PieceInscription;
 
-public interface ICategoriePersonneService extends IService<CategoriePersonne, Long> {
+import java.util.List;
 
+public interface ICategoriePersonneService extends IServiceEntity<CategoriePersonne, Long> {
+    List<PieceInscription> getPieces(Long idCategorie);
 }

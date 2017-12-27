@@ -1,6 +1,9 @@
 package app.modele.dao;
 
 import app.exception.DeleteChildBeforeParentException;
+import app.modele.entity.Activite;
+import app.modele.entity.Actualite;
+import app.modele.entity.CategorieSport;
 import app.modele.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,6 +20,13 @@ import java.util.List;
 public class SportDAO extends AbstractDao implements ISportDAO {
     @Autowired
     private RowMapper<Sport> sportRowMapper;
+    @Autowired
+    private RowMapper<Activite> activiteRowMapper;
+    @Autowired
+    private RowMapper<Actualite> actualiteRowMapper;
+
+    @Autowired
+    private RowMapper<CategorieSport> categorieSportRowMapper;
 
     @Autowired
     public SportDAO(DataSource dataSource) {
@@ -51,6 +61,27 @@ public class SportDAO extends AbstractDao implements ISportDAO {
             return null;
         else
             return sportx.get(0);
+    }
+
+    @Override
+    public List<Activite> getActivites(Long idSport) {
+        //language=SQL
+        final String sql = "SELECT activite.* FROM (SELECT id_activite FROM de_type WHERE id_sport=?) de_type JOIN activite ON activite.id=de_type.id_sport";
+        return getJdbcTemplate().query(sql, activiteRowMapper, idSport);
+    }
+
+    @Override
+    public List<Actualite> getActualite(Long idSport) {
+        //language=SQL
+        final String sql = "SELECT actualite.* FROM (SELECT id_actualite FROM concerne WHERE id_sport=?) concerne JOIN actualite ON actualite.id=concerne.id_sport";
+        return getJdbcTemplate().query(sql, actualiteRowMapper, idSport);
+    }
+
+    @Override
+    public List<CategorieSport> getCategoriesSports(Long idSport) {
+        //language=SQL
+        final String sql = "SELECT categorie_sport.* FROM (SELECT id_categorie_sport FROM appartient WHERE id_sport=?) a JOIN categorie_sport ON categorie_sport.id=a.id_categorie_sport";
+        return getJdbcTemplate().query(sql, categorieSportRowMapper, idSport);
     }
 
     @Override

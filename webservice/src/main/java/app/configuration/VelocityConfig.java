@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-public class ConfigurationVelocity {
+public class VelocityConfig {
 
     @Bean
     @Scope("singleton")

@@ -5,12 +5,7 @@ import javax.validation.groups.Default;
 
 public class PieceInscription {
 
-    public interface Insert extends Default{}
-
-    public interface Update extends Insert {
-    }
-
-    @NotNull(groups = Update.class)
+    @NotNull(groups = {Update.class})
     private Long id;
     private String nom;
 
@@ -28,5 +23,11 @@ public class PieceInscription {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public interface Insert extends Default {
+    }
+
+    public interface Update extends Insert {
     }
 }

@@ -32,7 +32,7 @@ public class CatagoriePersonneControler {
         categoriePersonneService.deleteById(id);
     }
 
-    @DeleteMapping("/{idCategorie}/pieces_inscription/{idPiece}")
+    @DeleteMapping("/{idCategorie}/pieces/{idPiece}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePieceInscription(@PathVariable long idCategorie, @PathVariable long idPiece) {
         demandeService.delete(new Demande(idCategorie, idPiece));
@@ -52,9 +52,9 @@ public class CatagoriePersonneControler {
         return byId;
     }
 
-    @GetMapping("/{idCategorie}/pieces_inscription")
-    public List<PieceInscription> getAllPieceInscription(@PathVariable Long idCategorie) {
-        return categoriePersonneService.findAllPiece(idCategorie);
+    @GetMapping("/{idCategorie}/pieces")
+    public List<PieceInscription> getPiecesInscription(@PathVariable Long idCategorie) {
+        return categoriePersonneService.getPieces(idCategorie);
     }
 
     @PostMapping

@@ -5,16 +5,19 @@ import javax.validation.groups.Default;
 
 public class Responsable {
 
-public interface Insert extends Default{}
-
-    public interface Update extends Insert {
-    }
-
     @NotNull(groups = {Update.class, Creneau.Insert.class})
     private Long id;
     private String nom;
     private String prenom;
     private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
@@ -40,11 +43,9 @@ public interface Insert extends Default{}
         this.prenom = prenom;
     }
 
-    public String getEmail() {
-        return email;
+    public interface Insert extends Default {
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public interface Update extends Insert {
     }
 }

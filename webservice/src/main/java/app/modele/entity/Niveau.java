@@ -5,11 +5,6 @@ import javax.validation.groups.Default;
 
 public class Niveau {
 
-    public interface Insert extends Default{}
-
-    public interface Update extends Insert {
-    }
-
     @NotNull(groups = {Update.class, Creneau.Insert.class})
     private Long id;
     private String nom;
@@ -28,5 +23,11 @@ public class Niveau {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public interface Insert extends Default {
+    }
+
+    public interface Update extends Insert {
     }
 }

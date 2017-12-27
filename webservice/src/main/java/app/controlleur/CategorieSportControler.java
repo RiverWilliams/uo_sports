@@ -1,7 +1,10 @@
 package app.controlleur;
 
 import app.exception.apiException.NotFoundApiException;
+import app.modele.entity.Activite;
+import app.modele.entity.Actualite;
 import app.modele.entity.CategorieSport;
+import app.modele.entity.Sport;
 import app.modele.service.ICategorieSportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,6 +54,22 @@ public class CategorieSportControler {
         final Long key = categorieSportService.insert(categorieSport);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+
+    @GetMapping("/{idCategorie}/sports")
+    public List<Sport> getSports(@PathVariable Long idCategorie) {
+        return categorieSportService.getSports(idCategorie);
+    }
+
+    @GetMapping("/{idCategorie}/actualites")
+    public List<Actualite> getActualites(@PathVariable Long idCategorie) {
+        return categorieSportService.getActualites(idCategorie);
+    }
+
+    @GetMapping("/{idCategorie}/activites")
+    public List<Activite> getActivites(@PathVariable Long idCategorie) {
+        return categorieSportService.getActivites(idCategorie);
     }
 
 }

@@ -8,12 +8,7 @@ import javax.validation.groups.Default;
 
 public class Personne {
 
-    public interface Insert extends Default{}
-
-    public interface Update extends Insert {
-    }
-
-    @NotNull(groups = Update.class)
+    @NotNull(groups = {Update.class})
     private Long id;
     private String nom;
     private String prenom;
@@ -22,10 +17,33 @@ public class Personne {
     @NotNull
     @Email
     private String email;
-
     @Valid
     @NotNull
     private CategoriePersonne categoriePersonne;
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public CategoriePersonne getCategoriePersonne() {
+        return categoriePersonne;
+    }
+
+    public void setCategoriePersonne(CategoriePersonne categoriePersonne) {
+        this.categoriePersonne = categoriePersonne;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
@@ -51,14 +69,6 @@ public class Personne {
         this.prenom = prenom;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
     public String getTelephone() {
         return telephone;
     }
@@ -67,19 +77,9 @@ public class Personne {
         this.telephone = telephone;
     }
 
-    public String getEmail() {
-        return email;
+    public interface Insert extends Default {
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public CategoriePersonne getCategoriePersonne() {
-        return categoriePersonne;
-    }
-
-    public void setCategoriePersonne(CategoriePersonne categoriePersonne) {
-        this.categoriePersonne = categoriePersonne;
+    public interface Update extends Insert {
     }
 }

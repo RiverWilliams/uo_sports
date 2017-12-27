@@ -5,19 +5,19 @@ import javax.validation.groups.Default;
 
 public class Lieu {
 
-    public interface Insert extends Default{}
-
-    public interface Update extends Insert {
-    }
-
     @NotNull(groups = {Update.class, Creneau.Insert.class})
     private Long id;
-
     private String nom;
-
     private String ville;
-
     private String adresse;
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
 
     public Long getId() {
         return id;
@@ -43,11 +43,9 @@ public class Lieu {
         this.ville = ville;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public interface Insert extends Default {
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public interface Update extends Insert {
     }
 }

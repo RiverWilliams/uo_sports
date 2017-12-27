@@ -31,13 +31,13 @@ public class DemandeService implements IDemandeService {
     }
 
     @Override
-    public void delete(Demande id) {
-        demandeDAO.delete(id);
+    public void delete(Demande relation) {
+        demandeDAO.delete(relation);
     }
 
     @Override
-    public void insert(Demande entity) {
-        checkForeignKey(entity);
-        demandeDAO.insert(entity);
+    public void insert(Demande relation) {
+        checkForeignKey(relation);
+        demandeDAO.insert(relation);
     }
 }

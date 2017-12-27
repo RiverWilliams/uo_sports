@@ -18,6 +18,8 @@ import java.util.List;
 public class CategoriePersonneDAO extends AbstractDao implements ICategoriePersonneDAO {
     @Autowired
     private RowMapper<CategoriePersonne> categoriePersonneRowMapper;
+    @Autowired
+    private RowMapper<PieceInscription> pieceInscriptionRowMapper;
 
     @Autowired
     public CategoriePersonneDAO(DataSource dataSource) {
@@ -55,6 +57,13 @@ public class CategoriePersonneDAO extends AbstractDao implements ICategoriePerso
     }
 
     @Override
+    public List<PieceInscription> getPieces(Long idCategorie) {
+        //language=SQL
+        final String sql = "SELECT piece_inscription.* FROM (SELECT id_piece_inscription FROM demande WHERE id_categorie_personne=?) demande JOIN piece_inscription ON demande.id_piece_inscription=piece_inscription.id";
+        return getJdbcTemplate().query(sql, pieceInscriptionRowMapper, idCategorie);
+    }
+
+    @Override
     public Long insert(CategoriePersonne entity) {
         //language=SQL
         final String sql = "INSERT INTO categorie_personne(nom,prix) VALUES (?,?)";
@@ -75,15 +84,5 @@ public class CategoriePersonneDAO extends AbstractDao implements ICategoriePerso
         //language=SQL
         final String sql = "UPDATE categorie_personne SET nom=?,prix=? WHERE id=?";
         getJdbcTemplate().update(sql, entity.getNom(), entity.getPrix(), entity.getId());
-    }
-
-    @Autowired
-    private RowMapper<PieceInscription> pieceInscriptionRowMapper;
-
-    @Override
-    public List<PieceInscription> findAllPiece(Long id_categorie) {
-        //language=SQL
-        final String sql = "SELECT piece_inscription.* FROM (SELECT id_piece_inscription FROM demande WHERE id_categorie_personne=?) demande JOIN piece_inscription ON demande.id_piece_inscription=piece_inscription.id";
-        return getJdbcTemplate().query(sql, pieceInscriptionRowMapper, id_categorie);
     }
 }

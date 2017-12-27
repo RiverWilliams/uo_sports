@@ -1,19 +1,14 @@
 package app.modele.entity;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
+import app.modele.relation.DeType;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
 public class Activite {
 
 
-    public interface Insert extends Default{}
-
-    public interface Update extends Insert {
-    }
-
-    @NotNull(groups = {Update.class,Creneau.Insert.class})
+    @NotNull(groups = {Update.class, Creneau.Insert.class})
     private Long id;
     private String nom;
 
@@ -31,6 +26,12 @@ public class Activite {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public interface Insert extends Default {
+    }
+
+    public interface Update extends Insert {
     }
 
 }
