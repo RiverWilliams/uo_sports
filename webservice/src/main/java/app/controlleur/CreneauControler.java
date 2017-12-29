@@ -1,7 +1,9 @@
 package app.controlleur;
 
 import app.modele.entity.Creneau;
+import app.modele.relation.Inscription;
 import app.modele.service.ICreneauService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,18 @@ public class CreneauControler {
     @GetMapping("/{id}")
     public Creneau findById(@PathVariable Long id) {
         return creneauService.findById(id);
+    }
+
+    @GetMapping("/{id}/en_attentes")
+    @JsonView(Inscription.Views.Personne.class)
+    public List<Inscription> getEnAttentes(@PathVariable Long id) {
+        return creneauService.getEnAttentes(id);
+    }
+
+    @GetMapping("/{id}/inscrits")
+    @JsonView(Inscription.Views.Personne.class)
+    public List<Inscription> getInscrits(@PathVariable Long id) {
+        return creneauService.getInscrits(id);
     }
 
     @PostMapping

@@ -9,6 +9,7 @@ import app.modele.dao.ICreneauDAO;
 import app.modele.dao.ILieuDAO;
 import app.modele.dao.IResponsableDAO;
 import app.modele.entity.Creneau;
+import app.modele.relation.Inscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +61,26 @@ public class CreneauService implements ICreneauService {
 
     @Override
     public Creneau findById(Long aLong) {
-        return creneauDAO.findById(aLong);
+        final Creneau byId = creneauDAO.findById(aLong);
+        if (byId == null)
+            throwNotFoundApiException(aLong);
+        return byId;
+    }
+
+    @Override
+    public boolean validerInscription(Inscription inscription) {
+
+        return false;
+    }
+
+    @Override
+    public List<Inscription> getEnAttentes(Long id) {
+        return creneauDAO.getEnAttentes(id);
+    }
+
+    @Override
+    public List<Inscription> getInscrits(Long id) {
+        return creneauDAO.getInscrits(id);
     }
 
     @Override

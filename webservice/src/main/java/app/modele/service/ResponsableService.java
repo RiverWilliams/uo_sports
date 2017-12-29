@@ -31,7 +31,10 @@ public class ResponsableService implements IResponsableService {
 
     @Override
     public Responsable findById(Long aLong) {
-        return responsableDAO.findById(aLong);
+        final Responsable byId = responsableDAO.findById(aLong);
+        if (byId == null)
+            throwNotFoundApiException(aLong);
+        return byId;
     }
 
     @Override

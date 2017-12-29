@@ -1,5 +1,7 @@
 package app.modele.entity;
 
+import app.modele.relation.Inscription;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
@@ -7,7 +9,7 @@ import java.sql.Time;
 
 public class Creneau {
 
-    @NotNull(groups = {Update.class})
+    @NotNull(groups = {Update.class, Inscription.Update.class})
     private Long id;
     private Time heureDebut;
     private Time heureFin;

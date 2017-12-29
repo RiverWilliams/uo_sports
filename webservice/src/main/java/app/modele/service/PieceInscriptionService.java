@@ -31,7 +31,10 @@ public class PieceInscriptionService implements IPieceInscriptionService {
 
     @Override
     public PieceInscription findById(Long aLong) {
-        return pieceInscriptionDAO.findById(aLong);
+        final PieceInscription byId = pieceInscriptionDAO.findById(aLong);
+        if (byId == null)
+            throwNotFoundApiException(aLong);
+        return byId;
     }
 
     @Override

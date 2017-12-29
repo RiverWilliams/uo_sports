@@ -41,7 +41,10 @@ public class ActualiteService implements IActualiteService {
 
     @Override
     public Actualite findById(Long aLong) {
-        return actualiteDAO.findById(aLong);
+        final Actualite byId = actualiteDAO.findById(aLong);
+        if (byId==null)
+            throwNotFoundApiException(aLong);
+        return byId;
     }
 
     @Override

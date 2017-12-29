@@ -41,7 +41,10 @@ public class CategorieSportService implements ICategorieSportService {
 
     @Override
     public CategorieSport findById(Long aLong) {
-        return categorieSportDAO.findById(aLong);
+        final CategorieSport byId = categorieSportDAO.findById(aLong);
+        if (byId==null)
+            throwNotFoundApiException(aLong);
+        return byId;
     }
 
     @Override

@@ -32,7 +32,10 @@ public class NiveauService implements INiveauService {
 
     @Override
     public Niveau findById(Long aLong) {
-        return niveauDAO.findById(aLong);
+        final Niveau byId = niveauDAO.findById(aLong);
+        if (byId==null)
+            throwNotFoundApiException(aLong);
+        return byId;
     }
 
     @Override

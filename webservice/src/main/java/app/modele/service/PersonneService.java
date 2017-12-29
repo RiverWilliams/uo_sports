@@ -7,6 +7,7 @@ import app.exception.apiException.NotFoundApiException;
 import app.modele.dao.ICategoriePersonneDAO;
 import app.modele.dao.IPersonneDAO;
 import app.modele.entity.Personne;
+import app.modele.relation.Inscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,15 @@ public class PersonneService implements IPersonneService {
 
     @Override
     public Personne findById(Long aLong) {
-        return personneDAO.findById(aLong);
+        final Personne byId = personneDAO.findById(aLong);
+        if (byId==null)
+            throwNotFoundApiException(aLong);
+        return byId;
+    }
+
+    @Override
+    public List<Inscription> getInscriptions(Long id) {
+        return personneDAO.getInscriptions(id);
     }
 
     @Override

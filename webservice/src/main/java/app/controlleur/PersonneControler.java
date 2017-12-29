@@ -1,7 +1,9 @@
 package app.controlleur;
 
 import app.modele.entity.Personne;
+import app.modele.relation.Inscription;
 import app.modele.service.IPersonneService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,12 @@ public class PersonneControler {
     @GetMapping
     public List<Personne> findAll() {
         return personneService.findAll();
+    }
+
+    @GetMapping("/{id}/inscriptions")
+    @JsonView(Inscription.Views.Creneau.class)
+    public List<Inscription> getInscriptions(@PathVariable Long id) {
+        return personneService.getInscriptions(id);
     }
 
     @GetMapping("/{id}")

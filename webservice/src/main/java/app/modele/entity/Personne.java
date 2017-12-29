@@ -1,5 +1,6 @@
 package app.modele.entity;
 
+import app.modele.relation.Inscription;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.Valid;
@@ -8,7 +9,7 @@ import javax.validation.groups.Default;
 
 public class Personne {
 
-    @NotNull(groups = {Update.class})
+    @NotNull(groups = {Update.class, Inscription.Update.class})
     private Long id;
     private String nom;
     private String prenom;

@@ -2,6 +2,7 @@ package app.modele.dao;
 
 import app.exception.DeleteChildBeforeParentException;
 import app.modele.entity.Creneau;
+import app.modele.relation.Inscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -17,6 +18,8 @@ import java.util.List;
 public class CreneauDAO extends AbstractDao implements ICreneauDAO {
     @Autowired
     private RowMapper<Creneau> creneauRowMapper;
+    @Autowired
+    private RowMapper<Inscription> inscriptionRowMapper;
 
     @Autowired
     public CreneauDAO(DataSource dataSource) {
@@ -60,6 +63,20 @@ public class CreneauDAO extends AbstractDao implements ICreneauDAO {
             return null;
         else
             return creneaux.get(0);
+    }
+
+    @Override
+    public List<Inscription> getEnAttentes(Long id) {
+        //language=SQL
+        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_creneau=? AND en_attente ) inscription JOIN personne ON inscription.id_personne=personne.id JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id";
+        return getJdbcTemplate().query(sql, inscriptionRowMapper, id);
+    }
+
+    @Override
+    public List<Inscription> getInscrits(Long id) {
+        //language=SQL
+        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_creneau=? AND NOT en_attente ) inscription JOIN personne ON inscription.id_personne=personne.id JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id";
+        return getJdbcTemplate().query(sql, inscriptionRowMapper, id);
     }
 
     @Override

@@ -41,7 +41,10 @@ public class SportService implements ISportService {
 
     @Override
     public Sport findById(Long aLong) {
-        return sportDAO.findById(aLong);
+        final Sport byId = sportDAO.findById(aLong);
+        if (byId == null)
+            throwNotFoundApiException(aLong);
+        return byId;
     }
 
     @Override

@@ -38,7 +38,10 @@ public class CategoriePersonneService implements ICategoriePersonneService {
 
     @Override
     public CategoriePersonne findById(Long aLong) {
-        return categoriePersonneDAO.findById(aLong);
+        final CategoriePersonne byId = categoriePersonneDAO.findById(aLong);
+        if (byId==null)
+            throwNotFoundApiException(aLong);
+        return byId;
     }
 
     @Override

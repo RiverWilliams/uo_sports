@@ -31,7 +31,10 @@ public class LieuService implements ILieuService {
 
     @Override
     public Lieu findById(Long aLong) {
-        return lieuDAO.findById(aLong);
+        final Lieu byId = lieuDAO.findById(aLong);
+        if (byId == null)
+            throwNotFoundApiException(aLong);
+        return byId;
     }
 
     @Override
