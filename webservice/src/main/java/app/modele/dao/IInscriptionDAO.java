@@ -20,4 +20,5 @@ public interface IInscriptionDAO {
 
     boolean update(Inscription inscription);
 
+
 }

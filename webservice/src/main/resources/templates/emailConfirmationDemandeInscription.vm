@@ -1,0 +1,14 @@
+<html>
+<body>
+<h3>Confirmation Inscription Sport</h3>
+<p>${personne.nom} ${personne.prenom}</p>
+<p>
+    <ul>
+    #foreach($i in $inscriptions)
+    #set($c = $i.creneau)
+        <li>$c.activite.nom $c.heureDebut</li>
+    #end
+</ul>
+</p>
+</body>
+</html>

@@ -1,11 +1,13 @@
 package app.modele.service;
 
+import app.exception.SendMailException;
 import app.exception.apiException.*;
 import app.modele.dao.ICreneauDAO;
 import app.modele.dao.IInscriptionDAO;
 import app.modele.dao.IPersonneDAO;
 import app.modele.entity.Personne;
 import app.modele.relation.Inscription;
+import app.service.ISendMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ import java.util.Set;
 
 @Service
 public class InscriptionService implements IInscriptionService {
+
+    @Autowired
+    private ISendMailService sendMailService;
 
     @Autowired
     private IPersonneDAO personneDAO;
@@ -41,8 +46,7 @@ public class InscriptionService implements IInscriptionService {
     public void delete(Inscription relation) {
         final Inscription oldInscription = inscriptionDAO.getInscription(relation);
         if (oldInscription == null) {
-            final String msg = String.format("L'inscription (idPersonne,idCreneau) (%d,%d) n'existe pas.", relation.getPersonne().getId(), relation.getCreneau().getId());
-            throw new NotFoundApiException(msg);
+
         }
 
         final boolean delete = inscriptionDAO.delete(relation);
@@ -78,16 +82,29 @@ public class InscriptionService implements IInscriptionService {
             insert(inscription);
         }
 
-        // Mail confimation
+        try {
+            sendMailService.emailConfirmationDemandeInscription(demandeInscription);
+        } catch (SendMailException e) {
+            e.printStackTrace();
+        }
+
         return idPersonne;
+    }
+
+    @Override
+    public Inscription getInscription(Inscription inscription) {
+        final Inscription i = inscriptionDAO.getInscription(inscription);
+        if (i == null) {
+            throwNotFoundApiException(inscription);
+        }
+        return i;
     }
 
     @Override
     public void insert(Inscription relation) {
         checkForeignKey(relation);
         if (inscriptionDAO.exist(relation)) {
-            final String msg = String.format("La relation (idPersonne,idCreneau) (%d,%d) existe déjà.", relation.getPersonne().getId(), relation.getCreneau().getId());
-            throw new ExistApiException(msg);
+            throwNotFoundApiException(relation);
         }
 
         relation.setEnAttente(true);
@@ -97,12 +114,16 @@ public class InscriptionService implements IInscriptionService {
         inscriptionDAO.insert(relation);
     }
 
+    private void throwNotFoundApiException(Inscription inscription) {
+        final String msg = String.format("L'inscription (idPersonne,idCreneau) (%d,%d) n'existe pas.", inscription.getPersonne().getId(), inscription.getCreneau().getId());
+        throw new NotFoundApiException(msg);
+    }
+
     @Override
     public void update(Inscription inscription) {
         final Inscription oldInscription = inscriptionDAO.getInscription(inscription);
         if (oldInscription == null) {
-            final String msg = String.format("L'inscription (idPersonne,idCreneau) (%d,%d) n'existe pas.", inscription.getPersonne().getId(), inscription.getCreneau().getId());
-            throw new NotFoundApiException(msg);
+            throwNotFoundApiException(inscription);
         }
 
         final boolean update = inscriptionDAO.update(inscription);
@@ -111,10 +132,23 @@ public class InscriptionService implements IInscriptionService {
             final String msg = String.format("Le creneau %d a atteint son effectif maximal.", inscription.getCreneau().getId());
             throw new EffectifCreneauAtteintApiException(msg);
         }
+
         if (oldInscription.getEnAttente() && !inscription.getEnAttente()) {
             //Validation Inscription
+
+            try {
+                sendMailService.emailConfirmationValidationInscription(inscription);
+            } catch (SendMailException e) {
+                e.printStackTrace();
+            }
+
         } else if (!oldInscription.getEnAttente() && inscription.getEnAttente()) {
             //Suppression validation inscription
+            try {
+                sendMailService.emailAnnulationInscription(inscription);
+            } catch (SendMailException e) {
+                e.printStackTrace();
+            }
         }
     }
 

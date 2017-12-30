@@ -83,4 +83,5 @@ public class InscriptionDAO extends AbstractDao implements IInscriptionDAO {
         final int update = getJdbcTemplate().update(sql, inscription.getEnAttente(), inscription.getDemande(), inscription.getNombreHeures(), inscription.getEcts(), inscription.getPersonne().getId(), inscription.getCreneau().getId(), inscription.getEnAttente(), inscription.getCreneau().getId());
         return update != 0;
     }
+
 }

@@ -8,4 +8,6 @@ public interface IInscriptionService extends IServiceRelation<Inscription> {
 
     void update(Inscription inscription);
 
+    Inscription getInscription(Inscription inscription);
+
 }
