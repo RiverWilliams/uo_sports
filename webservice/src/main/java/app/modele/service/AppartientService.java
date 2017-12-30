@@ -37,8 +37,8 @@ public class AppartientService implements IAppartientService {
     @Override
     public void insert(Appartient relation) {
         checkForeignKey(relation);
-        if(appartientDAO.exist(relation)){
-            final String msg = String.format("La relation (idSport,idCategorieSport) (%d,%d) existe déjà.", relation.getIdSport(),relation.getIdCategorieSport());
+        if (appartientDAO.exist(relation)) {
+            final String msg = String.format("La relation (idSport,idCategorieSport) (%d,%d) existe déjà.", relation.getIdSport(), relation.getIdCategorieSport());
             throw new ExistApiException(msg);
         }
         appartientDAO.insert(relation);

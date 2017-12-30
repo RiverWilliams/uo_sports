@@ -6,8 +6,8 @@ public interface IInscriptionService extends IServiceRelation<Inscription> {
 
     Long demandeInscriptions(InscriptionService.DemandeInscription demandeInscription);
 
-    void update(Inscription inscription);
-
     Inscription getInscription(Inscription inscription);
+
+    void update(Inscription inscription);
 
 }

@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.groups.Default;
 
 public class Personne {
 

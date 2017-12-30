@@ -2,6 +2,7 @@ package app.modele.service;
 
 import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
+import app.exception.apiException.EmailDejaUtiliseApiException;
 import app.exception.apiException.ForeignKeyViolationApiException;
 import app.exception.apiException.NotFoundApiException;
 import app.modele.dao.ICategoriePersonneDAO;
@@ -67,6 +68,9 @@ public class PersonneService implements IPersonneService {
     @Override
     public Long insert(Personne entity) {
         checkForeignKey(entity);
+        if (personneDAO.exist(entity.getEmail())) {
+            throw new EmailDejaUtiliseApiException("L'email " + entity.getEmail() + " est déjà utilisé.");
+        }
         return personneDAO.insert(entity);
     }
 

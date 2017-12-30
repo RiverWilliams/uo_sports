@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 
 public class CategoriePersonne {
 
@@ -13,7 +12,7 @@ public class CategoriePersonne {
     @NotBlank(groups = Insert.class)
     private String nom;
     @NotNull(groups = Insert.class)
-    @Min(groups = Insert.class,value = 0)
+    @Min(groups = Insert.class, value = 0)
     private Float prix;
 
     public Long getId() {

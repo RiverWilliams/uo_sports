@@ -38,8 +38,8 @@ public class ConcerneService implements IConcerneService {
     @Override
     public void insert(Concerne relation) {
         checkForeignKey(relation);
-        if(concerneDAO.exist(relation)){
-            final String msg = String.format("La relation (idSport,idActualite) (%d,%d) existe déjà.", relation.getIdSport(),relation.getIdActualite());
+        if (concerneDAO.exist(relation)) {
+            final String msg = String.format("La relation (idSport,idActualite) (%d,%d) existe déjà.", relation.getIdSport(), relation.getIdActualite());
             throw new ExistApiException(msg);
         }
         concerneDAO.insert(relation);

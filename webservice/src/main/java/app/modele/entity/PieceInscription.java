@@ -3,7 +3,6 @@ package app.modele.entity;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 
 public class PieceInscription {
 

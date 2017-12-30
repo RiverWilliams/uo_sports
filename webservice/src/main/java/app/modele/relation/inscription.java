@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 
 public class Inscription {
 

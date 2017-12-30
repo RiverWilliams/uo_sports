@@ -20,6 +20,12 @@ public class ResponsableService implements IResponsableService {
     @Autowired
     private ICreneauDAO creneauDAO;
 
+    private void checkExist(Long id) {
+        if (!responsableDAO.exist(id)) {
+            throwNotFoundApiException(id);
+        }
+    }
+
     @Override
     public void deleteById(Long aLong) {
         try {
@@ -41,11 +47,7 @@ public class ResponsableService implements IResponsableService {
             throwNotFoundApiException(aLong);
         return byId;
     }
-    private void checkExist(Long id) {
-        if (!responsableDAO.exist(id)) {
-            throwNotFoundApiException(id);
-        }
-    }
+
     @Override
     public List<Creneau> getCreneaux(Long id) {
         checkExist(id);

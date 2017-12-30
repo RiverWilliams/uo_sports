@@ -7,10 +7,11 @@ import java.util.List;
 public interface IInscriptionDAO {
     boolean delete(Inscription inscription);
 
+    boolean exist(Inscription inscription);
+
     List<Inscription> getEnAttentesByIdCreneau(Long id);
 
     Inscription getInscription(Inscription inscription);
-    boolean exist(Inscription inscription);
 
     List<Inscription> getInscriptionsByIdPersonne(Long id);
 

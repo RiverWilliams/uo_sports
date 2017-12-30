@@ -3,7 +3,6 @@ package app.modele.entity;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 
 public class Lieu {
 
@@ -48,7 +47,7 @@ public class Lieu {
         this.ville = ville;
     }
 
-    public interface Insert  {
+    public interface Insert {
     }
 
     public interface Update extends Insert {

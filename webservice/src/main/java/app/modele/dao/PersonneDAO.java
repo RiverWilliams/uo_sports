@@ -37,11 +37,29 @@ public class PersonneDAO extends AbstractDao implements IPersonneDAO {
     }
 
     @Override
+    public boolean exist(String email) {
+        return findByEmail(email) != null;
+    }
+
+    @Override
     public List<Personne> findAll() {
         //language=SQL
         final String sql = "SELECT * FROM personne"
                 + " JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id";
         return getJdbcTemplate().query(sql, personneRowMapper);
+    }
+
+    @Override
+    public Personne findByEmail(String email) {
+        //language=SQL
+        final String sql = "SELECT * FROM (SELECT * FROM personne WHERE email=?) personne"
+                + " JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id";
+
+        final List<Personne> personnex = getJdbcTemplate().query(sql, personneRowMapper, email);
+        if (personnex.isEmpty())
+            return null;
+        else
+            return personnex.get(0);
     }
 
     @Override

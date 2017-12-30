@@ -38,8 +38,8 @@ public class DeTypeService implements IDeTypeService {
     @Override
     public void insert(DeType relation) {
         checkForeignKey(relation);
-        if(deTypeDAO.exist(relation)){
-            final String msg = String.format("La relation (idSport,idActivite) (%d,%d) existe déjà.", relation.getIdSport(),relation.getIdActivite());
+        if (deTypeDAO.exist(relation)) {
+            final String msg = String.format("La relation (idSport,idActivite) (%d,%d) existe déjà.", relation.getIdSport(), relation.getIdActivite());
             throw new ExistApiException(msg);
         }
         deTypeDAO.insert(relation);

@@ -7,12 +7,11 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 import java.sql.Time;
 
 public class Creneau {
 
-    @NotNull(groups = {Update.class,InscriptionService.DemandeInscription.Insert.class, Inscription.Update.class, Inscription.Delete.class})
+    @NotNull(groups = {Update.class, InscriptionService.DemandeInscription.Insert.class, Inscription.Update.class, Inscription.Delete.class})
     private Long id;
     @NotNull(groups = Insert.class)
     private Time heureDebut;
@@ -22,7 +21,7 @@ public class Creneau {
     @Min(groups = Insert.class, value = 1)
     private Integer effectif;
     @NotNull
-    @Range(groups = Insert.class, min = 1, max = 7)
+    @Range(groups = Insert.class, min = 0, max = 6)
     private Integer jour;
     @Valid
     @NotNull(groups = {Insert.class})

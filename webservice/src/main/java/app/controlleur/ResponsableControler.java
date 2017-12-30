@@ -36,6 +36,11 @@ public class ResponsableControler {
         return responsableService.findById(id);
     }
 
+    @GetMapping("/{id}/creneaux")
+    public List<Creneau> getCreneaux(@PathVariable Long id) {
+        return responsableService.getCreneaux(id);
+    }
+
     @PostMapping
     public ResponseEntity insert(@RequestBody @Validated(Responsable.Insert.class) Responsable responsable) {
         final Long key = responsableService.insert(responsable);
@@ -47,11 +52,6 @@ public class ResponsableControler {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody @Validated(Responsable.Update.class) Responsable responsable) {
         responsableService.update(responsable);
-    }
-
-    @GetMapping("/{id}/creneaux")
-    public List<Creneau> getCreneaux(@PathVariable Long id){
-        return responsableService.getCreneaux(id);
     }
 
 }
