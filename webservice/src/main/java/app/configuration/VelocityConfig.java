@@ -27,7 +27,9 @@ public class VelocityConfig {
     @Scope("singleton")
     public VelocityEngine velocityEngine(@Value("${velocity.properties.name}") String propertiesVelocity) throws Exception {
         final ClassPathResource classPathResource = new ClassPathResource(propertiesVelocity);
-        final String filename = classPathResource.getFile().getCanonicalPath();
-        return new VelocityEngine(filename);
+        final InputStream inputStream = classPathResource.getInputStream();
+        Properties properties = new Properties();
+        properties.load(inputStream);
+        return new VelocityEngine(properties);
     }
 }
