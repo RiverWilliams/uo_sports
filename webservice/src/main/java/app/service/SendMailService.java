@@ -39,6 +39,15 @@ public class SendMailService implements ISendMailService {
     @Value("${mail.adresse.bcc}")
     private String bcc;
 
+    @Value("${mail.sujet.annulationInscription}")
+    private String sujetAnnulation;
+
+    @Value("${mail.sujet.demandeInscription}")
+    private String sujetDemandeInscription;
+
+    @Value("${mail.sujet.validationInscription}")
+    private String sujetValidationInscription;
+
     @Override
     public void emailAnnulationInscription(Inscription inscription) throws SendMailException {
         inscription = inscriptionService.getInscription(inscription);
@@ -50,7 +59,7 @@ public class SendMailService implements ISendMailService {
             throw new SendMailException("Le template n'as pas pu être chargé.", e);
         }
 
-        mailService.sendMail("Annulation Inscription Sport", writer.toString(), inscription.getPersonne().getEmail(), null);
+        mailService.sendMail(sujetAnnulation, writer.toString(), inscription.getPersonne().getEmail(), null);
     }
 
     @Override
@@ -70,7 +79,7 @@ public class SendMailService implements ISendMailService {
             throw new SendMailException("Le template n'as pas pu être chargé.", e);
         }
 
-        mailService.sendMail("Confirmation Demande Inscription Sport", writer.toString(), demande.getPersonne().getEmail(), bcc);
+        mailService.sendMail(sujetDemandeInscription, writer.toString(), demande.getPersonne().getEmail(), bcc);
     }
 
     @Override
@@ -85,6 +94,6 @@ public class SendMailService implements ISendMailService {
             throw new SendMailException("Le template n'as pas pu être chargé.", e);
         }
 
-        mailService.sendMail("Validation Demande Inscription Sport", writer.toString(), inscription.getPersonne().getEmail(), null);
+        mailService.sendMail(sujetValidationInscription, writer.toString(), inscription.getPersonne().getEmail(), null);
     }
 }
