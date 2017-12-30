@@ -1,9 +1,7 @@
 package app.modele.dao;
 
 import app.exception.DeleteChildBeforeParentException;
-import app.modele.entity.Activite;
 import app.modele.entity.Actualite;
-import app.modele.entity.CategorieSport;
 import app.modele.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,12 +20,6 @@ public class ActualiteDAO extends AbstractDao implements IActualiteDAO {
     RowMapper<Sport> sportRowMapper;
     @Autowired
     private RowMapper<Actualite> actualiteRowMapper;
-
-    @Autowired
-    private RowMapper<CategorieSport> categorieSportRowMapper;
-
-    @Autowired
-    private RowMapper<Activite> activiteRowMapper;
 
     @Autowired
     public ActualiteDAO(DataSource dataSource) {
@@ -65,38 +57,37 @@ public class ActualiteDAO extends AbstractDao implements IActualiteDAO {
     }
 
     @Override
-    public List<Activite> getActivites(Long idActualite) {
+    public List<Actualite> getActualiteByIdSport(Long idSport) {
         //language=SQL
-        final String sql = "SELECT activite.*" +
-                "FROM (SELECT de_type.id_activite" +
-                "      FROM (SELECT id_sport" +
-                "            FROM concerne" +
-                "            WHERE id_actualite = ?) d" +
-                "        JOIN de_type ON d.id_sport = de_type.id_activite) d" +
-                "  JOIN activite ON d.id_activite = activite.id";
-
-        return getJdbcTemplate().query(sql, activiteRowMapper, idActualite);
+        final String sql = "SELECT actualite.* FROM (SELECT id_actualite FROM concerne WHERE id_sport=?) concerne JOIN actualite ON actualite.id=concerne.id_actualite";
+        return getJdbcTemplate().query(sql, actualiteRowMapper, idSport);
     }
 
     @Override
-    public List<CategorieSport> getCategoriesSports(Long idActualite) {
+    public List<Actualite> getActualitesByIdActivite(Long idActivite) {
         //language=SQL
-        final String sql = "SELECT categorie_sport.*" +
-                "FROM (SELECT appartient.id_categorie_sport" +
+        final String sql = "SELECT actualite.*" +
+                "FROM (SELECT concerne.id_actualite" +
                 "      FROM (SELECT id_sport" +
-                "            FROM concerne" +
-                "            WHERE id_actualite = ?) d" +
-                "        JOIN appartient ON d.id_sport = appartient.id_sport) a" +
-                "  JOIN categorie_sport ON a.id_categorie_sport = categorie_sport.id";
-
-        return getJdbcTemplate().query(sql, categorieSportRowMapper, idActualite);
+                "            FROM de_type" +
+                "            WHERE id_activite = ?) d" +
+                "        JOIN concerne ON d.id_sport = concerne.id_sport) c" +
+                "  JOIN actualite ON c.id_actualite = actualite.id";
+        return getJdbcTemplate().query(sql, actualiteRowMapper, idActivite);
     }
 
     @Override
-    public List<Sport> getSports(Long idActualite) {
+    public List<Actualite> getActualitesByIdCategorieSport(Long idCategorie) {
         //language=SQL
-        final String sql = "SELECT sport.* FROM (SELECT id_sport FROM concerne WHERE id_actualite=?) concerne JOIN sport ON sport.id=concerne.id_sport";
-        return getJdbcTemplate().query(sql, sportRowMapper, idActualite);
+        final String sql = "SELECT actualite.*" +
+                "FROM (SELECT concerne.id_actualite" +
+                "      FROM (SELECT id_sport" +
+                "            FROM appartient" +
+                "            WHERE id_categorie_sport = ?) a" +
+                "        JOIN concerne ON a.id_sport = concerne.id_actualite) c" +
+                "  JOIN actualite ON c.id_actualite = actualite.id";
+
+        return getJdbcTemplate().query(sql, actualiteRowMapper, idCategorie);
     }
 
     @Override
@@ -123,7 +114,7 @@ public class ActualiteDAO extends AbstractDao implements IActualiteDAO {
     @Override
     public void update(Actualite entity) {
         //language=SQL
-        final String sql = "UPDATE actualite SET titre=?,image=?,desc_courte=?,desc_longue=?,date_debut=?,date_fin=?,date_mise_en_ligne=? WHERE id=?";
-        getJdbcTemplate().update(sql, entity.getTitre(), entity.getImage(), entity.getDescCourte(), entity.getDescLongue(), entity.getDateDebut(), entity.getDateFin(), entity.getDateMiseEnLigne(), entity.getId());
+        final String sql = "UPDATE actualite SET titre=?,image=?,desc_courte=?,desc_longue=?,date_debut=?,date_fin=? WHERE id=?";
+        getJdbcTemplate().update(sql, entity.getTitre(), entity.getImage(), entity.getDescCourte(), entity.getDescLongue(), entity.getDateDebut(), entity.getDateFin(), entity.getId());
     }
 }

@@ -3,7 +3,10 @@ package app.modele.service;
 import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
 import app.exception.apiException.NotFoundApiException;
+import app.modele.dao.IActiviteDAO;
+import app.modele.dao.IActualiteDAO;
 import app.modele.dao.ICategorieSportDAO;
+import app.modele.dao.ISportDAO;
 import app.modele.entity.Activite;
 import app.modele.entity.Actualite;
 import app.modele.entity.CategorieSport;
@@ -18,6 +21,12 @@ public class CategorieSportService implements ICategorieSportService {
 
     @Autowired
     private ICategorieSportDAO categorieSportDAO;
+    @Autowired
+    private ISportDAO sportDAO;
+    @Autowired
+    private IActiviteDAO activiteDAO;
+    @Autowired
+    private IActualiteDAO actualiteDAO;
 
     private void checkExist(Long id) {
         if (!categorieSportDAO.exist(id)) {
@@ -42,7 +51,7 @@ public class CategorieSportService implements ICategorieSportService {
     @Override
     public CategorieSport findById(Long aLong) {
         final CategorieSport byId = categorieSportDAO.findById(aLong);
-        if (byId==null)
+        if (byId == null)
             throwNotFoundApiException(aLong);
         return byId;
     }
@@ -50,21 +59,21 @@ public class CategorieSportService implements ICategorieSportService {
     @Override
     public List<Activite> getActivites(Long idCategorie) {
         checkExist(idCategorie);
-        return categorieSportDAO.getActivites(idCategorie);
+        return activiteDAO.getActivitesByIdCategorieSport(idCategorie);
     }
 
     @Override
     public List<Actualite> getActualites(Long idCategorie) {
         checkExist(idCategorie);
 
-        return categorieSportDAO.getActualites(idCategorie);
+        return actualiteDAO.getActualitesByIdCategorieSport(idCategorie);
     }
 
     @Override
     public List<Sport> getSports(Long idCategorie) {
 
         checkExist(idCategorie);
-        return categorieSportDAO.getSports(idCategorie);
+        return sportDAO.getSportsByIdCategorieSport(idCategorie);
     }
 
     @Override

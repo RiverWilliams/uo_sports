@@ -1,17 +1,16 @@
 package app.modele.dao;
 
-import app.modele.entity.Activite;
 import app.modele.entity.Actualite;
-import app.modele.entity.CategorieSport;
-import app.modele.entity.Sport;
 
 import java.util.List;
 
 public interface IActualiteDAO extends IcrudEntity<Actualite, Long> {
 
-    List<Activite> getActivites(Long idActualite);
+    List<Actualite> getActualiteByIdSport(Long idSport);
 
-    List<CategorieSport> getCategoriesSports(Long idActualite);
+    List<Actualite> getActualitesByIdActivite(Long idActivite);
 
-    List<Sport> getSports(Long idActualite);
+    List<Actualite> getActualitesByIdCategorieSport(Long idCategorie);
+
+
 }

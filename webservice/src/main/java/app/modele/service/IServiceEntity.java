@@ -2,7 +2,7 @@ package app.modele.service;
 
 import java.util.List;
 
-public interface IServiceEntity<T, ID> {
+interface IServiceEntity<T, ID> {
     void deleteById(ID id);
 
     List<T> findAll();

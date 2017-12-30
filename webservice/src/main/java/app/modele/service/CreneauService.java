@@ -4,10 +4,7 @@ import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
 import app.exception.apiException.ForeignKeyViolationApiException;
 import app.exception.apiException.NotFoundApiException;
-import app.modele.dao.IActiviteDAO;
-import app.modele.dao.ICreneauDAO;
-import app.modele.dao.ILieuDAO;
-import app.modele.dao.IResponsableDAO;
+import app.modele.dao.*;
 import app.modele.entity.Creneau;
 import app.modele.relation.Inscription;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,8 @@ public class CreneauService implements ICreneauService {
     private IResponsableDAO responsableDAO;
     @Autowired
     private IActiviteDAO activiteDAO;
+    @Autowired
+    private IInscriptionDAO inscriptionDAO;
 
     private void checkExist(Long id) {
         if (!creneauDAO.exist(id)) {
@@ -32,7 +31,7 @@ public class CreneauService implements ICreneauService {
         }
     }
 
-    private boolean checkForeignKey(Creneau creneau) {
+    private void checkForeignKey(Creneau creneau) {
         if (!lieuDAO.exist(creneau.getLieu().getId())) {
             throw new ForeignKeyViolationApiException("lieu");
         }
@@ -42,7 +41,6 @@ public class CreneauService implements ICreneauService {
         if (!responsableDAO.exist(creneau.getResponsable().getId())) {
             throw new ForeignKeyViolationApiException("responsable");
         }
-        return true;
     }
 
     @Override
@@ -68,19 +66,15 @@ public class CreneauService implements ICreneauService {
     }
 
     @Override
-    public boolean validerInscription(Inscription inscription) {
-
-        return false;
-    }
-
-    @Override
     public List<Inscription> getEnAttentes(Long id) {
-        return creneauDAO.getEnAttentes(id);
+        checkExist(id);
+        return inscriptionDAO.getEnAttentesByIdCreneau(id);
     }
 
     @Override
     public List<Inscription> getInscrits(Long id) {
-        return creneauDAO.getInscrits(id);
+        checkExist(id);
+        return inscriptionDAO.getInscritsByIdCreneau(id);
     }
 
     @Override
@@ -98,4 +92,6 @@ public class CreneauService implements ICreneauService {
         checkForeignKey(entity);
         creneauDAO.update(entity);
     }
+
+
 }

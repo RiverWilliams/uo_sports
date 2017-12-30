@@ -1,5 +1,6 @@
 package app.modele.service;
 
+import app.exception.apiException.ExistApiException;
 import app.exception.apiException.ForeignKeyViolationApiException;
 import app.modele.dao.IActualiteDAO;
 import app.modele.dao.IConcerneDAO;
@@ -20,14 +21,13 @@ public class ConcerneService implements IConcerneService {
     @Autowired
     private IConcerneDAO concerneDAO;
 
-    private boolean checkForeignKey(Concerne concerne) {
+    private void checkForeignKey(Concerne concerne) {
         if (!sportDAO.exist(concerne.getIdSport())) {
             throw new ForeignKeyViolationApiException("sport");
         }
         if (!actualiteDAO.exist(concerne.getIdActualite())) {
             throw new ForeignKeyViolationApiException("actualite");
         }
-        return true;
     }
 
     @Override
@@ -38,6 +38,10 @@ public class ConcerneService implements IConcerneService {
     @Override
     public void insert(Concerne relation) {
         checkForeignKey(relation);
+        if(concerneDAO.exist(relation)){
+            final String msg = String.format("La relation (idSport,idActualite) (%d,%d) existe déjà.", relation.getIdSport(),relation.getIdActualite());
+            throw new ExistApiException(msg);
+        }
         concerneDAO.insert(relation);
     }
 }

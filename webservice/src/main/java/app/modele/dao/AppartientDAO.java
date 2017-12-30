@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Repository
 public class AppartientDAO extends AbstractDao implements IAppartientDAO {
@@ -19,6 +20,17 @@ public class AppartientDAO extends AbstractDao implements IAppartientDAO {
         //language=SQL
         final String sql = "DELETE FROM appartient WHERE id_categorie_sport=? AND id_sport=?";
         getJdbcTemplate().update(sql, relation.getIdCategorieSport(), relation.getIdSport());
+    }
+
+    @Override
+    public boolean exist(Appartient relation) {
+        //language=SQL
+        final String sql = "SELECT * FROM appartient WHERE id_categorie_sport=? AND id_sport=?";
+        final List<Object> query = getJdbcTemplate().query(sql, (rs, rowNum) -> {
+            return null;
+        }, relation.getIdCategorieSport(), relation.getIdSport());
+
+        return !query.isEmpty();
     }
 
     @Override

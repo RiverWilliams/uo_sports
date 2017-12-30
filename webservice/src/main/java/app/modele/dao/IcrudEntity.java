@@ -4,7 +4,7 @@ import app.exception.DeleteChildBeforeParentException;
 
 import java.util.List;
 
-public interface IcrudEntity<T, ID> {
+interface IcrudEntity<T, ID> {
 
     void deleteById(ID id) throws DeleteChildBeforeParentException;
 

@@ -5,6 +5,7 @@ import app.exception.apiException.DeleteChildBeforeParentApiException;
 import app.exception.apiException.ForeignKeyViolationApiException;
 import app.exception.apiException.NotFoundApiException;
 import app.modele.dao.ICategoriePersonneDAO;
+import app.modele.dao.IInscriptionDAO;
 import app.modele.dao.IPersonneDAO;
 import app.modele.entity.Personne;
 import app.modele.relation.Inscription;
@@ -20,6 +21,8 @@ public class PersonneService implements IPersonneService {
     private IPersonneDAO personneDAO;
     @Autowired
     private ICategoriePersonneDAO categoriePersonneDAO;
+    @Autowired
+    private IInscriptionDAO inscriptionDAO;
 
     private void checkExist(Long id) {
         if (!personneDAO.exist(id)) {
@@ -27,11 +30,10 @@ public class PersonneService implements IPersonneService {
         }
     }
 
-    private boolean checkForeignKey(Personne personne) {
+    private void checkForeignKey(Personne personne) {
         if (!categoriePersonneDAO.exist(personne.getCategoriePersonne().getId())) {
             throw new ForeignKeyViolationApiException("categorie_personne");
         }
-        return true;
     }
 
     @Override
@@ -51,14 +53,15 @@ public class PersonneService implements IPersonneService {
     @Override
     public Personne findById(Long aLong) {
         final Personne byId = personneDAO.findById(aLong);
-        if (byId==null)
+        if (byId == null)
             throwNotFoundApiException(aLong);
         return byId;
     }
 
     @Override
     public List<Inscription> getInscriptions(Long id) {
-        return personneDAO.getInscriptions(id);
+        checkExist(id);
+        return inscriptionDAO.getInscriptionsByIdPersonne(id);
     }
 
     @Override

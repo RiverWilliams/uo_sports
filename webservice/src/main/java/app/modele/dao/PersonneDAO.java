@@ -2,7 +2,6 @@ package app.modele.dao;
 
 import app.exception.DeleteChildBeforeParentException;
 import app.modele.entity.Personne;
-import app.modele.relation.Inscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -19,8 +18,6 @@ public class PersonneDAO extends AbstractDao implements IPersonneDAO {
     @Autowired
     private RowMapper<Personne> personneRowMapper;
 
-    @Autowired
-    private RowMapper<Inscription> inscriptionRowMapper;
 
     @Autowired
     public PersonneDAO(DataSource dataSource) {
@@ -60,12 +57,6 @@ public class PersonneDAO extends AbstractDao implements IPersonneDAO {
             return personnex.get(0);
     }
 
-    @Override
-    public List<Inscription> getInscriptions(Long id) {
-        //language=SQL
-        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_personne=?) inscription JOIN creneau ON inscription.id_creneau=creneau.id JOIN responsable ON creneau.id_responsable = responsable.id JOIN niveau ON creneau.id_niveau = niveau.id JOIN activite ON creneau.id_activite = activite.id JOIN lieu ON creneau.id_lieu = lieu.id";
-        return getJdbcTemplate().query(sql, inscriptionRowMapper, id);
-    }
 
     @Override
     public Long insert(Personne entity) {

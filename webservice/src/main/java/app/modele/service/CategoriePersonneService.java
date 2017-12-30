@@ -4,6 +4,7 @@ import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
 import app.exception.apiException.NotFoundApiException;
 import app.modele.dao.ICategoriePersonneDAO;
+import app.modele.dao.IPieceInscriptionDAO;
 import app.modele.entity.CategoriePersonne;
 import app.modele.entity.PieceInscription;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import java.util.List;
 public class CategoriePersonneService implements ICategoriePersonneService {
     @Autowired
     private ICategoriePersonneDAO categoriePersonneDAO;
+    @Autowired
+    private IPieceInscriptionDAO pieceInscriptionDAO;
 
     private void checkExist(Long id) {
         if (!categoriePersonneDAO.exist(id)) {
@@ -39,7 +42,7 @@ public class CategoriePersonneService implements ICategoriePersonneService {
     @Override
     public CategoriePersonne findById(Long aLong) {
         final CategoriePersonne byId = categoriePersonneDAO.findById(aLong);
-        if (byId==null)
+        if (byId == null)
             throwNotFoundApiException(aLong);
         return byId;
     }
@@ -47,7 +50,7 @@ public class CategoriePersonneService implements ICategoriePersonneService {
     @Override
     public List<PieceInscription> getPieces(Long idCategorie) {
         checkExist(idCategorie);
-        return categoriePersonneDAO.getPieces(idCategorie);
+        return pieceInscriptionDAO.getPiecesByIdCategoriePersonne(idCategorie);
     }
 
     @Override

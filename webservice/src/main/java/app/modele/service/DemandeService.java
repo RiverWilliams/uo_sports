@@ -20,14 +20,13 @@ public class DemandeService implements IDemandeService {
     @Autowired
     private IDemandeDAO demandeDAO;
 
-    private boolean checkForeignKey(Demande demande) {
+    private void checkForeignKey(Demande demande) {
         if (!categoriePersonneDAO.exist(demande.getIdCategoriePersonne())) {
             throw new ForeignKeyViolationApiException("categoriePersonne");
         }
         if (!pieceInscriptionDAO.exist(demande.getIdPieceInscription())) {
             throw new ForeignKeyViolationApiException("pieceInscription");
         }
-        return true;
     }
 
     @Override

@@ -2,24 +2,31 @@ package app.modele.entity;
 
 import app.modele.relation.Inscription;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 
 public class Personne {
 
-    @NotNull(groups = {Update.class, Inscription.Update.class})
+    @NotNull(groups = {Update.class, Inscription.Update.class, Inscription.Delete.class})
     private Long id;
+    @NotBlank(groups = Insert.class)
     private String nom;
+    @NotBlank(groups = Insert.class)
     private String prenom;
+    @NotBlank(groups = Insert.class)
     private String adresse;
+    @NotNull(groups = Insert.class)
+    @Pattern(regexp = "(\\+[0-9]{0,3})?[0-9]{10}")
     private String telephone;
-    @NotNull
-    @Email
+    @NotNull(groups = Insert.class)
+    @Email(groups = Insert.class)
     private String email;
     @Valid
-    @NotNull
+    @NotNull(groups = Insert.class)
     private CategoriePersonne categoriePersonne;
 
     public String getAdresse() {
@@ -78,7 +85,7 @@ public class Personne {
         this.telephone = telephone;
     }
 
-    public interface Insert extends Default {
+    public interface Insert {
     }
 
     public interface Update extends Insert {

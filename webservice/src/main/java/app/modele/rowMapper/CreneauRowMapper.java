@@ -43,6 +43,7 @@ public class CreneauRowMapper extends AbstractRowMapper<Creneau> {
         creneau.setEffectif(rs.getInt(getColumnName("effectif")));
         creneau.setHeureDebut(rs.getTime(getColumnName("heure_debut")));
         creneau.setHeureFin(rs.getTime(getColumnName("heure_fin")));
+        creneau.setJour(rs.getInt("jour"));
         creneau.setResponsable(responsableRowMapper.mapRow(rs, rowNum));
         creneau.setNiveau(niveauRowMapper.mapRow(rs, rowNum));
         creneau.setLieu(lieuRowMapper.mapRow(rs, rowNum));

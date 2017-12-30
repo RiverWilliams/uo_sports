@@ -32,15 +32,15 @@ public class PersonneControler {
         return personneService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Personne findById(@PathVariable Long id) {
+        return personneService.findById(id);
+    }
+
     @GetMapping("/{id}/inscriptions")
     @JsonView(Inscription.Views.Creneau.class)
     public List<Inscription> getInscriptions(@PathVariable Long id) {
         return personneService.getInscriptions(id);
-    }
-
-    @GetMapping("/{id}")
-    public Personne findById(@PathVariable Long id) {
-        return personneService.findById(id);
     }
 
     @PostMapping

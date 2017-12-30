@@ -1,10 +1,7 @@
 package app.modele.dao;
 
 import app.exception.DeleteChildBeforeParentException;
-import app.modele.entity.Activite;
-import app.modele.entity.Actualite;
 import app.modele.entity.CategorieSport;
-import app.modele.entity.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -20,15 +17,6 @@ import java.util.List;
 public class CategorieSportDAO extends AbstractDao implements ICategorieSportDAO {
     @Autowired
     private RowMapper<CategorieSport> categorieSportRowMapper;
-
-    @Autowired
-    private RowMapper<Sport> sportRowMapper;
-
-    @Autowired
-    private RowMapper<Actualite> actualiteRowMapper;
-
-    @Autowired
-    private RowMapper<Activite> activiteRowMapper;
 
     @Autowired
     public CategorieSportDAO(DataSource dataSource) {
@@ -66,38 +54,38 @@ public class CategorieSportDAO extends AbstractDao implements ICategorieSportDAO
     }
 
     @Override
-    public List<Activite> getActivites(Long idCategorie) {
+    public List<CategorieSport> getCategoriesSportsByIdActivite(Long idActivite) {
         //language=SQL
-        final String sql = "SELECT activite.*" +
-                "FROM (SELECT de_type.id_activite" +
+        final String sql = "SELECT categorie_sport.*" +
+                "FROM (SELECT appartient.id_categorie_sport" +
                 "      FROM (SELECT id_sport" +
-                "            FROM appartient" +
-                "            WHERE id_categorie_sport = ?) a" +
-                "        JOIN de_type ON a.id_sport = de_type.id_activite) c" +
-                "  JOIN activite ON c.id_activite = activite.id";
+                "            FROM de_type" +
+                "            WHERE id_activite = ?) d" +
+                "        JOIN appartient ON d.id_sport = appartient.id_sport) a" +
+                "  JOIN categorie_sport ON a.id_categorie_sport = categorie_sport.id";
 
-        return getJdbcTemplate().query(sql, activiteRowMapper, idCategorie);
+        return getJdbcTemplate().query(sql, categorieSportRowMapper, idActivite);
     }
 
     @Override
-    public List<Actualite> getActualites(Long idCategorie) {
+    public List<CategorieSport> getCategoriesSportsByIdActualite(Long idActualite) {
         //language=SQL
-        final String sql = "SELECT actualite.*" +
-                "FROM (SELECT concerne.id_actualite" +
+        final String sql = "SELECT categorie_sport.*" +
+                "FROM (SELECT appartient.id_categorie_sport" +
                 "      FROM (SELECT id_sport" +
-                "            FROM appartient" +
-                "            WHERE id_categorie_sport = ?) a" +
-                "        JOIN concerne ON a.id_sport = concerne.id_actualite) c" +
-                "  JOIN actualite ON c.id_actualite = actualite.id";
+                "            FROM concerne" +
+                "            WHERE id_actualite = ?) d" +
+                "        JOIN appartient ON d.id_sport = appartient.id_sport) a" +
+                "  JOIN categorie_sport ON a.id_categorie_sport = categorie_sport.id";
 
-        return getJdbcTemplate().query(sql, actualiteRowMapper, idCategorie);
+        return getJdbcTemplate().query(sql, categorieSportRowMapper, idActualite);
     }
 
     @Override
-    public List<Sport> getSports(Long idCategorie) {
+    public List<CategorieSport> getCategoriesSportsByIdSport(Long idSport) {
         //language=SQL
-        final String sql = "SELECT sport.* FROM (SELECT id_sport FROM appartient WHERE id_categorie_sport=?) a JOIN sport ON sport.id=a.id_sport";
-        return getJdbcTemplate().query(sql, sportRowMapper, idCategorie);
+        final String sql = "SELECT categorie_sport.* FROM (SELECT id_categorie_sport FROM appartient WHERE id_sport=?) a JOIN categorie_sport ON categorie_sport.id=a.id_categorie_sport";
+        return getJdbcTemplate().query(sql, categorieSportRowMapper, idSport);
     }
 
     @Override

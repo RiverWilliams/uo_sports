@@ -1,5 +1,6 @@
 package app.modele.service;
 
+import app.exception.apiException.ExistApiException;
 import app.exception.apiException.ForeignKeyViolationApiException;
 import app.modele.dao.IAppartientDAO;
 import app.modele.dao.ICategorieSportDAO;
@@ -19,14 +20,13 @@ public class AppartientService implements IAppartientService {
     @Autowired
     private IAppartientDAO appartientDAO;
 
-    private boolean checkForeignKey(Appartient appartient) {
+    private void checkForeignKey(Appartient appartient) {
         if (!sportDAO.exist(appartient.getIdSport())) {
             throw new ForeignKeyViolationApiException("sport");
         }
         if (!categorieSportDAO.exist(appartient.getIdCategorieSport())) {
             throw new ForeignKeyViolationApiException("categorieSport");
         }
-        return true;
     }
 
     @Override
@@ -37,6 +37,10 @@ public class AppartientService implements IAppartientService {
     @Override
     public void insert(Appartient relation) {
         checkForeignKey(relation);
+        if(appartientDAO.exist(relation)){
+            final String msg = String.format("La relation (idSport,idCategorieSport) (%d,%d) existe déjà.", relation.getIdSport(),relation.getIdCategorieSport());
+            throw new ExistApiException(msg);
+        }
         appartientDAO.insert(relation);
     }
 }

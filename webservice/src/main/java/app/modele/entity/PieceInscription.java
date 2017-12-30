@@ -1,5 +1,7 @@
 package app.modele.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
@@ -7,6 +9,7 @@ public class PieceInscription {
 
     @NotNull(groups = {Update.class})
     private Long id;
+    @NotBlank(groups = Insert.class)
     private String nom;
 
     public Long getId() {
@@ -25,7 +28,7 @@ public class PieceInscription {
         this.nom = nom;
     }
 
-    public interface Insert extends Default {
+    public interface Insert {
     }
 
     public interface Update extends Insert {

@@ -1,7 +1,8 @@
 package app.modele.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 import java.sql.Date;
 
 public class Actualite {
@@ -9,11 +10,17 @@ public class Actualite {
 
     @NotNull(groups = {Update.class})
     private Long id;
+    @NotBlank(groups = Insert.class)
     private String titre;
+    @NotBlank(groups = Insert.class)
     private String image;
+    @NotBlank(groups = Insert.class)
     private String descCourte;
+    @NotBlank(groups = Insert.class)
     private String descLongue;
+    @NotNull(groups = Insert.class)
     private Date dateDebut;
+    @NotNull(groups = Insert.class)
     private Date dateFin;
     private Date dateMiseEnLigne;
 
@@ -81,7 +88,7 @@ public class Actualite {
         this.titre = titre;
     }
 
-    public interface Insert extends Default {
+    public interface Insert {
     }
 
     public interface Update extends Insert {

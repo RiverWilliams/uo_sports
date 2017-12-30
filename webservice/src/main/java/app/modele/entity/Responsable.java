@@ -1,5 +1,8 @@
 package app.modele.entity;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
@@ -7,8 +10,11 @@ public class Responsable {
 
     @NotNull(groups = {Update.class, Creneau.Insert.class})
     private Long id;
+    @NotBlank(groups = Insert.class)
     private String nom;
+    @NotBlank(groups = Insert.class)
     private String prenom;
+    @Email(groups = Insert.class)
     private String email;
 
     public String getEmail() {
@@ -43,7 +49,7 @@ public class Responsable {
         this.prenom = prenom;
     }
 
-    public interface Insert extends Default {
+    public interface Insert {
     }
 
     public interface Update extends Insert {

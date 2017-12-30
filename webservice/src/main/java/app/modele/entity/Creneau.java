@@ -1,30 +1,40 @@
 package app.modele.entity;
 
 import app.modele.relation.Inscription;
+import app.modele.service.InscriptionService;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 import java.sql.Time;
 
 public class Creneau {
 
-    @NotNull(groups = {Update.class, Inscription.Update.class})
+    @NotNull(groups = {Update.class,InscriptionService.DemandeInscription.Insert.class, Inscription.Update.class, Inscription.Delete.class})
     private Long id;
+    @NotNull(groups = Insert.class)
     private Time heureDebut;
+    @NotNull(groups = Insert.class)
     private Time heureFin;
+    @NotNull(groups = Insert.class)
+    @Min(groups = Insert.class, value = 1)
     private Integer effectif;
-    @Valid
     @NotNull
+    @Range(groups = Insert.class, min = 1, max = 7)
+    private Integer jour;
+    @Valid
+    @NotNull(groups = {Insert.class})
     private Niveau niveau;
     @Valid
-    @NotNull
+    @NotNull(groups = Insert.class)
     private Lieu lieu;
     @Valid
-    @NotNull
+    @NotNull(groups = {Insert.class})
     private Responsable responsable;
     @Valid
-    @NotNull
+    @NotNull(groups = {Insert.class})
     private Activite activite;
 
     public Activite getActivite() {
@@ -67,6 +77,14 @@ public class Creneau {
         this.id = id;
     }
 
+    public Integer getJour() {
+        return jour;
+    }
+
+    public void setJour(Integer jour) {
+        this.jour = jour;
+    }
+
     public Lieu getLieu() {
         return lieu;
     }
@@ -91,7 +109,7 @@ public class Creneau {
         this.responsable = responsable;
     }
 
-    public interface Insert extends Default {
+    public interface Insert {
     }
 
     public interface Update extends Insert {

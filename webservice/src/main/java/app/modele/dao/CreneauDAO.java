@@ -2,7 +2,6 @@ package app.modele.dao;
 
 import app.exception.DeleteChildBeforeParentException;
 import app.modele.entity.Creneau;
-import app.modele.relation.Inscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -18,8 +17,6 @@ import java.util.List;
 public class CreneauDAO extends AbstractDao implements ICreneauDAO {
     @Autowired
     private RowMapper<Creneau> creneauRowMapper;
-    @Autowired
-    private RowMapper<Inscription> inscriptionRowMapper;
 
     @Autowired
     public CreneauDAO(DataSource dataSource) {
@@ -66,23 +63,21 @@ public class CreneauDAO extends AbstractDao implements ICreneauDAO {
     }
 
     @Override
-    public List<Inscription> getEnAttentes(Long id) {
+    public List<Creneau> getCreneauxByIdResponsable(Long id) {
         //language=SQL
-        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_creneau=? AND en_attente ) inscription JOIN personne ON inscription.id_personne=personne.id JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id";
-        return getJdbcTemplate().query(sql, inscriptionRowMapper, id);
+        final String sql = "SELECT * FROM (SELECT * FROM creneau WHERE id_responsable=?) creneau"
+                + " JOIN activite ON creneau.id_activite = activite.id"
+                + " JOIN lieu ON creneau.id_lieu = lieu.id"
+                + " JOIN niveau ON creneau.id_niveau = niveau.id"
+                + " JOIN responsable ON creneau.id_responsable = responsable.id";
+        return getJdbcTemplate().query(sql, creneauRowMapper, id);
     }
 
-    @Override
-    public List<Inscription> getInscrits(Long id) {
-        //language=SQL
-        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_creneau=? AND NOT en_attente ) inscription JOIN personne ON inscription.id_personne=personne.id JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id";
-        return getJdbcTemplate().query(sql, inscriptionRowMapper, id);
-    }
 
     @Override
     public Long insert(Creneau entity) {
         //language=SQL
-        final String sql = "INSERT INTO creneau(heure_debut,heure_fin,effectif,id_responsable,id_niveau,id_lieu,id_activite) VALUES (?,?,?,?,?,?,?)";
+        final String sql = "INSERT INTO creneau(heure_debut,heure_fin,effectif,id_responsable,id_niveau,id_lieu,id_activite,jour) VALUES (?,?,?,?,?,?,?,?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -95,6 +90,7 @@ public class CreneauDAO extends AbstractDao implements ICreneauDAO {
             preparedStatement.setLong(5, entity.getNiveau().getId());
             preparedStatement.setLong(6, entity.getLieu().getId());
             preparedStatement.setLong(7, entity.getActivite().getId());
+            preparedStatement.setInt(8, entity.getJour());
             return preparedStatement;
         }, keyHolder);
         return keyHolder.getKey().longValue();
@@ -103,7 +99,7 @@ public class CreneauDAO extends AbstractDao implements ICreneauDAO {
     @Override
     public void update(Creneau entity) {
         //language=SQL
-        final String sql = "UPDATE creneau SET heure_debut=?,heure_fin=?,effectif=?,id_responsable=?,id_niveau=?,id_lieu=?,id_activite=? WHERE id=?";
-        getJdbcTemplate().update(sql, entity.getHeureDebut(), entity.getHeureFin(), entity.getEffectif(), entity.getResponsable().getId(), entity.getNiveau().getId(), entity.getLieu().getId(), entity.getActivite().getId(), entity.getId());
+        final String sql = "UPDATE creneau SET heure_debut=?,heure_fin=?,effectif=?,id_responsable=?,id_niveau=?,id_lieu=?,id_activite=?,jour=? WHERE id=?";
+        getJdbcTemplate().update(sql, entity.getHeureDebut(), entity.getHeureFin(), entity.getEffectif(), entity.getResponsable().getId(), entity.getNiveau().getId(), entity.getLieu().getId(), entity.getActivite().getId(), entity.getJour(), entity.getId());
     }
 }

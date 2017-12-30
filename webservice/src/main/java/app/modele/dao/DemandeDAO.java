@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Repository
 public class DemandeDAO extends AbstractDao implements IDemandeDAO {
@@ -19,6 +20,16 @@ public class DemandeDAO extends AbstractDao implements IDemandeDAO {
         //language=SQL
         final String sql = "DELETE FROM demande WHERE id_categorie_personne=? AND id_piece_inscription=?";
         getJdbcTemplate().update(sql, relation.getIdCategoriePersonne(), relation.getIdPieceInscription());
+    }
+
+    @Override
+    public boolean exist(Demande relation) {
+        //language=SQL
+        final String sql = "SELECT * FROM demande WHERE id_categorie_personne=? AND id_piece_inscription=?";
+        final List<Object> query = getJdbcTemplate().query(sql, (rs, rowNum) ->
+                        null
+                , relation.getIdCategoriePersonne(), relation.getIdPieceInscription());
+        return !query.isEmpty();
     }
 
     @Override

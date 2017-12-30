@@ -1,5 +1,7 @@
 package app.modele.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
@@ -7,8 +9,11 @@ public class Lieu {
 
     @NotNull(groups = {Update.class, Creneau.Insert.class})
     private Long id;
+    @NotBlank(groups = Insert.class)
     private String nom;
+    @NotBlank(groups = Insert.class)
     private String ville;
+    @NotBlank(groups = Insert.class)
     private String adresse;
 
     public String getAdresse() {
@@ -43,7 +48,7 @@ public class Lieu {
         this.ville = ville;
     }
 
-    public interface Insert extends Default {
+    public interface Insert  {
     }
 
     public interface Update extends Insert {

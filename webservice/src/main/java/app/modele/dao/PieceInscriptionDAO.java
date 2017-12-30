@@ -54,6 +54,13 @@ public class PieceInscriptionDAO extends AbstractDao implements IPieceInscriptio
     }
 
     @Override
+    public List<PieceInscription> getPiecesByIdCategoriePersonne(Long idCategorie) {
+        //language=SQL
+        final String sql = "SELECT piece_inscription.* FROM (SELECT id_piece_inscription FROM demande WHERE id_categorie_personne=?) demande JOIN piece_inscription ON demande.id_piece_inscription=piece_inscription.id";
+        return getJdbcTemplate().query(sql, pieceInscriptionRowMapper, idCategorie);
+    }
+
+    @Override
     public Long insert(PieceInscription entity) {
         //language=SQL
         final String sql = "INSERT INTO piece_inscription(nom) VALUES (?)";

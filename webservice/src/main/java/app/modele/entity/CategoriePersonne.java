@@ -1,5 +1,8 @@
 package app.modele.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
@@ -7,7 +10,10 @@ public class CategoriePersonne {
 
     @NotNull(groups = {Update.class, Personne.Insert.class})
     private Long id;
+    @NotBlank(groups = Insert.class)
     private String nom;
+    @NotNull(groups = Insert.class)
+    @Min(groups = Insert.class,value = 0)
     private Float prix;
 
     public Long getId() {
@@ -34,7 +40,7 @@ public class CategoriePersonne {
         this.prix = prix;
     }
 
-    public interface Insert extends Default {
+    public interface Insert {
     }
 
     public interface Update extends Insert {

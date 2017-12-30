@@ -28,7 +28,6 @@ public class VelocityConfig {
     public VelocityEngine velocityEngine(@Value("${velocity.properties.name}") String propertiesVelocity) throws Exception {
         final ClassPathResource classPathResource = new ClassPathResource(propertiesVelocity);
         final String filename = classPathResource.getFile().getCanonicalPath();
-        VelocityEngine velocityEngine = new VelocityEngine(filename);
-        return velocityEngine;
+        return new VelocityEngine(filename);
     }
 }

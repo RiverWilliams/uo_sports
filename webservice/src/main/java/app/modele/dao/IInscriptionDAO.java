@@ -2,7 +2,22 @@ package app.modele.dao;
 
 import app.modele.relation.Inscription;
 
+import java.util.List;
+
 public interface IInscriptionDAO {
-    void delete(Inscription inscription);
+    boolean delete(Inscription inscription);
+
+    List<Inscription> getEnAttentesByIdCreneau(Long id);
+
+    Inscription getInscription(Inscription inscription);
+    boolean exist(Inscription inscription);
+
+    List<Inscription> getInscriptionsByIdPersonne(Long id);
+
+    List<Inscription> getInscritsByIdCreneau(Long id);
+
+    void insert(Inscription inscription);
+
     boolean update(Inscription inscription);
+
 }

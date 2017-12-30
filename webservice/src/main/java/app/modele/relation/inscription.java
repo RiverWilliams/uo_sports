@@ -2,6 +2,7 @@ package app.modele.relation;
 
 import app.modele.entity.Creneau;
 import app.modele.entity.Personne;
+import app.modele.service.InscriptionService;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.validation.Valid;
@@ -9,22 +10,24 @@ import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
 public class Inscription {
+
     @JsonView(Views.Personne.class)
-    @NotNull
     @Valid
+    @NotNull(groups = {Insert.class, Delete.class})
     private Personne personne;
 
     @JsonView(Views.Creneau.class)
     @Valid
-    @NotNull
+    @NotNull(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class, Delete.class})
     private Creneau creneau;
 
+    @NotNull(groups = Update.class)
     private Boolean enAttente;
-
+    @NotNull
     private Boolean demande;
-
+    @NotNull(groups = Update.class)
     private Integer ects;
-
+    @NotNull(groups = Update.class)
     private Integer nombreHeures;
 
 
@@ -76,7 +79,7 @@ public class Inscription {
         this.personne = personne;
     }
 
-    public interface Insert extends Default {
+    public interface Insert {
     }
 
     public interface Update extends Insert {
@@ -91,4 +94,6 @@ public class Inscription {
         }
     }
 
+    public interface Delete {
+    }
 }

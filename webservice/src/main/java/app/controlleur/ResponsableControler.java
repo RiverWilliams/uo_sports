@@ -1,5 +1,6 @@
 package app.controlleur;
 
+import app.modele.entity.Creneau;
 import app.modele.entity.Responsable;
 import app.modele.service.IResponsableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,11 @@ public class ResponsableControler {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody @Validated(Responsable.Update.class) Responsable responsable) {
         responsableService.update(responsable);
+    }
+
+    @GetMapping("/{id}/creneaux")
+    public List<Creneau> getCreneaux(@PathVariable Long id){
+        return responsableService.getCreneaux(id);
     }
 
 }

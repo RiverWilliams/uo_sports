@@ -11,5 +11,4 @@ public interface ICreneauService extends IServiceEntity<Creneau, Long> {
 
     List<Inscription> getInscrits(Long id);
 
-    boolean validerInscription(Inscription inscription);
 }
