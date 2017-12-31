@@ -3,14 +3,8 @@ package app.modele.service;
 import app.exception.DeleteChildBeforeParentException;
 import app.exception.apiException.DeleteChildBeforeParentApiException;
 import app.exception.apiException.NotFoundApiException;
-import app.modele.dao.IActiviteDAO;
-import app.modele.dao.IActualiteDAO;
-import app.modele.dao.ICategorieSportDAO;
-import app.modele.dao.ISportDAO;
-import app.modele.entity.Activite;
-import app.modele.entity.Actualite;
-import app.modele.entity.CategorieSport;
-import app.modele.entity.Sport;
+import app.modele.dao.*;
+import app.modele.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +18,9 @@ public class ActiviteService implements IActiviteService {
 
     @Autowired
     private IActualiteDAO actualiteDAO;
+
+    @Autowired
+    private ICreneauDAO creneauDAO;
 
     @Autowired
     private ISportDAO sportDAO;
@@ -71,6 +68,12 @@ public class ActiviteService implements IActiviteService {
     public List<CategorieSport> getCategoriesSports(Long idActivite) {
         checkExist(idActivite);
         return categorieSportDAO.getCategoriesSportsByIdActivite(idActivite);
+    }
+
+    @Override
+    public List<Creneau> getCreneaux(Long idActivite) {
+        checkExist(idActivite);
+        return creneauDAO.getCreneauxByIdActivite(idActivite);
     }
 
     @Override

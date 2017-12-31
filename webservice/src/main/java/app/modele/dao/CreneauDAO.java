@@ -63,6 +63,17 @@ public class CreneauDAO extends AbstractDao implements ICreneauDAO {
     }
 
     @Override
+    public List<Creneau> getCreneauxByIdActivite(Long idActivite) {
+        //language=SQL
+        final String sql = "SELECT * FROM (SELECT * FROM creneau WHERE id_activite=?) creneau"
+                + " JOIN activite ON creneau.id_activite = activite.id"
+                + " JOIN lieu ON creneau.id_lieu = lieu.id"
+                + " JOIN niveau ON creneau.id_niveau = niveau.id"
+                + " JOIN responsable ON creneau.id_responsable = responsable.id";
+        return getJdbcTemplate().query(sql, creneauRowMapper, idActivite);
+    }
+
+    @Override
     public List<Creneau> getCreneauxByIdResponsable(Long id) {
         //language=SQL
         final String sql = "SELECT * FROM (SELECT * FROM creneau WHERE id_responsable=?) creneau"

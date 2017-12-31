@@ -1,9 +1,6 @@
 package app.controlleur;
 
-import app.modele.entity.Activite;
-import app.modele.entity.Actualite;
-import app.modele.entity.CategorieSport;
-import app.modele.entity.Sport;
+import app.modele.entity.*;
 import app.modele.relation.DeType;
 import app.modele.service.IActiviteService;
 import app.modele.service.IDeTypeService;
@@ -63,6 +60,9 @@ public class ActiviteControler {
     public List<Sport> getSports(@PathVariable Long idActivite) {
         return activiteService.getSports(idActivite);
     }
+
+    @GetMapping("/{idActivite}/creneaux")
+    public List<Creneau> getCreneaux(@PathVariable Long idActivite){return activiteService.getCreneaux(idActivite);}
 
     @PostMapping
     public ResponseEntity insert(@RequestBody @Validated(Activite.Insert.class) Activite activite) {
