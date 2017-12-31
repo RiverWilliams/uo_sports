@@ -11,7 +11,7 @@ public class Responsable {
     private Long id;
     @NotBlank(groups = Insert.class)
     private String nom;
-    @NotBlank(groups = Insert.class)
+    @NotNull(groups = Insert.class)
     private String prenom;
     @Email(groups = Insert.class)
     private String email;
