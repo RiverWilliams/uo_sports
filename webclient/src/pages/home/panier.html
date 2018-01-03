@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Selection
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+			<ion-row>
+				<ion-col><strong>Sport</strong></ion-col>
+				<ion-col><strong>Jour</strong></ion-col>
+				<ion-col><strong>Heure</strong></ion-col>
+				<ion-col><strong>Lieu</strong></ion-col>
+				<ion-col><strong>Niveau</strong></ion-col>
+				<ion-col><strong>Suppr.</strong></ion-col>
+			</ion-row>
+			<ion-row *ngFor="let creneau of creneaux">
+				<ion-col>{{creneau.activite.nom}}</ion-col>
+				<ion-col>{{creneau.jour}}</ion-col>
+				<ion-col>{{creneau.heureDebut}} - {{creneau.heureFin}}</ion-col>
+				<ion-col>{{creneau.lieu.nom}}</ion-col>
+				<ion-col>{{creneau.niveau.niveau}}</ion-col>
+				<ion-col><ion-icon name="trash" (click)="supprimer(creneau)"></ion-icon></ion-col>
+			</ion-row>
+			</ion-grid>
+			<br/><br/><br/>
+			<div text-center>
+				<button ion-button large color="danger" [navPush]="page">Valider</button> 
+			</div>
+
+</ion-content>
+
+<ion-footer  text-center >
+	<ion-toolbar color="danger" >
+		<ion-icon style="font-size:25px" name="logo-facebook"></ion-icon>
+		<ion-icon style="font-size:25px" name="logo-linkedin"></ion-icon>
+		<ion-icon style="font-size:25px" name="logo-youtube"></ion-icon>
+		<ion-icon style="font-size:25px" name="logo-twitter"></ion-icon>
+	</ion-toolbar>
+</ion-footer>

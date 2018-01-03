@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Inscription
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list radio-group>
+			<p><strong>Je suis : </strong></p>
+
+		<ion-item>
+			<ion-label>Etudiant</ion-label>
+			<ion-radio value="c"></ion-radio>
+		</ion-item>
+		<ion-item>
+			<ion-label>Personnel</ion-label>
+			<ion-radio value="b"></ion-radio>
+		</ion-item>
+		 <ion-item>
+			<ion-label>Exterieur</ion-label>
+			<ion-radio value="a"></ion-radio>
+		</ion-item>
+	</ion-list>
+	
+	<ion-list>
+		<ion-item>
+			<ion-label color="dark">Nom</ion-label>
+			<ion-input placeholder="nom"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="dark">Prenom</ion-label>
+			<ion-input placeholder="prenom"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="dark">Adresse</ion-label>
+			<ion-input placeholder="adresse"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="dark">Telephone</ion-label>
+			<ion-input placeholder="telephone"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="dark">Mail</ion-label>
+			<ion-input placeholder="mail"></ion-input>
+		</ion-item>
+	</ion-list>
+	<div text-center>
+		<button ion-button large color="danger" >Valider</button> 
+	</div>
+	<p text-center style="font-size:12px">Un mail de confirmation vous sera envoyé</p>
+
+</ion-content>
+
+<ion-footer  text-center >
+	<ion-toolbar color="danger" >
+		<ion-icon style="font-size:25px" name="logo-facebook"></ion-icon>
+		<ion-icon style="font-size:25px" name="logo-linkedin"></ion-icon>
+		<ion-icon style="font-size:25px" name="logo-youtube"></ion-icon>
+		<ion-icon style="font-size:25px" name="logo-twitter"></ion-icon>
+	</ion-toolbar>
+</ion-footer>
