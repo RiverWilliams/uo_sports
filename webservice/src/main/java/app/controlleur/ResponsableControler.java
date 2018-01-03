@@ -15,6 +15,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/responsables")
+@CrossOrigin
+
 public class ResponsableControler {
 
     @Autowired

@@ -14,6 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/lieux")
+@CrossOrigin
+
 public class LieuControler {
 
     @Autowired

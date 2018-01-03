@@ -14,6 +14,8 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("inscriptions")
+@CrossOrigin
+
 public class InscriptionControler {
 
     @Autowired

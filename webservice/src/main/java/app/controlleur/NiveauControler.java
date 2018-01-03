@@ -14,6 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/niveaux")
+@CrossOrigin
+
 public class NiveauControler {
 
     @Autowired

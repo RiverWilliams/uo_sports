@@ -14,6 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pieces_inscription")
+@CrossOrigin
+
 public class PieceInscriptionControler {
 
     @Autowired

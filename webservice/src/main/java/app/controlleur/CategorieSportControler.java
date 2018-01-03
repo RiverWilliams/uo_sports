@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categories_sports")
+@CrossOrigin
 public class CategorieSportControler {
 
     @Autowired

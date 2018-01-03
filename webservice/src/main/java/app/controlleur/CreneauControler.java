@@ -16,6 +16,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/creneaux")
+@CrossOrigin
+
 public class CreneauControler {
 
     @Autowired

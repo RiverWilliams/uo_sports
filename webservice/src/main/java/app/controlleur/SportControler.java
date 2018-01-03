@@ -19,6 +19,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sports")
+@CrossOrigin
+
 public class SportControler {
     @Autowired
     private ISportService sportService;
