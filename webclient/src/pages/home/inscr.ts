@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
+import {Creneau, Personne} from "../../common/model";
 
 
 @Component({
@@ -8,9 +9,17 @@ import { NavController } from 'ionic-angular';
 })
 export class InscrPage {
 
+  public mesParam: Creneau[];
 
-  constructor(public navCtrl: NavController) {
+    private inscrit: Personne;
 
-  }
+    constructor(public  navCtrl: NavController, public navParams: NavParams) {
 
+        this.mesParam = navParams.get("paramPasse");
+        ;
+    }
+
+    inscrire(){
+      //this.inscrit.nom = ;
+    }
 }

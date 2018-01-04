@@ -15,12 +15,14 @@ import {InscrPage} from '../pages/home/inscr';
 import {ActivitesProvider} from '../providers/activites/activites';
 import {WebserviceProvider} from '../common/webservice';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {PanierCardComponent} from "../components/panier-card/panier-card";
 
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
         ActiviteCardComponent,
+        PanierCardComponent,
         DayOfWeekPipe,
         SeancePage,
         PanierPage,
@@ -36,6 +38,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
         MyApp,
         HomePage,
         ActiviteCardComponent,
+        PanierCardComponent,
         SeancePage,
         PanierPage,
         InscrPage

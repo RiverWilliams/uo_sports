@@ -14,12 +14,19 @@ export class PanierPage {
 
     public creneaux: Creneau[];
 
-    public page: any;
+    page: any;
 
     constructor(public navCtrl: NavController, private panier: PanierProvider, private web: WebserviceProvider) {
-        this.page = InscrPage;
         this.creneaux = this.panier.creneaux;
+        this.page = InscrPage;
     }
+
+
+    /*naviguer(){
+        this.navCtrl.push(InscrPage,{
+            paramPasse: this.creneaux
+        })
+    }*/
 
 
     supprimer(creneau: Creneau): void {

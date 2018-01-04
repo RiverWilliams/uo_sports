@@ -7,29 +7,14 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid>
-        <ion-row>
-            <ion-col><strong>Sport</strong></ion-col>
-            <ion-col><strong>Jour</strong></ion-col>
-            <ion-col><strong>Heure</strong></ion-col>
-            <ion-col><strong>Lieu</strong></ion-col>
-            <ion-col><strong>Niveau</strong></ion-col>
-            <ion-col><strong>Suppr.</strong></ion-col>
-        </ion-row>
-        <ion-row *ngFor="let creneau of creneaux">
-            <ion-col>{{creneau.activite.nom}}</ion-col>
-            <ion-col>{{creneau.jour}}</ion-col>
-            <ion-col>{{creneau.heureDebut|date:"HH:mm"}} - {{creneau.heureFin|date:"HH:mm"}}</ion-col>
-            <ion-col>{{creneau.lieu.nom}}</ion-col>
-            <ion-col>{{creneau.niveau.nom}}</ion-col>
-            <ion-col>
-                <ion-icon name="trash" (click)="supprimer(creneau)"></ion-icon>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <ion-list>
+        <ion-item *ngFor="let creneau of creneaux">
+            <panier-card [creneau]="creneau"></panier-card>
+        </ion-item>
+    </ion-list>
     <br/><br/><br/>
     <div text-center>
-        <button ion-button large color="danger" [navPush]="page">Valider</button>
+        <button ion-button large color="danger" (click)="naviguer()">Valider</button>
     </div>
 
 </ion-content>

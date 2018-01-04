@@ -7,20 +7,27 @@
 </ion-header>
 
 <ion-content>
-	<ion-list radio-group>
+	<ion-list>
+		<ion-item *ngFor="let creneau of creneaux">
+			{{creneau.activite.nom}}
+		</ion-item>
+	</ion-list>
+
+
+	<ion-list radio-group [(ngModel)]="catPersonne">
 			<p><strong>Je suis : </strong></p>
 
 		<ion-item>
 			<ion-label>Etudiant</ion-label>
-			<ion-radio value="c"></ion-radio>
+			<ion-radio value="1"></ion-radio>
 		</ion-item>
 		<ion-item>
 			<ion-label>Personnel</ion-label>
-			<ion-radio value="b"></ion-radio>
+			<ion-radio value="2"></ion-radio>
 		</ion-item>
 		 <ion-item>
 			<ion-label>Exterieur</ion-label>
-			<ion-radio value="a"></ion-radio>
+			<ion-radio value="3"></ion-radio>
 		</ion-item>
 	</ion-list>
 	
@@ -47,7 +54,7 @@
 		</ion-item>
 	</ion-list>
 	<div text-center>
-		<button ion-button large color="danger" >Valider</button> 
+		<button ion-button large color="danger" (click)="inscrire()" >Valider</button>
 	</div>
 	<p text-center style="font-size:12px">Un mail de confirmation vous sera envoyé</p>
 
