@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Creneau} from "../../model/Creneau";
+import {Creneau} from "../../common/model";
 import {isUndefined} from "ionic-angular/util/util";
 
 /*

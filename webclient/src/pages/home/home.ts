@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { SeancePage } from './seance';
-import { PanierPage } from './panier';
-import {Activite} from "../../model/Activite";
-
+import {Component} from '@angular/core';
+import {NavController} from 'ionic-angular';
+import {SeancePage} from './seance';
+import {PanierPage} from './panier';
 
 
 @Component({

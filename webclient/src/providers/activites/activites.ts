@@ -1,4 +1,4 @@
-import {Activite} from "../../model/Activite";
+import {Activite} from "../../common/model";
 import { Injectable } from '@angular/core';
 
 /*

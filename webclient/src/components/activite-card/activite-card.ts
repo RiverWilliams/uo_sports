@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Creneau} from "../../model/Creneau";
+import {Creneau} from "../../common/model";
 import {PanierProvider} from "../../providers/panier/panier";
 
 /**
