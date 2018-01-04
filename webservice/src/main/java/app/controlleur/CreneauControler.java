@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/creneaux")
-@CrossOrigin(exposedHeaders = "Locations")
+@CrossOrigin(exposedHeaders = "Location")
 public class CreneauControler {
 
     @Autowired
