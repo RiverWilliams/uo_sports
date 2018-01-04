@@ -35,8 +35,8 @@ class CreneauxProvider {
     public post(c: Creneau): Observable<string> {
         return this.http.post<HttpResponse<string>>(Urls.CRENEAUX, AdaptaeurCreneau.toJSON(c), {
             responseType: 'text',
-            observe: "body"
-        }).map(value => value.headers.get('Location'));
+            observe: "response"
+        }).map(value => value.headers.get('location'));
     }
 
     public put(c: Creneau): Observable<void> {
