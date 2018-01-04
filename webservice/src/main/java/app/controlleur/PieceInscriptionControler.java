@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pieces_inscription")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 
 public class PieceInscriptionControler {
 

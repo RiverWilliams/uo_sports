@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categories_personnes")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 public class CatagoriePersonneControler {
 
     @Autowired

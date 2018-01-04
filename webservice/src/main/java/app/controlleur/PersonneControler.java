@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/personnes")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 
 public class PersonneControler {
 

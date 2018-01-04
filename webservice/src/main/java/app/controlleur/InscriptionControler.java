@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("inscriptions")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 
 public class InscriptionControler {
 

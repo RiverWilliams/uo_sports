@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/niveaux")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 
 public class NiveauControler {
 

@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sports")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 
 public class SportControler {
     @Autowired

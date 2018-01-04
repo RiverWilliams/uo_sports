@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/responsables")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 
 public class ResponsableControler {
 

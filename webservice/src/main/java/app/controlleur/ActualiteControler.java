@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/actualites")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 public class ActualiteControler {
 
     @Autowired

@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/lieux")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 
 public class LieuControler {
 

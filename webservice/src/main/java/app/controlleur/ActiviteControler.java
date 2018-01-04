@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/activites")
-@CrossOrigin
+@CrossOrigin(exposedHeaders = "Location")
 public class ActiviteControler {
 
     @Autowired
