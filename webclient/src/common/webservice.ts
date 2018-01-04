@@ -1,11 +1,10 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {Creneau} from "./model";
-import {URI} from "urijs";
-import {Urls} from "./urls";
-import "rxjs/add/operator/map"
+import {Creneau, Inscription} from "./model";
+import {makeUrl, Urls} from "./urls";
 import {AdaptaeurCreneau, CreneauJSON} from "./adaptateur";
+import "rxjs/add/operator/map";
 
 /*
   Generated class for the WebserviceProvider provider.
@@ -30,7 +29,38 @@ class CreneauxProvider {
     }
 
     public getAll(): Observable<Creneau[]> {
-        return this.http.get<CreneauJSON[]>(Urls.CRENEAUX.toString()).map(value => value.map(value => AdaptaeurCreneau.fromJSON(value)));
+        return this.http.get<CreneauJSON[]>(Urls.CRENEAUX).map(value => value.map(value => AdaptaeurCreneau.fromJSON(value)));
+    }
+
+    public post(c: Creneau): Observable<string> {
+        return this.http.post<HttpResponse<string>>(Urls.CRENEAUX, AdaptaeurCreneau.toJSON(c), {
+            responseType: 'text',
+            observe: "body"
+        }).map(value => value.headers.get('Location'));
+    }
+
+    public put(c: Creneau): Observable<void> {
+        return this.http.post<void>(Urls.CRENEAUX, AdaptaeurCreneau.toJSON(c));
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.CRENEAUX_ID, {idCreneau: id});
+        return this.http.delete<void>(url);
+    }
+
+    public get(id: number): Observable<Creneau> {
+        const url = makeUrl(Urls.CRENEAUX_ID, {idCreneau: id});
+        return this.http.get<CreneauJSON>(url).map(value => AdaptaeurCreneau.fromJSON(value));
+    }
+
+    public getEnAttentes(id: number): Observable<Inscription[]> {
+        const url = makeUrl(Urls.CRENEAUX_EN_ATTENTES, {idCreneau: id});
+        return this.http.get<Inscription[]>(url);
+    }
+
+    public getInscrits(id: number): Observable<Inscription[]> {
+        const url = makeUrl(Urls.CRENEAUX_INSCRITS, {idCreneau: id});
+        return this.http.get<Inscription[]>(url);
     }
 
 }

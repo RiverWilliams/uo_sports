@@ -38,10 +38,10 @@ export namespace AdaptaeurActualite {
 
 export namespace AdaptaeurCreneau {
 
-    function dateToString(d: Date): string {
+    function stringFromDate(d: Date): string {
         const h = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
         const m = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
-        const s = d.getSeconds() < 10 ? "0" + this.getSeconds() : this.getSeconds;
+        const s = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
         return h + ":" + m + ":" + s;
     }
 
@@ -65,8 +65,8 @@ export namespace AdaptaeurCreneau {
             lieu: (typeof c.lieu === "number") ? {id: c.lieu} : c.lieu,
             effectif: c.effectif,
             activite: (typeof c.activite === "number") ? {id: c.activite} : c.activite,
-            heureDebut: dateToString(c.heureDebut),
-            heureFin: dateToString(c.heureFin)
+            heureDebut: stringFromDate(c.heureDebut),
+            heureFin: stringFromDate(c.heureFin)
         };
     }
 

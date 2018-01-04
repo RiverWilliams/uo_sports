@@ -77,10 +77,10 @@ export interface Sport {
 }
 
 export interface Inscription {
-    personne: Personne | number;
+    personne?: Personne | number;
     demande: boolean;
     ects: number;
     enAttente: boolean;
     nombreHeures: number;
-    creneau: Creneau | number;
+    creneau?: Creneau | number;
 }
