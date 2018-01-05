@@ -1,24 +1,24 @@
 <ion-header>
-    <ion-navbar color="danger">
-        <ion-title>
-            {{monParam.nom}}
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color="danger">
+    <ion-title>
+      {{monParam.nom}}
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <ion-list>
-        <ion-item *ngFor="let creneau of creneaux">
-            <activite-card [creneau]="creneau"></activite-card>
-        </ion-item>
-    </ion-list>
+<ion-list>
+  <ion-item *ngFor="let creneau of creneaux">
+    <activite-card [creneau]="creneau"></activite-card>
+  </ion-item>
+</ion-list>
 </ion-content>
 
-<ion-footer text-center>
-    <ion-toolbar color="danger">
-        <ion-icon style="font-size:25px" name="logo-facebook"></ion-icon>
-        <ion-icon style="font-size:25px" name="logo-linkedin"></ion-icon>
-        <ion-icon style="font-size:25px" name="logo-youtube"></ion-icon>
-        <ion-icon style="font-size:25px" name="logo-twitter"></ion-icon>
-    </ion-toolbar>
+<ion-footer  text-center >
+	<ion-toolbar color="danger" >
+		<ion-icon style="font-size:25px" name="logo-facebook"></ion-icon>
+		<ion-icon style="font-size:25px" name="logo-linkedin"></ion-icon>
+		<ion-icon style="font-size:25px" name="logo-youtube"></ion-icon>
+		<ion-icon style="font-size:25px" name="logo-twitter"></ion-icon>
+	</ion-toolbar>
 </ion-footer>

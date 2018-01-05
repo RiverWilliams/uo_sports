@@ -6,7 +6,7 @@ import {Pipe, PipeTransform} from '@angular/core';
  * See https://angular.io/api/core/Pipe for more info on Angular Pipes.
  */
 @Pipe({
-    name: 'dayOfWeek',
+  name: 'dayOfWeek',
 })
 export class DayOfWeekPipe implements PipeTransform {
     /**
@@ -38,5 +38,5 @@ export class DayOfWeekPipe implements PipeTransform {
                 break;
         }
         return jour;
-    }
+  }
 }

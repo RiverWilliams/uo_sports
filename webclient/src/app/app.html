@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu side="right" [content]="filtre" id="menu1">
     <ion-header>
         <ion-toolbar color="danger">
             <ion-title>Filtrer</ion-title>
@@ -6,29 +6,6 @@
     </ion-header>
 
     <ion-content>
-
-
-        <ion-list radio-group>
-                <p><strong>Par ville : </strong></p>
-
-                <ion-item>
-                    <ion-label>Orléans</ion-label>
-                    <ion-radio value="1"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Chateauroux</ion-label>
-                    <ion-radio value="2"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Chartes</ion-label>
-                    <ion-radio value="3"></ion-radio>
-                </ion-item>
-            <ion-item>
-                <ion-label>Bourges</ion-label>
-                <ion-radio value="4"></ion-radio>
-            </ion-item>
-        </ion-list>
-
         <ion-list radio-group>
             <p><strong>Par catégorie : </strong></p>
 
@@ -42,5 +19,13 @@
 
 </ion-menu>
 
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-menu side="left" [content]="menu" id="menu2">
+    <ion-header>
+        <ion-toolbar color="danger">
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+</ion-menu>
+
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav><ion-nav [root]="rootPage"></ion-nav>

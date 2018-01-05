@@ -13,48 +13,49 @@
 		</ion-item>
 	</ion-list>
 
-
+	<div ng-controller="contr">
 	<ion-list radio-group [(ngModel)]="catPersonne">
 			<p><strong>Je suis : </strong></p>
 
 		<ion-item>
 			<ion-label>Etudiant</ion-label>
-			<ion-radio value="1"></ion-radio>
+			<ion-radio ng-value="1"></ion-radio>
 		</ion-item>
 		<ion-item>
 			<ion-label>Personnel</ion-label>
-			<ion-radio value="2"></ion-radio>
+			<ion-radio ng-value="2"></ion-radio>
 		</ion-item>
 		 <ion-item>
 			<ion-label>Exterieur</ion-label>
-			<ion-radio value="3"></ion-radio>
+			<ion-radio ng-value="3"></ion-radio>
 		</ion-item>
 	</ion-list>
 	
 	<ion-list>
 		<ion-item>
 			<ion-label color="dark">Nom</ion-label>
-			<ion-input placeholder="nom"></ion-input>
+			<ion-input [(ngModel)]="nomI" placeholder="nom"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label color="dark">Prenom</ion-label>
-			<ion-input placeholder="prenom"></ion-input>
+			<ion-input [(ngModel)]="prenomI" placeholder="prenom"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label color="dark">Adresse</ion-label>
-			<ion-input placeholder="adresse"></ion-input>
+			<ion-input [(ngModel)]="adresseI" placeholder="adresse"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label color="dark">Telephone</ion-label>
-			<ion-input placeholder="telephone"></ion-input>
+			<ion-input [(ngModel)]="telephoneI" placeholder="telephone"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label color="dark">Mail</ion-label>
-			<ion-input placeholder="mail"></ion-input>
+			<ion-input [(ngModel)]="mailI" placeholder="mail"></ion-input>
 		</ion-item>
 	</ion-list>
+	</div>
 	<div text-center>
-		<button ion-button large color="danger" (click)="inscrire()" >Valider</button>
+		<button ion-button large color="danger" (click)="inscrire(nomI, prenomI, adresseI, telephoneI, mailI)" >Valider</button>
 	</div>
 	<p text-center style="font-size:12px">Un mail de confirmation vous sera envoyé</p>
 

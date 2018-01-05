@@ -8,24 +8,25 @@ import {isUndefined} from "ionic-angular/util/util";
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
 @Injectable()
 export class PanierProvider {
 
-    creneaux: Creneau[] = [];
+  creneaux: Creneau[] = [];
 
-    constructor() {
+  constructor(){
 
-    }
+  }
 
-    contient(id: number): boolean {
-        return !isUndefined(this.creneaux.find((creneau) => creneau.id == id));
-    }
+  contient(id: number): boolean {
+    return !isUndefined(this.creneaux.find((creneau) => creneau.id == id));
+  }
 
-    ajouter(creneau: Creneau) {
-        this.creneaux.push(creneau);
-    }
+  ajouter(creneau: Creneau) {
+    this.creneaux.push(creneau);
+  }
 
-    supprimer(creneau: Creneau) {
-        this.creneaux.splice(this.creneaux.indexOf(creneau), 1);
-    }
+  supprimer(creneau: Creneau){
+    this.creneaux.splice(this.creneaux.indexOf(creneau),1);
+  }
 }
