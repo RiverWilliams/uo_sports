@@ -12,10 +12,12 @@ import {PanierProvider} from '../providers/panier/panier';
 import {PanierPage} from '../pages/home/panier';
 import {SeancePage} from '../pages/home/seance';
 import {InscrPage} from '../pages/home/inscr';
+import {ActuPage} from '../pages/home/actualite';
 import {WebserviceProvider} from '../common/webservice';
 import {HttpClientModule} from "@angular/common/http";
+import {CommonModule} from "@angular/common"
 import {PanierCardComponent} from "../components/panier-card/panier-card";
-import {CommonModule} from "@angular/common";
+import {ActuCardComponent} from "../components/actualite-card/actualite-card";
 
 @NgModule({
     declarations: [
@@ -23,10 +25,12 @@ import {CommonModule} from "@angular/common";
         HomePage,
         ActiviteCardComponent,
         PanierCardComponent,
+        ActuCardComponent,
         DayOfWeekPipe,
         SeancePage,
         PanierPage,
-        InscrPage
+        InscrPage,
+        ActuPage
     ],
     imports: [
         BrowserModule,
@@ -40,9 +44,11 @@ import {CommonModule} from "@angular/common";
         HomePage,
         ActiviteCardComponent,
         PanierCardComponent,
+        ActuCardComponent,
         SeancePage,
         PanierPage,
-        InscrPage
+        InscrPage,
+        ActuPage
     ],
     providers: [
         StatusBar,

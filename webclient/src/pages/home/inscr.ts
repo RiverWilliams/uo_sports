@@ -16,10 +16,19 @@ export class InscrPage {
     constructor(public  navCtrl: NavController, public navParams: NavParams) {
 
         this.mesParam = navParams.get("paramPasse");
-        ;
+
     }
 
-    inscrire(){
-      //this.inscrit.nom = ;
+
+
+    inscrire(nom, prenom, adresse, telephone, mail){
+      this.inscrit.nom = nom;
+      this.inscrit.prenom = prenom;
+      this.inscrit.adresse = adresse;
+      this.inscrit.telephone = telephone;
+      this.inscrit.email = mail;
+      this.inscrit.categoriePersonne = 1;
     }
+
+
 }

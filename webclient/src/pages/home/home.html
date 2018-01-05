@@ -8,14 +8,21 @@
 		<button ion-button icon-only end [navPush]="page2" >
 			<ion-icon item-end name="ios-basket" ></ion-icon>
 		</button>
-		<button ion-button icon-only end menu-toggle>
+		<button ion-button icon-only end (click)="ouvreMenu('filtre')">
 			<ion-icon item-end name="ios-funnel" ></ion-icon>
+		</button>
+		<button ion-button icon-only left (click)="openMenu('menu')">
+			<ion-icon name="menu"></ion-icon>
 		</button>
 	</ion-buttons>
 	
   </ion-toolbar>
 </ion-header>
 
+
+<button ion-button icon-only (click)="openMenu('main')">
+	<ion-icon name="menu"></ion-icon>
+</button>
 
 
 <ion-content>
@@ -24,8 +31,7 @@
 
     <ion-list>
         <ion-item *ngFor="let activite of activites">
-          {{activite.nom}} <ion-icon item-end name="ios-arrow-dropright-outline" (click)="naviguer(activite)"></ion-icon>
-		</ion-item>
+			{{activite.nom}} <ion-icon item-end name="ios-arrow-dropright-outline" (click)="naviguer(activite)"></ion-icon>		</ion-item>
   </ion-list>
 </ion-content>
  
