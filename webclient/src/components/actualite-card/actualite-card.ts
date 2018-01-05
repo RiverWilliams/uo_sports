@@ -9,7 +9,7 @@ import {Actualite} from "../../common/model";
  * Components.
  */
 @Component({
-    selector: 'actalite-card',
+    selector: 'actualite-card',
     templateUrl: 'actualite-card.html'
 })
 export class ActuCardComponent {
@@ -18,7 +18,6 @@ export class ActuCardComponent {
 
     constructor() {
     }
-
 
 
 }
