@@ -19,6 +19,12 @@ export namespace Urls {
     export const ACTUALITES_ACTIVITE: string = ACTUALITES_ID + "/activites";
     export const ACTUALITES_CATEGORIES_SPORTS: string = ACTUALITES_ID + "/categories_sports";
     export const ACTUALITES_SPORTS: string = ACTUALITES_ID + "/sports";
+    export const ACTUALITES_SPORTS_ID: string = ACTUALITES_SPORTS + "/{idSport}";
+    //CATEGORIES_PERSONNES
+    export const CATEGORIES_PERSONNES: string = BASE + "/categories_personnes";
+    export const CATEGORIES_PERSONNES_ID: string = CATEGORIES_PERSONNES + "/{idCategoriePersonne}";
+    export const CATEGORIES_PERSONNES_PIECES: string = CATEGORIES_PERSONNES_ID + "/pieces";
+    export const CATEGORIES_PERSONNES_PIECES_ID: string = CATEGORIES_PERSONNES_PIECES + "/{idPiece}";
 
 
 }

@@ -1,7 +1,10 @@
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {Activite, Actualite, CategorieSport, Creneau, Inscription, Sport} from "./model";
+import {
+    Activite, Actualite, CategoriePersonne, CategorieSport, Creneau, Inscription, PieceInscription,
+    Sport
+} from "./model";
 import {makeUrl, Urls} from "./urls";
 import {ActualiteJSON, AdaptaeurActualite, AdaptaeurCreneau, CreneauJSON} from "./adaptateur";
 import "rxjs/add/operator/map";
@@ -15,33 +18,40 @@ import "rxjs/add/operator/map";
 @Injectable()
 export class WebserviceProvider {
     constructor(private http: HttpClient) {
-        this._creneaux = new CreneauxProvider(http);
-        this._activites = new ActivitesProvider(http);
-        this._actualites = new ActualitesProvider(http);
+        this._creneaux = new CreneauProvider(http);
+        this._activites = new ActiviteProvider(http);
+        this._actualites = new ActualiteProvider(http);
+        this._categoriesPersonnes = new CategoriePersonneProvider(http);
         console.log('Hello WebserviceProvider Provider');
     }
 
-    private _creneaux: CreneauxProvider;
+    private _creneaux: CreneauProvider;
 
-    get creneaux(): CreneauxProvider {
+    get creneaux(): CreneauProvider {
         return this._creneaux;
     }
 
-    private _activites: ActivitesProvider;
+    private _categoriesPersonnes: CategoriePersonneProvider;
 
-    get activites(): ActivitesProvider {
+    get categoriesPersonnes(): CategoriePersonneProvider {
+        return this._categoriesPersonnes;
+    }
+
+    private _activites: ActiviteProvider;
+
+    get activites(): ActiviteProvider {
         return this._activites;
     }
 
-    private _actualites: ActualitesProvider;
+    private _actualites: ActualiteProvider;
 
-    get actualites(): ActualitesProvider {
+    get actualites(): ActualiteProvider {
         return this._actualites;
     }
 }
 
 
-class CreneauxProvider {
+class CreneauProvider {
     constructor(private http: HttpClient) {
     }
 
@@ -79,7 +89,7 @@ class CreneauxProvider {
 
 }
 
-class ActivitesProvider {
+class ActiviteProvider {
     constructor(private http: HttpClient) {
     }
 
@@ -132,7 +142,7 @@ class ActivitesProvider {
 
 }
 
-class ActualitesProvider {
+class ActualiteProvider {
     constructor(private http: HttpClient) {
     }
 
@@ -145,7 +155,7 @@ class ActualitesProvider {
     }
 
     public post(actualite: Actualite): Observable<string> {
-        return this.http.post<string>(Urls.ACTIVITES, AdaptaeurActualite.toJSON(actualite), {observe: "response"}).map(value => value.headers.get('location'));
+        return this.http.post<string>(Urls.ACTUALITES, AdaptaeurActualite.toJSON(actualite), {observe: "response"}).map(value => value.headers.get('location'));
     }
 
     public get(id: number): Observable<Actualite> {
@@ -159,7 +169,7 @@ class ActualitesProvider {
     }
 
     public deleteSport(idActualite: number, idSport: number): Observable<void> {
-        const url = makeUrl(Urls.ACTIVITES_SPORTS_ID, {idActualite: idActualite, idSport: idSport});
+        const url = makeUrl(Urls.ACTUALITES_SPORTS_ID, {idActualite: idActualite, idSport: idSport});
         return this.http.delete<void>(url);
     }
 
@@ -178,4 +188,44 @@ class ActualitesProvider {
         return this.http.get<Sport[]>(url);
     }
 
+}
+
+class CategoriePersonneProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public getAll(): Observable<CategoriePersonne[]> {
+        return this.http.get<CategoriePersonne[]>(Urls.CATEGORIES_PERSONNES);
+    }
+
+    public put(categoriePersonne: CategoriePersonne): Observable<void> {
+        return this.http.put<void>(Urls.CATEGORIES_PERSONNES, categoriePersonne);
+    }
+
+    public post(categoriePersonne: CategoriePersonne): Observable<string> {
+        return this.http.post<string>(Urls.CATEGORIES_PERSONNES, categoriePersonne, {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public get(id: number): Observable<CategoriePersonne> {
+        const url = makeUrl(Urls.CATEGORIES_PERSONNES_ID, {idCategoriePersonne: id});
+        return this.http.get<CategoriePersonne>(url);
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.CATEGORIES_PERSONNES_ID, {idCategoriePersonne: id});
+        return this.http.delete<void>(url);
+    }
+
+    public deletePiece(idCategoriePersonne: number, idPiece: number): Observable<void> {
+        const url = makeUrl(Urls.CATEGORIES_PERSONNES_PIECES_ID, {
+            idCategoriePersonne: idCategoriePersonne,
+            idPiece: idPiece
+        });
+        return this.http.delete<void>(url);
+    }
+
+    public getPieces(id: number): Observable<PieceInscription[]> {
+        const url = makeUrl(Urls.CATEGORIES_PERSONNES_PIECES, {idCategoriePersonne: id});
+        return this.http.get<PieceInscription[]>(url);
+    }
 }
