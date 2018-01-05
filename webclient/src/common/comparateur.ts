@@ -1,4 +1,4 @@
-import {Activite, Creneau, Lieu} from "./model";
+import {Activite, CategorieSport, Creneau, Lieu, Sport} from "./model";
 
 export namespace Comparateur {
     export namespace Activite {
@@ -40,6 +40,17 @@ export namespace Comparateur {
             export function ville(a: Lieu, b: Lieu): number {
                 return a.ville.localeCompare(b.ville);
             }
+        }
+    }
+
+    export namespace CategorieSport {
+        export function nom(a: CategorieSport, b: CategorieSport): number {
+            return a.nom.localeCompare(b.nom);
+        }
+    }
+    export namespace Sport {
+        export function nom(a: Sport, b: Sport): number {
+            return a.nom.localeCompare(b.nom);
         }
     }
 }

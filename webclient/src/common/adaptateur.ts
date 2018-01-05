@@ -75,7 +75,7 @@ export namespace AdaptateurInscription {
     export function toJSON(inscription: Inscription): InscriptionJSON {
         return {
             personne: (typeof inscription.personne === "number") ? {id: inscription.personne} : inscription.personne,
-            creneau: (typeof inscription.creneau === "number") ? {id: inscription.creneau} : AdaptaeurCreneau.toJSON(inscription.creneau),
+            creneau: (typeof inscription.creneau === "number") ? {id: inscription.creneau} : AdaptateurCreneau.toJSON(inscription.creneau),
             demande: inscription.demande,
             enAttente: inscription.enAttente,
             nombreHeures: inscription.nombreHeures,
@@ -86,7 +86,7 @@ export namespace AdaptateurInscription {
     export function fromJSON(inscription: InscriptionJSON): Inscription {
         return {
             personne: <Personne>inscription.personne,
-            creneau: AdaptaeurCreneau.fromJSON(<CreneauJSON>inscription.creneau),
+            creneau: AdaptateurCreneau.fromJSON(<CreneauJSON>inscription.creneau),
             demande: inscription.demande,
             enAttente: inscription.enAttente,
             nombreHeures: inscription.nombreHeures,
@@ -96,7 +96,7 @@ export namespace AdaptateurInscription {
 }
 
 
-export namespace AdaptaeurActualite {
+export namespace AdaptateurActualite {
     function dateToString(d: Date): string {
         const fullYear = d.getFullYear();
         const zero = Math.ceil(3 - Math.log10(d.getFullYear()));
@@ -148,7 +148,7 @@ export namespace AdaptaeurActualite {
 
 }
 
-export namespace AdaptaeurCreneau {
+export namespace AdaptateurCreneau {
 
     function dateToString(d: Date): string {
         const h = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();

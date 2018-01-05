@@ -10,7 +10,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 
 export interface Filtre {
     nom: string,
-    fonction: any
+    fonction?: any
 }
 
 @IonicPage()
