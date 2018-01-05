@@ -14,30 +14,32 @@ import "rxjs/add/operator/map";
 */
 @Injectable()
 export class WebserviceProvider {
+    constructor(private http: HttpClient) {
+        this._creneaux = new CreneauxProvider(http);
+        this._activites = new ActivitesProvider(http);
+        this._actualites = new ActualitesProvider(http);
+        console.log('Hello WebserviceProvider Provider');
+    }
+
+    private _creneaux: CreneauxProvider;
+
     get creneaux(): CreneauxProvider {
         return this._creneaux;
     }
 
-    set creneaux(value: CreneauxProvider) {
-    }
+    private _activites: ActivitesProvider;
 
     get activites(): ActivitesProvider {
         return this._activites;
     }
 
-    set activites(value: ActivitesProvider) {
+    private _actualites: ActualitesProvider;
+
+    get actualites(): ActualitesProvider {
+        return this._actualites;
     }
-
-    private _creneaux: CreneauxProvider;
-    private _activites: ActivitesProvider;
-
-    constructor(private http: HttpClient) {
-        this._creneaux = new CreneauxProvider(http);
-        this._activites = new ActivitesProvider(http);
-        console.log('Hello WebserviceProvider Provider');
-    }
-
 }
+
 
 class CreneauxProvider {
     constructor(private http: HttpClient) {
@@ -126,6 +128,54 @@ class ActivitesProvider {
     public deleteSport(idActivite: number, idSport: number): Observable<void> {
         const url = makeUrl(Urls.ACTIVITES_SPORTS_ID, {idActivite: idActivite, idSport: idSport});
         return this.http.get<void>(url);
+    }
+
+}
+
+class ActualitesProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public getAll(): Observable<Actualite[]> {
+        return this.http.get<ActualiteJSON[]>(Urls.ACTUALITES).map(value => value.map(v => AdaptaeurActualite.fromJSON(v)));
+    }
+
+    public put(actualite: Actualite): Observable<void> {
+        return this.http.put<void>(Urls.ACTUALITES, AdaptaeurActualite.toJSON(actualite));
+    }
+
+    public post(actualite: Actualite): Observable<string> {
+        return this.http.post<string>(Urls.ACTIVITES, AdaptaeurActualite.toJSON(actualite), {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public get(id: number): Observable<Actualite> {
+        const url = makeUrl(Urls.ACTUALITES_ID, {idActualite: id});
+        return this.http.get<ActualiteJSON>(url).map(value => AdaptaeurActualite.fromJSON(value));
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.ACTUALITES_ID, {idActualite: id});
+        return this.http.delete<void>(url);
+    }
+
+    public deleteSport(idActualite: number, idSport: number): Observable<void> {
+        const url = makeUrl(Urls.ACTIVITES_SPORTS_ID, {idActualite: idActualite, idSport: idSport});
+        return this.http.delete<void>(url);
+    }
+
+    public getActivites(id: number): Observable<Activite[]> {
+        const url = makeUrl(Urls.ACTUALITES_ACTIVITE, {idActualite: id});
+        return this.http.get<Activite[]>(url);
+    }
+
+    public getCategorieSports(id: number): Observable<CategorieSport[]> {
+        const url = makeUrl(Urls.ACTUALITES_CATEGORIES_SPORTS, {idActualite: id});
+        return this.http.get<CategorieSport[]>(url);
+    }
+
+    public getSports(id: number): Observable<Sport[]> {
+        const url = makeUrl(Urls.ACTUALITES_SPORTS, {idActualite: id});
+        return this.http.get<Sport[]>(url);
     }
 
 }

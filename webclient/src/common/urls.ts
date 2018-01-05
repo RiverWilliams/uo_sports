@@ -13,6 +13,12 @@ export namespace Urls {
     export const ACTIVITES_CRENEAUX: string = ACTIVITES_ID + "/creneaux";
     export const ACTIVITES_SPORTS: string = ACTIVITES_ID + "/sports";
     export const ACTIVITES_SPORTS_ID: string = ACTIVITES_SPORTS + "/{idSport}";
+//ACTUALIES
+    export const ACTUALITES: string = BASE + "/actualites";
+    export const ACTUALITES_ID: string = ACTUALITES + "/{idActualite}";
+    export const ACTUALITES_ACTIVITE: string = ACTUALITES_ID + "/activites";
+    export const ACTUALITES_CATEGORIES_SPORTS: string = ACTUALITES_ID + "/categories_sports";
+    export const ACTUALITES_SPORTS: string = ACTUALITES_ID + "/sports";
 
 
 }
