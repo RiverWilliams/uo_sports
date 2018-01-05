@@ -1,12 +1,12 @@
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {
-    Activite, Actualite, CategoriePersonne, CategorieSport, Creneau, Inscription, PieceInscription,
+    Activite, Actualite, CategoriePersonne, CategorieSport, Creneau, Inscription, Personne, PieceInscription,
     Sport
 } from "./model";
 import {makeUrl, Urls} from "./urls";
-import {ActualiteJSON, AdaptaeurActualite, AdaptaeurCreneau, CreneauJSON} from "./adaptateur";
+import {ActualiteJSON, AdaptaeurActualite, AdaptaeurCreneau, AdaptateurInscription, CreneauJSON} from "./adaptateur";
 import "rxjs/add/operator/map";
 
 /*
@@ -17,18 +17,32 @@ import "rxjs/add/operator/map";
 */
 @Injectable()
 export class WebserviceProvider {
-    constructor(private http: HttpClient) {
+    constructor(http: HttpClient) {
         this._creneaux = new CreneauProvider(http);
         this._activites = new ActiviteProvider(http);
         this._actualites = new ActualiteProvider(http);
         this._categoriesPersonnes = new CategoriePersonneProvider(http);
+        this._categoriesSports = new CategorieSportProvider(http);
+        this._inscriptions = new InscriptionProvider(http);
         console.log('Hello WebserviceProvider Provider');
+    }
+
+    private _inscriptions: InscriptionProvider;
+
+    get inscriptions(): InscriptionProvider {
+        return this._inscriptions;
     }
 
     private _creneaux: CreneauProvider;
 
     get creneaux(): CreneauProvider {
         return this._creneaux;
+    }
+
+    private _categoriesSports: CategorieSportProvider;
+
+    get categoriesSports(): CategorieSportProvider {
+        return this._categoriesSports;
     }
 
     private _categoriesPersonnes: CategoriePersonneProvider;
@@ -74,7 +88,7 @@ class CreneauProvider {
 
     public get(id: number): Observable<Creneau> {
         const url = makeUrl(Urls.CRENEAUX_ID, {idCreneau: id});
-        return this.http.get<CreneauJSON>(url).map(value => AdaptaeurCreneau.fromJSON(value));
+        return this.http.get<CreneauJSON>(url).map(AdaptaeurCreneau.fromJSON);
     }
 
     public getEnAttentes(id: number): Observable<Inscription[]> {
@@ -117,7 +131,7 @@ class ActiviteProvider {
 
     public getActualites(id: number): Observable<Actualite[]> {
         const url = makeUrl(Urls.ACTIVITES_ACTUALITES, {idActivite: id});
-        return this.http.get<ActualiteJSON[]>(url).map(value => value.map(v => AdaptaeurActualite.fromJSON(v)));
+        return this.http.get<ActualiteJSON[]>(url).map(value => value.map(AdaptaeurActualite.fromJSON));
     }
 
     public getCategorieSports(id: number): Observable<CategorieSport[]> {
@@ -127,7 +141,7 @@ class ActiviteProvider {
 
     public getCreneaux(id: number): Observable<Creneau[]> {
         const url = makeUrl(Urls.ACTIVITES_CRENEAUX, {idActivite: id});
-        return this.http.get<CreneauJSON[]>(url).map(value => value.map(v => AdaptaeurCreneau.fromJSON(v)));
+        return this.http.get<CreneauJSON[]>(url).map(value => value.map(AdaptaeurCreneau.fromJSON));
     }
 
     public getSports(id: number): Observable<Sport[]> {
@@ -147,7 +161,7 @@ class ActualiteProvider {
     }
 
     public getAll(): Observable<Actualite[]> {
-        return this.http.get<ActualiteJSON[]>(Urls.ACTUALITES).map(value => value.map(v => AdaptaeurActualite.fromJSON(v)));
+        return this.http.get<ActualiteJSON[]>(Urls.ACTUALITES).map(value => value.map(AdaptaeurActualite.fromJSON));
     }
 
     public put(actualite: Actualite): Observable<void> {
@@ -160,7 +174,7 @@ class ActualiteProvider {
 
     public get(id: number): Observable<Actualite> {
         const url = makeUrl(Urls.ACTUALITES_ID, {idActualite: id});
-        return this.http.get<ActualiteJSON>(url).map(value => AdaptaeurActualite.fromJSON(value));
+        return this.http.get<ActualiteJSON>(url).map(AdaptaeurActualite.fromJSON);
     }
 
     public delete(id: number): Observable<void> {
@@ -228,4 +242,71 @@ class CategoriePersonneProvider {
         const url = makeUrl(Urls.CATEGORIES_PERSONNES_PIECES, {idCategoriePersonne: id});
         return this.http.get<PieceInscription[]>(url);
     }
+}
+
+class CategorieSportProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public getAll(): Observable<CategorieSport[]> {
+        return this.http.get<CategorieSport[]>(Urls.CATEGORIES_SPORTS);
+    }
+
+    public put(categorieSport: CategorieSport): Observable<void> {
+        return this.http.put<void>(Urls.CATEGORIES_SPORTS, categorieSport);
+    }
+
+    public post(categorieSport: CategorieSport): Observable<string> {
+        return this.http.post<string>(Urls.CATEGORIES_SPORTS, categorieSport, {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public get(id: number): Observable<CategorieSport> {
+        const url = makeUrl(Urls.CATEGORIES_SPORTS_ID, {idCategorieSport: id});
+        return this.http.get<CategorieSport>(url);
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.CATEGORIES_SPORTS_ID, {idCategorieSport: id});
+        return this.http.delete<void>(url);
+    }
+
+    public getActivites(id: number): Observable<Activite[]> {
+        const url = makeUrl(Urls.CATEGORIES_SPORTS_ACTIVITES, {idCategorieSport: id});
+        return this.http.get<Activite[]>(url);
+    }
+
+    public getSports(id: number): Observable<Sport[]> {
+        const url = makeUrl(Urls.CATEGORIES_SPORTS_SPORTS, {idCategorieSport: id});
+        return this.http.get<Sport[]>(url);
+    }
+
+    public getActualites(id: number): Observable<Actualite[]> {
+        const url = makeUrl(Urls.CATEGORIES_SPORTS_SPORTS, {idCategorieSport: id});
+        return this.http.get<ActualiteJSON[]>(url).map(value => value.map(AdaptaeurActualite.fromJSON));
+    }
+}
+
+class InscriptionProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public put(inscription: Inscription): Observable<void> {
+        return this.http.put<void>(Urls.INSCRIPTIONS, AdaptateurInscription.toJSON(inscription));
+    }
+
+    public post(inscription: Inscription): Observable<string> {
+        return this.http.post<string>(Urls.INSCRIPTIONS, AdaptateurInscription.toJSON(inscription), {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public delete(idPersonne: number, idCreneau: number): Observable<void> {
+        return this.http.delete<void>(Urls.INSCRIPTIONS, {params: new HttpParams().set('idPersonne', idPersonne.toString()).set('idCreneau', idCreneau.toString())});
+    }
+
+    public demandeInscription(personne: Personne, inscriptions: Inscription[]): Observable<string> {
+        return this.http.post<string>(Urls.INSCRIPTIONS_DEMANDE, {
+            personne: personne,
+            inscriptions: inscriptions.map(AdaptateurInscription.toJSON)
+        }, {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
 }
