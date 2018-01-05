@@ -34,6 +34,30 @@ export namespace Urls {
 //INSCRIPTIONS
     export const INSCRIPTIONS: string = BASE + "/inscriptions";
     export const INSCRIPTIONS_DEMANDE: string = INSCRIPTIONS + "/demande";
+//LIEUX
+    export const LIEUX: string = BASE + "/lieux";
+    export const LIEUX_ID: string = LIEUX + "/{idLieu}";
+//NIVEAUX
+    export const NIVEAUX: string = BASE + "/niveaux";
+    export const NIVEAUX_ID: string = NIVEAUX + "/{idNiveau}";
+//PERSONNES
+    export const PERSONNES: string = BASE + "/personnes";
+    export const PERSONNES_ID: string = PERSONNES + "/{idPersonne}";
+    export const PERSONNES_INSCRIPTIONS: string = PERSONNES_ID + "/inscriptions";
+//PIECES_INSCRIPTION
+    export const PIECES_INSCRIPTION: string = BASE + "/pieces_inscription";
+    export const PIECES_INSCRIPTION_ID: string = PIECES_INSCRIPTION + "/{idPieceInscription}";
+//RESPONSABLES
+    export const RESPONSABLES: string = BASE + "/responsables";
+    export const RESPONSABLES_ID: string = RESPONSABLES + "/{idResponsable}";
+    export const RESPONSABLES_CRENEAUX: string = RESPONSABLES_ID + "/creneaux";
+//SPORTS
+    export const SPORTS: string = BASE + "/sports";
+    export const SPORTS_ID: string = SPORTS + "/{idSport}";
+    export const SPORTS_ACTIVITES: string = SPORTS_ID + "/activites";
+    export const SPORTS_ACTUALITES: string = SPORTS_ID + "/actualites";
+    export const SPORTS_CATEGORIES_SPORTS: string = SPORTS_ID + "/categories";
+    export const SPORTS_CATEGORIES_SPORTS_ID: string = SPORTS_CATEGORIES_SPORTS + "/{idCategorieSport}";
 
 
 }

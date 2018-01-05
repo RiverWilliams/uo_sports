@@ -2,11 +2,15 @@ import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {
-    Activite, Actualite, CategoriePersonne, CategorieSport, Creneau, Inscription, Personne, PieceInscription,
+    Activite, Actualite, CategoriePersonne, CategorieSport, Creneau, Inscription, Lieu, Niveau, Personne,
+    PieceInscription, Responsable,
     Sport
 } from "./model";
 import {makeUrl, Urls} from "./urls";
-import {ActualiteJSON, AdaptaeurActualite, AdaptaeurCreneau, AdaptateurInscription, CreneauJSON} from "./adaptateur";
+import {
+    ActualiteJSON, AdaptaeurActualite, AdaptaeurCreneau, AdaptateurInscription, AdaptateurPersonne,
+    CreneauJSON, PersonneJSON
+} from "./adaptateur";
 import "rxjs/add/operator/map";
 
 /*
@@ -24,7 +28,49 @@ export class WebserviceProvider {
         this._categoriesPersonnes = new CategoriePersonneProvider(http);
         this._categoriesSports = new CategorieSportProvider(http);
         this._inscriptions = new InscriptionProvider(http);
+        this._lieux = new LieuxProvider(http);
+        this._niveux = new NiveauxProvider(http);
+        this._personnes = new PersonnesProvider(http);
+        this._piecesInscription = new PiecesInscriptionProvider(http);
+        this._responsables = new ResponsablesProvider(http);
+        this._sports = new SportsProvider(http);
         console.log('Hello WebserviceProvider Provider');
+    }
+
+    private _niveux: NiveauxProvider;
+
+    get niveux(): NiveauxProvider {
+        return this._niveux;
+    }
+
+    private _personnes: PersonnesProvider;
+
+    get personnes(): PersonnesProvider {
+        return this._personnes;
+    }
+
+    private _piecesInscription: PiecesInscriptionProvider;
+
+    get piecesInscription(): PiecesInscriptionProvider {
+        return this._piecesInscription;
+    }
+
+    private _responsables: ResponsablesProvider;
+
+    get responsables(): ResponsablesProvider {
+        return this._responsables;
+    }
+
+    private _sports: SportsProvider;
+
+    get sports(): SportsProvider {
+        return this._sports;
+    }
+
+    private _lieux: LieuxProvider;
+
+    get lieux(): LieuxProvider {
+        return this._lieux;
     }
 
     private _inscriptions: InscriptionProvider;
@@ -307,6 +353,196 @@ class InscriptionProvider {
             personne: personne,
             inscriptions: inscriptions.map(AdaptateurInscription.toJSON)
         }, {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+}
+
+class LieuxProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public put(lieu: Lieu): Observable<void> {
+        return this.http.put<void>(Urls.LIEUX, lieu);
+    }
+
+    public post(lieu: Lieu): Observable<string> {
+        return this.http.post<string>(Urls.LIEUX, lieu, {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.LIEUX_ID, {idLieu: id});
+        return this.http.delete<void>(url);
+    }
+
+    public getAll(): Observable<Lieu[]> {
+        return this.http.get<Lieu[]>(Urls.LIEUX);
+    }
+
+    public get(id: number): Observable<Lieu> {
+        const url = makeUrl(Urls.LIEUX_ID, {idLieu: id});
+        return this.http.get<Lieu>(url);
+    }
+
+}
+
+class NiveauxProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public put(niveau: Niveau): Observable<void> {
+        return this.http.put<void>(Urls.NIVEAUX, niveau);
+    }
+
+    public post(niveau: Niveau): Observable<string> {
+        return this.http.post<string>(Urls.NIVEAUX, niveau, {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.NIVEAUX_ID, {idNiveau: id});
+        return this.http.delete<void>(url);
+    }
+
+    public getAll(): Observable<Niveau[]> {
+        return this.http.get<Niveau[]>(Urls.NIVEAUX);
+    }
+
+    public get(id: number): Observable<Niveau> {
+        const url = makeUrl(Urls.NIVEAUX_ID, {idNiveau: id});
+        return this.http.get<Niveau>(url);
+    }
+}
+
+
+class PersonnesProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public put(personne: Personne): Observable<void> {
+        return this.http.put<void>(Urls.PERSONNES, AdaptateurPersonne.toJSON(personne));
+    }
+
+    public post(personne: Personne): Observable<string> {
+        return this.http.post<string>(Urls.PERSONNES, AdaptateurPersonne.toJSON(personne), {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.PERSONNES_ID, {idPersonne: id});
+        return this.http.delete<void>(url);
+    }
+
+    public getAll(): Observable<Personne[]> {
+        return this.http.get<PersonneJSON[]>(Urls.PERSONNES).map(value => value.map(AdaptateurPersonne.fromJSON));
+    }
+
+    public get(id: number): Observable<Personne> {
+        const url = makeUrl(Urls.PERSONNES_ID, {idPersonne: id});
+        return this.http.get<PersonneJSON>(url).map(AdaptateurPersonne.fromJSON);
+    }
+}
+
+class PiecesInscriptionProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public put(pieceInscription: PieceInscription): Observable<void> {
+        return this.http.put<void>(Urls.PIECES_INSCRIPTION, pieceInscription);
+    }
+
+    public post(pieceInscription: PieceInscription): Observable<string> {
+        return this.http.post<string>(Urls.PIECES_INSCRIPTION, pieceInscription, {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.PIECES_INSCRIPTION_ID, {idPieceInscription: id});
+        return this.http.delete<void>(url);
+    }
+
+    public getAll(): Observable<PieceInscription[]> {
+        return this.http.get<PieceInscription[]>(Urls.PIECES_INSCRIPTION);
+    }
+
+    public get(id: number): Observable<PieceInscription> {
+        const url = makeUrl(Urls.PIECES_INSCRIPTION_ID, {idPieceInscription: id});
+        return this.http.get<PieceInscription>(url);
+    }
+}
+
+class ResponsablesProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public put(responsable: Responsable): Observable<void> {
+        return this.http.put<void>(Urls.RESPONSABLES, responsable);
+    }
+
+    public post(responsable: Responsable): Observable<string> {
+        return this.http.post<string>(Urls.RESPONSABLES, responsable, {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.RESPONSABLES_ID, {idPieceInscription: id});
+        return this.http.delete<void>(url);
+    }
+
+    public getAll(): Observable<Responsable[]> {
+        return this.http.get<Responsable[]>(Urls.RESPONSABLES);
+    }
+
+    public get(id: number): Observable<Responsable> {
+        const url = makeUrl(Urls.RESPONSABLES_ID, {idResponsable: id});
+        return this.http.get<Responsable>(url);
+    }
+
+    public getCreneaux(id: number): Observable<Creneau[]> {
+        const url = makeUrl(Urls.RESPONSABLES_ID, {idResponsable: id});
+        return this.http.get<CreneauJSON[]>(url).map(value => value.map(AdaptaeurCreneau.fromJSON));
+    }
+}
+
+class SportsProvider {
+    constructor(private http: HttpClient) {
+    }
+
+    public put(sport: Sport): Observable<void> {
+        return this.http.put<void>(Urls.SPORTS, sport);
+    }
+
+    public post(sport: Sport): Observable<string> {
+        return this.http.post<string>(Urls.SPORTS, sport, {observe: "response"}).map(value => value.headers.get('location'));
+    }
+
+    public delete(id: number): Observable<void> {
+        const url = makeUrl(Urls.SPORTS_ID, {idSport: id});
+        return this.http.delete<void>(url);
+    }
+
+    public getAll(): Observable<Sport[]> {
+        return this.http.get<Sport[]>(Urls.SPORTS);
+    }
+
+    public get(id: number): Observable<Sport> {
+        const url = makeUrl(Urls.SPORTS_ID, {idSport: id});
+        return this.http.get<Sport>(url);
+    }
+
+    public getActivites(id: number): Observable<Activite[]> {
+        const url = makeUrl(Urls.SPORTS_ACTIVITES, {idSport: id});
+        return this.http.get<Activite[]>(url);
+    }
+
+    public getActualites(id: number): Observable<Actualite[]> {
+        const url = makeUrl(Urls.SPORTS_ACTUALITES, {idSport: id});
+        return this.http.get<ActualiteJSON[]>(url).map(value => value.map(AdaptaeurActualite.fromJSON));
+    }
+
+    public getCategoriesSport(id: number): Observable<CategorieSport[]> {
+        const url = makeUrl(Urls.SPORTS_CATEGORIES_SPORTS, {idSport: id});
+        return this.http.get<CategorieSport[]>(url);
+    }
+
+    public deleteCategoriesSport(idSport: number, idCategorieSport: number): Observable<void> {
+        const url = makeUrl(Urls.SPORTS_CATEGORIES_SPORTS_ID, {idSport: idSport, idCategorieSport: idCategorieSport});
+        return this.http.delete<void>(url);
     }
 
 }
