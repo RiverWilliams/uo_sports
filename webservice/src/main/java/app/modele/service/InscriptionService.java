@@ -46,7 +46,7 @@ public class InscriptionService implements IInscriptionService {
     public void delete(Inscription relation) {
         final Inscription oldInscription = inscriptionDAO.getInscription(relation);
         if (oldInscription == null) {
-
+            return;
         }
 
         final boolean delete = inscriptionDAO.delete(relation);
