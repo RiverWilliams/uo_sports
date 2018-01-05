@@ -9,10 +9,10 @@ import {HomePage} from '../pages/home/home';
 import {ActiviteCardComponent} from "../components/activite-card/activite-card";
 import {DayOfWeekPipe} from "../pipes/day-of-week/day-of-week";
 import {PanierProvider} from '../providers/panier/panier';
-import {PanierPage} from '../pages/home/panier';
-import {SeancePage} from '../pages/home/seance';
-import {InscrPage} from '../pages/home/inscr';
-import {ActuPage} from '../pages/home/actualite';
+import {PanierPage} from '../pages/panier/panier';
+import {SeancePage} from '../pages/seance/seance';
+import {InscrPage} from '../pages/inscr/inscr';
+import {ActuPage} from '../pages/actualite/actualite';
 import {WebserviceProvider} from '../common/webservice';
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common"
