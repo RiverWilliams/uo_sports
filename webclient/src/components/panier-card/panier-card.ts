@@ -20,7 +20,7 @@ export class PanierCardComponent {
     }
 
     supprimer(): void {
-        this.panier.supprimer(this.creneau);
+        this.panier.supprimer(this.creneau.id);
     }
 
 }
