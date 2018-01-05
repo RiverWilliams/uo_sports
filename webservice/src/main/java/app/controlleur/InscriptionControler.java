@@ -1,5 +1,7 @@
 package app.controlleur;
 
+import app.modele.entity.Creneau;
+import app.modele.entity.Personne;
 import app.modele.relation.Inscription;
 import app.modele.service.IInscriptionService;
 import app.modele.service.InscriptionService;
@@ -23,7 +25,14 @@ public class InscriptionControler {
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@RequestBody @Validated(Inscription.Delete.class) Inscription inscription) {
+    public void delete(@RequestParam Long idPersonne, @RequestParam Long idCreneau) {
+        final Inscription inscription = new Inscription();
+        inscription.setPersonne(new Personne());
+        inscription.setCreneau(new Creneau());
+
+        inscription.getPersonne().setId(idPersonne);
+        inscription.getCreneau().setId(idCreneau);
+
         inscriptionService.delete(inscription);
     }
 
