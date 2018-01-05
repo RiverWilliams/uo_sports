@@ -13,16 +13,10 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
     <ion-list>
         <ion-item *ngFor="let filtre of filtres">
-
-            <ion-chip (click)="filtre.fonction()">
-              <ion-icon name="pin"></ion-icon>
-              <ion-label>{{filtre.nom}}</ion-label>
-            </ion-chip>
+            <button ion-button outline full color="danger"(click)="filtre.fonction()"> {{filtre.nom}} </button>
         </ion-item>
-
-
     </ion-list>
 </ion-content>

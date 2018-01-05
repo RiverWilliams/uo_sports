@@ -3,7 +3,8 @@ import {NavController} from 'ionic-angular';
 
 
 import {HomePage} from '../pages/home/home';
-import {ActuPage} from "../pages/actualite/actualite";
+import {ActuPage} from '../pages/actualite/actualite';
+import {CartePage} from '../pages/carte/carte';
 
 @Component({
    templateUrl: 'app.html'
@@ -26,6 +27,9 @@ export class MyApp {
     }
     if(p==2){
       this.nav.setRoot(HomePage);
+    }
+    if(p==3){
+      this.nav.setRoot(CartePage);
     }
     
    }

@@ -19,6 +19,7 @@ import {CommonModule} from "@angular/common"
 import {PanierCardComponent} from "../components/panier-card/panier-card";
 import {ActuCardComponent} from "../components/actualite-card/actualite-card";
 import {FiltrePage} from "../pages/filtre/filtre";
+import {CartePage} from "../pages/carte/carte";
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import {FiltrePage} from "../pages/filtre/filtre";
         PanierPage,
         InscrPage,
         ActuPage,
-        FiltrePage
+        FiltrePage,
+        CartePage
     ],
     imports: [
         BrowserModule,
@@ -51,7 +53,8 @@ import {FiltrePage} from "../pages/filtre/filtre";
         PanierPage,
         InscrPage,
         ActuPage,
-        FiltrePage
+        FiltrePage,
+        CartePage
     ],
     providers: [
         StatusBar,
