@@ -30,8 +30,7 @@ export class PanierPage {
 
 
     supprimer(creneau: Creneau): void {
-        this.panier.supprimer(creneau);
-
+        this.panier.supprimer(creneau.id);
     }
 
 }

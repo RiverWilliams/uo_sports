@@ -12,21 +12,23 @@ import {isUndefined} from "ionic-angular/util/util";
 @Injectable()
 export class PanierProvider {
 
-  creneaux: Creneau[] = [];
+    creneaux: Creneau[] = [];
 
-  constructor(){
+    constructor() {
 
-  }
+    }
 
-  contient(id: number): boolean {
-    return !isUndefined(this.creneaux.find((creneau) => creneau.id == id));
-  }
+    contient(id: number): boolean {
+        return !isUndefined(this.creneaux.find((creneau) => creneau.id == id));
+    }
 
-  ajouter(creneau: Creneau) {
-    this.creneaux.push(creneau);
-  }
+    ajouter(creneau: Creneau) {
+        this.creneaux.push(creneau);
+    }
 
-  supprimer(creneau: Creneau){
-    this.creneaux.splice(this.creneaux.indexOf(creneau),1);
-  }
+    supprimer(id: number) {
+        const index = this.creneaux.findIndex(value => value.id == id);
+        if (index >= 0)
+            this.creneaux.splice(index, 1);
+    }
 }
