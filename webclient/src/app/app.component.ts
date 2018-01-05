@@ -3,7 +3,7 @@ import {NavController} from 'ionic-angular';
 
 
 import {HomePage} from '../pages/home/home';
-import {PanierPage} from "../pages/panier/panier";
+import {ActuPage} from "../pages/actualite/actualite";
 
 @Component({
    templateUrl: 'app.html'
@@ -17,12 +17,17 @@ export class MyApp {
    
 
    ngOnInit() {
-      // Let's navigate from TabsPage to Page1
       this.nav.push(HomePage);
    }
 
-   openPage() {
-      this.nav.setRoot(PanierPage);
+   openPage(p) {
+    if(p==1){
+      this.nav.setRoot(ActuPage);
+    }
+    if(p==2){
+      this.nav.setRoot(HomePage);
+    }
+    
    }
 }
 

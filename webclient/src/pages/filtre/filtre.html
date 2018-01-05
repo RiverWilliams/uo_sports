@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>filtre</ion-title>
+    <ion-navbar color="danger">
+        <ion-title>filtrer par</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -15,8 +15,14 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let filtre of filtres; let i = index">
-            <button ion-button (click)="filtre.fonction()">{{filtre.nom}}</button>
+        <ion-item *ngFor="let filtre of filtres">
+
+            <ion-chip (click)="filtre.fonction()">
+              <ion-icon name="pin"></ion-icon>
+              <ion-label>{{filtre.nom}}</ion-label>
+            </ion-chip>
         </ion-item>
+
+
     </ion-list>
 </ion-content>

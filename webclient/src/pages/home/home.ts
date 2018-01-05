@@ -35,7 +35,6 @@ export class HomePage implements OnInit {
     }
 
     ouvreMenu(evt) {
-        /*
         if (evt === "filtre") {
             this.menu.enable(true, 'menu1');
             this.menu.enable(false, 'menu2');
@@ -43,8 +42,6 @@ export class HomePage implements OnInit {
             this.menu.enable(true, 'menu2');
             this.menu.enable(false, 'menu1');
         }
-        */
-
         this.menu.toggle();
     }
 
@@ -62,4 +59,6 @@ export class HomePage implements OnInit {
         const popover = this.popoverCtrl.create(FiltrePage, {filtres: filtres});
         popover.present({ev: ev});
     }
+
+
 }
