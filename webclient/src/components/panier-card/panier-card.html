@@ -1,8 +1,8 @@
 <ion-card>
     <ion-card-header>{{creneau.activite.nom}}</ion-card-header>
     <ion-card-content>
-        <p>Niveau: {{creneau.niveau.niveau}}</p>
-        <p>{{creneau.jour|dayOfWeek}}  /  {{creneau.heureDebut}} - {{creneau.heureFin}}</p>
+        <p>Niveau: {{creneau.niveau.nom}}</p>
+        <p>{{creneau.jour|dayOfWeek}} / {{creneau.heureDebut|date:"HH:mm"}} - {{creneau.heureFin|date:"HH:mm"}}</p>
         <p>Lieu: {{creneau.lieu.nom}} {{creneau.lieu.ville}}</p>
         <p>Responsable: {{creneau.responsable.nom}}</p>
 
@@ -11,7 +11,7 @@
             <ion-toggle [(ngModel)]="option"></ion-toggle>
         </ion-item>
 
-        <button ion-button full icon-end color="danger"  (click)="supprimer()" >Supprimer
+        <button ion-button full icon-end color="danger" (click)="supprimer()">Supprimer
             <ion-icon name="trash"></ion-icon>
         </button>
 

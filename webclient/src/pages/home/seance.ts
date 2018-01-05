@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Activite, Creneau, Lieu, Niveau, Responsable} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
     selector: 'page-seance',
@@ -9,17 +10,15 @@ import {WebserviceProvider} from "../../common/webservice";
 })
 export class SeancePage implements OnInit {
     ngOnInit(): void {
-        this.webservice.creneaux.getAll().subscribe(data => this.creneaux = data);
+        this.webservice.activites.getCreneaux(this.monParam.id).subscribe(data => this.creneaux = data.sort(Comparateur.Creneau.villeChronologique));
     }
 
-    public monParam;
+    public monParam: Activite;
 
     creneaux: Creneau[];
 
 
-
     constructor(public  navCtrl: NavController, public navParams: NavParams, private webservice: WebserviceProvider) {
-
         this.monParam = navParams.get("paramPasse");
         ;
     }

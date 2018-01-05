@@ -12,10 +12,10 @@ import {PanierProvider} from '../providers/panier/panier';
 import {PanierPage} from '../pages/home/panier';
 import {SeancePage} from '../pages/home/seance';
 import {InscrPage} from '../pages/home/inscr';
-import {ActivitesProvider} from '../providers/activites/activites';
 import {WebserviceProvider} from '../common/webservice';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {PanierCardComponent} from "../components/panier-card/panier-card";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -31,7 +31,8 @@ import {PanierCardComponent} from "../components/panier-card/panier-card";
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp),
-        HttpClientModule
+        HttpClientModule,
+        CommonModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -48,7 +49,6 @@ import {PanierCardComponent} from "../components/panier-card/panier-card";
         SplashScreen,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         PanierProvider,
-        ActivitesProvider,
         WebserviceProvider
     ]
 })

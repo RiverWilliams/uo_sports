@@ -14,13 +14,26 @@ import "rxjs/add/operator/map";
 */
 @Injectable()
 export class WebserviceProvider {
+    get creneaux(): CreneauxProvider {
+        return this._creneaux;
+    }
 
-    public creneaux: CreneauxProvider;
-    public activites: ActivitesProvider;
+    set creneaux(value: CreneauxProvider) {
+    }
+
+    get activites(): ActivitesProvider {
+        return this._activites;
+    }
+
+    set activites(value: ActivitesProvider) {
+    }
+
+    private _creneaux: CreneauxProvider;
+    private _activites: ActivitesProvider;
 
     constructor(private http: HttpClient) {
-        this.creneaux = new CreneauxProvider(http);
-        this.activites = new ActivitesProvider(http);
+        this._creneaux = new CreneauxProvider(http);
+        this._activites = new ActivitesProvider(http);
         console.log('Hello WebserviceProvider Provider');
     }
 
