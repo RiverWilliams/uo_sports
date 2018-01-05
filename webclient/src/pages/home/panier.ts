@@ -22,15 +22,17 @@ export class PanierPage {
     }
 
 
-    /*naviguer(){
+    naviguer():void{
         this.navCtrl.push(InscrPage,{
             paramPasse: this.creneaux
         })
-    }*/
+    }
+    
 
 
     supprimer(creneau: Creneau): void {
         this.panier.supprimer(creneau.id);
+
     }
 
 }

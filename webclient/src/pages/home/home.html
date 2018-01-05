@@ -1,6 +1,13 @@
 <ion-header>
   <ion-toolbar color="danger" >
-    <ion-title >
+
+  <ion-buttons left>
+  	<button ion-button icon-only (click)="ouvreMenu('menu')">
+			<ion-icon name="menu"></ion-icon>
+		</button>
+	</ion-buttons>
+
+    <ion-title>
 		Les sports 
     </ion-title>
 	
@@ -11,23 +18,13 @@
 		<button ion-button icon-only end (click)="ouvreMenu('filtre')">
 			<ion-icon item-end name="ios-funnel" ></ion-icon>
 		</button>
-		<button ion-button icon-only left (click)="ouvreMenu('menu')">
-			<ion-icon name="menu"></ion-icon>
-		</button>
 	</ion-buttons>
 	
   </ion-toolbar>
 </ion-header>
 
 
-<button ion-button icon-only (click)="openMenu('main')">
-	<ion-icon name="menu"></ion-icon>
-</button>
-
-
 <ion-content>
-
-	<button ion-button menuToggle></button>
 
     <ion-list>
         <ion-item *ngFor="let activite of activites">

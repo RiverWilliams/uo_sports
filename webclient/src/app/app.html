@@ -1,4 +1,4 @@
-<ion-menu side="right" [content]="filtre" id="menu1">
+ <ion-menu side="right" [content]="content" id="menu1">
     <ion-header>
         <ion-toolbar color="danger">
             <ion-title>Filtrer</ion-title>
@@ -19,13 +19,29 @@
 
 </ion-menu>
 
-<ion-menu side="left" [content]="menu" id="menu2">
+<ion-menu side="left" [content]="content" id="menu2">
     <ion-header>
         <ion-toolbar color="danger">
             <ion-title>Menu</ion-title>
         </ion-toolbar>
     </ion-header>
 
+    <ion-content>
+        <ion-list>
+            <ion-item>
+               Actualités   <ion-icon end name="paper" (click)="openPage()" ></ion-icon>
+            </ion-item>
+            <ion-item >
+                Sports   <ion-icon end name="football" ></ion-icon>
+            </ion-item>
+            <ion-item>
+                Carte  <ion-icon end name="map"></ion-icon>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
 </ion-menu>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav><ion-nav [root]="rootPage"></ion-nav>
+
+s

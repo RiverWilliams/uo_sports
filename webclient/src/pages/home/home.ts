@@ -5,6 +5,7 @@ import {PanierPage} from './panier';
 import {Activite} from '../../common/model'
 import {WebserviceProvider} from "../../common/webservice";
 import {Comparateur} from "../../common/comparateur";
+import { PopoverController } from 'ionic-angular';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class HomePage implements  OnInit {
     }
 
 	public page2 : any;
-  constructor(public navCtrl: NavController,  public menu: MenuController, private web: WebserviceProvider) {
+  constructor(public navCtrl: NavController,  public menu: MenuController, private web: WebserviceProvider,public popoverCtrl: PopoverController) {
 		this.page2 = PanierPage;
         menu.enable(true);
   }
@@ -33,13 +34,15 @@ export class HomePage implements  OnInit {
 
   ouvreMenu(evt){
       if(evt === "filtre"){
-          this.menu.enable(true, 'filtre');
-          this.menu.enable(false, 'menu');
+          this.menu.enable(true, 'menu1');
+          this.menu.enable(false, 'menu2');
       }else{
-          this.menu.enable(true, 'menu');
-          this.menu.enable(false, 'filtre');
-      }
+          this.menu.enable(true, 'menu2');
+          this.menu.enable(false, 'menu1');
+      } 
+      
       this.menu.toggle();
   }
+
 
 }
