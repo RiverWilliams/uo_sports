@@ -6,6 +6,7 @@ import {Activite} from '../../common/model'
 import {WebserviceProvider} from "../../common/webservice";
 import {Comparateur} from "../../common/comparateur";
 import {PopoverController} from 'ionic-angular';
+import {Filtre, FiltrePage} from "../filtre/filtre";
 
 
 @Component({
@@ -47,5 +48,18 @@ export class HomePage implements OnInit {
         this.menu.toggle();
     }
 
-
+    openFiltre(ev) {
+        let filtres: Filtre[] = [{
+            nom: 'A-Z', fonction: () => {
+                this.activites.sort(Comparateur.Activite.nom)
+            }
+        }, {
+            nom: "Z-A", fonction: () => {
+                this.activites.sort((a, b) => Comparateur.Activite.nom(b, a))
+            }
+        }
+        ];
+        const popover = this.popoverCtrl.create(FiltrePage, {filtres: filtres});
+        popover.present({ev: ev});
+    }
 }

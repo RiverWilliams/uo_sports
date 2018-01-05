@@ -18,6 +18,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common"
 import {PanierCardComponent} from "../components/panier-card/panier-card";
 import {ActuCardComponent} from "../components/actualite-card/actualite-card";
+import {FiltrePage} from "../pages/filtre/filtre";
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import {ActuCardComponent} from "../components/actualite-card/actualite-card";
         SeancePage,
         PanierPage,
         InscrPage,
-        ActuPage
+        ActuPage,
+        FiltrePage
     ],
     imports: [
         BrowserModule,
@@ -48,7 +50,8 @@ import {ActuCardComponent} from "../components/actualite-card/actualite-card";
         SeancePage,
         PanierPage,
         InscrPage,
-        ActuPage
+        ActuPage,
+        FiltrePage
     ],
     providers: [
         StatusBar,
