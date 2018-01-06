@@ -1,0 +1,15 @@
+<form (ngSubmit)="creationResponsableForm()">
+	<ion-item>
+		<ion-label color="primary" floating>Nom : </ion-label>
+		<ion-input [(ngModel)]="creationResponsable.nomResponsable" name="nomResponsable" clearInput></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Prénom : </ion-label>
+		<ion-input [(ngModel)]="creationResponsable.prenomResponsable" name="prenomResponsable" clearInput></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Email : </ion-label>
+		<ion-input [(ngModel)]="creationResponsable.emailResponsable" name="emailResponsable" type="email" clearInput></ion-input>
+	</ion-item>
+	<button ion-button type="submit" block>Ajouter le responsable</button>
+</form>

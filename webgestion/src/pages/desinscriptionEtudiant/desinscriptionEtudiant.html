@@ -1,0 +1,15 @@
+<ion-content padding>
+	<div padding>
+		<p ion-text color="primary" floating>Activité(s) à retirer à l'étudiant : </p>
+		<form (ngSubmit)="DesinscriptionEtudiantForm()">
+			<ion-item>
+				<ion-label color="primary" floating>Activité : </ion-label>
+				<ion-select [(ngModel)]="desinscriptionEtudiant.nomActivite" name="nomActivite" okText="Ok" cancelText="Annuler" multiple="true">
+					<ion-option *ngFor="let activite of listeActivite">{{ activite }}</ion-option>
+				</ion-select>
+			</ion-item>
+			<button ion-button type="submit" block>Désinscrire</button>
+			<button ion-button (click)="goback()" block>Retour</button>
+		</form>
+	</div>
+</ion-content>

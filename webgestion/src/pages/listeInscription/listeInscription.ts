@@ -7,20 +7,22 @@ import { Component } from '@angular/core';
 
 export class listeInscriptionPage {
 
-	items = [
+	listeInscription = [
 		'andré',
 		'martin',
 		'sophie',
+		'bacassine',
+		'denis',
+		'john'
 	];
-
 
 	payeListeInscription = {
 		choixPayeListeInscription : ''
 	};
 
-	itemSelected(item: string) {
-		console.log("Selected Item", item);
-		console.log(this.payeListeInscription);
+	ListeInscriptionForm() {
+		console.log("Selected Item", this.payeListeInscription);
+		console.log(this.payeListeInscription.choixPayeListeInscription);
 	}
 
 }

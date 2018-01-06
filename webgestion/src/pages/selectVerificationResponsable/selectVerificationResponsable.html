@@ -1,0 +1,11 @@
+<p ion-text color="primary" floating>Choisir le responsable à vérifier : </p>
+<ion-searchbar placeholder="Nom :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+<form (ngSubmit)="VerifResponsableForm()">
+	<ion-list radio-group [(ngModel)]="verifResponsable.choixVerifResponsable" [ngModelOptions]="{standalone: true}">
+		<ion-item *ngFor="let responsable of listeResponsable">
+			<ion-label>{{responsable}}</ion-label>
+			<ion-radio value="{{responsable}}"></ion-radio>
+		</ion-item>
+	</ion-list>
+	<button ion-button type="submit" block>Vérifier le responsable</button>
+</form>

@@ -1,18 +1,15 @@
 <ion-content padding>
 	<div padding>
-		<ion-list>
-			<ion-item *ngFor="let item of activite1">
-				<ion-label>{{ item }}</ion-label>
-				<ion-checkbox></ion-checkbox><!-- [(ngModel)]="listeAttente.choixListeAttente" name="choixListeAttente" -->
+		<p ion-text color="primary" floating>Etudiant(s) ou personnel(s) en attente d'inscription à l'activité: </p>
+		<form (ngSubmit)="ListeAttenteForm()">
+			<ion-item>
+				<ion-label color="primary" floating>Nom(s) : </ion-label>
+				<ion-select [(ngModel)]="listeAttente.choixListeAttente" name="choixListeAttente" okText="Ok" cancelText="Annuler" multiple="true">
+					<ion-option *ngFor="let inscrit of listeInscrit1">{{ inscrit }}</ion-option>
+				</ion-select>
 			</ion-item>
-		</ion-list>
-		<button ion-button (click)="itemSelected(item)" block>Inscrire</button>
-		<button ion-button (click)="goback()" block>Retour</button>
+			<button ion-button type="submit" block>Inscrire</button>
+			<button ion-button (click)="goback()" block>Retour</button>
+		</form>
 	</div>
 </ion-content>
-
-
-<div>
-	<h5>Parametre passé:</h5>
-	<pre>selections: [{{liste}}]</pre>
-</div>

@@ -12,15 +12,14 @@ export class listeAttentePage {
 
 	constructor(public navCtrl: NavController, public navParams: NavParams){
 		this.nomliste = navParams.get("liste");
-		console.log("hello");
-		console.log(this.nomliste);
+		console.log("Parametre ",this.nomliste);
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		//il faut importer la bonne liste d'attente suivant le string liste
 		//on fait en attendant avec la liste items1 dans l'html
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
 
-	activite1 = [
+	listeInscrit1 = [
 		'francis',
 		'tony',
 		'lois',
@@ -30,7 +29,7 @@ export class listeAttentePage {
 		'victor'
 	];
 
-	activite2 = [
+	listeInscrit2 = [
 		'xxxxx',
 		'Metroixxxxxd',
 		'Megxxxxa Mxxxxan',
@@ -44,9 +43,9 @@ export class listeAttentePage {
 		choixListeAttente : ''
 	};
 
-	itemSelected(item: string) {
-		console.log("Selected Item", item);
-		console.log(this.listeAttente);
+	ListeAttenteForm() {
+		console.log("Selected Item", this.listeAttente);
+		console.log(this.listeAttente.choixListeAttente);
 	}
 
 	goback() {

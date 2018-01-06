@@ -15,14 +15,23 @@ export class selectListeAttentePage {
 		choixListeAttente: ''
 	};
 
-	liste = [
+	listeActivite = [
 		'activite1',
 		'activite2',
 	];
 
-	testfunc() {
-		this.navCtrl.push(listeAttentePage, {liste: this.selectListeAttente.choixListeAttente});
+	filterItems(ev: any) {
+		let val = ev.target.value;
+		if (val && val.trim() !== '') {
+			this.listeActivite = this.listeActivite.filter(function(activite) {
+				return activite.toLowerCase().includes(val.toLowerCase());
+			});
+		}
+	}
+
+	ListeAttente() {
 		console.log(this.selectListeAttente);
-		
+		console.log(this.selectListeAttente.choixListeAttente);
+		this.navCtrl.push(listeAttentePage, {liste: this.selectListeAttente.choixListeAttente});		
 	};
 }
