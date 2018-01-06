@@ -25,8 +25,7 @@ public class EmailConfirmationValidationInscriptionModeller extends Modeller {
 
     public void merge(Inscription inscription, Writer writer) throws ResourceNotFoundException, ParseErrorException, MethodInvocationException, IOException {
         final VelocityContext context = new VelocityContext();
-        context.put("inscription", inscription);
-        context.put("creneau", inscription.getCreneau());
+        context.put("inscription", new InscriptionAffichable(inscription));
         context.put("personne", inscription.getPersonne());
         super.merge(context, writer);
     }

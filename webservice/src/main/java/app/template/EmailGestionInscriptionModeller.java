@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.Properties;
 
 @Service
-public class EmailConfirmationDemandeInscriptionModeller extends Modeller {
+public class EmailGestionInscriptionModeller extends Modeller {
 
     @Autowired
-    public EmailConfirmationDemandeInscriptionModeller(@Qualifier("velocityEngine") VelocityEngine velocityEngine, @Qualifier("templateName") Properties properties) throws Exception {
-        super(velocityEngine, properties.getProperty("templates.email.confirmation.demandeInscription"));
+    public EmailGestionInscriptionModeller(@Qualifier("velocityEngine") VelocityEngine velocityEngine, @Qualifier("templateName") Properties properties) throws Exception {
+        super(velocityEngine, properties.getProperty("templates.email.gestion.inscription"));
     }
 
 

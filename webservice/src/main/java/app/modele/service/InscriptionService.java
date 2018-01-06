@@ -83,6 +83,12 @@ public class InscriptionService implements IInscriptionService {
         }
 
         try {
+            sendMailService.emailGestionInscription(demandeInscription);
+        } catch (SendMailException e) {
+            e.printStackTrace();
+        }
+
+        try {
             sendMailService.emailConfirmationDemandeInscription(demandeInscription);
         } catch (SendMailException e) {
             e.printStackTrace();
@@ -135,20 +141,12 @@ public class InscriptionService implements IInscriptionService {
 
         if (oldInscription.getEnAttente() && !inscription.getEnAttente()) {
             //Validation Inscription
-
             try {
                 sendMailService.emailConfirmationValidationInscription(inscription);
             } catch (SendMailException e) {
                 e.printStackTrace();
             }
 
-        } else if (!oldInscription.getEnAttente() && inscription.getEnAttente()) {
-            //Suppression validation inscription
-            try {
-                sendMailService.emailAnnulationInscription(inscription);
-            } catch (SendMailException e) {
-                e.printStackTrace();
-            }
         }
     }
 
