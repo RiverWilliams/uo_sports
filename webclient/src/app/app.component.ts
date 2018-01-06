@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {MenuController, NavController} from 'ionic-angular';
 
 
 import {HomePage} from '../pages/home/home';
@@ -7,32 +7,37 @@ import {ActuPage} from '../pages/actualite/actualite';
 import {CartePage} from '../pages/carte/carte';
 
 @Component({
-   templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
 export class MyApp {
-   @ViewChild('myNav') nav: NavController
-   public rootPage = HomePage;
+    @ViewChild('myNav') nav: NavController
+    public rootPage = HomePage;
 
-   // Wait for the components in MyApp's template to be initialized
-   // In this case, we are waiting for the Nav with reference variable of "#myNav"
-   
+    // Wait for the components in MyApp's template to be initialized
+    // In this case, we are waiting for the Nav with reference variable of "#myNav"
 
-   ngOnInit() {
-      this.nav.push(HomePage);
-   }
 
-   openPage(p) {
-    if(p==1){
-      this.nav.setRoot(ActuPage);
+    constructor(private menu: MenuController) {
     }
-    if(p==2){
-      this.nav.setRoot(HomePage);
+
+    ngOnInit() {
+        this.nav.push(HomePage);
     }
-    if(p==3){
-      this.nav.setRoot(CartePage);
+
+    openPage(p) {
+        switch (p) {
+            case 1:
+                this.nav.setRoot(ActuPage);
+                break;
+            case 2:
+                this.nav.setRoot(HomePage);
+                break;
+            case 3:
+                this.nav.setRoot(CartePage);
+                break;
+        }
+        this.menu.close();
     }
-    
-   }
 }
 
 

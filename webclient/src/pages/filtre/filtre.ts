@@ -10,7 +10,12 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 
 export interface Filtre {
     nom: string,
-    fonction?: any
+    fonction: any
+}
+
+export interface FiltreGroup {
+    nom?: string,
+    filtres: Filtre[]
 }
 
 @IonicPage()
@@ -20,7 +25,7 @@ export interface Filtre {
 })
 export class FiltrePage implements OnInit {
 
-    private filtres: Filtre[];
+    private filtres: FiltreGroup[];
 
     ngOnInit(): void {
         if (this.navParams.data) {

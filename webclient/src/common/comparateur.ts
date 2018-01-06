@@ -1,4 +1,4 @@
-import {Activite, CategorieSport, Creneau, Lieu, Sport} from "./model";
+import {Activite, Actualite, CategorieSport, Creneau, Lieu, Sport} from "./model";
 
 export namespace Comparateur {
     export namespace Activite {
@@ -48,6 +48,21 @@ export namespace Comparateur {
             return a.nom.localeCompare(b.nom);
         }
     }
+
+    export namespace Actualite {
+        export function debut(a: Actualite, b: Actualite): number {
+            return a.dateDebut.getDate() - b.dateDebut.getDate();
+        }
+
+        export function fin(a: Actualite, b: Actualite): number {
+            return a.dateFin.getDate() - b.dateFin.getDate();
+        }
+
+        export function miseEnLigne(a: Actualite, b: Actualite): number {
+            return a.dateMiseEnLigne.getDate() - b.dateMiseEnLigne.getDate();
+        }
+    }
+
     export namespace Sport {
         export function nom(a: Sport, b: Sport): number {
             return a.nom.localeCompare(b.nom);

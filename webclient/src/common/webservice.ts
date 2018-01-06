@@ -327,7 +327,7 @@ class CategorieSportProvider {
     }
 
     public getActualites(id: number): Observable<Actualite[]> {
-        const url = makeUrl(Urls.CATEGORIES_SPORTS_SPORTS, {idCategorieSport: id});
+        const url = makeUrl(Urls.CATEGORIES_SPORTS_ACTUALITES, {idCategorieSport: id});
         return this.http.get<ActualiteJSON[]>(url).map(value => value.map(AdaptateurActualite.fromJSON));
     }
 }
