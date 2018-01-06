@@ -3,11 +3,11 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
 @Component({
-	selector: 'page-modificationActivite',
-	templateUrl: 'modificationActivite.html'
+	selector: 'page-verificationresponsable',
+	templateUrl: 'verificationResponsable.html'
 })
 
-export class modificationActivitePage {
+export class verificationResponsablePage {
 	public nomliste;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams){
@@ -19,29 +19,19 @@ export class modificationActivitePage {
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
 
-	modificationActivite = {
-		nomActivite: '',
-		responsableActivite: '',
-		jourActivite: '',
-		heureDebutActivite: '',
-		heureFinActivite: '',
-		effectifActivite: '',
-		lieuActivite: '',
-	};
-
-	modificationActiviteForm() {
-		console.log(this.modificationActivite)
-	};
-
-	items1 = [
+	listeActivite = [
 		'Natation',
-		'Dupond',
-		'Lundi',
-		'13/00',
-		'15/00',
-		'20',
-		'Piscine'
+		'Foot'
 	];
+
+	verificationResponsable = {
+		nomActivite: ''
+	};
+
+	VerificationResponsableForm() {
+		console.log("Selected Item", this.verificationResponsable);
+		console.log(this.verificationResponsable.nomActivite);
+	};
 
 	goback() {
 		this.navCtrl.push(HomePage);

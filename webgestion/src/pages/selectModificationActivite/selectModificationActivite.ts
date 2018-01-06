@@ -6,6 +6,7 @@ import { modificationActivitePage } from '../modificationActivite/modificationAc
 	selector: 'page-selectmodificationactivite',
 	templateUrl: 'selectModificationActivite.html'
 })
+
 export class selectModificationActivitePage {
 	constructor(public navCtrl: NavController) {
 
@@ -15,14 +16,24 @@ export class selectModificationActivitePage {
 		choixModificationActivite: ''
 	};
 
-	liste = [
-		'activite1',
-		'activite2',
+	listeActivite = [
+		'Natation',
+		'Foot',
+		'Course',
 	];
 
-	testfunc() {
-		this.navCtrl.push(modificationActivitePage, {liste: this.selectModificationActivite.choixModificationActivite});
+	filterItems(ev: any) {
+		let val = ev.target.value;
+		if (val && val.trim() !== '') {
+			this.listeActivite = this.listeActivite.filter(function(activite) {
+				return activite.toLowerCase().includes(val.toLowerCase());
+			});
+		}
+	}
+
+	SelectModificationActivite() {
 		console.log(this.selectModificationActivite);
-		
+		console.log(this.selectModificationActivite.choixModificationActivite);
+		this.navCtrl.push(modificationActivitePage, {liste: this.selectModificationActivite.choixModificationActivite});		
 	};
 }

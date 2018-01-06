@@ -1,9 +1,11 @@
-<div>
-	<ion-item>
-		<ion-label color="primary" floating>Choisir la liste d'attente pour l'activité : </ion-label>
-		<ion-select [(ngModel)]="selectListeAttente.choixListeAttente" name="choixListeAttente">
-			<ion-option *ngFor="let activite of liste">{{ activite }}</ion-option>
-		</ion-select>	
-	</ion-item>
-	<button ion-button (click)="testfunc()" block>Choisir l'activité</button>
-</div>
+<p ion-text color="primary" floating>Choisir la liste d'attente de l'activité : </p>
+<ion-searchbar placeholder="Activité :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+<form (ngSubmit)="ListeAttente()">
+	<ion-list radio-group [(ngModel)]="selectListeAttente.choixListeAttente" [ngModelOptions]="{standalone: true}">
+		<ion-item *ngFor="let activite of listeActivite">
+			<ion-label>{{activite}}</ion-label>
+			<ion-radio value="{{activite}}"></ion-radio>
+		</ion-item>
+	</ion-list>
+	<button ion-button type="submit" block>Choisir cette liste d'attente</button>
+</form>

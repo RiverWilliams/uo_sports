@@ -1,0 +1,31 @@
+<form (ngSubmit)="creationActualiteForm()">
+	<ion-item>
+		<ion-label color="primary" floating>Titre : </ion-label>
+		<ion-input [(ngModel)]="creationActualite.titreActualite" name="titreActualite" clearInput></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Date de début : </ion-label>
+		<ion-datetime [(ngModel)]="creationActualite.dateDebutActualite" name="dateDebutActualite" displayFormat="DD/MM/YYYY" min="2000" max="2030"></ion-datetime>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Date de fin : </ion-label>
+		<ion-datetime [(ngModel)]="creationActualite.dateFinActualite" name="dateFinActualite" displayFormat="DD/MM/YYYY" min="2000" max="2030"></ion-datetime>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Date de mise en ligne : </ion-label>
+		<ion-datetime [(ngModel)]="creationActualite.dateMiseEnLigneActualite" name="dateMiseEnLigneActualite" displayFormat="DD/MM/YYYY" min="2000" max="2030"></ion-datetime>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Description courte : </ion-label>
+		<ion-textarea [(ngModel)]="creationActualite.descriptionCourteActualite" name="descriptionCourteActualite"></ion-textarea>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Description longue : </ion-label>
+		<ion-textarea [(ngModel)]="creationActualite.descriptionLongueActualite" name="descriptionLongueActualite"></ion-textarea>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Chemin de l'image : </ion-label>
+		<ion-input [(ngModel)]="creationActualite.imageActualite" name="imageActualite" clearInput></ion-input>
+	</ion-item>
+	<button ion-button type="submit" block>Publier l'actualité</button>
+</form>

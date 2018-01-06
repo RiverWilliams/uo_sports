@@ -12,15 +12,14 @@ export class listeEffectifPage {
 
 	constructor(public navCtrl: NavController, public navParams: NavParams){
 		this.nomliste = navParams.get("liste");
-		console.log("hello");
-		console.log(this.nomliste);
+		console.log("Parametre ",this.nomliste);
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		//il faut importer la bonne liste d'effectif suivant le string liste
 		//on fait en attendant avec la liste items1 dans l'html
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
 
-	items1 = [
+	listeEffectif1 = [
 		'robert',
 		'franck',
 		'zoe',
@@ -30,7 +29,7 @@ export class listeEffectifPage {
 		'gaston'
 	];
 
-	items2 = [
+	listeEffectif2 = [
 		'xxxxx',
 		'Metroixxxxxd',
 		'Megxxxxa Mxxxxan',
@@ -40,8 +39,13 @@ export class listeEffectifPage {
 		'Halo'
 	];
 
-	itemSelected(item: string) {
-		console.log("Selected Item", item);
+	listeEffectif = {
+		choixListeEffectif : ''
+	};
+
+	ListeEffectifForm() {
+		console.log("Selected Item", this.listeEffectif);
+		console.log(this.listeEffectif.choixListeEffectif);
 	}
 
 	goback() {
