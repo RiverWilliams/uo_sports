@@ -30,7 +30,7 @@ export class ActuPage implements OnInit {
 
     public monParam;
 
-    private _actualites: Actualite[];
+    private _actualites: Actualite[] = [];
 
     get actualites(): Actualite[] {
         return this._actualites;

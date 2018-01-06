@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
         this._activites = value.sort(this.comparateur);
     }
 
-    private _activites: Activite[];
+    private _activites: Activite[]=[];
 
     private _comparateur: any;
 
