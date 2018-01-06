@@ -15,7 +15,7 @@ public class Modeller {
     private Template template;
 
     public Modeller(VelocityEngine velocityEngine, String template) throws Exception {
-        this.template = velocityEngine.getTemplate(template);
+        this.template = velocityEngine.getTemplate(template, "UTF-8");
     }
 
     public void merge(Context context, Writer writer) throws ResourceNotFoundException, ParseErrorException, MethodInvocationException, IOException {
