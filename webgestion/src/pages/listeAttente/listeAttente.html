@@ -1,0 +1,18 @@
+<ion-content padding>
+	<div padding>
+		<ion-list>
+			<ion-item *ngFor="let item of activite1">
+				<ion-label>{{ item }}</ion-label>
+				<ion-checkbox></ion-checkbox><!-- [(ngModel)]="listeAttente.choixListeAttente" name="choixListeAttente" -->
+			</ion-item>
+		</ion-list>
+		<button ion-button (click)="itemSelected(item)" block>Inscrire</button>
+		<button ion-button (click)="goback()" block>Retour</button>
+	</div>
+</ion-content>
+
+
+<div>
+	<h5>Parametre passé:</h5>
+	<pre>selections: [{{liste}}]</pre>
+</div>

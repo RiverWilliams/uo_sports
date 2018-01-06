@@ -1,0 +1,9 @@
+<div>
+	<ion-item>
+		<ion-label color="primary" floating>Choisir l'activité à supprimer : </ion-label>
+		<ion-select [(ngModel)]="selectSuppressionActivite.choixSuppressionActivite" name="choixSuppressionActivite">
+			<ion-option *ngFor="let activite of liste">{{ activite }}</ion-option>
+		</ion-select>	
+	</ion-item>
+	<button ion-button (click)="SupprActivite()" block>Supprimer l'activité</button>
+</div>

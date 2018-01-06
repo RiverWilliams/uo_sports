@@ -1,0 +1,275 @@
+<!-- ############################################################### -->
+<!-- Page d'accueil avec le menu inscriptions, activités, actualités -->
+<ion-content padding>
+	<div padding>
+		<ion-segment [(ngModel)]="listAction">
+			<ion-segment-button value="incriptions">Incriptions</ion-segment-button>
+			<ion-segment-button value="activites">Activités</ion-segment-button>
+			<ion-segment-button value="actualites">Actualités</ion-segment-button>
+			<ion-segment-button value="options">Options</ion-segment-button>
+		</ion-segment>
+	</div>
+	<div [ngSwitch]="listAction">
+		<!-- ########################################################################################################################################## -->
+		<!-- Pour l'option inscriptions à nouveau un menu dessous avec les listes d'étudiants à inscrire, celles des incrits, le tout à choisir parmis la liste actuelle des sports -->
+		<ion-list *ngSwitchCase="'incriptions'">
+			<div>
+				<div padding>
+					<ion-segment [(ngModel)]="listActionIncriptions">
+						<ion-segment-button value="listeInscription">Listes d'inscriptions</ion-segment-button>
+						<ion-segment-button value="listeAttente">Listes d'attentes</ion-segment-button>
+						<ion-segment-button value="listeEffectif">Listes Effectifs</ion-segment-button>
+					</ion-segment>
+				</div>
+			</div>
+			<div [ngSwitch]="listActionIncriptions">
+				<ion-list *ngSwitchCase="'listeInscription'">
+					<div>
+						<page-listeinscription></page-listeinscription>
+					</div>
+				</ion-list>
+
+				<ion-list *ngSwitchCase="'listeAttente'">
+					<div>
+						<page-selectlisteattente></page-selectlisteattente>
+					</div>
+				</ion-list>
+
+				<ion-list *ngSwitchCase="'listeEffectif'">
+					<div>
+						<page-selectlisteeffectif></page-selectlisteeffectif>
+					</div>
+				</ion-list>
+			</div>
+		</ion-list>
+		<!-- ########################################################################################################################################## -->
+
+
+		<!-- ################################################################################################################# -->
+		<!-- Pour l'option activites à nouveau un menu dessous avec les actions possibles vis à vis des activités ajout/modification/suppression -->
+		<ion-list *ngSwitchCase="'activites'">
+			<div>
+				<div padding>
+					<ion-segment [(ngModel)]="listActionActivites">
+						<ion-segment-button value="creationActivite">Créer une activité</ion-segment-button>
+						<ion-segment-button value="modificationActivite">Modifier une activité</ion-segment-button>
+						<ion-segment-button value="suppressionActivite">Supprimer une activité</ion-segment-button>
+					</ion-segment>
+				</div>
+			</div>
+			<div [ngSwitch]="listActionActivites">
+				<ion-list *ngSwitchCase="'creationActivite'">
+					<div>
+						<form (ngSubmit)="creationActiviteForm()">
+							<ion-item>
+								<ion-label color="primary" floating>Nom activité : </ion-label>
+								<ion-input [(ngModel)]="creationActivite.nomActivite" name="nomActivite" type="text" clearInput></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-label color="primary" floating>Responsable : </ion-label>
+									<ion-select [(ngModel)]="creationActivite.responsableActivite" name="responsableActivite" okText="Ok" cancelText="Annuler" multiple="true">
+										<ion-option value="testprof1">TestProf1</ion-option>
+										<ion-option value="testprof2">TestProf2</ion-option>
+									</ion-select>
+							</ion-item>
+							<ion-item>
+								<ion-label color="primary" floating>Jour : </ion-label>
+								<ion-select [(ngModel)]="creationActivite.jourActivite" name="jourActivite" okText="Ok" cancelText="Annuler" multiple="true">
+										<ion-option value="lundi">Lundi</ion-option>
+										<ion-option value="mardi">Mardi</ion-option>
+										<ion-option value="mercredi">Mercredi</ion-option>
+										<ion-option value="jeudi">Jeudi</ion-option>
+										<ion-option value="vendredi">Vendredi</ion-option>
+										<ion-option value="samedi">Samedi</ion-option>
+										<ion-option value="dimanche">Dimanche</ion-option>
+									</ion-select>
+							</ion-item>
+							<ion-item>
+								<ion-label color="primary" floating>Heure de début : </ion-label>
+								<ion-datetime [(ngModel)]="creationActivite.heureDebutActivite" name="heureDebutActivite" displayFormat="HH/mm"></ion-datetime>
+							</ion-item>
+							<ion-item>
+								<ion-label color="primary" floating>Heure de fin : </ion-label>
+								<ion-datetime [(ngModel)]="creationActivite.heureFinActivite" name="heureFinActivite" displayFormat="HH/mm"></ion-datetime>
+							</ion-item>
+							<ion-item>
+								<ion-label color="primary" floating>Effectif : </ion-label>
+								<ion-input [(ngModel)]="creationActivite.effectifActivite" name="effectifActivite" type="number"></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-label color="primary" floating>Niveau : </ion-label>
+								<ion-select [(ngModel)]="creationActivite.niveauActivite" name="niveauActivite" okText="Ok" cancelText="Annuler" multiple="false">
+										<ion-option value="debut">Debutant</ion-option>
+										<ion-option value="inter">Intermédiaire</ion-option>
+										<ion-option value="pro">Pro</ion-option>
+									</ion-select>
+							</ion-item>
+							<ion-item>
+								<ion-label color="primary" floating>Lieu : </ion-label>
+									<ion-select [(ngModel)]="creationActivite.lieuActivite" name="lieuActivite" okText="Ok" cancelText="Annuler" multiple="false">
+										<ion-option value="testLlieu1">TestLieu1</ion-option>
+										<ion-option value="testLlieu2">TestLieu2</ion-option>
+									</ion-select>
+							</ion-item>
+							<button ion-button type="submit" block>Créer l'activité</button>
+						</form>
+					</div>
+				</ion-list>
+
+				<ion-list *ngSwitchCase="'modificationActivite'">
+					<div>
+						<page-selectmodificationactivite></page-selectmodificationactivite>
+					</div>
+				</ion-list>
+
+				<ion-list *ngSwitchCase="'suppressionActivite'">
+					<div>
+						<page-selectsuppressionactivite></page-selectsuppressionactivite>
+					</div>
+				</ion-list>
+			</div>
+		</ion-list>
+		<!-- ################################################################################################################# -->
+
+
+		<!-- ################################################################################################################################################################ -->
+		<!-- Pour l'option actualites juste un formulaire de création d'actualités, titre, date début, date fin, date création et les descriptions -->
+
+
+
+		<ion-list *ngSwitchCase="'actualites'">
+			<div>
+				<form (ngSubmit)="creationActualiteForm()">
+					<ion-item>
+						<ion-label color="primary" floating>Titre : </ion-label>
+						<ion-input [(ngModel)]="creationActualite.titreActualite" name="titreActualite" clearInput></ion-input>
+					</ion-item>
+					<ion-item>
+						<ion-label color="primary" floating>Date de début : </ion-label>
+						<ion-datetime [(ngModel)]="creationActualite.dateDebutActualite" name="dateDebutActualite" displayFormat="DD/MM/YYYY" min="2000" max="2030"></ion-datetime>
+					</ion-item>
+					<ion-item>
+						<ion-label color="primary" floating>Date de fin : </ion-label>
+						<ion-datetime [(ngModel)]="creationActualite.dateFinActualite" name="dateFinActualite" displayFormat="DD/MM/YYYY" min="2000" max="2030"></ion-datetime>
+					</ion-item>
+					<ion-item>
+						<ion-label color="primary" floating>Date de mise en ligne : </ion-label>
+						<ion-datetime [(ngModel)]="creationActualite.dateMiseEnLigneActualite" name="dateMiseEnLigneActualite" displayFormat="DD/MM/YYYY" min="2000" max="2030"></ion-datetime>
+					</ion-item>
+					<ion-item>
+						<ion-label color="primary" floating>Description courte : </ion-label>
+						<ion-textarea [(ngModel)]="creationActualite.descriptionCourteActualite" name="descriptionCourteActualite"></ion-textarea>
+					</ion-item>
+					<ion-item>
+						<ion-label color="primary" floating>Description longue : </ion-label>
+						<ion-textarea [(ngModel)]="creationActualite.descriptionLongueActualite" name="descriptionLongueActualite"></ion-textarea>
+					</ion-item>
+					<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+					<!-- Image non gérée -->
+					<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+					<button ion-button type="submit" block>Publier l'actualité</button>
+				</form>
+			</div>
+		</ion-list>
+		<!-- ################################################################################################################################################################ -->
+
+
+		<!-- ################################################################################################################################################################ -->
+		<!-- Pour options à nouveau un menu dessous avec partie responsable et partie etudiant, chaque menu a encore sous propoe menu avec gémeralement ajout, vérification si la personne est inscrit ou responsable quelque part, et suppression.
+		Formulaire de création -->
+		<ion-list *ngSwitchCase="'options'">
+			<div>
+				<div padding>
+					<ion-segment [(ngModel)]="listActionOptions">
+						<ion-segment-button value="gestionReponsable">Gestion Responsable</ion-segment-button>
+						<ion-segment-button value="gestionEtudiant">Gestion étudiant</ion-segment-button>
+					</ion-segment>
+				</div>
+			</div>
+			<div [ngSwitch]="listActionOptions">
+				<ion-list *ngSwitchCase="'gestionReponsable'">
+					<div>
+						<div padding>
+							<ion-segment [(ngModel)]="listActiongestionReponsable">
+								<ion-segment-button value="ajoutReponsable">Ajout Responsable</ion-segment-button>
+								<ion-segment-button value="verifResponsable">Vérification Responsable</ion-segment-button>
+								<ion-segment-button value="supprResponsable">Suppression Responsable</ion-segment-button>
+							</ion-segment>
+						</div>
+					</div>
+					<div [ngSwitch]="listActiongestionReponsable">
+						<ion-list *ngSwitchCase="'ajoutReponsable'">
+							<div>
+								<form>
+									<ion-item>
+										<ion-label color="primary" name="nomReponsable" floating>Nom : </ion-label>
+										<ion-input clearInput></ion-input>
+									</ion-item>
+									<ion-item>
+										<ion-label color="primary" name="prenomReponsable" floating>Prénom : </ion-label>
+										<ion-input clearInput></ion-input>
+									</ion-item>
+									<ion-item>
+										<ion-label color="primary" name="emailReponsable" floating>Email : </ion-label>
+										<ion-input type="email" clearInput></ion-input>
+									</ion-item>
+									<button ion-button type="submit" block>Ajouter le responsable</button>
+								</form>
+							</div>
+						</ion-list>
+						<ion-list *ngSwitchCase="'verifResponsable'">
+							<div>
+							</div>
+						</ion-list>
+						<ion-list *ngSwitchCase="'supprResponsable'">
+							<div>
+							</div>
+						</ion-list>
+					</div>
+				</ion-list>
+				<ion-list *ngSwitchCase="'gestionEtudiant'">
+					<div>
+						<div padding>
+							<ion-segment [(ngModel)]="listActiongestionEtudiant">
+								<ion-segment-button value="ajoutEtudiant">Ajout Etudiant</ion-segment-button>
+								<ion-segment-button value="verifEtudiant">Vérification Etudiant</ion-segment-button>
+								<ion-segment-button value="supprEtudiant">Suppression Etudiant</ion-segment-button>
+							</ion-segment>
+						</div>
+					</div>
+					<div [ngSwitch]="listActiongestionEtudiant">
+						<ion-list *ngSwitchCase="'ajoutEtudiant'">
+							<div>
+								<form>
+									<ion-item>
+										<ion-label color="primary" name="nomEtudiant" floating>Nom : </ion-label>
+										<ion-input clearInput></ion-input>
+									</ion-item>
+									<ion-item>
+										<ion-label color="primary" name="prenomEtudiant" floating>Prénom : </ion-label>
+										<ion-input clearInput></ion-input>
+									</ion-item>
+									<ion-item>
+										<ion-label color="primary" name="emailEtudiant" floating>Email : </ion-label>
+										<ion-input type="email" clearInput></ion-input>
+									</ion-item>
+									<button ion-button type="submit" block>Ajouter l'étudiant</button>
+								</form>
+							</div>
+						</ion-list>
+						<ion-list *ngSwitchCase="'verifEtudiant'">
+							<div>
+							</div>
+						</ion-list>
+						<ion-list *ngSwitchCase="'supprEtudiant'">
+							<div>
+							</div>
+						</ion-list>
+					</div>
+				</ion-list>
+			</div>
+		</ion-list>
+	</div>
+</ion-content>
+
+<!-- ############################################################### -->
