@@ -27,7 +27,7 @@
 <br/>
 Pieces à fournir : <br/>
 <ul>
-    #foreach($p in $piecesInscription)
+    #foreach($p in $pieceInscriptions)
         <li> $p.nom </li>
     #end
 </ul>

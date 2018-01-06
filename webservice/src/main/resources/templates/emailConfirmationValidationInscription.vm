@@ -29,7 +29,7 @@
 <br/>
 Pour valider l'inscription, merci de vous présenter au secrétariat SUAPSE, bureau 114 du pôle STAPS avec : <br/>
 <ul>
-    #foreach($p in $piecesInscription)
+    #foreach($p in $pieceInscriptions)
         <li> $p.nom </li>
     #end
 </ul>
