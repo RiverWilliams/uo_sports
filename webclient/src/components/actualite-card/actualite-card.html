@@ -1,10 +1,10 @@
 <ion-card>
+    <img  src="{{actualite.image}}"/>
     <ion-card-header>{{actualite.titre}}</ion-card-header>
     <ion-card-content>
         <p>Mis en ligne le {{actualite.dateMiseEnLigne|date:"dd-MM-yyyy"}}</p>
         <p>du {{actualite.dateDebut|date:"dd-MM-yyyy"}} au {{actualite.dateFin|date:"dd-MM-yyyy"}}</p>
         <p>{{actualite.descCourte}}</p>
-        <ion-img src="{{actualite.image}}"></ion-img>
         <p>{{actualite.descLongue}}</p>
     </ion-card-content>
 </ion-card>
