@@ -24,7 +24,5 @@ export class PanierPage {
         })
     }
 
-    accueil(){
-        this.navCtrl.push(HomePage);
-    }
+    
 }

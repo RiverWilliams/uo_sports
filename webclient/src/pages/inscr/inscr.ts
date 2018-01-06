@@ -11,7 +11,7 @@ export class InscrPage {
 
   public mesParam: Creneau[];
 
-    private inscrit: Personne;
+    public inscrit: Personne;
 
     constructor(public  navCtrl: NavController, public navParams: NavParams) {
 
@@ -19,15 +19,29 @@ export class InscrPage {
 
     }
 
+    inscr = {
+      catPersonne : '',
+      nomI : '',
+      prenomI : '',
+      adresseI : '',
+      telephoneI : '',
+      mailI : '',
+    };
+
+    inscriptionForm(){
+      console.log(this.inscr);
+      //this.inscrit.nom = this.inscr.nomI;
+      //console.log(this.inscrit.nom);
+    };
 
 
     inscrire(nom, prenom, adresse, telephone, mail){
-      this.inscrit.nom = nom;
-      this.inscrit.prenom = prenom;
-      this.inscrit.adresse = adresse;
-      this.inscrit.telephone = telephone;
-      this.inscrit.email = mail;
-      this.inscrit.categoriePersonne = 1;
+      this.inscrit.nom = this.inscr.nomI;
+      this.inscrit.prenom = this.inscr.prenomI;
+      this.inscrit.adresse = this.inscr.adresseI;
+      this.inscrit.telephone = this.inscr.telephoneI;
+      this.inscrit.email = this.inscr.mailI;
+      this.inscrit.categoriePersonne = this.inscr.catPersonne;
     }
 
 
