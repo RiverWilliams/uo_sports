@@ -1,5 +1,6 @@
 package app.template;
 
+import app.modele.entity.PieceInscription;
 import app.modele.relation.Inscription;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import java.util.Properties;
 
 @Service
@@ -23,10 +25,11 @@ public class EmailConfirmationValidationInscriptionModeller extends Modeller {
     }
 
 
-    public void merge(Inscription inscription, Writer writer) throws ResourceNotFoundException, ParseErrorException, MethodInvocationException, IOException {
+    public void merge(Inscription inscription, List<PieceInscription> pieceInscriptions, Writer writer) throws ResourceNotFoundException, ParseErrorException, MethodInvocationException, IOException {
         final VelocityContext context = new VelocityContext();
         context.put("inscription", new InscriptionAffichable(inscription));
         context.put("personne", inscription.getPersonne());
+        context.put("pieceInscriptions", pieceInscriptions);
         super.merge(context, writer);
     }
 }

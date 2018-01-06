@@ -80,10 +80,10 @@ public class SendMailService implements ISendMailService {
     public void emailConfirmationValidationInscription(Inscription inscription) throws SendMailException {
 
         inscription = inscriptionService.getInscription(inscription);
-
+        final List<PieceInscription> pieceInscriptions = categoriePersonneService.getPieces(inscription.getPersonne().getCategoriePersonne().getId());
         Writer writer = new StringWriter();
         try {
-            emailConfirmationValidationInscriptionModeller.merge(inscription, writer);
+            emailConfirmationValidationInscriptionModeller.merge(inscription, pieceInscriptions, writer);
         } catch (IOException e) {
             throw new SendMailException("Le template n'as pas pu être chargé.", e);
         }

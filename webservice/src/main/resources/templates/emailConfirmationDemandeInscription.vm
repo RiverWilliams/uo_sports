@@ -1,14 +1,51 @@
 <html>
 <body>
-<h3>Confirmation Inscription Sport</h3>
-<p>${personne.nom} ${personne.prenom}</p>
+
 <p>
-    <ul>
-    #foreach($i in $inscriptions)
-    #set($c = $i.creneau)
-        <li>$c.activite.nom $c.heureDebut</li>
+
+    Bonjour, <br/>
+    <br/>
+    Vous avez demandé à vous inscrire aux activités sportives du SUAPSE, voici le résumé de votre demande :<br/>
+    <br/>
+    Informations personnelles :<br/>
+    ${personne.nom} ${personne.prenom} <br/>
+    ${personne.adresse} <br/>
+    ${personne.email} - ${personne.telephone}} <br/>
+    <br/>
+    Activités demandées : <br/>
+<ul>
+    #foreach($i in inscriptions)
+        #set($c = $i.creneau)
+        <li>
+            ${c.activite.nom} <br/>
+            le $c.jour, de $c.heureDebut à $c.heureFin <br/>
+            $c.lieu.nom à $c.lieu.ville <br/>
+            encadré par $c.responsable.nom $c.responsable.prenom <br/>
+        </li>
     #end
 </ul>
-</p>
+<br/>
+Une fois l'insciption validée, merci de vous présenter au secrétariat SUAPSE, bureau 114 du pôle STAPS avec : <br/>
+<br/>
+<ul>
+    #foreach($p in piecesInscription)
+        <li> $p.nom </li>
+    #end
+</ul>
+un chèque de ${personne.categoriePersonne.prix} à l'ordre de l'agent comptable de l'université d'Orléans.<br/>
+<br/>
+<br/>
+Ceci est un mail automatique, merci de ne pas répondre.<br/>
+<br/>
+<br/>
+SUAPSE/Pôle STAPS du Collegium ST <br/>
+2 Allée du Château – BP 6237 <br/>
+45 062 ORLEANS Cedex 2 <br/>
+Secrétariat : Mme Marie-Charlotte Baret - bureau 114 (permanence mercredi et jeudi 9h à 12h) <br/>
+02 38 49 47 40 <br/>
+Directeur : Mr Olivier Pinault - bureau 117 <br/>
+02 38 49 46 34 <br/>
+suapse@univ-orleans.fr <br/>
+
 </body>
 </html>

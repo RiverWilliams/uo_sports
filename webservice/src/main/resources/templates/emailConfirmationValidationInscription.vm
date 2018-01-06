@@ -1,38 +1,52 @@
 <html>
 <body>
-Bonjour,
 
-Votre demande d'inscription aux activités sportives SUAPSE a été acceptée.
+<p>
 
-Rappel des informations:
-
-Informations personnelles :
-{{nom}} {{prenom}}
-{{adresse}}
-{{email}} - {{telephone}}
-
-[ng for]
-Activités :
-{{nom activité}}
-le {{jour activité}}, de {{heure debut}} à {{heure fin}}
-{{lieu}}
-encadré par {{responsable nom}}
-
-Pour valider l'inscription, merci de vous présenter au secrétariat SUAPSE, bureau 114 du pôle STAPS avec :
-{{liste pieces}}
-un chèque de {{prix}} à l'ordre de l'agent comptable de l'université d'Orléans.
-
-
-Ceci est un mail automatique, merci de ne pas répondre.
-
-
-SUAPSE/Pôle STAPS du Collegium ST
-2 Allée du Château – BP 6237
-45 062 ORLEANS Cedex 2
-Secrétariat : Mme Marie-Charlotte Baret - bureau 114 (permanence mercredi et jeudi 9h à 12h)
-02 38 49 47 40
-Directeur : Mr Olivier Pinault - bureau 117
-02 38 49 46 34
-suapse@univ-orleans.fr
+    Bonjour, <br/>
+    <br/>
+    Votre demande d'inscription aux activités sportives SUAPSE a été acceptée. <br/>
+    <br/>
+    Rappel des informations: <br/>
+    <br/>
+    Informations personnelles :<br/>
+    ${personne.nom} ${personne.prenom} <br/>
+    ${personne.adresse} <br/>
+    ${personne.email} - ${personne.telephone}} <br/>
+    <br/>
+    Activités : <br/>
+<ul>
+    #foreach($i in inscriptions)
+        #set($c = $i.creneau)
+        <li>
+            ${c.activite.nom} <br/>
+            le $c.jour, de $c.heureDebut à $c.heureFin <br/>
+            $c.lieu.nom à $c.lieu.ville <br/>
+            encadré par $c.responsable.nom $c.responsable.prenom <br/>
+        </li>
+    #end
+</ul>
+<br/>
+Pour valider l'inscription, merci de vous présenter au secrétariat SUAPSE, bureau 114 du pôle STAPS avec : <br/>
+<ul>
+    #foreach($p in piecesInscription)
+        <li> $p.nom </li>
+    #end
+</ul>
+un chèque de ${personne.categoriePersonne.prix} à l'ordre de l'agent comptable de l'université d'Orléans. <br/>
+<br/>
+<br/>
+Ceci est un mail automatique, merci de ne pas répondre. <br/>
+<br/>
+<br/>
+SUAPSE/Pôle STAPS du Collegium ST <br/>
+2 Allée du Château – BP 6237 <br/>
+45 062 ORLEANS Cedex 2 <br/>
+Secrétariat : Mme Marie-Charlotte Baret - bureau 114 (permanence mercredi et jeudi 9h à 12h) <br/>
+02 38 49 47 40 <br/>
+Directeur : Mr Olivier Pinault - bureau 117 <br/>
+02 38 49 46 34 <br/>
+suapse@univ-orleans.fr <br/>
+</p>
 </body>
 </html>
