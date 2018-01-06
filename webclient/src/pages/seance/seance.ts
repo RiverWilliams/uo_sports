@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-import {Activite, Creneau, Lieu, Niveau, Responsable} from "../../common/model";
+import {Activite, Creneau} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
 import {Comparateur} from "../../common/comparateur"
 
@@ -19,9 +19,7 @@ export class SeancePage implements OnInit {
 
 
     constructor(public  navCtrl: NavController, public navParams: NavParams, private webservice: WebserviceProvider) {
-
         this.monParam = navParams.get("paramPasse");
-        ;
     }
 
 }

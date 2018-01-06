@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {Creneau, Personne} from "../../common/model";
+import {Component} from '@angular/core';
+import {NavController} from 'ionic-angular';
 
 
 @Component({
