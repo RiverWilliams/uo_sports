@@ -1,0 +1,9 @@
+<div>
+	<ion-item>
+		<ion-label color="primary" floating>Choisir la liste des étudiants pour l'activité : </ion-label>
+		<ion-select [(ngModel)]="selectListeEffectif.choixListeEffectif" name="choixListeEffectif">
+			<ion-option *ngFor="let activite of liste">{{ activite }}</ion-option>
+		</ion-select>	
+	</ion-item>
+	<button ion-button (click)="testfunc()" block>Choisir l'activité</button>
+</div>

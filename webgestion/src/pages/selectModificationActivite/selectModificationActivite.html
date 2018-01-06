@@ -1,0 +1,9 @@
+<div>
+	<ion-item>
+		<ion-label color="primary" floating>Choisir l'activité à modifier : (champ à préremplir??)</ion-label>
+		<ion-select [(ngModel)]="selectModificationActivite.choixModificationActivite" name="choixModificationActivite">
+			<ion-option *ngFor="let activite of liste">{{ activite }}</ion-option>
+		</ion-select>	
+	</ion-item>
+	<button ion-button (click)="testfunc()" block>Choisir l'activité</button>
+</div>

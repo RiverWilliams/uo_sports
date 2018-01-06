@@ -1,0 +1,7 @@
+<ion-list>
+	<ion-item *ngFor="let item of items">
+		<ion-label>{{ item }}</ion-label>
+		<ion-checkbox></ion-checkbox><!-- [(ngModel)]="payeListeInscription.choixPayeListeInscription" name="choixPayeListeInscription" -->
+	</ion-item>
+</ion-list>
+<button ion-button (click)="itemSelected(item)" block>Adhérer</button>
