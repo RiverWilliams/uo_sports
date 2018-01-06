@@ -68,12 +68,12 @@ public class SendMailService implements ISendMailService {
 
         Writer writer = new StringWriter();
         try {
-            emailConfirmationDemandeInscriptionModeller.merge(demande, pieceInscriptions, writer);
+            emailGestionInscriptionModeller.merge(demande, pieceInscriptions, writer);
         } catch (IOException e) {
             throw new SendMailException("Le template n'as pas pu être chargé.", e);
         }
 
-        mailService.sendMail(sujetGestion, writer.toString(), emailGestion, null);
+        mailService.sendMail(sujetDemandeInscription, writer.toString(), demande.getPersonne().getEmail(), null);
     }
 
     @Override
@@ -105,11 +105,11 @@ public class SendMailService implements ISendMailService {
 
         Writer writer = new StringWriter();
         try {
-            emailGestionInscriptionModeller.merge(demande, pieceInscriptions, writer);
+            emailConfirmationDemandeInscriptionModeller.merge(demande, pieceInscriptions, writer);
         } catch (IOException e) {
             throw new SendMailException("Le template n'as pas pu être chargé.", e);
         }
 
-        mailService.sendMail(sujetDemandeInscription, writer.toString(), demande.getPersonne().getEmail(), null);
+        mailService.sendMail(sujetGestion, writer.toString(), emailGestion, null);
     }
 }
