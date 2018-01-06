@@ -14,7 +14,7 @@
     <br/>
     Activités demandées : <br/>
 <ul>
-    #foreach ($i in inscriprions)
+    #foreach ($i in $inscriprions)
         #set ($c = $i.creneau)
         <li>
             ${c.activite.nom} <br/>
@@ -26,8 +26,13 @@
 </ul>
 <br/>
 Pieces à fournir : <br/>
-{{liste pieces}} <br/>
-Un chèque de {{prix}} euros. <br/>
+<ul>
+    #foreach($p in $piecesInscription)
+        <li> $p.nom </li>
+    #end
+</ul>
+<br/>
+Un chèque de ${personne.categoriePersonne.prix} euros. <br/>
 <br/>
 Pour valider l'inscription, merci d'ajouter la demande aux adhésions via l'application de gestion des sports. <br/>
 <br/>

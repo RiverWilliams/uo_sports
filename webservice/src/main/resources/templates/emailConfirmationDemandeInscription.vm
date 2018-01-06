@@ -14,7 +14,7 @@
     <br/>
     Activités demandées : <br/>
 <ul>
-    #foreach($i in inscriptions)
+    #foreach($i in $inscriptions)
         #set($c = $i.creneau)
         <li>
             ${c.activite.nom} <br/>
@@ -28,7 +28,7 @@
 Une fois l'insciption validée, merci de vous présenter au secrétariat SUAPSE, bureau 114 du pôle STAPS avec : <br/>
 <br/>
 <ul>
-    #foreach($p in piecesInscription)
+    #foreach($p in $piecesInscription)
         <li> $p.nom </li>
     #end
 </ul>
