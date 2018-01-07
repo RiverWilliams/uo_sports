@@ -1,6 +1,7 @@
 package app.modele.entity;
 
 import app.modele.relation.Inscription;
+import app.modele.service.InscriptionService;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -12,20 +13,20 @@ public class Personne {
 
     @NotNull(groups = {Update.class, Inscription.Update.class, Inscription.Delete.class})
     private Long id;
-    @NotBlank(groups = Insert.class)
+    @NotBlank(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class})
     private String nom;
-    @NotBlank(groups = Insert.class)
+    @NotBlank(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class})
     private String prenom;
-    @NotBlank(groups = Insert.class)
+    @NotBlank(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class})
     private String adresse;
-    @NotNull(groups = Insert.class)
-    @Pattern(regexp = "(\\+[0-9]{0,3})?[0-9]{10}")
+    @NotNull(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class})
+    @Pattern(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class}, regexp = "(\\+[0-9]{0,3})?[0-9]{10}")
     private String telephone;
-    @NotNull(groups = Insert.class)
-    @Email(groups = Insert.class)
+    @NotNull(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class})
+    @Email(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class})
     private String email;
     @Valid
-    @NotNull(groups = Insert.class)
+    @NotNull(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class})
     private CategoriePersonne categoriePersonne;
 
     public String getAdresse() {
