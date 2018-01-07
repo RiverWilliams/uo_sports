@@ -12,7 +12,7 @@
     Informations personnelles :<br/>
     ${personne.nom} ${personne.prenom} <br/>
     ${personne.adresse} <br/>
-    ${personne.email} - ${personne.telephone}} <br/>
+    ${personne.email} - ${personne.telephone} <br/>
     <br/>
     Activités : <br/>
 <ul>
