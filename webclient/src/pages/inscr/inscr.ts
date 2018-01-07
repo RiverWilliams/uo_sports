@@ -39,7 +39,6 @@ export class InscrPage implements OnInit {
         });
 
         this.web.inscriptions.demandeInscription(p, inscriptions).subscribe((data) => {
-                console.log(data);
                 alert.present();
             }, (err) => {
                 this.valider = false;
