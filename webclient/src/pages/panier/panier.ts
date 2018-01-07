@@ -14,9 +14,7 @@ export class PanierPage {
     public inscriptions: Inscription[];
 
     constructor(public navCtrl: NavController, private panier: PanierProvider) {
-        this.inscriptions = this.panier.creneaux.map(value => {
-            return <Inscription>{creneau: value, demande: false, nombreHeures: 0, ects: 0};
-        });
+        this.inscriptions = this.panier.inscriptions;
     }
 
     naviguer(): void {

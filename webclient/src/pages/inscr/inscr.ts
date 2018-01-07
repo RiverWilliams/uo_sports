@@ -13,6 +13,8 @@ export class InscrPage implements OnInit {
         this.web.categoriesPersonnes.getAll().subscribe(d => this.categories = d);
     }
 
+    valider: boolean = false;
+
     public categories: CategoriePersonne[] = [];
 
     public message: string = "";
@@ -21,6 +23,7 @@ export class InscrPage implements OnInit {
     }
 
     inscriptionForm(p: Personne) {
+        this.valider = true;
         let inscriptions: Inscription[];
         if (this.navParams.data)
             inscriptions = this.navParams.data.inscriptions;
@@ -39,6 +42,7 @@ export class InscrPage implements OnInit {
                 console.log(data);
                 alert.present();
             }, (err) => {
+                this.valider = false;
                 if (err.error.erreur) this.message = err.error.erreur.message
             }
         );

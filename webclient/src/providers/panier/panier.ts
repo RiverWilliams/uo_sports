@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Creneau} from "../../common/model";
+import {Creneau, Inscription} from "../../common/model";
 import {isUndefined} from "ionic-angular/util/util";
 
 /*
@@ -12,25 +12,33 @@ import {isUndefined} from "ionic-angular/util/util";
 @Injectable()
 export class PanierProvider {
 
-    creneaux: Creneau[] = [];
+    inscriptions: Inscription[] = [];
 
     constructor() {
 
     }
 
     contient(id: number): boolean {
-        return !isUndefined(this.creneaux.find((creneau) => creneau.id == id));
+        return !isUndefined(this.inscriptions.find((value) => {
+            if (typeof value.creneau != "number")
+                return value.creneau.id === id;
+            else return value.creneau === id;
+        }));
     }
 
     ajouter(creneau: Creneau) {
-        this.creneaux.push(creneau);
+        this.inscriptions.push({creneau: creneau, nombreHeures: 0, demande: false, enAttente: true, ects: 0});
     }
 
     supprimer(id: number | Creneau) {
         if (typeof id != "number")
             id = id.id;
-        const index = this.creneaux.findIndex(value => value.id == id);
+        const index = this.inscriptions.findIndex(value => {
+            if (typeof value.creneau != "number")
+                return value.creneau.id === id;
+            else return value.creneau === id;
+        });
         if (index >= 0)
-            this.creneaux.splice(index, 1);
+            this.inscriptions.splice(index, 1);
     }
 }
