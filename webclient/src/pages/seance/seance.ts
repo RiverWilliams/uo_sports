@@ -15,7 +15,7 @@ export class SeancePage implements OnInit {
 
     public monParam: Activite;
 
-    creneaux: Creneau[];
+    creneaux: Creneau[]=[];
 
     constructor(public  navCtrl: NavController, public navParams: NavParams, private webservice: WebserviceProvider) {
         this.monParam = navParams.get("paramPasse");

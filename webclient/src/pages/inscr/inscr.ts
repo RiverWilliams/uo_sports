@@ -1,48 +1,47 @@
-import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {Creneau, Personne} from "../../common/model";
+import {Component, OnInit} from '@angular/core';
+import {AlertController, NavController, NavParams} from 'ionic-angular';
+import {CategoriePersonne, Inscription, Personne} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
 
 
 @Component({
-  selector: 'page-inscr',
-  templateUrl: 'inscr.html'
+    selector: 'page-inscr',
+    templateUrl: 'inscr.html'
 })
-export class InscrPage {
-
-  public mesParam: Creneau[];
-
-    public inscrit: Personne;
-
-    constructor(public  navCtrl: NavController, public navParams: NavParams) {
-
-        this.mesParam = navParams.get("paramPasse");
-
+export class InscrPage implements OnInit {
+    ngOnInit(): void {
+        this.web.categoriesPersonnes.getAll().subscribe(d => this.categories = d);
     }
 
-    inscr = {
-      catPersonne : '',
-      nomI : '',
-      prenomI : '',
-      adresseI : '',
-      telephoneI : '',
-      mailI : '',
-    };
+    public categories: CategoriePersonne[] = [];
 
-    inscriptionForm(){
-      console.log(this.inscr);
-      //this.inscrit.nom = this.inscr.nomI;
-      //console.log(this.inscrit.nom);
-    };
+    public message: string = "";
 
-
-    inscrire(nom, prenom, adresse, telephone, mail){
-      this.inscrit.nom = this.inscr.nomI;
-      this.inscrit.prenom = this.inscr.prenomI;
-      this.inscrit.adresse = this.inscr.adresseI;
-      this.inscrit.telephone = this.inscr.telephoneI;
-      this.inscrit.email = this.inscr.mailI;
-      this.inscrit.categoriePersonne = this.inscr.catPersonne;
+    constructor(public  navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider, public alertCtrl: AlertController) {
     }
 
+    inscriptionForm(p: Personne) {
+        let inscriptions: Inscription[];
+        if (this.navParams.data)
+            inscriptions = this.navParams.data.inscriptions;
 
+        const alert = this.alertCtrl.create({
+            title: "Inscription réussie",
+            buttons: [{
+                text: 'OK',
+                handler: () => {
+                    this.navCtrl.goToRoot({})
+                }
+            }]
+        });
+
+        this.web.inscriptions.demandeInscription(p, inscriptions).subscribe((data) => {
+                console.log(data);
+                alert.present();
+            }, (err) => {
+                if (err.error.erreur) this.message = err.error.erreur.message
+            }
+        );
+
+    };
 }

@@ -1,90 +1,65 @@
 <ion-header>
-  <ion-navbar color="danger">
-  <ion-buttons left>
-  	<button ion-button icon-only menuToggle >
-			<ion-icon name="menu"></ion-icon>
-		</button>
-	</ion-buttons>
-    <ion-title>
-      Inscription
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar color="danger">
+        <ion-buttons left>
+            <button ion-button icon-only menuToggle>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>
+            Inscription
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
-	<ion-list>
-		<ion-item *ngFor="let creneau of creneaux">
-			{{creneau.activite.nom}}
-		</ion-item>
-	</ion-list>
+    <form #f="ngForm" (ngSubmit)="inscriptionForm(f.value)">
+        <ion-list radio-group name="categoriePersonne" ngModel required>
+            <p><strong>Je suis : </strong></p>
+            <ion-item *ngFor="let categorie of categories">
+                <ion-label>{{categorie.nom}}</ion-label>
+                <ion-radio [value]="categorie.id"></ion-radio>
+            </ion-item>
+        </ion-list>
 
-	<form (ngSubmit)="inscriptionForm()">
-		<ion-list radio-group [(ngModel)]="inscr.catPersonne" [ngModelOptions]="{standalone: true}">
-				<p><strong>Je suis : </strong></p>
-
-			<ion-item>
-				<ion-label>Etudiant de l'Université</ion-label>
-				<ion-radio ng-value="1"></ion-radio>
-			</ion-item>
-			<ion-item>
-				<ion-label>Etudiant IRFMK, psychomotricite, infirmiere</ion-label>
-				<ion-radio ng-value="2"></ion-radio>
-			</ion-item>
-			<ion-item>
-				<ion-label>Personnel de l'Université</ion-label>
-				<ion-radio ng-value="3"></ion-radio>
-			</ion-item>
-			<ion-item>
-				<ion-label>Personnel du CROUS, radio-campus</ion-label>
-				<ion-radio ng-value="4"></ion-radio>
-			</ion-item>
-			<ion-item>
-				<ion-label>Personnel du CNRS, DREAL, CCNO</ion-label>
-				<ion-radio ng-value="3"></ion-radio>
-			</ion-item>
-			 <ion-item>
-				<ion-label>Exterieur</ion-label>
-				<ion-radio ng-value="3"></ion-radio>
-			</ion-item>
-		</ion-list>
-		
-		<ion-list>
-			<ion-item>
-				<ion-label color="dark">Nom</ion-label>
-				<ion-input [(ngModel)]="inscr.nomI" [ngModelOptions]="{standalone: true}" placeholder="nom"></ion-input>
-			</ion-item>
-			<ion-item>
-				<ion-label color="dark">Prenom</ion-label>
-				<ion-input [(ngModel)]="inscr.prenomI" [ngModelOptions]="{standalone: true}" placeholder="prenom"></ion-input>
-			</ion-item>
-			<ion-item>
-				<ion-label color="dark">Adresse</ion-label>
-				<ion-input [(ngModel)]="inscr.adresseI" [ngModelOptions]="{standalone: true}" placeholder="adresse"></ion-input>
-			</ion-item>
-			<ion-item>
-				<ion-label color="dark">Telephone</ion-label>
-				<ion-input [(ngModel)]="inscr.telephoneI" [ngModelOptions]="{standalone: true}" placeholder="telephone"></ion-input>
-			</ion-item>
-			<ion-item>
-				<ion-label color="dark">Mail</ion-label>
-				<ion-input [(ngModel)]="inscr.mailI" [ngModelOptions]="{standalone: true}" placeholder="mail"></ion-input>
-			</ion-item>
-		</ion-list>
-		
-		<div text-center>
-			<button ion-button large color="danger" type="submit" >Valider</button>
-		</div>
-	</form>
-	<p text-center style="font-size:12px">Un mail de confirmation vous sera envoyé</p>
-
-
+        <ion-list>
+            <ion-item>
+                <ion-label color="dark">Nom</ion-label>
+                <ion-input name="nom" ngModel placeholder="nom" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="dark">Prenom</ion-label>
+                <ion-input name="prenom" ngModel
+                           placeholder="prenom" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="dark">Adresse</ion-label>
+                <ion-input name="adresse" ngModel
+                           placeholder="adresse" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="dark">Telephone</ion-label>
+                <ion-input name="telephone" ngModel
+                           placeholder="telephone" required pattern="(\\+[0-9]{0,3})?[0-9]{10}"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="dark">Mail</ion-label>
+                <ion-input name="email" ngModel
+                           placeholder="mail" required email></ion-input>
+            </ion-item>
+            <ion-item *ngIf="message">{{message}}</ion-item>
+        </ion-list>
+        <div text-center>
+            <button ion-button large color="danger" [disabled]="!f.valid" type="submit">Valider</button>
+        </div>
+    </form>
+    <p text-center style="font-size:12px">Un mail de confirmation vous sera envoyé</p>
 </ion-content>
 
-<ion-footer  text-center >
-	<ion-toolbar color="danger" >
-		<ion-icon style="font-size:25px" name="logo-facebook"></ion-icon>
-		<ion-icon style="font-size:25px" name="logo-linkedin"></ion-icon>
-		<ion-icon style="font-size:25px" name="logo-youtube"></ion-icon>
-		<ion-icon style="font-size:25px" name="logo-twitter"></ion-icon>
-	</ion-toolbar>
+<ion-footer text-center>
+    <ion-toolbar color="danger">
+        <ion-icon style="font-size:25px" name="logo-facebook"></ion-icon>
+        <ion-icon style="font-size:25px" name="logo-linkedin"></ion-icon>
+        <ion-icon style="font-size:25px" name="logo-youtube"></ion-icon>
+        <ion-icon style="font-size:25px" name="logo-twitter"></ion-icon>
+    </ion-toolbar>
 </ion-footer>

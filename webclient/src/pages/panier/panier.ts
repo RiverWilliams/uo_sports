@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {InscrPage} from '../inscr/inscr';
-import {HomePage} from '../home/home';
-import {Creneau} from "../../common/model";
+import {Inscription} from "../../common/model";
 import {PanierProvider} from "../../providers/panier/panier";
 
 
@@ -12,17 +11,17 @@ import {PanierProvider} from "../../providers/panier/panier";
 })
 export class PanierPage {
 
-    public creneaux: Creneau[];
+    public inscriptions: Inscription[];
 
     constructor(public navCtrl: NavController, private panier: PanierProvider) {
-        this.creneaux = this.panier.creneaux;
+        this.inscriptions = this.panier.creneaux.map(value => {
+            return <Inscription>{creneau: value, demande: false, nombreHeures: 0, ects: 0};
+        });
     }
 
     naviguer(): void {
-        this.navCtrl.push(InscrPage, {
-            paramPasse: this.creneaux
-        })
+        this.navCtrl.push(InscrPage, {inscriptions: this.inscriptions});
     }
 
-    
+
 }

@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Creneau} from "../../common/model";
+import {Component, Input, OnInit} from '@angular/core';
+import {Creneau, Inscription} from "../../common/model";
 import {PanierProvider} from "../../providers/panier/panier";
 
 /**
@@ -12,9 +12,14 @@ import {PanierProvider} from "../../providers/panier/panier";
     selector: 'panier-card',
     templateUrl: 'panier-card.html'
 })
-export class PanierCardComponent {
+export class PanierCardComponent implements OnInit {
 
-    @Input() creneau: Creneau;
+    ngOnInit(): void {
+        this.creneau = <Creneau>this.inscription.creneau;
+    }
+
+    @Input() inscription: Inscription;
+    creneau: Creneau;
 
     constructor(private panier: PanierProvider) {
     }

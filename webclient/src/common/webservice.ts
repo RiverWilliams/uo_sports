@@ -13,6 +13,11 @@ import {
 } from "./adaptateur";
 import "rxjs/add/operator/map";
 
+export interface Erreur {
+    code: number,
+    message: string;
+}
+
 /*
   Generated class for the WebserviceProvider provider.
 
@@ -350,7 +355,7 @@ class InscriptionProvider {
 
     public demandeInscription(personne: Personne, inscriptions: Inscription[]): Observable<string> {
         return this.http.post<string>(Urls.INSCRIPTIONS_DEMANDE, {
-            personne: personne,
+            personne: AdaptateurPersonne.toJSON(personne),
             inscriptions: inscriptions.map(AdaptateurInscription.toJSON)
         }, {observe: "response"}).map(value => value.headers.get('location'));
     }

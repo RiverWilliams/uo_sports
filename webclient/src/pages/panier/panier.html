@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar color="danger">
-    
-  
+
+
         <ion-title>
             Selection
         </ion-title>
@@ -10,13 +10,16 @@
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let creneau of creneaux">
-            <panier-card [creneau]="creneau"></panier-card>
+        <ion-item *ngFor="let inscription of inscriptions">
+            <panier-card [inscription]="inscription"></panier-card>
         </ion-item>
     </ion-list>
     <br/><br/><br/>
     <div text-center>
-        <button ion-button large color="danger" (click)="naviguer()">Valider</button>
+        <button ion-button large color="danger" [disabled]="inscriptions.length==0 || inscriptions.length>3"
+                (click)="naviguer()">Valider
+        </button>
+        <div *ngIf="inscriptions.length>3">Le nombre d'inscription est limité à 3.</div>
     </div>
 
 </ion-content>

@@ -20,6 +20,7 @@ import {PanierCardComponent} from "../components/panier-card/panier-card";
 import {ActuCardComponent} from "../components/actualite-card/actualite-card";
 import {FiltrePage} from "../pages/filtre/filtre";
 import {CartePage} from "../pages/carte/carte";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import {CartePage} from "../pages/carte/carte";
         BrowserModule,
         IonicModule.forRoot(MyApp),
         HttpClientModule,
-        CommonModule
+        CommonModule,
+        FormsModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
