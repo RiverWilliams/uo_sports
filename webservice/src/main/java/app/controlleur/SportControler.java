@@ -70,7 +70,8 @@ public class SportControler {
     public ResponseEntity insert(@RequestBody @Validated(Sport.Insert.class) Sport sport) {
         final Long key = sportService.insert(sport);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(uri);
+
     }
 
     @PutMapping

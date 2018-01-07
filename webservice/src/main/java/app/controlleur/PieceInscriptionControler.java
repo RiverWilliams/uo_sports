@@ -41,7 +41,8 @@ public class PieceInscriptionControler {
     public ResponseEntity insert(@RequestBody @Validated(PieceInscription.Insert.class) PieceInscription pieceInscription) {
         final Long key = pieceInscriptionService.insert(pieceInscription);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(uri);
+
     }
 
     @PutMapping

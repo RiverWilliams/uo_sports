@@ -57,19 +57,21 @@ public class ActiviteControler {
         return activiteService.getCategoriesSports(idActivite);
     }
 
+    @GetMapping("/{idActivite}/creneaux")
+    public List<Creneau> getCreneaux(@PathVariable Long idActivite) {
+        return activiteService.getCreneaux(idActivite);
+    }
+
     @GetMapping("/{idActivite}/sports")
     public List<Sport> getSports(@PathVariable Long idActivite) {
         return activiteService.getSports(idActivite);
     }
 
-    @GetMapping("/{idActivite}/creneaux")
-    public List<Creneau> getCreneaux(@PathVariable Long idActivite){return activiteService.getCreneaux(idActivite);}
-
     @PostMapping
     public ResponseEntity insert(@RequestBody @Validated(Activite.Insert.class) Activite activite) {
         final Long key = activiteService.insert(activite);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(uri);
     }
 
     @PutMapping

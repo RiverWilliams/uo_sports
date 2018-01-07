@@ -68,7 +68,7 @@ public class ActualiteControler {
     public ResponseEntity insert(@RequestBody @Validated(Actualite.Insert.class) Actualite actualite) {
         final Long key = actualiteService.insert(actualite);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(uri);
     }
 
     @PutMapping

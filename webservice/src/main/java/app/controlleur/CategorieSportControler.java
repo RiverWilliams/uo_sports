@@ -58,7 +58,7 @@ public class CategorieSportControler {
     public ResponseEntity insert(@RequestBody @Validated(CategorieSport.Insert.class) CategorieSport categorieSport) {
         final Long key = categorieSportService.insert(categorieSport);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(uri);
     }
 
     @PutMapping
