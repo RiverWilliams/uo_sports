@@ -48,6 +48,8 @@ export class InscrPage implements OnInit {
                         message: "Une erreur c'est produite veuillez réessayer",
                         buttons: [{
                             text: 'OK',
+                            role: 'cancel',
+                            handler: () => true
                         }]
                     }).present();
             }
