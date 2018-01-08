@@ -49,7 +49,7 @@ public class PersonneControler {
     public ResponseEntity insert(@RequestBody @Validated(Personne.Insert.class) Personne personne) {
         final Long key = personneService.insert(personne);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).body(uri);
+        return ResponseEntity.created(uri).body(key);
     }
 
     @PutMapping

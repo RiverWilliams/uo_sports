@@ -57,7 +57,7 @@ public class CatagoriePersonneControler {
     public ResponseEntity insert(@RequestBody @Validated(CategoriePersonne.Insert.class) CategoriePersonne categoriePersonne) {
         final Long key = categoriePersonneService.insert(categoriePersonne);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).body(uri);
+        return ResponseEntity.created(uri).body(key);
     }
 
     @PutMapping

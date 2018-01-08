@@ -40,7 +40,7 @@ public class InscriptionControler {
     public ResponseEntity<Object> demandeInscription(@RequestBody @Validated(InscriptionService.DemandeInscription.Insert.class) InscriptionService.DemandeInscription demandeInscription) {
         final Long key = inscriptionService.demandeInscriptions(demandeInscription);
         final URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/personnes/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).body(uri);
+        return ResponseEntity.created(uri).body(key);
     }
 
     @PostMapping

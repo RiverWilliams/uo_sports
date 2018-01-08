@@ -41,7 +41,7 @@ public class LieuControler {
     public ResponseEntity insert(@RequestBody @Validated(Lieu.Insert.class) Lieu lieu) {
         final Long key = lieuService.insert(lieu);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).body(uri);
+        return ResponseEntity.created(uri).body(key);
     }
 
     @PutMapping

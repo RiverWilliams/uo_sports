@@ -55,7 +55,7 @@ public class CreneauControler {
     public ResponseEntity insert(@RequestBody @Validated(Creneau.Insert.class) Creneau creneau) {
         final Long key = creneauService.insert(creneau);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).body(uri);
+        return ResponseEntity.created(uri).body(key);
     }
 
     @PutMapping

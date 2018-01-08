@@ -47,7 +47,7 @@ public class ResponsableControler {
     public ResponseEntity insert(@RequestBody @Validated(Responsable.Insert.class) Responsable responsable) {
         final Long key = responsableService.insert(responsable);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).body(uri);
+        return ResponseEntity.created(uri).body(key);
 
     }
 

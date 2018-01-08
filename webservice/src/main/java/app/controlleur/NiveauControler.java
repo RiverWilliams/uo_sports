@@ -41,7 +41,7 @@ public class NiveauControler {
     public ResponseEntity insert(@RequestBody @Validated(Niveau.Insert.class) Niveau niveau) {
         final Long key = niveauService.insert(niveau);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).body(uri);
+        return ResponseEntity.created(uri).body(key);
 
     }
 

@@ -71,7 +71,7 @@ public class ActiviteControler {
     public ResponseEntity insert(@RequestBody @Validated(Activite.Insert.class) Activite activite) {
         final Long key = activiteService.insert(activite);
         final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(key).toUri();
-        return ResponseEntity.created(uri).body(uri);
+        return ResponseEntity.created(uri).body(key);
     }
 
     @PutMapping
