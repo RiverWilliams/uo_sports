@@ -124,8 +124,8 @@ class CreneauProvider {
         return this.http.get<CreneauJSON[]>(Urls.CRENEAUX).map(value => value.map(v => AdaptateurCreneau.fromJSON(v)));
     }
 
-    public post(creneau: Creneau): Observable<string> {
-        return this.http.post<HttpResponse<string>>(Urls.CRENEAUX, AdaptateurCreneau.toJSON(creneau), {observe: "response"}).map(value => value.headers.get('location'));
+    public post(creneau: Creneau): Observable<number> {
+        return this.http.post<number>(Urls.CRENEAUX, AdaptateurCreneau.toJSON(creneau));
     }
 
     public put(creneau: Creneau): Observable<void> {
@@ -162,8 +162,8 @@ class ActiviteProvider {
         return this.http.get<Activite[]>(Urls.ACTIVITES);
     }
 
-    public post(activite: Activite): Observable<string> {
-        return this.http.post<string>(Urls.ACTIVITES, activite, {observe: "response"}).map(value => value.headers.get('location'));
+    public post(activite: Activite): Observable<number> {
+        return this.http.post<number>(Urls.ACTIVITES, activite);
     }
 
     public put(activite: Activite): Observable<void> {
@@ -219,8 +219,8 @@ class ActualiteProvider {
         return this.http.put<void>(Urls.ACTUALITES, AdaptateurActualite.toJSON(actualite));
     }
 
-    public post(actualite: Actualite): Observable<string> {
-        return this.http.post<string>(Urls.ACTUALITES, AdaptateurActualite.toJSON(actualite), {observe: "response"}).map(value => value.headers.get('location'));
+    public post(actualite: Actualite): Observable<number> {
+        return this.http.post<number>(Urls.ACTUALITES, AdaptateurActualite.toJSON(actualite));
     }
 
     public get(id: number): Observable<Actualite> {
@@ -267,8 +267,8 @@ class CategoriePersonneProvider {
         return this.http.put<void>(Urls.CATEGORIES_PERSONNES, categoriePersonne);
     }
 
-    public post(categoriePersonne: CategoriePersonne): Observable<string> {
-        return this.http.post<string>(Urls.CATEGORIES_PERSONNES, categoriePersonne, {observe: "response"}).map(value => value.headers.get('location'));
+    public post(categoriePersonne: CategoriePersonne): Observable<number> {
+        return this.http.post<number>(Urls.CATEGORIES_PERSONNES, categoriePersonne);
     }
 
     public get(id: number): Observable<CategoriePersonne> {
@@ -307,8 +307,8 @@ class CategorieSportProvider {
         return this.http.put<void>(Urls.CATEGORIES_SPORTS, categorieSport);
     }
 
-    public post(categorieSport: CategorieSport): Observable<string> {
-        return this.http.post<string>(Urls.CATEGORIES_SPORTS, categorieSport, {observe: "response"}).map(value => value.headers.get('location'));
+    public post(categorieSport: CategorieSport): Observable<number> {
+        return this.http.post<number>(Urls.CATEGORIES_SPORTS, categorieSport);
     }
 
     public get(id: number): Observable<CategorieSport> {
@@ -345,19 +345,19 @@ class InscriptionProvider {
         return this.http.put<void>(Urls.INSCRIPTIONS, AdaptateurInscription.toJSON(inscription));
     }
 
-    public post(inscription: Inscription): Observable<string> {
-        return this.http.post<string>(Urls.INSCRIPTIONS, AdaptateurInscription.toJSON(inscription), {observe: "response"}).map(value => value.headers.get('location'));
+    public post(inscription: Inscription): Observable<number> {
+        return this.http.post<number>(Urls.INSCRIPTIONS, AdaptateurInscription.toJSON(inscription));
     }
 
     public delete(idPersonne: number, idCreneau: number): Observable<void> {
         return this.http.delete<void>(Urls.INSCRIPTIONS, {params: new HttpParams().set('idPersonne', idPersonne.toString()).set('idCreneau', idCreneau.toString())});
     }
 
-    public demandeInscription(personne: Personne, inscriptions: Inscription[]): Observable<string> {
-        return this.http.post<string>(Urls.INSCRIPTIONS_DEMANDE, {
+    public demandeInscription(personne: Personne, inscriptions: Inscription[]): Observable<number> {
+        return this.http.post<number>(Urls.INSCRIPTIONS_DEMANDE, {
             personne: AdaptateurPersonne.toJSON(personne),
             inscriptions: inscriptions.map(AdaptateurInscription.toJSON)
-        }, {observe: "response"}).map(value => value.headers.get('location'));
+        });
     }
 
 }
@@ -370,8 +370,8 @@ class LieuxProvider {
         return this.http.put<void>(Urls.LIEUX, lieu);
     }
 
-    public post(lieu: Lieu): Observable<string> {
-        return this.http.post<string>(Urls.LIEUX, lieu, {observe: "response"}).map(value => value.headers.get('location'));
+    public post(lieu: Lieu): Observable<number> {
+        return this.http.post<number>(Urls.LIEUX, lieu);
     }
 
     public delete(id: number): Observable<void> {
@@ -398,8 +398,8 @@ class NiveauxProvider {
         return this.http.put<void>(Urls.NIVEAUX, niveau);
     }
 
-    public post(niveau: Niveau): Observable<string> {
-        return this.http.post<string>(Urls.NIVEAUX, niveau, {observe: "response"}).map(value => value.headers.get('location'));
+    public post(niveau: Niveau): Observable<number> {
+        return this.http.post<number>(Urls.NIVEAUX, niveau);
     }
 
     public delete(id: number): Observable<void> {
@@ -426,8 +426,8 @@ class PersonnesProvider {
         return this.http.put<void>(Urls.PERSONNES, AdaptateurPersonne.toJSON(personne));
     }
 
-    public post(personne: Personne): Observable<string> {
-        return this.http.post<string>(Urls.PERSONNES, AdaptateurPersonne.toJSON(personne), {observe: "response"}).map(value => value.headers.get('location'));
+    public post(personne: Personne): Observable<number> {
+        return this.http.post<number>(Urls.PERSONNES, AdaptateurPersonne.toJSON(personne));
     }
 
     public delete(id: number): Observable<void> {
@@ -453,8 +453,8 @@ class PiecesInscriptionProvider {
         return this.http.put<void>(Urls.PIECES_INSCRIPTION, pieceInscription);
     }
 
-    public post(pieceInscription: PieceInscription): Observable<string> {
-        return this.http.post<string>(Urls.PIECES_INSCRIPTION, pieceInscription, {observe: "response"}).map(value => value.headers.get('location'));
+    public post(pieceInscription: PieceInscription): Observable<number> {
+        return this.http.post<number>(Urls.PIECES_INSCRIPTION, pieceInscription);
     }
 
     public delete(id: number): Observable<void> {
@@ -480,8 +480,8 @@ class ResponsablesProvider {
         return this.http.put<void>(Urls.RESPONSABLES, responsable);
     }
 
-    public post(responsable: Responsable): Observable<string> {
-        return this.http.post<string>(Urls.RESPONSABLES, responsable, {observe: "response"}).map(value => value.headers.get('location'));
+    public post(responsable: Responsable): Observable<number> {
+        return this.http.post<number>(Urls.RESPONSABLES, responsable);
     }
 
     public delete(id: number): Observable<void> {
@@ -512,8 +512,8 @@ class SportsProvider {
         return this.http.put<void>(Urls.SPORTS, sport);
     }
 
-    public post(sport: Sport): Observable<string> {
-        return this.http.post<string>(Urls.SPORTS, sport, {observe: "response"}).map(value => value.headers.get('location'));
+    public post(sport: Sport): Observable<number> {
+        return this.http.post<number>(Urls.SPORTS, sport);
     }
 
     public delete(id: number): Observable<void> {
