@@ -33,48 +33,48 @@ export class WebserviceProvider {
         this._categoriesPersonnes = new CategoriePersonneProvider(http);
         this._categoriesSports = new CategorieSportProvider(http);
         this._inscriptions = new InscriptionProvider(http);
-        this._lieux = new LieuxProvider(http);
-        this._niveux = new NiveauxProvider(http);
-        this._personnes = new PersonnesProvider(http);
-        this._piecesInscription = new PiecesInscriptionProvider(http);
-        this._responsables = new ResponsablesProvider(http);
-        this._sports = new SportsProvider(http);
+        this._lieux = new LieuProvider(http);
+        this._niveux = new NiveauProvider(http);
+        this._personnes = new PersonneProvider(http);
+        this._piecesInscription = new PieceInscriptionProvider(http);
+        this._responsables = new ResponsableProvider(http);
+        this._sports = new SportProvider(http);
         console.log('Hello WebserviceProvider Provider');
     }
 
-    private _niveux: NiveauxProvider;
+    private _niveux: NiveauProvider;
 
-    get niveux(): NiveauxProvider {
+    get niveux(): NiveauProvider {
         return this._niveux;
     }
 
-    private _personnes: PersonnesProvider;
+    private _personnes: PersonneProvider;
 
-    get personnes(): PersonnesProvider {
+    get personnes(): PersonneProvider {
         return this._personnes;
     }
 
-    private _piecesInscription: PiecesInscriptionProvider;
+    private _piecesInscription: PieceInscriptionProvider;
 
-    get piecesInscription(): PiecesInscriptionProvider {
+    get piecesInscription(): PieceInscriptionProvider {
         return this._piecesInscription;
     }
 
-    private _responsables: ResponsablesProvider;
+    private _responsables: ResponsableProvider;
 
-    get responsables(): ResponsablesProvider {
+    get responsables(): ResponsableProvider {
         return this._responsables;
     }
 
-    private _sports: SportsProvider;
+    private _sports: SportProvider;
 
-    get sports(): SportsProvider {
+    get sports(): SportProvider {
         return this._sports;
     }
 
-    private _lieux: LieuxProvider;
+    private _lieux: LieuProvider;
 
-    get lieux(): LieuxProvider {
+    get lieux(): LieuProvider {
         return this._lieux;
     }
 
@@ -166,6 +166,11 @@ class ActiviteProvider {
         return this.http.post<number>(Urls.ACTIVITES, activite);
     }
 
+    public addSport(idActivite: number, idSport: number): Observable<void> {
+        const url = makeUrl(Urls.ACTIVITES_SPORTS, {idActivite: idActivite});
+        return this.http.post<void>(url, idSport);
+    }
+
     public put(activite: Activite): Observable<void> {
         return this.http.post<void>(Urls.CRENEAUX, activite);
     }
@@ -253,6 +258,11 @@ class ActualiteProvider {
         return this.http.get<Sport[]>(url);
     }
 
+    public addSport(idActualite: number, idSport: number): Observable<void> {
+        const url = makeUrl(Urls.ACTUALITES_SPORTS, {idActualite: idActualite});
+        return this.http.post<void>(url, idSport);
+    }
+
 }
 
 class CategoriePersonneProvider {
@@ -274,6 +284,11 @@ class CategoriePersonneProvider {
     public get(id: number): Observable<CategoriePersonne> {
         const url = makeUrl(Urls.CATEGORIES_PERSONNES_ID, {idCategoriePersonne: id});
         return this.http.get<CategoriePersonne>(url);
+    }
+
+    public addPiece(idCategoriePersonne: number, idPiece: number): Observable<void> {
+        const url = makeUrl(Urls.CATEGORIES_PERSONNES_PIECES, {idCategoriePersonne: idCategoriePersonne});
+        return this.http.post<void>(url, idPiece);
     }
 
     public delete(id: number): Observable<void> {
@@ -362,7 +377,7 @@ class InscriptionProvider {
 
 }
 
-class LieuxProvider {
+class LieuProvider {
     constructor(private http: HttpClient) {
     }
 
@@ -390,7 +405,7 @@ class LieuxProvider {
 
 }
 
-class NiveauxProvider {
+class NiveauProvider {
     constructor(private http: HttpClient) {
     }
 
@@ -418,7 +433,7 @@ class NiveauxProvider {
 }
 
 
-class PersonnesProvider {
+class PersonneProvider {
     constructor(private http: HttpClient) {
     }
 
@@ -445,7 +460,7 @@ class PersonnesProvider {
     }
 }
 
-class PiecesInscriptionProvider {
+class PieceInscriptionProvider {
     constructor(private http: HttpClient) {
     }
 
@@ -472,7 +487,7 @@ class PiecesInscriptionProvider {
     }
 }
 
-class ResponsablesProvider {
+class ResponsableProvider {
     constructor(private http: HttpClient) {
     }
 
@@ -504,7 +519,7 @@ class ResponsablesProvider {
     }
 }
 
-class SportsProvider {
+class SportProvider {
     constructor(private http: HttpClient) {
     }
 
@@ -514,6 +529,11 @@ class SportsProvider {
 
     public post(sport: Sport): Observable<number> {
         return this.http.post<number>(Urls.SPORTS, sport);
+    }
+
+    public addCategorie(idSport: number, idCategorie: number): Observable<void> {
+        const url = makeUrl(Urls.SPORTS_CATEGORIES_SPORTS, {idSport: idSport});
+        return this.http.post<void>(url, idCategorie);
     }
 
     public delete(id: number): Observable<void> {
