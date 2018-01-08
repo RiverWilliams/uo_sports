@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Actualite, Sport} from "../../common/model";
+import {Sport} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
+import {Adaptateur} from "../../common/adaptateur";
 
 @Component({
   selector: 'page-formcreationactualite',
@@ -18,14 +19,17 @@ export class formCreationActualitePage implements OnInit {
 
   creationActualiteForm(a) {
     this.web.actualites.post({
-      dateFin: new Date(Date.parse(a.dateFin)),
-      dateDebut: new Date(Date.parse(a.dateDebut)),
+      dateFin: Adaptateur.stringToDate(a.dateFin),
+      dateDebut: Adaptateur.stringToDate(a.dateDebut),
       descCourte: a.descCourte,
       descLongue: a.descLongue,
       titre: a.titre,
       image: a.image,
       dateMiseEnLigne: new Date()
-    }).subscribe(id => a.sports.forEach(s => this.web.actualites.addSport(id, s).subscribe()));
+    }).subscribe(id => {
+      if (Array.isArray(a.sports))
+        a.sports.forEach(s => this.web.actualites.addSport(id, s).subscribe())
+    });
 
   };
 
