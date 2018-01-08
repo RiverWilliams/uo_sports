@@ -51,8 +51,9 @@ import { formCreationPiecePage } from "../pages/formCreationPiece/formCreationPi
 import { selectModificationPiecePage } from "../pages/selectModificationPiece/selectModificationPiece";
 import { modificationPiecePage } from "../pages/modificationPiece/modificationPiece";
 import { selectSuppressionPiecePage } from "../pages/selectSuppressionPiece/selectSuppressionPiece";
-import {HttpClientModule} from "../../../webclient/node_modules/@angular/common/http/src/module";
-import {WebserviceProvider} from "../../../webclient/src/common/webservice";
+import {HttpClientModule} from "@angular/common/http";
+import {WebserviceProvider} from "../common/webservice";
+
 
 @NgModule({
 	declarations: [
