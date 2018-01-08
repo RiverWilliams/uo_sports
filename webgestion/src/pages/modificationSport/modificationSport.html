@@ -1,0 +1,12 @@
+<ion-content padding>
+	<div padding>
+		<form (ngSubmit)="modificationSportForm()">
+			<ion-item>
+				<ion-label color="primary" floating>Nouveau nom du sport : </ion-label>
+				<ion-input [(ngModel)]="modificationSport.nom" name="nom" type="text" clearInput></ion-input>
+			</ion-item>
+			<button ion-button type="submit" block>Valider</button>
+			<button ion-button (click)="goback()" block>Retour</button>
+		</form>
+	</div>
+</ion-content>

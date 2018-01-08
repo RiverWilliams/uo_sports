@@ -4,7 +4,7 @@
 	<div padding>
 		<ion-segment [(ngModel)]="listAction">
 			<ion-segment-button value="incriptions">Incriptions</ion-segment-button>
-			<ion-segment-button value="activites">Activités</ion-segment-button>
+			<ion-segment-button value="categoriesSportsActivites">Catégories/Sports/Activités</ion-segment-button>
 			<ion-segment-button value="actualites">Actualités</ion-segment-button>
 			<ion-segment-button value="options">Options</ion-segment-button>
 		</ion-segment>
@@ -46,36 +46,114 @@
 
 
 		<!-- ################################################################################################################# -->
-		<!-- Pour l'option activites à nouveau un menu dessous avec les actions possibles vis à vis des activités ajout/modification/suppression -->
-		<ion-list *ngSwitchCase="'activites'">
+		<!-- Pour l'option Categories/Sports/Activites à nouveau un menu dessous avec les différentes parties, qui ont elles même un sous menu avec les actions possibles ajout/modification/suppression -->
+		<ion-list *ngSwitchCase="'categoriesSportsActivites'">
 			<div>
 				<div padding>
-					<ion-segment [(ngModel)]="listActionActivites">
-						<ion-segment-button value="creationActivite">Créer une activité</ion-segment-button>
-						<ion-segment-button value="modificationActivite">Modifier une activité</ion-segment-button>
-						<ion-segment-button value="suppressionActivite">Supprimer une activité</ion-segment-button>
+					<ion-segment [(ngModel)]="listActionCategoriesSportsActivites">
+						<ion-segment-button value="categories">Catégories</ion-segment-button>
+						<ion-segment-button value="sports">Sports</ion-segment-button>
+						<ion-segment-button value="activites">Activités</ion-segment-button>
 					</ion-segment>
 				</div>
 			</div>
-			<div [ngSwitch]="listActionActivites">
-				<ion-list *ngSwitchCase="'creationActivite'">
+			<div [ngSwitch]="listActionCategoriesSportsActivites">
+				<ion-list *ngSwitchCase="'categories'">
 					<div>
-						<page-formcreationactivite></page-formcreationactivite>
+						<div padding>
+							<ion-segment [(ngModel)]="listActionCategories">
+								<ion-segment-button value="creationCategorie">Créer une catégorie</ion-segment-button>
+								<ion-segment-button value="modificationCategorie">Modifier une catégorie</ion-segment-button>
+								<ion-segment-button value="suppressionCategorie">Supprimer une catégorie</ion-segment-button>
+							</ion-segment>
+						</div>
+					</div>
+					<div [ngSwitch]="listActionCategories">
+						<ion-list *ngSwitchCase="'creationSport'">
+							<div>
+								<page-formcreationsport></page-formcreationsport>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'modificationSport'">
+							<div>
+								<page-selectmodificationsport></page-selectmodificationsport>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'suppressionSport'">
+							<div>
+								<page-selectsuppressionsport></page-selectsuppressionsport>
+							</div>
+						</ion-list>
 					</div>
 				</ion-list>
 
-				<ion-list *ngSwitchCase="'modificationActivite'">
+				<ion-list *ngSwitchCase="'sports'">
 					<div>
-						<page-selectmodificationactivite></page-selectmodificationactivite>
+						<div padding>
+							<ion-segment [(ngModel)]="listActionSports">
+								<ion-segment-button value="creationSport">Créer un sport</ion-segment-button>
+								<ion-segment-button value="modificationSport">Modifier un sport</ion-segment-button>
+								<ion-segment-button value="suppressionSport">Supprimer un sport</ion-segment-button>
+							</ion-segment>
+						</div>
+					</div>
+					<div [ngSwitch]="listActionSports">
+						<ion-list *ngSwitchCase="'creationSport'">
+							<div>
+								<page-formcreationsport></page-formcreationsport>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'modificationSport'">
+							<div>
+								<page-selectmodificationsport></page-selectmodificationsport>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'suppressionSport'">
+							<div>
+								<page-selectsuppressionsport></page-selectsuppressionsport>
+							</div>
+						</ion-list>
 					</div>
 				</ion-list>
 
-				<ion-list *ngSwitchCase="'suppressionActivite'">
+				<ion-list *ngSwitchCase="'activites'">
 					<div>
-						<page-selectsuppressionactivite></page-selectsuppressionactivite>
+						<div padding>
+							<ion-segment [(ngModel)]="listActionActivites">
+								<ion-segment-button value="creationActivite">Créer une activité</ion-segment-button>
+								<ion-segment-button value="modificationActivite">Modifier une activité</ion-segment-button>
+								<ion-segment-button value="suppressionActivite">Supprimer une activité</ion-segment-button>
+							</ion-segment>
+						</div>
+					</div>
+					<div [ngSwitch]="listActionActivites">
+						<ion-list *ngSwitchCase="'creationActivite'">
+							<div>
+								<page-formcreationactivite></page-formcreationactivite>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'modificationActivite'">
+							<div>
+								<page-selectmodificationactivite></page-selectmodificationactivite>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'suppressionActivite'">
+							<div>
+								<page-selectsuppressionactivite></page-selectsuppressionactivite>
+							</div>
+						</ion-list>
 					</div>
 				</ion-list>
 			</div>
+
+
+
 		</ion-list>
 		<!-- ################################################################################################################# -->
 
@@ -99,6 +177,9 @@
 					<ion-segment [(ngModel)]="listActionOptions">
 						<ion-segment-button value="gestionReponsable">Gestion Responsable</ion-segment-button>
 						<ion-segment-button value="gestionEtudiant">Gestion étudiant</ion-segment-button>
+						<ion-segment-button value="gestionUtilisateurTarif">Gestion utilisateurs et tarifs</ion-segment-button>
+						<ion-segment-button value="gestionLieu">Gestion des lieux</ion-segment-button>
+						<ion-segment-button value="gestionPiece">Gestion des pieces</ion-segment-button>
 					</ion-segment>
 				</div>
 			</div>
@@ -106,24 +187,26 @@
 				<ion-list *ngSwitchCase="'gestionReponsable'">
 					<div>
 						<div padding>
-							<ion-segment [(ngModel)]="listActiongestionReponsable">
+							<ion-segment [(ngModel)]="listActionGestionReponsable">
 								<ion-segment-button value="ajoutReponsable">Ajout Responsable</ion-segment-button>
 								<ion-segment-button value="verifResponsable">Vérification Responsable</ion-segment-button>
 								<ion-segment-button value="supprResponsable">Suppression Responsable</ion-segment-button>
 							</ion-segment>
 						</div>
 					</div>
-					<div [ngSwitch]="listActiongestionReponsable">
+					<div [ngSwitch]="listActionGestionReponsable">
 						<ion-list *ngSwitchCase="'ajoutReponsable'">
 							<div>
 								<page-formcreationresponsable></page-formcreationresponsable>
 							</div>
 						</ion-list>
+
 						<ion-list *ngSwitchCase="'verifResponsable'">
 							<div>
 								<page-selectverificationresponsable></page-selectverificationresponsable>
 							</div>
 						</ion-list>
+
 						<ion-list *ngSwitchCase="'supprResponsable'">
 							<div>
 								<page-selectsuppressionresponsable></page-selectsuppressionresponsable>
@@ -134,27 +217,121 @@
 				<ion-list *ngSwitchCase="'gestionEtudiant'">
 					<div>
 						<div padding>
-							<ion-segment [(ngModel)]="listActiongestionEtudiant">
+							<ion-segment [(ngModel)]="listActionGestionEtudiant">
 								<ion-segment-button value="ajoutEtudiant">Ajout Etudiant</ion-segment-button>
 								<ion-segment-button value="desinscrptionEtudiant">Désinscription Etudiant</ion-segment-button>
 								<ion-segment-button value="supprEtudiant">Suppression Etudiant</ion-segment-button>
 							</ion-segment>
 						</div>
 					</div>
-					<div [ngSwitch]="listActiongestionEtudiant">
+					<div [ngSwitch]="listActionGestionEtudiant">
 						<ion-list *ngSwitchCase="'ajoutEtudiant'">
 							<div>
 								<page-formcreationetudiant></page-formcreationetudiant>
 							</div>
 						</ion-list>
+
 						<ion-list *ngSwitchCase="'desinscrptionEtudiant'">
 							<div>
 								<page-selectdesinscriptionetudiant></page-selectdesinscriptionetudiant>
 							</div>
 						</ion-list>
+
 						<ion-list *ngSwitchCase="'supprEtudiant'">
 							<div>
 								<page-selectsuppressionetudiant></page-selectsuppressionetudiant>
+							</div>
+						</ion-list>
+					</div>
+				</ion-list>
+				<ion-list *ngSwitchCase="'gestionUtilisateurTarif'">
+					<div>
+						<div padding>
+							<ion-segment [(ngModel)]="listActionGestionUtilisateurTarif">
+								<ion-segment-button value="ajoutCategorietUtilisateur">Ajout Catégorie Utilisateur</ion-segment-button>
+								<ion-segment-button value="modificationCategorieTarif">Modification Catégorie et Tarif</ion-segment-button>
+								<ion-segment-button value="supprCategorietUtilisateur">Suppression Catégorie Utilisateur</ion-segment-button>
+							</ion-segment>
+						</div>
+					</div>
+					<div [ngSwitch]="listActionGestionUtilisateurTarif">
+						<ion-list *ngSwitchCase="'ajoutCategorietUtilisateur'">
+							<div>
+								<page-formcreationcategorieutilisateur></page-formcreationcategorieutilisateur>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'modificationCategorieTarif'">
+							<div>
+								<page-selectgestioncategorietarif></page-selectgestioncategorietarif>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'supprCategorietUtilisateur'">
+							<div>
+								<page-selectsuppressioncategorietarif></page-selectsuppressioncategorietarif>
+							</div>
+						</ion-list>
+					</div>
+				</ion-list>
+
+				<ion-list *ngSwitchCase="'gestionLieu'">
+					<div>
+						<div padding>
+							<ion-segment [(ngModel)]="listActionGestionLieu">
+								<ion-segment-button value="ajoutLieu">Ajout Lieu</ion-segment-button>
+								<ion-segment-button value="modificationLieu">Modification Lieu</ion-segment-button>
+								<ion-segment-button value="supprLieu">Suppression Lieu</ion-segment-button>
+							</ion-segment>
+						</div>
+					</div>
+					<div [ngSwitch]="listActionGestionLieu">
+						<ion-list *ngSwitchCase="'ajoutLieu'">
+							<div>
+								<page-formcreationlieu></page-formcreationlieu>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'modificationLieu'">
+							<div>
+								<page-selectmodificationlieu></page-selectmodificationlieu>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'supprLieu'">
+							<div>
+								<page-selectsuppressionlieu></page-selectsuppressionlieu>
+							</div>
+						</ion-list>
+					</div>
+				</ion-list>
+
+				<ion-list *ngSwitchCase="'gestionPiece'">
+					<div>
+						<div padding>
+							<ion-segment [(ngModel)]="listActionGestionPiece">
+								<ion-segment-button value="ajoutPiece">Ajout Piece</ion-segment-button>
+								<ion-segment-button value="modificationPiece">Modification Piece</ion-segment-button>
+								<ion-segment-button value="supprPiece">Suppression Piece</ion-segment-button>
+							</ion-segment>
+						</div>
+					</div>
+					<div [ngSwitch]="listActionGestionPiece">
+						<ion-list *ngSwitchCase="'ajoutPiece'">
+							<div>
+								<page-formcreationpiece></page-formcreationpiece>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'modificationPiece'">
+							<div>
+								<page-selectmodificationpiece></page-selectmodificationpiece>
+							</div>
+						</ion-list>
+
+						<ion-list *ngSwitchCase="'supprPiece'">
+							<div>
+								<page-selectsuppressionpiece></page-selectsuppressionpiece>
 							</div>
 						</ion-list>
 					</div>
@@ -165,4 +342,10 @@
 	</div>
 </ion-content>
 
-<!-- ############################################################### -->
+<!-- ############################################################### 
+
+								<page-formcreationpiece></page-formcreationpiece>
+								<page-selectmodificationpiece></page-selectmodificationpiece>
+								<page-selectsuppressionpiece></page-selectsuppressionpiece>
+								
+-->

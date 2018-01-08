@@ -1,0 +1,17 @@
+<div>
+	<form (ngSubmit)="CreationLieuForm()">
+		<ion-item>
+			<ion-label color="primary" floating>Nom lieu : </ion-label>
+			<ion-input [(ngModel)]="creationLieu.nomLieu" name="nomLieu" type="text" clearInput></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary" floating>Adresse lieu : </ion-label>
+			<ion-input [(ngModel)]="creationLieu.adresseLieu" name="adresseLieu" type="text" clearInput></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary" floating>Ville : </ion-label>
+			<ion-input [(ngModel)]="creationLieu.villeLieu" name="villeLieu" type="text" clearInput></ion-input>
+		</ion-item>
+		<button ion-button type="submit" block>Créer le lieu</button>
+	</form>
+</div>

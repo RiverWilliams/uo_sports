@@ -1,0 +1,9 @@
+<div>
+	<form (ngSubmit)="CreationPieceForm()">
+		<ion-item>
+			<ion-label color="primary" floating>Nom de la pièce d'inscription : </ion-label>
+			<ion-input [(ngModel)]="creationPiece.nom" name="nom" type="text" clearInput></ion-input>
+		</ion-item>
+		<button ion-button type="submit" block>Valider</button>
+	</form>
+</div>
