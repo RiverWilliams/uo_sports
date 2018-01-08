@@ -1,0 +1,20 @@
+<ion-content padding>
+<div padding>
+	<form (ngSubmit)="modificationLieuForm()">
+		<ion-item>
+			<ion-label color="primary" floating>Nom lieu : </ion-label>
+			<ion-input [(ngModel)]="modificationLieu.nomLieu" name="nomLieu" type="text" clearInput></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary" floating>Adresse lieu : </ion-label>
+			<ion-input [(ngModel)]="modificationLieu.adresseLieu" name="adresseLieu" type="text" clearInput></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary" floating>Ville : </ion-label>
+			<ion-input [(ngModel)]="modificationLieu.villeLieu" name="villeLieu" type="text" clearInput></ion-input>
+		</ion-item>
+		<button ion-button type="submit" block>Créer le lieu</button>
+		<button ion-button (click)="goback()" block>Retour</button>
+	</form>
+</div>
+</ion-content>

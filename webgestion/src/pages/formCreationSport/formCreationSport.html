@@ -1,0 +1,9 @@
+<div>
+	<form (ngSubmit)="CreationSportForm()">
+		<ion-item>
+			<ion-label color="primary" floating>Nom du sport : </ion-label>
+			<ion-input [(ngModel)]="creationSport.nom" name="nom" type="text" clearInput></ion-input>
+		</ion-item>
+		<button ion-button type="submit" block>Valider</button>
+	</form>
+</div>

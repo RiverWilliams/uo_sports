@@ -7,30 +7,50 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
-import {listeInscriptionPage} from "../pages/listeInscription/listeInscription";
+import { listeInscriptionPage } from "../pages/listeInscription/listeInscription";
 
-import {selectListeAttentePage} from "../pages/selectListeAttente/selectListeAttente";
-import {listeAttentePage} from "../pages/listeAttente/listeAttente";
+import { selectListeAttentePage } from "../pages/selectListeAttente/selectListeAttente";
+import { listeAttentePage } from "../pages/listeAttente/listeAttente";
 
-import {selectListeEffectifPage} from "../pages/selectListeEffectif/selectListeEffectif";
-import {listeEffectifPage} from "../pages/listeEffectif/listeEffectif";
+import { selectListeEffectifPage} from "../pages/selectListeEffectif/selectListeEffectif";
+import { listeEffectifPage } from "../pages/listeEffectif/listeEffectif";
 
-import {formCreationActivitePage} from "../pages/formCreationActivite/formCreationActivite";
-import {selectModificationActivitePage} from "../pages/selectModificationActivite/selectModificationActivite";
-import {modificationActivitePage} from "../pages/modificationActivite/modificationActivite";
-import {selectSuppressionActivitePage} from "../pages/selectSuppressionActivite/selectSuppressionActivite";
+import { formCreationSportPage } from "../pages/formCreationSport/formCreationSport";
+import { selectModificationSportPage } from "../pages/selectModificationSport/selectModificationSport";
+import { modificationSportPage } from "../pages/modificationSport/modificationSport";
+import { selectSuppressionSportPage } from "../pages/selectSuppressionSport/selectSuppressionSport";
 
-import {formCreationActualitePage} from "../pages/formCreationActualite/formCreationActualite";
+import { formCreationActivitePage } from "../pages/formCreationActivite/formCreationActivite";
+import { selectModificationActivitePage } from "../pages/selectModificationActivite/selectModificationActivite";
+import { modificationActivitePage } from "../pages/modificationActivite/modificationActivite";
+import { selectSuppressionActivitePage } from "../pages/selectSuppressionActivite/selectSuppressionActivite";
 
-import {formCreationResponsablePage} from "../pages/formCreationResponsable/formCreationResponsable";
-import {selectVerificationResponsablePage} from "../pages/selectVerificationResponsable/selectVerificationResponsable";
-import {verificationResponsablePage} from "../pages/verificationResponsable/verificationResponsable";
-import {selectSuppressionResponsablePage} from "../pages/selectSuppressionResponsable/selectSuppressionResponsable";
+import { formCreationActualitePage } from "../pages/formCreationActualite/formCreationActualite";
 
-import {formCreationEtudiantPage} from "../pages/formCreationEtudiant/formCreationEtudiant";
-import {selectDesinscriptionEtudiantPage} from "../pages/selectDesinscriptionEtudiant/selectDesinscriptionEtudiant";
-import {desinscriptionEtudiantPage} from "../pages/desinscriptionEtudiant/desinscriptionEtudiant";
-import {selectSuppressionEtudiantPage} from "../pages/selectSuppressionEtudiant/selectSuppressionEtudiant";
+import { formCreationResponsablePage } from "../pages/formCreationResponsable/formCreationResponsable";
+import { selectVerificationResponsablePage } from "../pages/selectVerificationResponsable/selectVerificationResponsable";
+import { verificationResponsablePage } from "../pages/verificationResponsable/verificationResponsable";
+import { selectSuppressionResponsablePage } from "../pages/selectSuppressionResponsable/selectSuppressionResponsable";
+
+import { formCreationEtudiantPage } from "../pages/formCreationEtudiant/formCreationEtudiant";
+import { selectDesinscriptionEtudiantPage } from "../pages/selectDesinscriptionEtudiant/selectDesinscriptionEtudiant";
+import { desinscriptionEtudiantPage } from "../pages/desinscriptionEtudiant/desinscriptionEtudiant";
+import { selectSuppressionEtudiantPage } from "../pages/selectSuppressionEtudiant/selectSuppressionEtudiant";
+
+import { selectGestionCategorieTarifPage } from "../pages/selectGestionCategorieTarif/selectGestionCategorieTarif";
+import { formCreationCategorieUtilisateurPage } from "../pages/formCreationCategorieUtilisateur/formCreationCategorieUtilisateur";
+import { gestionCategorieTarifPage } from "../pages/gestionCategorieTarif/gestionCategorieTarif";
+import { selectSuppressionCategorieTarifPage } from "../pages/selectSuppressionCategorieTarif/selectSuppressionCategorieTarif";
+
+import { formCreationLieuPage } from "../pages/formCreationLieu/formCreationLieu";
+import { selectModificationLieuPage } from "../pages/selectModificationLieu/selectModificationLieu";
+import { modificationLieuPage } from "../pages/modificationLieu/modificationLieu";
+import { selectSuppressionLieuPage } from "../pages/selectSuppressionLieu/selectSuppressionLieu";
+
+import { formCreationPiecePage } from "../pages/formCreationPiece/formCreationPiece";
+import { selectModificationPiecePage } from "../pages/selectModificationPiece/selectModificationPiece";
+import { modificationPiecePage } from "../pages/modificationPiece/modificationPiece";
+import { selectSuppressionPiecePage } from "../pages/selectSuppressionPiece/selectSuppressionPiece";
 
 @NgModule({
 	declarations: [
@@ -43,6 +63,11 @@ import {selectSuppressionEtudiantPage} from "../pages/selectSuppressionEtudiant/
 
 		selectListeEffectifPage,
 		listeEffectifPage,
+
+		formCreationSportPage,
+		selectModificationSportPage,
+		modificationSportPage,
+		selectSuppressionSportPage,
 
 		formCreationActivitePage,
 		selectModificationActivitePage,
@@ -59,7 +84,23 @@ import {selectSuppressionEtudiantPage} from "../pages/selectSuppressionEtudiant/
 		formCreationEtudiantPage,
 		selectDesinscriptionEtudiantPage,
 		desinscriptionEtudiantPage,
-		selectSuppressionEtudiantPage
+		selectSuppressionEtudiantPage,
+
+		selectGestionCategorieTarifPage,
+		formCreationCategorieUtilisateurPage,
+		gestionCategorieTarifPage,
+		selectSuppressionCategorieTarifPage,
+
+		formCreationLieuPage,
+		selectModificationLieuPage,
+		modificationLieuPage,
+		selectSuppressionLieuPage,
+
+		formCreationPiecePage,
+		selectModificationPiecePage,
+		modificationPiecePage,
+		selectSuppressionPiecePage
+
 	],
 	imports: [
 		BrowserModule,
@@ -77,6 +118,11 @@ import {selectSuppressionEtudiantPage} from "../pages/selectSuppressionEtudiant/
 		selectListeEffectifPage,
 		listeEffectifPage,
 
+		formCreationSportPage,
+		selectModificationSportPage,
+		modificationSportPage,
+		selectSuppressionSportPage,
+
 		formCreationActivitePage,
 		selectModificationActivitePage,
 		modificationActivitePage,
@@ -92,7 +138,23 @@ import {selectSuppressionEtudiantPage} from "../pages/selectSuppressionEtudiant/
 		formCreationEtudiantPage,
 		selectDesinscriptionEtudiantPage,
 		desinscriptionEtudiantPage,
-		selectSuppressionEtudiantPage
+		selectSuppressionEtudiantPage,
+
+		selectGestionCategorieTarifPage,
+		formCreationCategorieUtilisateurPage,
+		gestionCategorieTarifPage,
+		selectSuppressionCategorieTarifPage,
+
+		formCreationLieuPage,
+		selectModificationLieuPage,
+		modificationLieuPage,
+		selectSuppressionLieuPage,
+
+		formCreationPiecePage,
+		selectModificationPiecePage,
+		modificationPiecePage,
+		selectSuppressionPiecePage
+		
 	],
 	providers: [
 		StatusBar,

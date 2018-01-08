@@ -1,0 +1,11 @@
+<p ion-text color="primary" floating>Choisir le sport à modifier:</p>
+<ion-searchbar placeholder="Sport :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+<form (ngSubmit)="SelectModificationSport()">
+	<ion-list radio-group [(ngModel)]="selectModificationSport.choixModificationSport" [ngModelOptions]="{standalone: true}">
+		<ion-item *ngFor="let sport of listeSport">
+			<ion-label>{{sport}}</ion-label>
+			<ion-radio value="{{sport}}"></ion-radio>
+		</ion-item>
+	</ion-list>
+	<button ion-button type="submit" block>Valider</button>
+</form>

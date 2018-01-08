@@ -1,0 +1,12 @@
+<ion-content padding>
+	<div padding>
+		<form (ngSubmit)="modificationPieceForm()">
+			<ion-item>
+				<ion-label color="primary" floating>Nouveau nom de la pièce d'inscription : </ion-label>
+				<ion-input [(ngModel)]="modificationPiece.nom" name="nom" type="text" clearInput></ion-input>
+			</ion-item>
+			<button ion-button type="submit" block>Valider</button>
+			<button ion-button (click)="goback()" block>Retour</button>
+		</form>
+	</div>
+</ion-content>
