@@ -105,7 +105,7 @@ export namespace Adaptateur {
         for (let i = 0; i < zero; i++)
             a = "0" + a;
         const m = d.getMonth() < 10 ? "0" + d.getMonth() : d.getMonth();
-        const j = d.getDay() < 10 ? "0" + d.getDay() : d.getDay();
+        const j = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
         return a + "-" + m + "-" + j;
     }
 
