@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {CategoriePersonne, Inscription, Personne} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
+import {Utilitaire} from "../../common/utilitaire";
 
 
 @Component({
@@ -43,15 +44,7 @@ export class InscrPage implements OnInit {
                 this.valider = false;
                 if (err.error.erreur) this.message = err.error.erreur.message
                 else
-                    this.alertCtrl.create({
-                        title: "Erreur",
-                        message: "Une erreur c'est produite veuillez réessayer",
-                        buttons: [{
-                            text: 'OK',
-                            role: 'cancel',
-                            handler: () => true
-                        }]
-                    }).present();
+                    Utilitaire.createAlertErreur(this.alertCtrl).present();
             }
         );
 
