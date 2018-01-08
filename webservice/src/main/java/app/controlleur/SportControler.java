@@ -35,6 +35,12 @@ public class SportControler {
         sportService.deleteById(id);
     }
 
+    @PostMapping("/{idSport}/categories")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addCategorie(@PathVariable long idSport, @RequestBody long idCategorie) {
+        appartientService.insert(new Appartient(idCategorie, idSport));
+    }
+
     @DeleteMapping("/{idSport}/categories/{idCategorie}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteSport(@PathVariable long idSport, @PathVariable long idCategorie) {

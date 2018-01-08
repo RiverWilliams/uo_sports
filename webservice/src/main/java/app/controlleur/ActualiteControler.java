@@ -27,6 +27,12 @@ public class ActualiteControler {
     @Autowired
     private IConcerneService concerneService;
 
+    @PostMapping("/{idActualite}/sports")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addSport(@PathVariable long idActualite, @RequestBody long idSport) {
+        concerneService.insert(new Concerne(idActualite, idSport));
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {

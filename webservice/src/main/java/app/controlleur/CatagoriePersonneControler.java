@@ -26,6 +26,12 @@ public class CatagoriePersonneControler {
     @Autowired
     private IDemandeService demandeService;
 
+    @PostMapping("/{idCategorie}/pieces")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addSport(@PathVariable long idCategorie, @RequestBody long idPiece) {
+        demandeService.insert(new Demande(idCategorie, idPiece));
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {

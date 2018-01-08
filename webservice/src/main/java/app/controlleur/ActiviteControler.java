@@ -37,6 +37,12 @@ public class ActiviteControler {
         deTypeService.delete(new DeType(idSport, idActivite));
     }
 
+    @PostMapping("/{idActivite}/sports")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addSport(@PathVariable long idActivite, @RequestBody long idSport) {
+        deTypeService.insert(new DeType(idSport, idActivite));
+    }
+
     @GetMapping
     public List<Activite> findAll() {
         return activiteService.findAll();
