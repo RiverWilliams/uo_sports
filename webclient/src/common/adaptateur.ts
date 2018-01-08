@@ -95,29 +95,30 @@ export namespace AdaptateurInscription {
     }
 }
 
+export function dateToString(d: Date): string {
+    const fullYear = d.getFullYear();
+    const zero = Math.ceil(3 - Math.log10(d.getFullYear()));
+    let a = fullYear.toString();
+    for (let i = 0; i < zero; i++)
+        a = "0" + a;
+    const m = d.getMonth() < 10 ? "0" + d.getMonth() : d.getMonth();
+    const j = d.getDay() < 10 ? "0" + d.getDay() : d.getDay();
+    return a + "-" + m + "-" + j;
+}
+
+export function stringToDate(s: string): Date {
+    const regExp = RegExp("^\\d{1,4}-\\d?\\d-\\d?\\d$");
+    if (!regExp.test(s)) {
+        throw new Error("Le format doit correspondre à " + regExp.source)
+    }
+    const split = s.split("-");
+    let date = new Date();
+    date.setFullYear(+split[0], +split[1], +split[2]);
+    return date;
+}
 
 export namespace AdaptateurActualite {
-    function dateToString(d: Date): string {
-        const fullYear = d.getFullYear();
-        const zero = Math.ceil(3 - Math.log10(d.getFullYear()));
-        let a = fullYear.toString();
-        for (let i = 0; i < zero; i++)
-            a = "0" + a;
-        const m = d.getMonth() < 10 ? "0" + d.getMonth() : d.getMonth();
-        const j = d.getDay() < 10 ? "0" + d.getDay() : d.getDay();
-        return a + "-" + m + "-" + j;
-    }
 
-    function stringToDate(s: string): Date {
-        const regExp = RegExp("^\\d{1,4}-\\d?\\d-\\d?\\d$");
-        if (!regExp.test(s)) {
-            throw new Error("Le format doit correspondre à " + regExp.source)
-        }
-        const split = s.split("-");
-        let date = new Date();
-        date.setFullYear(+split[0], +split[1], +split[2]);
-        return date;
-    }
 
     export function toJSON(actualite: Actualite): ActualiteJSON {
         return {
@@ -148,25 +149,26 @@ export namespace AdaptateurActualite {
 
 }
 
+export function timeToString(d: Date): string {
+    const h = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
+    const m = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+    const s = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
+    return h + ":" + m + ":" + s;
+}
+
+export function stringToTime(s: string): Date {
+    const regExp = RegExp("^\\d?\\d:\\d?\\d:\\d?\\d$");
+    if (!regExp.test(s)) {
+        throw new Error("Le format doit correspondre à " + regExp.source)
+    }
+    const split = s.split(":");
+    let date = new Date();
+    date.setHours(+split[0], +split[1], +split[2]);
+    return date;
+}
+
 export namespace AdaptateurCreneau {
 
-    function dateToString(d: Date): string {
-        const h = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
-        const m = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
-        const s = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
-        return h + ":" + m + ":" + s;
-    }
-
-    function stringToDate(s: string): Date {
-        const regExp = RegExp("^\\d?\\d:\\d?\\d:\\d?\\d$");
-        if (!regExp.test(s)) {
-            throw new Error("Le format doit correspondre à " + regExp.source)
-        }
-        const split = s.split(":");
-        let date = new Date();
-        date.setHours(+split[0], +split[1], +split[2]);
-        return date;
-    }
 
     export function toJSON(c: Creneau): CreneauJSON {
         return {
@@ -177,8 +179,8 @@ export namespace AdaptateurCreneau {
             lieu: (typeof c.lieu === "number") ? {id: c.lieu} : c.lieu,
             effectif: c.effectif,
             activite: (typeof c.activite === "number") ? {id: c.activite} : c.activite,
-            heureDebut: dateToString(c.heureDebut),
-            heureFin: dateToString(c.heureFin)
+            heureDebut: timeToString(c.heureDebut),
+            heureFin: timeToString(c.heureFin)
         };
     }
 
@@ -191,8 +193,8 @@ export namespace AdaptateurCreneau {
             lieu: <Lieu>c.lieu,
             effectif: c.effectif,
             activite: <Activite>c.activite,
-            heureDebut: stringToDate(c.heureDebut),
-            heureFin: stringToDate(c.heureFin)
+            heureDebut: stringToTime(c.heureDebut),
+            heureFin: stringToTime(c.heureFin)
         };
     }
 

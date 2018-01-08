@@ -1,15 +1,29 @@
-import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {
-    Activite, Actualite, CategoriePersonne, CategorieSport, Creneau, Inscription, Lieu, Niveau, Personne,
-    PieceInscription, Responsable,
+    Activite,
+    Actualite,
+    CategoriePersonne,
+    CategorieSport,
+    Creneau,
+    Inscription,
+    Lieu,
+    Niveau,
+    Personne,
+    PieceInscription,
+    Responsable,
     Sport
 } from "./model";
 import {makeUrl, Urls} from "./urls";
 import {
-    ActualiteJSON, AdaptateurActualite, AdaptateurCreneau, AdaptateurInscription, AdaptateurPersonne,
-    CreneauJSON, PersonneJSON
+    ActualiteJSON,
+    AdaptateurActualite,
+    AdaptateurCreneau,
+    AdaptateurInscription,
+    AdaptateurPersonne,
+    CreneauJSON,
+    PersonneJSON
 } from "./adaptateur";
 import "rxjs/add/operator/map";
 
