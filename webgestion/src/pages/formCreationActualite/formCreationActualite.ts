@@ -3,6 +3,7 @@ import {Sport} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
 import {Adaptateur} from "../../common/adaptateur";
 import {AlertController} from "ionic-angular";
+import {Utilitaire} from "../../common/utilitaire";
 
 @Component({
   selector: 'page-formcreationactualite',
@@ -33,16 +34,19 @@ export class formCreationActualitePage implements OnInit {
     }).subscribe(id => {
       if (Array.isArray(a.sports))
         a.sports.forEach(s => this.web.actualites.addSport(id, s).subscribe())
-      this.alertCtrl.create({title: "Confirmation", message: "Actualité crée", buttons: [{text: "OK"}]}).present();
-    }, () => {
-      this.valider = false;
       this.alertCtrl.create({
-        title: "Erreur",
-        message: "Une erreur c'est produite veuillez réessayer",
+        title: "Confirmation",
+        message: "Actualité crée",
         buttons: [{
-          text: 'OK',
+          text: "OK", role: 'cancel', handler: () => {
+            this.valider = false;
+            return true;
+          }
         }]
       }).present();
+    }, () => {
+      this.valider = false;
+      Utilitaire.createAlertErreur(this.alertCtrl).present();
     });
 
   };
