@@ -51,6 +51,8 @@ import { formCreationPiecePage } from "../pages/formCreationPiece/formCreationPi
 import { selectModificationPiecePage } from "../pages/selectModificationPiece/selectModificationPiece";
 import { modificationPiecePage } from "../pages/modificationPiece/modificationPiece";
 import { selectSuppressionPiecePage } from "../pages/selectSuppressionPiece/selectSuppressionPiece";
+import {HttpClientModule} from "../../../webclient/node_modules/@angular/common/http/src/module";
+import {WebserviceProvider} from "../../../webclient/src/common/webservice";
 
 @NgModule({
 	declarations: [
@@ -104,7 +106,8 @@ import { selectSuppressionPiecePage } from "../pages/selectSuppressionPiece/sele
 	],
 	imports: [
 		BrowserModule,
-		IonicModule.forRoot(MyApp)
+		IonicModule.forRoot(MyApp),
+    HttpClientModule
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
@@ -154,12 +157,13 @@ import { selectSuppressionPiecePage } from "../pages/selectSuppressionPiece/sele
 		selectModificationPiecePage,
 		modificationPiecePage,
 		selectSuppressionPiecePage
-		
+
 	],
 	providers: [
 		StatusBar,
 		SplashScreen,
-		{provide: ErrorHandler, useClass: IonicErrorHandler}
+		{provide: ErrorHandler, useClass: IonicErrorHandler},
+    WebserviceProvider
 	]
 })
 export class AppModule {}
