@@ -29,5 +29,5 @@
       <ion-option *ngFor="let s of sports" [value]="s.id">{{s.nom}}</ion-option>
     </ion-select>
   </ion-item>
-  <button ion-button [disabled]="!f.valid" type="submit" block>Publier l'actualité</button>
+  <button ion-button [disabled]="!f.valid || valider" type="submit" block>Publier l'actualité</button>
 </form>
