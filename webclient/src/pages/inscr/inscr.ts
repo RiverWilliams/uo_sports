@@ -28,21 +28,28 @@ export class InscrPage implements OnInit {
         if (this.navParams.data)
             inscriptions = this.navParams.data.inscriptions;
 
-        const alert = this.alertCtrl.create({
-            title: "Inscription réussie",
-            buttons: [{
-                text: 'OK',
-                handler: () => {
-                    this.navCtrl.goToRoot({})
-                }
-            }]
-        });
-
         this.web.inscriptions.demandeInscription(p, inscriptions).subscribe((data) => {
-                alert.present();
+                this.alertCtrl.create({
+                    title: "Confirmation",
+                    message: "Inscription réussie",
+                    buttons: [{
+                        text: 'OK',
+                        handler: () => {
+                            this.navCtrl.goToRoot({})
+                        }
+                    }]
+                }).present();
             }, (err) => {
                 this.valider = false;
                 if (err.error.erreur) this.message = err.error.erreur.message
+                else
+                    this.alertCtrl.create({
+                        title: "Erreur",
+                        message: "Une erreur c'est produite veuillez réessayer",
+                        buttons: [{
+                            text: 'OK',
+                        }]
+                    }).present();
             }
         );
 
