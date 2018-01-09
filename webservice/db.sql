@@ -156,9 +156,9 @@ CREATE TABLE inscription(
         demande       Bool NOT NULL ,
         ects          Int ,
         nombre_heures Int ,
-        id            Int NOT NULL ,
+        id_personne   Int NOT NULL ,
         id_creneau    Int NOT NULL ,
-        PRIMARY KEY (id ,id_creneau )
+        PRIMARY KEY (id_personne ,id_creneau )
 )ENGINE=InnoDB;
 
 
@@ -167,9 +167,9 @@ CREATE TABLE inscription(
 #------------------------------------------------------------
 
 CREATE TABLE demande(
-        id                    Int NOT NULL ,
+        id_piece_inscription  Int NOT NULL ,
         id_categorie_personne Int NOT NULL ,
-        PRIMARY KEY (id ,id_categorie_personne )
+        PRIMARY KEY (id_piece_inscription ,id_categorie_personne )
 )ENGINE=InnoDB;
 
 
@@ -178,9 +178,9 @@ CREATE TABLE demande(
 #------------------------------------------------------------
 
 CREATE TABLE appartient(
-        id       Int NOT NULL ,
-        id_sport Int NOT NULL ,
-        PRIMARY KEY (id ,id_sport )
+        id_categorie_sport Int NOT NULL ,
+        id_sport           Int NOT NULL ,
+        PRIMARY KEY (id_categorie_sport ,id_sport )
 )ENGINE=InnoDB;
 
 
@@ -189,9 +189,9 @@ CREATE TABLE appartient(
 #------------------------------------------------------------
 
 CREATE TABLE concerne(
-        id           Int NOT NULL ,
+        id_sport     Int NOT NULL ,
         id_actualite Int NOT NULL ,
-        PRIMARY KEY (id ,id_actualite )
+        PRIMARY KEY (id_sport ,id_actualite )
 )ENGINE=InnoDB;
 
 
@@ -200,9 +200,9 @@ CREATE TABLE concerne(
 #------------------------------------------------------------
 
 CREATE TABLE de_type(
-        id          Int NOT NULL ,
+        id_sport    Int NOT NULL ,
         id_activite Int NOT NULL ,
-        PRIMARY KEY (id ,id_activite )
+        PRIMARY KEY (id_sport ,id_activite )
 )ENGINE=InnoDB;
 
 ALTER TABLE personne ADD CONSTRAINT FK_personne_id_categorie_personne FOREIGN KEY (id_categorie_personne) REFERENCES categorie_personne(id);
@@ -210,13 +210,13 @@ ALTER TABLE creneau ADD CONSTRAINT FK_creneau_id_responsable FOREIGN KEY (id_res
 ALTER TABLE creneau ADD CONSTRAINT FK_creneau_id_niveau FOREIGN KEY (id_niveau) REFERENCES niveau(id);
 ALTER TABLE creneau ADD CONSTRAINT FK_creneau_id_lieu FOREIGN KEY (id_lieu) REFERENCES lieu(id);
 ALTER TABLE creneau ADD CONSTRAINT FK_creneau_id_activite FOREIGN KEY (id_activite) REFERENCES activite(id);
-ALTER TABLE inscription ADD CONSTRAINT FK_inscription_id FOREIGN KEY (id) REFERENCES personne(id);
+ALTER TABLE inscription ADD CONSTRAINT FK_inscription_id_personne FOREIGN KEY (id_personne) REFERENCES personne(id);
 ALTER TABLE inscription ADD CONSTRAINT FK_inscription_id_creneau FOREIGN KEY (id_creneau) REFERENCES creneau(id);
-ALTER TABLE demande ADD CONSTRAINT FK_demande_id FOREIGN KEY (id) REFERENCES piece_inscription(id);
+ALTER TABLE demande ADD CONSTRAINT FK_demande_id_piece_inscription FOREIGN KEY (id_piece_inscription) REFERENCES piece_inscription(id);
 ALTER TABLE demande ADD CONSTRAINT FK_demande_id_categorie_personne FOREIGN KEY (id_categorie_personne) REFERENCES categorie_personne(id);
-ALTER TABLE appartient ADD CONSTRAINT FK_appartient_id FOREIGN KEY (id) REFERENCES categorie_sport(id);
+ALTER TABLE appartient ADD CONSTRAINT FK_appartient_id_categorie_sport FOREIGN KEY (id_categorie_sport) REFERENCES categorie_sport(id);
 ALTER TABLE appartient ADD CONSTRAINT FK_appartient_id_sport FOREIGN KEY (id_sport) REFERENCES sport(id);
-ALTER TABLE concerne ADD CONSTRAINT FK_concerne_id FOREIGN KEY (id) REFERENCES sport(id);
+ALTER TABLE concerne ADD CONSTRAINT FK_concerne_id_sport FOREIGN KEY (id_sport) REFERENCES sport(id);
 ALTER TABLE concerne ADD CONSTRAINT FK_concerne_id_actualite FOREIGN KEY (id_actualite) REFERENCES actualite(id);
-ALTER TABLE de_type ADD CONSTRAINT FK_de_type_id FOREIGN KEY (id) REFERENCES sport(id);
+ALTER TABLE de_type ADD CONSTRAINT FK_de_type_id_sport FOREIGN KEY (id_sport) REFERENCES sport(id);
 ALTER TABLE de_type ADD CONSTRAINT FK_de_type_id_activite FOREIGN KEY (id_activite) REFERENCES activite(id);
