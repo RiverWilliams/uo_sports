@@ -31,7 +31,6 @@ export class modificationSportPage implements OnInit {
     return a.id === b.id;
   }
 
-
   modificationSportForm() {
     this.web.sports.put(this.sport).subscribe();
 
