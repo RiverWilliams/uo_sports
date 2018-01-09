@@ -2,7 +2,9 @@
 	<form (ngSubmit)="creationActiviteForm()">
 		<ion-item>
 			<ion-label color="primary" floating>Nom activité : </ion-label>
-			<ion-input [(ngModel)]="creationActivite.nomActivite" name="nomActivite" type="text" clearInput></ion-input>
+			<ion-select [(ngModel)]="creationActivite.nomActivite" name="nomActivite" okText="Ok" cancelText="Annuler" multiple="false">
+					<ion-option *ngFor="let activite of listeActivite">{{ activite }}</ion-option>
+				</ion-select>
 		</ion-item>
 		<ion-item>
 			<ion-label color="primary" floating>Responsable : </ion-label>

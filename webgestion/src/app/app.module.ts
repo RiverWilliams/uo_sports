@@ -15,6 +15,11 @@ import { listeAttentePage } from "../pages/listeAttente/listeAttente";
 import { selectListeEffectifPage} from "../pages/selectListeEffectif/selectListeEffectif";
 import { listeEffectifPage } from "../pages/listeEffectif/listeEffectif";
 
+import { formCreationCategoriePage } from "../pages/formCreationCategorie/formCreationCategorie";
+import { selectModificationCategoriePage } from "../pages/selectModificationCategorie/selectModificationCategorie";
+import { modificationCategoriePage } from "../pages/modificationCategorie/modificationCategorie";
+import { selectSuppressionCategoriePage } from "../pages/selectSuppressionCategorie/selectSuppressionCategorie";
+
 import { formCreationSportPage } from "../pages/formCreationSport/formCreationSport";
 import { selectModificationSportPage } from "../pages/selectModificationSport/selectModificationSport";
 import { modificationSportPage } from "../pages/modificationSport/modificationSport";
@@ -25,6 +30,11 @@ import { selectModificationActivitePage } from "../pages/selectModificationActiv
 import { modificationActivitePage } from "../pages/modificationActivite/modificationActivite";
 import { selectSuppressionActivitePage } from "../pages/selectSuppressionActivite/selectSuppressionActivite";
 
+import { formCreationCreneauPage } from "../pages/formCreationCreneau/formCreationCreneau";
+import { selectModificationCreneauPage } from "../pages/selectModificationCreneau/selectModificationCreneau";
+import { modificationCreneauPage } from "../pages/modificationCreneau/modificationCreneau";
+import { selectSuppressionCreneauPage } from "../pages/selectSuppressionCreneau/selectSuppressionCreneau";
+
 import { formCreationActualitePage } from "../pages/formCreationActualite/formCreationActualite";
 
 import { formCreationResponsablePage } from "../pages/formCreationResponsable/formCreationResponsable";
@@ -32,10 +42,10 @@ import { selectVerificationResponsablePage } from "../pages/selectVerificationRe
 import { verificationResponsablePage } from "../pages/verificationResponsable/verificationResponsable";
 import { selectSuppressionResponsablePage } from "../pages/selectSuppressionResponsable/selectSuppressionResponsable";
 
-import { formCreationEtudiantPage } from "../pages/formCreationEtudiant/formCreationEtudiant";
-import { selectDesinscriptionEtudiantPage } from "../pages/selectDesinscriptionEtudiant/selectDesinscriptionEtudiant";
-import { desinscriptionEtudiantPage } from "../pages/desinscriptionEtudiant/desinscriptionEtudiant";
-import { selectSuppressionEtudiantPage } from "../pages/selectSuppressionEtudiant/selectSuppressionEtudiant";
+import { formCreationPersonnePage } from "../pages/formCreationPersonne/formCreationPersonne";
+import { selectDesinscriptionPersonnePage } from "../pages/selectDesinscriptionPersonne/selectDesinscriptionPersonne";
+import { desinscriptionPersonnePage } from "../pages/desinscriptionPersonne/desinscriptionPersonne";
+import { selectSuppressionPersonnePage } from "../pages/selectSuppressionPersonne/selectSuppressionPersonne";
 
 import { selectGestionCategorieTarifPage } from "../pages/selectGestionCategorieTarif/selectGestionCategorieTarif";
 import { formCreationCategorieUtilisateurPage } from "../pages/formCreationCategorieUtilisateur/formCreationCategorieUtilisateur";
@@ -67,6 +77,11 @@ import {WebserviceProvider} from "../common/webservice";
 		selectListeEffectifPage,
 		listeEffectifPage,
 
+		formCreationCategoriePage,
+		selectModificationCategoriePage,
+		modificationCategoriePage,
+		selectSuppressionCategoriePage,
+
 		formCreationSportPage,
 		selectModificationSportPage,
 		modificationSportPage,
@@ -77,6 +92,11 @@ import {WebserviceProvider} from "../common/webservice";
 		modificationActivitePage,
 		selectSuppressionActivitePage,
 
+		formCreationCreneauPage,
+		selectModificationCreneauPage,
+		modificationCreneauPage,
+		selectSuppressionCreneauPage,
+
 		formCreationActualitePage,
 
 		formCreationResponsablePage,
@@ -84,10 +104,10 @@ import {WebserviceProvider} from "../common/webservice";
 		verificationResponsablePage,
 		selectSuppressionResponsablePage,
 
-		formCreationEtudiantPage,
-		selectDesinscriptionEtudiantPage,
-		desinscriptionEtudiantPage,
-		selectSuppressionEtudiantPage,
+		formCreationPersonnePage,
+		selectDesinscriptionPersonnePage,
+		desinscriptionPersonnePage,
+		selectSuppressionPersonnePage,
 
 		selectGestionCategorieTarifPage,
 		formCreationCategorieUtilisateurPage,
@@ -108,7 +128,7 @@ import {WebserviceProvider} from "../common/webservice";
 	imports: [
 		BrowserModule,
 		IonicModule.forRoot(MyApp),
-    HttpClientModule
+    	HttpClientModule
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
@@ -122,6 +142,11 @@ import {WebserviceProvider} from "../common/webservice";
 		selectListeEffectifPage,
 		listeEffectifPage,
 
+		formCreationCategoriePage,
+		selectModificationCategoriePage,
+		modificationCategoriePage,
+		selectSuppressionCategoriePage,
+
 		formCreationSportPage,
 		selectModificationSportPage,
 		modificationSportPage,
@@ -132,6 +157,11 @@ import {WebserviceProvider} from "../common/webservice";
 		modificationActivitePage,
 		selectSuppressionActivitePage,
 
+		formCreationCreneauPage,
+		selectModificationCreneauPage,
+		modificationCreneauPage,
+		selectSuppressionCreneauPage,
+
 		formCreationActualitePage,
 
 		formCreationResponsablePage,
@@ -139,10 +169,10 @@ import {WebserviceProvider} from "../common/webservice";
 		verificationResponsablePage,
 		selectSuppressionResponsablePage,
 
-		formCreationEtudiantPage,
-		selectDesinscriptionEtudiantPage,
-		desinscriptionEtudiantPage,
-		selectSuppressionEtudiantPage,
+		formCreationPersonnePage,
+		selectDesinscriptionPersonnePage,
+		desinscriptionPersonnePage,
+		selectSuppressionPersonnePage,
 
 		selectGestionCategorieTarifPage,
 		formCreationCategorieUtilisateurPage,

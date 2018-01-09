@@ -19,6 +19,12 @@ export class formCreationActivitePage {
 
 	};
 
+	listeActivite = [
+		'50m haie',
+		'Javelot',
+		'Hockey'
+	];
+
 	listeResponsable = [
 		'mr zen',
 		'mrs peace',
