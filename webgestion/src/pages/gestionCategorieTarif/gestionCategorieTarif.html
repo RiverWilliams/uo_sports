@@ -1,15 +1,15 @@
 <ion-content padding>
 	<div padding>
-		<form (ngSubmit)="GestionCategorieTarifForm()">
+		<form #f="ngForm" (ngSubmit)="GestionCategorieTarifForm(f.value)">
 			<ion-item>
 				<ion-label color="primary" floating>Nom catégorie : </ion-label>
-				<ion-input [(ngModel)]="gestionCategorieTarif.nomCategorieTarif" name="nomCategorieTarif" type="text" clearInput></ion-input>
+				<ion-input ngModel name="nom" type="text" clearInput required></ion-input>
 			</ion-item>
 			<ion-item>
 				<ion-label color="primary" floating>Tarif : </ion-label>
-				<ion-input [(ngModel)]="gestionCategorieTarif.tarif" name="tarif" type="number"></ion-input>
+				<ion-input ngModel name="prix" type="number" required></ion-input>
 			</ion-item>
-			<button ion-button type="submit" block>Modifier la catégorie</button>
+			<button ion-button [disabled]="!f.valid || valider" type="submit" block>Modifier la catégorie</button>
 			<button ion-button (click)="goback()" block>Retour</button>
 		</form>
 	</div>

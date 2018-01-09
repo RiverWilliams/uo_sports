@@ -1,13 +1,11 @@
-<div>
-	<form (ngSubmit)="CreationCategorieUtilisateur()">
-		<ion-item>
-			<ion-label color="primary" floating>Nom catégorie : </ion-label>
-			<ion-input [(ngModel)]="creationCategorieUtilisateur.nomCategorieUtilisateur" name="nomCategorieUtilisateur" type="text" clearInput></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary" floating>Tarif : </ion-label>
-			<ion-input [(ngModel)]="creationCategorieUtilisateur.tarifCategorieUtilisateur" name="tarifCategorieUtilisateur" type="number"></ion-input>
-		</ion-item>
-		<button ion-button type="submit" block>Créer la catégorie</button>
-	</form>
-</div>
+<form #f="ngForm" (ngSubmit)="CreationCategorieUtilisateur(f.value)">
+	<ion-item>
+		<ion-label color="primary" floating>Nom catégorie : </ion-label>
+		<ion-input ngModel name="nom" type="text" clearInput required></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Tarif : </ion-label>
+		<ion-input ngModel name="prix" type="number" clearInputcrequired></ion-input>
+	</ion-item>
+	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Créer la catégorie</button>
+</form>

@@ -1,9 +1,7 @@
-<div>
-	<form (ngSubmit)="creationCategorieForm()">
-		<ion-item>
-			<ion-label color="primary" floating>Nom catégorie : </ion-label>
-			<ion-input [(ngModel)]="creationCategorie.nom" name="nom" type="text" clearInput></ion-input>
-		</ion-item>
-		<button ion-button type="submit" block>Créer la catégorie</button>
-	</form>
-</div>
+<form #f="ngForm" (ngSubmit)="creationCategorieForm(f.value)">
+	<ion-item>
+		<ion-label color="primary" floating>Nom catégorie de sport :</ion-label>
+		<ion-input ngModel name="nom" clearInput required></ion-input>
+	</ion-item>
+	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Créer la catégorie</button>
+</form>

@@ -1,47 +1,15 @@
-<div>
-	<form (ngSubmit)="creationActiviteForm()">
-		<ion-item>
-			<ion-label color="primary" floating>Nom activité : </ion-label>
-			<ion-select [(ngModel)]="creationActivite.nomActivite" name="nomActivite" okText="Ok" cancelText="Annuler" multiple="false">
-					<ion-option *ngFor="let activite of listeActivite">{{ activite }}</ion-option>
-				</ion-select>
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary" floating>Responsable : </ion-label>
-			<ion-select [(ngModel)]="creationActivite.responsableActivite" name="responsableActivite" okText="Ok" cancelText="Annuler" multiple="true">
-					<ion-option *ngFor="let responsable of listeResponsable">{{ responsable }}</ion-option>
-				</ion-select>
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary" floating>Jour : </ion-label>
-			<ion-select [(ngModel)]="creationActivite.jourActivite" name="jourActivite" okText="Ok" cancelText="Annuler" multiple="true">
-					<ion-option *ngFor="let jour of listeJour">{{ jour }}</ion-option>
-				</ion-select>
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary" floating>Heure de début : </ion-label>
-			<ion-datetime [(ngModel)]="creationActivite.heureDebutActivite" name="heureDebutActivite" displayFormat="HH/mm"></ion-datetime>
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary" floating>Heure de fin : </ion-label>
-			<ion-datetime [(ngModel)]="creationActivite.heureFinActivite" name="heureFinActivite" displayFormat="HH/mm"></ion-datetime>
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary" floating>Effectif : </ion-label>
-			<ion-input [(ngModel)]="creationActivite.effectifActivite" name="effectifActivite" type="number"></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary" floating>Niveau : </ion-label>
-			<ion-select [(ngModel)]="creationActivite.niveauActivite" name="niveauActivite" okText="Ok" cancelText="Annuler" multiple="false">
-					<ion-option *ngFor="let niveau of listeNiveau">{{ niveau }}</ion-option>
-				</ion-select>
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary" floating>Lieu : </ion-label>
-				<ion-select [(ngModel)]="creationActivite.lieuActivite" name="lieuActivite" okText="Ok" cancelText="Annuler" multiple="false">
-					<ion-option *ngFor="let lieu of listeLieu">{{ lieu }}</ion-option>
-				</ion-select>
-		</ion-item>
-		<button ion-button type="submit" block>Créer l'activité</button>
-	</form>
-</div>
+<form #f="ngForm" (ngSubmit)="creationActiviteForm(f.value)">
+	<ion-item>
+		<ion-label color="primary" floating>Nom activité : </ion-label>
+		<ion-select ngModel name="nom" okText="Ok" cancelText="Annuler" multiple="false" required>
+			<ion-option *ngFor="let activite of listeActivite">{{ activite }}</ion-option>
+		</ion-select>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Concerne le sport :</ion-label>
+		<ion-select ngModel name="sports" okText="Ok" cancelText="Annuler" multiple="false" required>
+			<ion-option *ngFor="let s of sports" [value]="s.id">{{s.nom}}</ion-option>
+		</ion-select>
+	</ion-item>
+	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Créer l'activité</button>
+</form>
