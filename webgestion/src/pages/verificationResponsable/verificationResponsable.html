@@ -1,14 +1,14 @@
 <ion-content padding>
 	<div padding>
 		<p ion-text color="primary" floating>Activité(s) du responsable : </p>
-		<form (ngSubmit)="VerificationResponsableForm()">
+		<form #f="ngForm" (ngSubmit)="VerificationResponsableForm(f.value)">
 			<ion-item>
 				<ion-label color="primary" floating>Activité : </ion-label>
-				<ion-select [(ngModel)]="verificationResponsable.nomActivite" name="nomActivite" okText="Ok" cancelText="Annuler" multiple="true">
+				<ion-select ngModel name="descCourte" name="nomActivite" okText="Ok" cancelText="Annuler" multiple="true" required>
 					<ion-option *ngFor="let activite of listeActivite">{{ activite }}</ion-option>
 				</ion-select>
 			</ion-item>
-			<button ion-button type="submit" block>Désinscrire</button>
+			<button ion-button [disabled]="!f.valid || valider" type="submit" block>Désinscrire</button>
 			<button ion-button (click)="goback()" block>Retour</button>
 		</form>
 	</div>

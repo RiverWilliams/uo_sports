@@ -1,11 +1,11 @@
 <p ion-text color="primary" floating>Choisir le créneau à modifier : </p>
 <ion-searchbar placeholder="Activité :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
-<form (ngSubmit)="SelectModificationCreneau()">
-	<ion-list radio-group [(ngModel)]="selectModificationCreneau.choixModificationCreneau" [ngModelOptions]="{standalone: true}">
+<form #f="ngForm" (ngSubmit)="SelectModificationCreneau(f.value)">
+	<ion-list radio-group ngModel name="choixModificationCreneau" required>
 		<ion-item *ngFor="let creneau of listeCreneau">
 			<ion-label>{{creneau}}</ion-label>
 			<ion-radio value="{{creneau}}"></ion-radio>
 		</ion-item>
 	</ion-list>
-	<button ion-button type="submit" block>Valider</button>
+	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
 </form>

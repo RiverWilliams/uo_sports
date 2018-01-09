@@ -1,11 +1,11 @@
 <p ion-text color="primary" floating>Choisir la pièce d'inscription à supprimer : </p>
 <ion-searchbar placeholder="Pièce :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
-<form (ngSubmit)="SupprimerPiece()">
-	<ion-list radio-group [(ngModel)]="selectSuppressionPiece.choixSuppressionPiece" [ngModelOptions]="{standalone: true}">
+<form #f="ngForm" (ngSubmit)="SupprimerPiece(f.value)">
+	<ion-list radio-group ngModel name="choixSuppressionPiece" required>
 		<ion-item *ngFor="let piece of listePiece">
 			<ion-label>{{piece}}</ion-label>
 			<ion-radio value="{{piece}}"></ion-radio>
 		</ion-item>
 	</ion-list>
-	<button ion-button type="submit" block>Supprimer</button>
+	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Supprimer</button>
 </form>

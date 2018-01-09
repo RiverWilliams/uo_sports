@@ -1,11 +1,11 @@
-<p ion-text color="primary" floating>Choisir la catégorie utilisateur à modifier : </p>
-<ion-searchbar placeholder="Catégorie :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
-<form (ngSubmit)="GestionCategorieTarifForm()">
-	<ion-list radio-group [(ngModel)]="gestionCategorieTarif.choixGestionCategorieTarif" [ngModelOptions]="{standalone: true}">
+<p ion-text color="primary" floating>Choisir la catégorie personnel à modifier : </p>
+<ion-searchbar placeholder="Catégorie personnel :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+<form #f="ngForm" (ngSubmit)="GestionCategorieTarifForm(f.value)">
+	<ion-list radio-group ngModel name="choixGestionCategorieTarif" required>
 		<ion-item *ngFor="let type of listeCategorie">
 			<ion-label>{{type}}</ion-label>
 			<ion-radio value="{{type}}"></ion-radio>
 		</ion-item>
 	</ion-list>
-	<button ion-button type="submit" block>Valider</button>
+	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
 </form>

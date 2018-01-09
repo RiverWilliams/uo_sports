@@ -1,11 +1,11 @@
 <p ion-text color="primary" floating>Choisir la liste des effectifs de l'activité : </p>
 <ion-searchbar placeholder="Activité :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
-<form (ngSubmit)="ListeEffectif()">
-	<ion-list radio-group [(ngModel)]="selectListeEffectif.choixListeEffectif" [ngModelOptions]="{standalone: true}">
+<form #f="ngForm" (ngSubmit)="ListeEffectif(f.value)">
+	<ion-list radio-group ngModel name="choixListeEffectif" required>
 		<ion-item *ngFor="let activite of listeActivite">
 			<ion-label>{{activite}}</ion-label>
 			<ion-radio value="{{activite}}"></ion-radio>
 		</ion-item>
 	</ion-list>
-	<button ion-button type="submit" block>Valider</button>
+	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
 </form>
