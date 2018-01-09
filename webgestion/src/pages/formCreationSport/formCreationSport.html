@@ -1,9 +1,15 @@
 <div>
-	<form #f="ngForm"(ngSubmit)="CreationSportForm(f.value)">
-		<ion-item>
-			<ion-label color="primary" floating>Nom du sport : </ion-label>
-			<ion-input ngModel name="nom" type="text" clearInput></ion-input>
-		</ion-item>
-		<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
-	</form>
+  <form #f="ngForm" (ngSubmit)="CreationSportForm(f.value)">
+    <ion-item>
+      <ion-label color="primary" floating>Nom du sport :</ion-label>
+      <ion-input ngModel name="nom" type="text" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>A les catégories :</ion-label>
+      <ion-select ngModel name="categories" multiple="true">
+        <ion-option *ngFor="let c of categories" [value]="c.id">{{c.nom}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
+  </form>
 </div>
