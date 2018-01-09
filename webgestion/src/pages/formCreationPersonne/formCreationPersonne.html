@@ -1,0 +1,29 @@
+<form (ngSubmit)="creationPersonneForm()">
+	<ion-item>
+		<ion-label color="primary" floating>Nom : </ion-label>
+		<ion-input [(ngModel)]="creationPersonne.nom" name="nom" clearInput></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Prénom : </ion-label>
+		<ion-input [(ngModel)]="creationPersonne.prenom" name="prenom" clearInput></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Email : </ion-label>
+		<ion-input [(ngModel)]="creationPersonne.adresse" name="adresse" clearInput></ion-input>
+	</ion-item>
+		<ion-item>
+		<ion-label color="primary" floating>Téléphone : </ion-label>
+		<ion-input [(ngModel)]="creationPersonne.telephone" name="telephone" clearInput></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Email : </ion-label>
+		<ion-input [(ngModel)]="creationPersonne.email" name="email" type="email" clearInput></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label color="primary" floating>Catégorie Personne : </ion-label>
+			<ion-select [(ngModel)]="creationPersonne.categorie_personne" name="categorie_personne" okText="Ok" cancelText="Annuler" multiple="false">
+				<ion-option *ngFor="let cat of listeCategorie">{{ cat }}</ion-option>
+			</ion-select>
+		</ion-item>
+	<button ion-button type="submit" block>Ajouter la personne</button>
+</form>

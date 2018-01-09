@@ -3,11 +3,11 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
 @Component({
-	selector: 'page-desinscriptionetudiant',
-	templateUrl: 'desinscriptionEtudiant.html'
+	selector: 'page-modificationcategorie',
+	templateUrl: 'modificationCategorie.html'
 })
 
-export class desinscriptionEtudiantPage {
+export class modificationCategoriePage {
 	public nomliste;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams){
@@ -19,18 +19,12 @@ export class desinscriptionEtudiantPage {
 		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
 
-	listeActivite = [
-		'Natation',
-		'Foot'
-	];
-
-	desinscriptionEtudiant = {
-		nomActivite: ''
+	modificationCategorie = {
+		nom: '',
 	};
 
-	DesinscriptionEtudiantForm() {
-		console.log("Selected Item", this.desinscriptionEtudiant);
-		console.log(this.desinscriptionEtudiant.nomActivite);
+	modificationCategorieForm() {
+		console.log(this.modificationCategorie)
 	};
 
 	goback() {

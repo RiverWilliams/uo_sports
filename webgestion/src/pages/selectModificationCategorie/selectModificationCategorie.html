@@ -1,0 +1,11 @@
+<p ion-text color="primary" floating>Choisir la catégorie à modifier : </p>
+<ion-searchbar placeholder="Catégorie :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+<form (ngSubmit)="SelectModificationCategorie()">
+	<ion-list radio-group [(ngModel)]="selectModificationCategorie.choixModificationCategorie" [ngModelOptions]="{standalone: true}">
+		<ion-item *ngFor="let categorie of listeCategorie">
+			<ion-label>{{categorie}}</ion-label>
+			<ion-radio value="{{categorie}}"></ion-radio>
+		</ion-item>
+	</ion-list>
+	<button ion-button type="submit" block>Valider</button>
+</form>

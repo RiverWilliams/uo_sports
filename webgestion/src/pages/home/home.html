@@ -5,6 +5,7 @@
 		<ion-segment [(ngModel)]="listAction">
 			<ion-segment-button value="incriptions">Incriptions</ion-segment-button>
 			<ion-segment-button value="categoriesSportsActivites">Catégories/Sports/Activités</ion-segment-button>
+			<ion-segment-button value="creneau">Créneau</ion-segment-button>
 			<ion-segment-button value="actualites">Actualités</ion-segment-button>
 			<ion-segment-button value="options">Options</ion-segment-button>
 		</ion-segment>
@@ -69,21 +70,21 @@
 						</div>
 					</div>
 					<div [ngSwitch]="listActionCategories">
-						<ion-list *ngSwitchCase="'creationSport'">
+						<ion-list *ngSwitchCase="'creationCategorie'">
 							<div>
-								<page-formcreationsport></page-formcreationsport>
+								<page-formcreationcategorie></page-formcreationcategorie>
 							</div>
 						</ion-list>
 
-						<ion-list *ngSwitchCase="'modificationSport'">
+						<ion-list *ngSwitchCase="'modificationCategorie'">
 							<div>
-								<page-selectmodificationsport></page-selectmodificationsport>
+								<page-selectmodificationcategorie></page-selectmodificationcategorie>
 							</div>
 						</ion-list>
 
-						<ion-list *ngSwitchCase="'suppressionSport'">
+						<ion-list *ngSwitchCase="'suppressionCategorie'">
 							<div>
-								<page-selectsuppressionsport></page-selectsuppressionsport>
+								<page-selectsuppressioncategorie></page-selectsuppressioncategorie>
 							</div>
 						</ion-list>
 					</div>
@@ -159,6 +160,39 @@
 
 
 		<!-- ##################################################################################################################################### -->
+		<!-- Pour l'option Créneau juste un formulaire de création de créneau -->
+		<ion-list *ngSwitchCase="'creneau'">
+			<div>
+				<div padding>
+					<ion-segment [(ngModel)]="listActionCreneau">
+						<ion-segment-button value="creationCreneau">Créer un Créneau</ion-segment-button>
+						<ion-segment-button value="modificationCreneau">Modifier un Créneau</ion-segment-button>
+						<ion-segment-button value="suppressionCreneau">Supprimer un Créneau</ion-segment-button>
+					</ion-segment>
+				</div>
+			</div>
+			<div [ngSwitch]="listActionCreneau">
+				<ion-list *ngSwitchCase="'creationCreneau'">
+					<div>
+						<page-formcreationcreneau></page-formcreationcreneau>
+					</div>
+				</ion-list>
+
+				<ion-list *ngSwitchCase="'modificationCreneau'">
+					<div>
+						<page-selectmodificationcreneau></page-selectmodificationcreneau>
+					</div>
+				</ion-list>
+
+				<ion-list *ngSwitchCase="'suppressionCreneau'">
+					<div>
+						<page-selectsuppressioncreneau></page-selectsuppressioncreneau>
+					</div>
+				</ion-list>
+			</div>
+		</ion-list>
+
+		<!-- ##################################################################################################################################### -->
 		<!-- Pour l'option actualites juste un formulaire de création d'actualités, titre, date début, date fin, date création et les descriptions -->
 		<ion-list *ngSwitchCase="'actualites'">
 			<div>
@@ -169,14 +203,13 @@
 
 
 		<!-- ################################################################################################################################################################ -->
-		<!-- Pour options à nouveau un menu dessous avec partie responsable et partie etudiant, chaque menu a encore sous propoe menu avec gémeralement ajout, vérification si la personne est inscrit ou responsable quelque part, et suppression.
+		<!-- Pour options à nouveau un menu dessous avec partie responsable et partie personne, chaque menu a encore sous propoe menu avec gémeralement ajout, vérification si la personne est inscrit ou responsable quelque part, et suppression.
 		Formulaire de création -->
 		<ion-list *ngSwitchCase="'options'">
 			<div>
 				<div padding>
 					<ion-segment [(ngModel)]="listActionOptions">
-						<ion-segment-button value="gestionReponsable">Gestion Responsable</ion-segment-button>
-						<ion-segment-button value="gestionEtudiant">Gestion étudiant</ion-segment-button>
+						<ion-segment-button value="gestionResponsablePersonne">Gestion Responsable/Personne</ion-segment-button>
 						<ion-segment-button value="gestionUtilisateurTarif">Gestion utilisateurs et tarifs</ion-segment-button>
 						<ion-segment-button value="gestionLieu">Gestion des lieux</ion-segment-button>
 						<ion-segment-button value="gestionPiece">Gestion des pieces</ion-segment-button>
@@ -184,66 +217,84 @@
 				</div>
 			</div>
 			<div [ngSwitch]="listActionOptions">
-				<ion-list *ngSwitchCase="'gestionReponsable'">
+				<ion-list *ngSwitchCase="'gestionResponsablePersonne'">
 					<div>
 						<div padding>
-							<ion-segment [(ngModel)]="listActionGestionReponsable">
-								<ion-segment-button value="ajoutReponsable">Ajout Responsable</ion-segment-button>
-								<ion-segment-button value="verifResponsable">Vérification Responsable</ion-segment-button>
-								<ion-segment-button value="supprResponsable">Suppression Responsable</ion-segment-button>
+							<ion-segment [(ngModel)]="listActionGestionReponsablePersonne">
+								<ion-segment-button value="gestionReponsable">Gestion Responsable</ion-segment-button>
+								<ion-segment-button value="gestionPersonne">Gestion Personne</ion-segment-button>
 							</ion-segment>
 						</div>
 					</div>
-					<div [ngSwitch]="listActionGestionReponsable">
-						<ion-list *ngSwitchCase="'ajoutReponsable'">
+					<div [ngSwitch]="listActionGestionReponsablePersonne">
+						<ion-list *ngSwitchCase="'gestionReponsable'">
 							<div>
-								<page-formcreationresponsable></page-formcreationresponsable>
+								<div padding>
+									<ion-segment [(ngModel)]="listActionGestionReponsable">
+										<ion-segment-button value="ajoutReponsable">Ajout Responsable</ion-segment-button>
+										<ion-segment-button value="verifResponsable">Vérification Responsable</ion-segment-button>
+										<ion-segment-button value="supprResponsable">Suppression Responsable</ion-segment-button>
+									</ion-segment>
+								</div>
+							</div>
+							<div [ngSwitch]="listActionGestionReponsable">
+								<ion-list *ngSwitchCase="'ajoutReponsable'">
+									<div>
+										<page-formcreationresponsable></page-formcreationresponsable>
+									</div>
+								</ion-list>
+
+								<ion-list *ngSwitchCase="'verifResponsable'">
+									<div>
+										<page-selectverificationresponsable></page-selectverificationresponsable>
+									</div>
+								</ion-list>
+
+								<ion-list *ngSwitchCase="'supprResponsable'">
+									<div>
+										<page-selectsuppressionresponsable></page-selectsuppressionresponsable>
+									</div>
+								</ion-list>
 							</div>
 						</ion-list>
 
-						<ion-list *ngSwitchCase="'verifResponsable'">
+						<ion-list *ngSwitchCase="'gestionPersonne'">
 							<div>
-								<page-selectverificationresponsable></page-selectverificationresponsable>
+								<div padding>
+									<ion-segment [(ngModel)]="listActionGestionPersonne">
+										<ion-segment-button value="ajoutPersonne">Ajout Personne</ion-segment-button>
+										<ion-segment-button value="desinscrptionPersonne">Désinscription Personne</ion-segment-button>
+										<ion-segment-button value="supprPersonne">Suppression Personne</ion-segment-button>
+									</ion-segment>
+								</div>
 							</div>
-						</ion-list>
+							<div [ngSwitch]="listActionGestionPersonne">
+								<ion-list *ngSwitchCase="'ajoutPersonne'">
+									<div>
+										<page-formcreationpersonne></page-formcreationpersonne>
+									</div>
+								</ion-list>
 
-						<ion-list *ngSwitchCase="'supprResponsable'">
-							<div>
-								<page-selectsuppressionresponsable></page-selectsuppressionresponsable>
+								<ion-list *ngSwitchCase="'desinscrptionPersonne'">
+									<div>
+										<page-selectdesinscriptionpersonne></page-selectdesinscriptionpersonne>
+									</div>
+								</ion-list>
+
+								<ion-list *ngSwitchCase="'supprPersonne'">
+									<div>
+										<page-selectsuppressionpersonne></page-selectsuppressionpersonne>
+									</div>
+								</ion-list>
 							</div>
 						</ion-list>
 					</div>
 				</ion-list>
-				<ion-list *ngSwitchCase="'gestionEtudiant'">
-					<div>
-						<div padding>
-							<ion-segment [(ngModel)]="listActionGestionEtudiant">
-								<ion-segment-button value="ajoutEtudiant">Ajout Etudiant</ion-segment-button>
-								<ion-segment-button value="desinscrptionEtudiant">Désinscription Etudiant</ion-segment-button>
-								<ion-segment-button value="supprEtudiant">Suppression Etudiant</ion-segment-button>
-							</ion-segment>
-						</div>
-					</div>
-					<div [ngSwitch]="listActionGestionEtudiant">
-						<ion-list *ngSwitchCase="'ajoutEtudiant'">
-							<div>
-								<page-formcreationetudiant></page-formcreationetudiant>
-							</div>
-						</ion-list>
 
-						<ion-list *ngSwitchCase="'desinscrptionEtudiant'">
-							<div>
-								<page-selectdesinscriptionetudiant></page-selectdesinscriptionetudiant>
-							</div>
-						</ion-list>
 
-						<ion-list *ngSwitchCase="'supprEtudiant'">
-							<div>
-								<page-selectsuppressionetudiant></page-selectsuppressionetudiant>
-							</div>
-						</ion-list>
-					</div>
-				</ion-list>
+
+				
+
 				<ion-list *ngSwitchCase="'gestionUtilisateurTarif'">
 					<div>
 						<div padding>
@@ -341,11 +392,3 @@
 		<!-- ################################################################################################################################################################ -->
 	</div>
 </ion-content>
-
-<!-- ############################################################### 
-
-								<page-formcreationpiece></page-formcreationpiece>
-								<page-selectmodificationpiece></page-selectmodificationpiece>
-								<page-selectsuppressionpiece></page-selectsuppressionpiece>
-								
--->
