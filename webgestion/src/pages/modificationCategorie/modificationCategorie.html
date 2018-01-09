@@ -1,0 +1,14 @@
+<ion-content padding>
+<div padding>
+	<div>
+		<form (ngSubmit)="modificationCategorieForm()">
+			<ion-item>
+				<ion-label color="primary" floating>Nom catégorie : </ion-label>
+				<ion-input [(ngModel)]="modificationCategorie.nom" name="nom" type="text" clearInput></ion-input>
+			</ion-item>
+			<button ion-button type="submit" block>Modifier la catégorie</button>
+		</form>
+	</div>
+	<button ion-button (click)="goback()" block>Retour</button>
+</div>
+</ion-content>
