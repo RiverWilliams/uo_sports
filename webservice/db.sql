@@ -83,7 +83,7 @@ CREATE TABLE piece_inscription(
 
 CREATE TABLE actualite(
         titre              Varchar (50) NOT NULL ,
-        image              Varchar (25) ,
+        image              Varchar (1024) ,
         desc_courte        Text ,
         desc_longue        Text ,
         date_debut         Date ,
