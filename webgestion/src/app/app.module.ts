@@ -63,6 +63,7 @@ import { modificationPiecePage } from "../pages/modificationPiece/modificationPi
 import { selectSuppressionPiecePage } from "../pages/selectSuppressionPiece/selectSuppressionPiece";
 import {HttpClientModule} from "@angular/common/http";
 import {WebserviceProvider} from "../common/webservice";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -128,7 +129,8 @@ import {WebserviceProvider} from "../common/webservice";
 	imports: [
 		BrowserModule,
 		IonicModule.forRoot(MyApp),
-    	HttpClientModule
+    	HttpClientModule,
+    FormsModule
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [

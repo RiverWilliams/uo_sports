@@ -1,34 +1,48 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import {Component, OnInit} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {HomePage} from '../home/home';
+import {CategorieSport, Sport} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
 
 @Component({
-	selector: 'page-modificationsport',
-	templateUrl: 'modificationSport.html'
+  selector: 'page-modificationsport',
+  templateUrl: 'modificationSport.html'
 })
 
-export class modificationSportPage {
-	public nomliste;
+export class modificationSportPage implements OnInit {
+  public idSport;
+  // Modification d'un sport
+  sport: Sport = {nom: ''};
+  idCategoriesDuSport: CategorieSport[] = [];
+  categoriesSports: CategorieSport[];
+  nouvelleCategorie: CategorieSport[];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams){
-		this.nomliste = navParams.get("liste");
-		console.log("Parametre ",this.nomliste);
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//il faut importer la bonne liste d'attente suivant le string liste
-		//on fait en attendant avec la liste items1 dans l'html
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider) {
+    this.idSport = navParams.get("idSport");
+  }
 
-	// Modification d'un sport
-	modificationSport = {
-		nom: ''
-	};
+  ngOnInit(): void {
+    this.web.sports.get(this.idSport).subscribe(d => this.sport = d);
+    this.web.categoriesSports.getAll().subscribe(d => this.categoriesSports = d);
+    this.web.sports.getCategoriesSport(this.idSport).subscribe(d => this.nouvelleCategorie = Array.from(this.idCategoriesDuSport = d));
+  }
 
-	modificationSportForm() {
-		console.log(this.modificationSport)
-	};
+  compareFn(a: any, b: any) {
+    return a.id === b.id;
+  }
 
-	goback() {
-		this.navCtrl.push(HomePage);
-	}
+
+  modificationSportForm() {
+    this.web.sports.put(this.sport).subscribe();
+
+    const del = this.categoriesSports.filter(value => !this.nouvelleCategorie.find(value2 => value2.id === value.id));
+    const add = this.nouvelleCategorie.filter(value => !this.categoriesSports.find(value2 => value2.id === value.id));
+
+    del.forEach(value => this.web.sports.deleteCategoriesSport(this.idSport, value.id).subscribe());
+    add.forEach(value => this.web.sports.addCategorie(this.idSport, value.id).subscribe());
+  };
+
+  goback() {
+    this.navCtrl.push(HomePage);
+  }
 }
