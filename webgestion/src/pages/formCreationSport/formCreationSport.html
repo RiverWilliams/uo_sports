@@ -10,6 +10,6 @@
         <ion-option *ngFor="let c of categories" [value]="c.id">{{c.nom}}</ion-option>
       </ion-select>
     </ion-item>
-    <button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
+    <button ion-button [disabled]="!f.valid" type="submit" block>Valider</button>
   </form>
 </div>

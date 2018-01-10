@@ -1,55 +1,59 @@
-import { Component } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {AlertController, ToastController} from 'ionic-angular';
+import {CategorieSport} from "../../common/model";
+import {Utilitaire} from "../../common/utilitaire";
+import {WebserviceProvider} from "../../common/webservice";
+import {FormControl} from "@angular/forms";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
-	selector: 'page-selectsuppressioncategorie',
-	templateUrl: 'selectSuppressionCategorie.html'
+  selector: 'page-selectsuppressioncategorie',
+  templateUrl: 'selectSuppressionCategorie.html'
 })
-export class selectSuppressionCategoriePage {
+export class selectSuppressionCategoriePage implements OnInit {
+  listeCategorie: CategorieSport[];
 
-	selectSuppressionCategorie = {
-		choixSuppressionCategorie: ''
-	};
+  // Suppression d'une catégorie
+  constructor(public alertCtrl: AlertController, private web: WebserviceProvider, private toastCtrl: ToastController) {
+  }
 
-	listeCategorie = [
-		'Eau',
-		'Pied',
-		'Collectif',
-	];
+  ngOnInit(): void {
+    this.web.categoriesSports.getAll().subscribe(d => this.listeCategorie = d);
+    this.search.valueChanges.subscribe((search) => {
+      const s = search.toLowerCase();
+      this.web.categoriesSports.getAll().subscribe(categorie => {
+        this.listeCategorie = categorie.filter(v => v.nom.toLowerCase().includes(s)).sort(Comparateur.CategorieSport.nom);
+      });
+    });
+  }
 
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listeCategorie = this.listeCategorie.filter(function(categorie) {
-				return categorie.toLowerCase().includes(val.toLowerCase());
-			});
-		}
-	}
+  search = new FormControl();
 
-	// Suppression d'une catégorie
-	constructor(public alertCtrl: AlertController) {}
-
-	SupprimerCategorie() {
-		console.log(this.selectSuppressionCategorie)
-		console.log(this.selectSuppressionCategorie.choixSuppressionCategorie)
-		let alert = this.alertCtrl.create({
-			title: 'Etes-vous sûr de supprimer cette catégorie?',
-			message: '',
-			buttons: [
-				{
-					text: 'Annuler',
-						handler: () => {
-							console.log('Annuler clicked');
-						}
-				},
-				{
-					text: 'Ok',
-						handler: () => {
-							console.log('Ok clicked');
-						}
-				}
-			]
-		});
-		alert.present();
-	}
+  SupprimerCategorie(categorie: CategorieSport) {
+    let alert = this.alertCtrl.create({
+      title: 'Etes-vous sûr de supprimer cette catégorie?',
+      message: categorie.nom,
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.web.categoriesSports.delete(categorie.id).subscribe(() => {
+              Utilitaire.createToastOk(this.toastCtrl).present();
+              this.search.setValue(this.search.value, {emitEvent: true});
+            }, (err) => {
+              const alert2 = Utilitaire.createAlertErreur(this.alertCtrl);
+              if (err.error.erreur) alert2.setMessage(err.error.erreur.message);
+              alert2.present();
+            });
+            return true;
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }

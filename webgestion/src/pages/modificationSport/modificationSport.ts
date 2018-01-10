@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {HomePage} from '../home/home';
 import {CategorieSport, Sport} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
+import {Utilitaire} from "../../common/utilitaire";
 
 @Component({
   selector: 'page-modificationsport',
@@ -17,7 +18,7 @@ export class modificationSportPage implements OnInit {
   categoriesSports: CategorieSport[];
   nouvelleCategorie: CategorieSport[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider, private toastCtrl: ToastController) {
     this.idSport = navParams.get("idSport");
   }
 
@@ -39,6 +40,7 @@ export class modificationSportPage implements OnInit {
 
     del.forEach(value => this.web.sports.deleteCategoriesSport(this.idSport, value.id).subscribe());
     add.forEach(value => this.web.sports.addCategorie(this.idSport, value.id).subscribe());
+    Utilitaire.createToastOk(this.toastCtrl).present();
   };
 
   goback() {

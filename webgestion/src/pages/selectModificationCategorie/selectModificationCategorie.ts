@@ -1,39 +1,36 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { modificationCategoriePage } from '../modificationCategorie/modificationCategorie';
+import {Component, OnInit} from '@angular/core';
+import {NavController} from 'ionic-angular';
+import {modificationCategoriePage} from '../modificationCategorie/modificationCategorie';
+import {CategorieSport} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
+import {Comparateur} from "../../common/comparateur";
+import {Observable} from "rxjs/Observable";
+import {FormControl} from "@angular/forms";
 
 @Component({
-	selector: 'page-selectmodificationcategorie',
-	templateUrl: 'selectModificationCategorie.html'
+  selector: 'page-selectmodificationcategorie',
+  templateUrl: 'selectModificationCategorie.html'
 })
 
-export class selectModificationCategoriePage {
-	constructor(public navCtrl: NavController) {
+export class selectModificationCategoriePage implements OnInit {
 
-	}
 
-	selectModificationCategorie = {
-		choixModificationCategorie: ''
-	};
+  ngOnInit(): void {
+    this.web.categoriesSports.getAll().subscribe(d => this.listeCategorie = d);
+    Observable.combineLatest(this.search.valueChanges, this.web.categoriesSports.getAll(), (search: string, categorieSports: CategorieSport[]) => {
+      const s = search.toLowerCase();
+      return categorieSports.filter(v => v.nom.toLowerCase().includes(s)).sort(Comparateur.CategorieSport.nom);
+    }).subscribe(d => this.listeCategorie = d);
+  }
 
-	listeCategorie = [
-		'Eau',
-		'Pied',
-		'Collectif',
-	];
+  constructor(public navCtrl: NavController, private web: WebserviceProvider) {
+  }
 
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listeCategorie = this.listeCategorie.filter(function(categorie) {
-				return categorie.toLowerCase().includes(val.toLowerCase());
-			});
-		}
-	}
+  listeCategorie: CategorieSport[];
+  search = new FormControl();
 
-	SelectModificationCategorie() {
-		console.log(this.selectModificationCategorie);
-		console.log(this.selectModificationCategorie.choixModificationCategorie);
-		this.navCtrl.push(modificationCategoriePage, {liste: this.selectModificationCategorie.choixModificationCategorie});		
-	};
+
+  SelectModificationCategorie(id: number) {
+    this.navCtrl.push(modificationCategoriePage, {idCategorie: id});
+  };
 }

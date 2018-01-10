@@ -1,4 +1,4 @@
-import {AlertController} from "ionic-angular";
+import {AlertController, ToastController} from "ionic-angular";
 
 export namespace Utilitaire {
     export function createAlertErreur(alertCtrl: AlertController) {
@@ -10,6 +10,13 @@ export namespace Utilitaire {
                 role: 'cancel',
                 handler: () => true
             }]
+        });
+    }
+
+    export function createToastOk(toastCtrl: ToastController) {
+        return toastCtrl.create({
+            message: "Opération réussie",
+            duration: 3000
         });
     }
 }

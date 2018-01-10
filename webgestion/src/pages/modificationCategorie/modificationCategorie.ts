@@ -1,33 +1,31 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import {Component} from '@angular/core';
+import {AlertController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {HomePage} from '../home/home';
+import {CategorieSport} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
+import {Utilitaire} from "../../common/utilitaire";
 
 @Component({
-	selector: 'page-modificationcategorie',
-	templateUrl: 'modificationCategorie.html'
+  selector: 'page-modificationcategorie',
+  templateUrl: 'modificationCategorie.html'
 })
 
 export class modificationCategoriePage {
-	public nomliste;
+  public idCategorie;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams){
-		this.nomliste = navParams.get("liste");
-		console.log("Parametre ",this.nomliste);
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//il faut importer la bonne liste d'attente suivant le string liste
-		//on fait en attendant avec la liste items1 dans l'html
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	}
+  categorie: CategorieSport = {nom: ''};
 
-	modificationCategorie = {
-		nom: '',
-	};
+  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider, private alertCtrl: AlertController) {
+    this.idCategorie = navParams.get("idCategorie");
+    this.web.categoriesSports.get(this.idCategorie).subscribe(d => this.categorie = d);
+  }
 
-	modificationCategorieForm() {
-		console.log(this.modificationCategorie)
-	};
+  modificationCategorieForm() {
+    this.web.categoriesSports.put(this.categorie).subscribe(() => Utilitaire.createToastOk(this.toastCtrl).present(), () => Utilitaire.createAlertErreur(this.alertCtrl)
+    )
+  };
 
-	goback() {
-		this.navCtrl.push(HomePage);
-	}
+  goback() {
+    this.navCtrl.push(HomePage);
+  }
 }

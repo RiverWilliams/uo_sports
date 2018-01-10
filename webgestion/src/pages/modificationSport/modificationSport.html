@@ -5,7 +5,7 @@
         <ion-label color="primary" floating>Nom du sport :</ion-label>
         <ion-input [(ngModel)]="sport.nom" type="text" name="nom" required clearInput></ion-input>
       </ion-item>
-      <ion-item >
+      <ion-item>
         <ion-label color="primary" floating>A les catégories :</ion-label>
         <ion-select [(ngModel)]="nouvelleCategorie" name="categorie" multiple="true" [compareWith]="compareFn">
           <ion-option *ngFor="let c of categoriesSports" [value]="c">{{c.nom}}
@@ -13,7 +13,7 @@
         </ion-select>
       </ion-item>
       <button ion-button type="submit" [disabled]="!f.valid" block>Valider</button>
-      <button ion-button (click)="goback()" block>Retour</button>
     </form>
+    <button ion-button (click)="goback()" block>Retour</button>
   </div>
 </ion-content>

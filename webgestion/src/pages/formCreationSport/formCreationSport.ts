@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController} from "ionic-angular";
+import {AlertController, ToastController} from "ionic-angular";
 import {WebserviceProvider} from "../../common/webservice";
 import {CategorieSport} from "../../common/model";
 import {Utilitaire} from "../../common/utilitaire";
@@ -10,31 +10,22 @@ import {Utilitaire} from "../../common/utilitaire";
 })
 export class formCreationSportPage {
 
-  valider: boolean = false;
 
   categories: CategorieSport[];
 
-  constructor(private alertCtrl: AlertController, private web: WebserviceProvider) {
+  constructor(private alertCtrl: AlertController, private web: WebserviceProvider, private toastCtrl: ToastController) {
     web.categoriesSports.getAll().subscribe(d => this.categories = d);
   }
 
   CreationSportForm(s) {
-    this.valider = true;
     this.web.sports.post(s).subscribe((id) => {
         if (Array.isArray(s.categories))
-          s.categories.forEach(s => this.web.sports.addCategorie(id, s).subscribe());
-        this.alertCtrl.create({
-          title: "Confirmation",
-          message: "Sport crée",
-          buttons: [{
-            text: "OK", role: 'cancel', handler: () => {
-              this.valider = false;
-              return true;
-            }
-          }]
-        }).present();
+          s.categories.forEach(s => this.web.sports.addCategorie(id, s).subscribe(() => {
+            }, () => Utilitaire.createAlertErreur(this.alertCtrl).present()
+          ))
+          ;
+        Utilitaire.createToastOk(this.toastCtrl).present();
       }, () => {
-        this.valider = false;
         Utilitaire.createAlertErreur(this.alertCtrl).present();
       }
     )
