@@ -4,6 +4,7 @@ import {Actualite} from "../../common/model";
 import {Filtre, FiltreGroup, FiltrePage} from "../filtre/filtre";
 import {WebserviceProvider} from "../../common/webservice";
 import {Comparateur} from "../../common/comparateur";
+import {Observable} from "rxjs/Observable";
 
 @Component({
     selector: 'page-actu',
@@ -66,17 +67,31 @@ export class ActuPage implements OnInit {
         filtres.push({
             nom: 'Tous',
             fonction: () => this.web.actualites.getAll().subscribe(data => this.actualites = data)
-        })
-        ;
-        this.web.categoriesSports.getAll().subscribe(data => data.map(v => filtres.push({
-            nom: v.nom,
-            fonction: () => this.web.categoriesSports.getActualites(v.id).subscribe(d => this.actualites = d)
-        })));
-        this.web.sports.getAll().subscribe(data => data.map(v => filtres.push({
-            nom: v.nom,
-            fonction: () => this.web.sports.getActualites(v.id).subscribe(d => this.actualites = d)
-        })));
-        this.filtreGroups.push({nom: 'Filtrer', filtres: filtres.sort((a, b) => a.nom.localeCompare(b.nom))});
+        });
+
+        let f: Filtre[] = [];
+        const categories = this.web.categoriesSports.getAll().map(data =>
+            data.map(v => {
+                return {
+                    nom: v.nom,
+                    fonction: () => this.web.categoriesSports.getActualites(v.id).subscribe(d => this.actualites = d)
+                };
+            }));
+        const sports = this.web.sports.getAll().map(data =>
+            data.map(v => {
+                return {
+                    nom: v.nom,
+                    fonction: () => this.web.sports.getActualites(v.id).subscribe(d => this.actualites = d)
+                };
+            }));
+
+        Observable.merge(sports, categories).flatMap(v => v).subscribe(v => f.push(v), () => {
+        }, () => {
+            f.sort((a, b) => a.nom.localeCompare(b.nom));
+            f.forEach(v => filtres.push(v));
+        });
+
+        this.filtreGroups.push({nom: 'Filtrer', filtres: filtres});
     }
 
     openFiltre(ev) {

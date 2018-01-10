@@ -7,6 +7,10 @@ import {WebserviceProvider} from "../../common/webservice";
 import {Comparateur} from "../../common/comparateur";
 import {PopoverController} from 'ionic-angular';
 import {Filtre, FiltreGroup, FiltrePage} from "../filtre/filtre";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/observable/merge";
+import "rxjs/add/observable/of";
+import "rxjs/add/operator/mergeMap";
 
 @Component({
     selector: 'page-home',
@@ -21,7 +25,7 @@ export class HomePage implements OnInit {
         this._activites = value.sort(this.comparateur);
     }
 
-    private _activites: Activite[]=[];
+    private _activites: Activite[] = [];
 
     private _comparateur: any;
 
@@ -60,15 +64,30 @@ export class HomePage implements OnInit {
             fonction: () => this.web.activites.getAll().subscribe(data => this.activites = data)
 
         });
-        this.web.categoriesSports.getAll().subscribe(data => data.map(v => filtres.push({
-            nom: v.nom,
-            fonction: () => this.web.categoriesSports.getActivites(v.id).subscribe(d => this.activites = d)
-        })));
-        this.web.sports.getAll().subscribe(data => data.map(v => filtres.push({
-            nom: v.nom,
-            fonction: () => this.web.sports.getActivites(v.id).subscribe(d => this.activites = d)
-        })));
-        this.filtreGroups.push({nom: 'Filtrer', filtres: filtres.sort((a, b) => a.nom.localeCompare(b.nom))});
+
+        let f: Filtre[] = [];
+
+        const categories = this.web.categoriesSports.getAll().map(data =>
+            data.map(v => {
+                return {
+                    nom: v.nom,
+                    fonction: () => this.web.categoriesSports.getActivites(v.id).subscribe(d => this.activites = d)
+                };
+            }));
+        const sports = this.web.sports.getAll().map(data =>
+            data.map(v => {
+                return {
+                    nom: v.nom,
+                    fonction: () => this.web.sports.getActivites(v.id).subscribe(d => this.activites = d)
+                };
+            }));
+        Observable.merge(sports, categories).flatMap(v => v).subscribe(v => f.push(v), () => {
+        }, () => {
+            f.sort((a, b) => a.nom.localeCompare(b.nom));
+            f.forEach(v => filtres.push(v));
+        });
+
+        this.filtreGroups.push({nom: 'Filtrer', filtres: filtres});
     }
 
     naviguer(p: Activite): void {

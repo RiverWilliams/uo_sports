@@ -1,18 +1,15 @@
-import {
-    Activite, Creneau, Lieu, Niveau, Responsable, Actualite, Personne, Inscription,
-    CategoriePersonne
-} from "./model";
+import {Activite, Actualite, Creneau, Inscription, Lieu, Niveau, Personne, Responsable} from "./model";
 
 export interface CreneauJSON {
-    activite: Activite | { id: number };
+    activite: Activite;
     effectif: number;
     heureDebut: string;
     heureFin: string;
     id?: number;
     jour: number;
-    lieu: Lieu | { id: number };
-    niveau: Niveau | { id: number };
-    responsable: Responsable | { id: number };
+    lieu: Lieu;
+    niveau: Niveau;
+    responsable: Responsable;
 }
 
 export interface ActualiteJSON {
@@ -27,58 +24,20 @@ export interface ActualiteJSON {
 }
 
 export interface InscriptionJSON {
-    personne?: Personne | { id: number };
+    personne?: Personne;
     demande: boolean;
     ects: number;
     enAttente: boolean;
     nombreHeures: number;
-    creneau?: CreneauJSON | { id: number };
+    creneau?: CreneauJSON;
 }
-
-export interface PersonneJSON {
-    adresse: string;
-    categoriePersonne: CategoriePersonne | { id: number };
-    email: string;
-    id?: number;
-    nom: string;
-    prenom: string;
-    telephone: string;
-}
-
 
 export namespace Adaptateur {
-
-    export namespace Personne {
-        export function toJSON(personne: Personne): PersonneJSON {
-            return {
-                categoriePersonne: (typeof personne.categoriePersonne === "number") ? {id: personne.categoriePersonne} : personne.categoriePersonne,
-                id: personne.id,
-                prenom: personne.prenom,
-                email: personne.email,
-                nom: personne.nom,
-                telephone: personne.telephone,
-                adresse: personne.adresse
-            };
-        }
-
-        export function fromJSON(personne: PersonneJSON): Personne {
-            return {
-                categoriePersonne: <CategoriePersonne>personne.categoriePersonne,
-                id: personne.id,
-                prenom: personne.prenom,
-                email: personne.email,
-                nom: personne.nom,
-                telephone: personne.telephone,
-                adresse: personne.adresse
-            };
-        }
-    }
-
     export namespace Inscription {
         export function toJSON(inscription: Inscription): InscriptionJSON {
             return {
-                personne: (typeof inscription.personne === "number") ? {id: inscription.personne} : inscription.personne,
-                creneau: (typeof inscription.creneau === "number") ? {id: inscription.creneau} : Creneau.toJSON(inscription.creneau),
+                personne: inscription.personne,
+                creneau: Creneau.toJSON(inscription.creneau),
                 demande: inscription.demande,
                 enAttente: inscription.enAttente,
                 nombreHeures: inscription.nombreHeures,
@@ -88,7 +47,7 @@ export namespace Adaptateur {
 
         export function fromJSON(inscription: InscriptionJSON): Inscription {
             return {
-                personne: <Personne>inscription.personne,
+                personne: inscription.personne,
                 creneau: Creneau.fromJSON(<CreneauJSON>inscription.creneau),
                 demande: inscription.demande,
                 enAttente: inscription.enAttente,
@@ -176,11 +135,11 @@ export namespace Adaptateur {
             return {
                 id: c.id,
                 jour: c.jour,
-                responsable: (typeof c.responsable === "number") ? {id: c.responsable} : c.responsable,
-                niveau: (typeof c.niveau === "number") ? {id: c.niveau} : c.niveau,
-                lieu: (typeof c.lieu === "number") ? {id: c.lieu} : c.lieu,
+                responsable: c.responsable,
+                niveau: c.niveau,
+                lieu: c.lieu,
                 effectif: c.effectif,
-                activite: (typeof c.activite === "number") ? {id: c.activite} : c.activite,
+                activite: c.activite,
                 heureDebut: timeToString(c.heureDebut),
                 heureFin: timeToString(c.heureFin)
             };
@@ -190,11 +149,11 @@ export namespace Adaptateur {
             return {
                 id: c.id,
                 jour: c.jour,
-                responsable: <Responsable>c.responsable,
-                niveau: <Niveau>c.niveau,
-                lieu: <Lieu>c.lieu,
+                responsable: c.responsable,
+                niveau: c.niveau,
+                lieu: c.lieu,
                 effectif: c.effectif,
-                activite: <Activite>c.activite,
+                activite: c.activite,
                 heureDebut: stringToTime(c.heureDebut),
                 heureFin: stringToTime(c.heureFin)
             };

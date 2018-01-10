@@ -17,7 +17,7 @@
             <p><strong>Je suis : </strong></p>
             <ion-item *ngFor="let categorie of categories">
                 <ion-label>{{categorie.nom}}</ion-label>
-                <ion-radio [value]="categorie.id"></ion-radio>
+                <ion-radio [value]="categorie"></ion-radio>
             </ion-item>
         </ion-list>
 

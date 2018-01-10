@@ -20,9 +20,7 @@ export class PanierProvider {
 
     contient(id: number): boolean {
         return !isUndefined(this.inscriptions.find((value) => {
-            if (typeof value.creneau != "number")
-                return value.creneau.id === id;
-            else return value.creneau === id;
+            return value.creneau.id === id;
         }));
     }
 
@@ -34,9 +32,7 @@ export class PanierProvider {
         if (typeof id != "number")
             id = id.id;
         const index = this.inscriptions.findIndex(value => {
-            if (typeof value.creneau != "number")
-                return value.creneau.id === id;
-            else return value.creneau === id;
+            return value.creneau.id === id;
         });
         if (index >= 0)
             this.inscriptions.splice(index, 1);

@@ -26,15 +26,15 @@ export interface CategorieSport {
 }
 
 export interface Creneau {
-    activite: Activite | number;
+    activite: Activite;
     effectif: number;
     heureDebut: Date;
     heureFin: Date;
     id?: number;
     jour: number;
-    lieu: Lieu | number;
-    niveau: Niveau | number;
-    responsable: Responsable | number;
+    lieu: Lieu;
+    niveau: Niveau;
+    responsable: Responsable;
 }
 
 export interface Lieu {
@@ -51,7 +51,7 @@ export interface Niveau {
 
 export interface Personne {
     adresse: string;
-    categoriePersonne: CategoriePersonne | number;
+    categoriePersonne: CategoriePersonne;
     email: string;
     id?: number;
     nom: string;
@@ -77,10 +77,10 @@ export interface Sport {
 }
 
 export interface Inscription {
-    personne?: Personne | number;
+    personne?: Personne;
     demande: boolean;
     ects: number;
     enAttente: boolean;
     nombreHeures: number;
-    creneau?: Creneau | number;
+    creneau?: Creneau;
 }

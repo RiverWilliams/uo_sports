@@ -19,7 +19,6 @@ import {makeUrl, Urls} from "./urls";
 import {
     ActualiteJSON,
     CreneauJSON,
-    PersonneJSON,
     Adaptateur,
 } from "./adaptateur";
 import "rxjs/add/operator/map";
@@ -381,7 +380,7 @@ class InscriptionProvider {
 
     public demandeInscription(personne: Personne, inscriptions: Inscription[]): Observable<number> {
         return this.http.post<number>(Urls.INSCRIPTIONS_DEMANDE, {
-            personne: Adaptateur.Personne.toJSON(personne),
+            personne: personne,
             inscriptions: inscriptions.map(Adaptateur.Inscription.toJSON)
         });
     }
@@ -449,11 +448,11 @@ class PersonneProvider {
     }
 
     public put(personne: Personne): Observable<void> {
-        return this.http.put<void>(Urls.PERSONNES, Adaptateur.Personne.toJSON(personne));
+        return this.http.put<void>(Urls.PERSONNES, personne);
     }
 
     public post(personne: Personne): Observable<number> {
-        return this.http.post<number>(Urls.PERSONNES, Adaptateur.Personne.toJSON(personne));
+        return this.http.post<number>(Urls.PERSONNES, personne);
     }
 
     public delete(id: number): Observable<void> {
@@ -462,12 +461,12 @@ class PersonneProvider {
     }
 
     public getAll(): Observable<Personne[]> {
-        return this.http.get<PersonneJSON[]>(Urls.PERSONNES).map(value => value.map(Adaptateur.Personne.fromJSON));
+        return this.http.get<Personne[]>(Urls.PERSONNES);
     }
 
     public get(id: number): Observable<Personne> {
         const url = makeUrl(Urls.PERSONNES_ID, {idPersonne: id});
-        return this.http.get<PersonneJSON>(url).map(Adaptateur.Personne.fromJSON);
+        return this.http.get<Personne>(url);
     }
 }
 
