@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AlertController} from "ionic-angular";
 import {WebserviceProvider} from "../../common/webservice";
-import {CategorieSport, Sport} from "../../common/model";
+import {CategorieSport} from "../../common/model";
 import {Utilitaire} from "../../common/utilitaire";
 
 @Component({

@@ -8,6 +8,7 @@ import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/switchMap";
 import "rxjs/add/observable/combineLatest";
 import {WebserviceProvider} from "../../common/webservice";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
   selector: 'page-selectmodificationsport',
@@ -27,7 +28,7 @@ export class selectModificationSportPage implements OnInit {
     this.web.sports.getAll().subscribe(d => this.listeSport = d);
     Observable.combineLatest(this.search.valueChanges, this.web.sports.getAll(), (search: string, sports: Sport[]) => {
       const s = search.toLowerCase();
-      return sports.filter(sport => sport.nom.toLowerCase().includes(s));
+      return sports.filter(sport => sport.nom.toLowerCase().includes(s)).sort(Comparateur.Sport.nom);
     }).subscribe(d => this.listeSport = d);
   }
 
