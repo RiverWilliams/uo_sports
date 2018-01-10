@@ -10,9 +10,11 @@ import { HomePage } from '../pages/home/home';
 import { listeInscriptionPage } from "../pages/listeInscription/listeInscription";
 
 import { selectListeAttentePage } from "../pages/selectListeAttente/selectListeAttente";
+import { selectListeAttenteCreneauPage } from "../pages/selectListeAttenteCreneau/selectListeAttenteCreneau";
 import { listeAttentePage } from "../pages/listeAttente/listeAttente";
 
 import { selectListeEffectifPage} from "../pages/selectListeEffectif/selectListeEffectif";
+import { selectListeEffectifCreneauPage } from "../pages/selectListeEffectifCreneau/selectListeEffectifCreneau";
 import { listeEffectifPage } from "../pages/listeEffectif/listeEffectif";
 
 import { formCreationCategoriePage } from "../pages/formCreationCategorie/formCreationCategorie";
@@ -72,10 +74,13 @@ import {FormsModule} from "@angular/forms";
 		HomePage,
 
 		listeInscriptionPage,
+
 		selectListeAttentePage,
+		selectListeAttenteCreneauPage,
 		listeAttentePage,
 
 		selectListeEffectifPage,
+		selectListeEffectifCreneauPage,
 		listeEffectifPage,
 
 		formCreationCategoriePage,
@@ -138,10 +143,13 @@ import {FormsModule} from "@angular/forms";
 		HomePage,
 
 		listeInscriptionPage,
+
 		selectListeAttentePage,
+		selectListeAttenteCreneauPage,
 		listeAttentePage,
 
 		selectListeEffectifPage,
+		selectListeEffectifCreneauPage,
 		listeEffectifPage,
 
 		formCreationCategoriePage,

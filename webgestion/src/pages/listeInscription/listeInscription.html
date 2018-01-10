@@ -1,4 +1,41 @@
 <p ion-text color="primary" floating>Etudiant ou personnel en attente d'inscription à SUAPSE : </p>
+<form #f="ngForm" (ngSubmit)="ListeInscriptionForm(f.value)">
+	<ion-grid>
+		<ion-row>
+			<ion-col col-4>
+			</ion-col>
+			<ion-col col-2>
+				<p ion-text align="center" color="primary">Nom de l'étudiant : </p>
+			</ion-col>
+			<ion-col>
+				<p ion-text align="right" color="primary">Inscription : </p>
+			</ion-col>
+			<ion-col col-4>
+			</ion-col>
+		</ion-row>
+		<ion-row *ngFor="let inscrit of listeInscription">
+			<ion-col col-4>
+			</ion-col>
+			<ion-col>
+				<ion-item no-lines>
+					<p ion-text align="center" color="primary">{{ inscrit }}</p>
+				</ion-item>
+			</ion-col>
+			<ion-col>
+				<ion-item no-lines>
+					<ion-toggle ngModel name="inscrit" required></ion-toggle>
+				</ion-item>
+			</ion-col>
+			<ion-col col-4>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
+	<button ion-button (click)="goback()" block>Retour</button>
+</form>
+
+<!--
+<p ion-text color="primary" floating>Etudiant ou personnel en attente d'inscription à SUAPSE : </p>
 <form (ngSubmit)="ListeInscriptionForm()">
 	<ion-item>
 		<ion-label color="primary" floating>Nom : </ion-label>
@@ -8,3 +45,4 @@
 	</ion-item>
 	<button ion-button type="submit" block>Adhérer</button>
 </form>
+-->

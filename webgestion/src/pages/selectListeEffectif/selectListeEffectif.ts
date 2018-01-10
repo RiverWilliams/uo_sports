@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { listeEffectifPage } from '../listeEffectif/listeEffectif';
+import { selectListeEffectifCreneauPage } from '../selectListeEffectifCreneau/selectListeEffectifCreneau';
 
 @Component({
 	selector: 'page-selectlisteeffectif',
@@ -32,6 +32,6 @@ export class selectListeEffectifPage {
 	ListeEffectif() {
 		console.log(this.selectListeEffectif);
 		console.log(this.selectListeEffectif.choixListeEffectif);
-		this.navCtrl.push(listeEffectifPage, {liste: this.selectListeEffectif.choixListeEffectif});
+		this.navCtrl.push(selectListeEffectifCreneauPage, {liste: this.selectListeEffectif.choixListeEffectif});
 	};
 }

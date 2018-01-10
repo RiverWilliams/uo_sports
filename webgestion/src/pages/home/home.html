@@ -3,7 +3,7 @@
 <ion-content padding>
 	<div padding>
 		<ion-segment [(ngModel)]="listAction">
-			<ion-segment-button value="incriptions">Incriptions</ion-segment-button>
+			<ion-segment-button value="inscriptions">Inscriptions</ion-segment-button>
 			<ion-segment-button value="categoriesSportsActivites">Catégories/Sports/Activités</ion-segment-button>
 			<ion-segment-button value="creneau">Créneau</ion-segment-button>
 			<ion-segment-button value="actualites">Actualités</ion-segment-button>
@@ -13,17 +13,17 @@
 	<div [ngSwitch]="listAction">
 		<!-- ########################################################################################################################################## -->
 		<!-- Pour l'option inscriptions à nouveau un menu dessous avec les listes d'étudiants à inscrire, celles des incrits, le tout à choisir parmis la liste actuelle des sports -->
-		<ion-list *ngSwitchCase="'incriptions'">
+		<ion-list *ngSwitchCase="'inscriptions'">
 			<div>
 				<div padding>
-					<ion-segment [(ngModel)]="listActionIncriptions">
-						<ion-segment-button value="listeInscription">Listes d'inscriptions</ion-segment-button>
-						<ion-segment-button value="listeAttente">Listes d'attentes</ion-segment-button>
-						<ion-segment-button value="listeEffectif">Listes Effectifs</ion-segment-button>
+					<ion-segment [(ngModel)]="listActionInscriptions">
+						<ion-segment-button value="listeInscription">Listes d'inscriptions à SUAPSE</ion-segment-button>
+						<ion-segment-button value="listeAttente">Listes d'attentes des activités</ion-segment-button>
+						<ion-segment-button value="listeEffectif">Listes des Effectifs des activités</ion-segment-button>
 					</ion-segment>
 				</div>
 			</div>
-			<div [ngSwitch]="listActionIncriptions">
+			<div [ngSwitch]="listActionInscriptions">
 				<ion-list *ngSwitchCase="'listeInscription'">
 					<div>
 						<page-listeinscription></page-listeinscription>

@@ -1,4 +1,4 @@
-<p ion-text color="primary" floating>Choisir la liste d'attente de l'activité : </p>
+<p ion-text color="primary" floating>Choisir l'activité : </p>
 <ion-searchbar placeholder="Activité :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="ListeAttente(f.value)">
 	<ion-list radio-group ngModel name="choixListeAttente" required>

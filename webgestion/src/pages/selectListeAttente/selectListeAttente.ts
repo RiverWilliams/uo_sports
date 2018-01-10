@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { listeAttentePage } from '../listeAttente/listeAttente';
+import { selectListeAttenteCreneauPage } from '../selectListeAttenteCreneau/selectListeAttenteCreneau';
 
 @Component({
 	selector: 'page-selectlisteattente',
@@ -32,6 +32,6 @@ export class selectListeAttentePage {
 	ListeAttente() {
 		console.log(this.selectListeAttente);
 		console.log(this.selectListeAttente.choixListeAttente);
-		this.navCtrl.push(listeAttentePage, {liste: this.selectListeAttente.choixListeAttente});		
+		this.navCtrl.push(selectListeAttenteCreneauPage, {liste: this.selectListeAttente.choixListeAttente});		
 	};
 }
