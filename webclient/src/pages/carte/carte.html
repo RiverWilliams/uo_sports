@@ -1,30 +1,31 @@
 <ion-header>
-  <ion-toolbar color="danger" >
+    <ion-toolbar color="danger">
 
-  <ion-buttons left>
-  	<button ion-button icon-only menuToggle >
-			<ion-icon name="menu"></ion-icon>
-		</button>
-	</ion-buttons>
+        <ion-buttons left>
+            <button ion-button icon-only menuToggle>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
 
-    <ion-title>
-		Carte du campus 
-    </ion-title>
-	
-  </ion-toolbar>
+        <ion-title>
+            Carte du campus
+        </ion-title>
+
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-<img src="../../assets/imgs/carte.jpg"/>
-
+    <ion-scroll zoom="true" scrollX="true" scrollY="true" style="width: 100%; height: 100%">
+        <ion-img width="1024" height="1024" src="/assets/imgs/carte.jpg"></ion-img>
+    </ion-scroll>
 </ion-content>
 
-<ion-footer  text-center >
-	<ion-toolbar color="danger" >
-		<ion-icon style="font-size:25px" name="logo-facebook"></ion-icon>
-		<ion-icon style="font-size:25px" name="logo-linkedin"></ion-icon>
-		<ion-icon style="font-size:25px" name="logo-youtube"></ion-icon>
-		<ion-icon style="font-size:25px" name="logo-twitter"></ion-icon>
-	</ion-toolbar>
+<ion-footer text-center>
+    <ion-toolbar color="danger">
+        <ion-icon style="font-size:25px" name="logo-facebook"></ion-icon>
+        <ion-icon style="font-size:25px" name="logo-linkedin"></ion-icon>
+        <ion-icon style="font-size:25px" name="logo-youtube"></ion-icon>
+        <ion-icon style="font-size:25px" name="logo-twitter"></ion-icon>
+    </ion-toolbar>
 </ion-footer>
