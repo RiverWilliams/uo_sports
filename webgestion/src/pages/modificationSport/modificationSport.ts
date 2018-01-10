@@ -4,6 +4,7 @@ import {HomePage} from '../home/home';
 import {CategorieSport, Sport} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
 import {Utilitaire} from "../../common/utilitaire";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
   selector: 'page-modificationsport',
@@ -13,7 +14,7 @@ import {Utilitaire} from "../../common/utilitaire";
 export class modificationSportPage implements OnInit {
   public idSport;
   // Modification d'un sport
-  sport: Sport = {nom: ''};
+  sport: Sport;
   idCategoriesDuSport: CategorieSport[] = [];
   categoriesSports: CategorieSport[];
   nouvelleCategorie: CategorieSport[];
@@ -24,7 +25,7 @@ export class modificationSportPage implements OnInit {
 
   ngOnInit(): void {
     this.web.sports.get(this.idSport).subscribe(d => this.sport = d);
-    this.web.categoriesSports.getAll().subscribe(d => this.categoriesSports = d);
+    this.web.categoriesSports.getAll().subscribe(d => this.categoriesSports = d.sort(Comparateur.CategorieSport.nom));
     this.web.sports.getCategoriesSport(this.idSport).subscribe(d => this.nouvelleCategorie = Array.from(this.idCategoriesDuSport = d));
   }
 

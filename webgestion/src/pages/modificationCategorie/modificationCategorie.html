@@ -1,6 +1,6 @@
 <ion-content padding>
   <div padding>
-    <form #f="ngForm" (ngSubmit)="modificationCategorieForm()">
+    <form *ngIf="categorie" #f="ngForm" (ngSubmit)="modificationCategorieForm()">
       <ion-item>
         <ion-label color="primary" floating>Nom catégorie :</ion-label>
         <ion-input [(ngModel)]="categorie.nom" name="nom" type="text" clearInput required></ion-input>

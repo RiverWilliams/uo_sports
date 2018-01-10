@@ -1,61 +1,46 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Activite, Lieu, Niveau, Responsable} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
+import {Adaptateur, CreneauJSON} from "../../common/adaptateur";
+import {Utilitaire} from "../../common/utilitaire";
+import {AlertController, ToastController} from "ionic-angular";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
-	selector: 'page-formcreationcreneau',
-	templateUrl: 'formCreationCreneau.html'
+  selector: 'page-formcreationcreneau',
+  templateUrl: 'formCreationCreneau.html'
 })
-export class formCreationCreneauPage {
+export class formCreationCreneauPage implements OnInit {
 
-	// Creation d'un creneau
-	creationCreneau = {
-		nomActivite: '',
-		nomCreneau: '',
-		responsableCreneau: '',
-		jourCreneau: '',
-		heureDebutCreneau: '',
-		heureFinCreneau: '',
-		effectifCreneau: '',
-		niveauCreneau: '',
-		lieuCreneau: '',
+  ngOnInit(): void {
+    this.web.activites.getAll().subscribe(d => this.activites = d.sort(Comparateur.Activite.nom));
+    this.web.responsables.getAll().subscribe(d => this.responsables = d.sort(Comparateur.Responsable.nomPrenom));
+    this.web.niveux.getAll().subscribe(d => this.niveaux = d.sort(Comparateur.Niveau.nom));
+    this.web.lieux.getAll().subscribe(d => this.lieux = d.sort(Comparateur.Lieu.ville));
+  }
 
-	};
+  constructor(private web: WebserviceProvider, private toastCtrl: ToastController, private alertCtrl: AlertController) {
+  }
 
-	listeActivite = [
-		'Natation',
-		'Foot',
-		'Course'
-	];
+  activites: Activite[];
 
-	listeResponsable = [
-		'mr zen',
-		'mrs peace',
-		'kid war'
-	];
+  responsables: Responsable[];
 
-	listeJour = [
-		'lundi',
-		'mardi',
-		'mercredi',
-		'jeudi',
-		'vendredi',
-		'samedi',
-		'dimanche'
-	];
+  jours: number[] = Array.of(0, 1, 2, 3, 4, 5, 6);
 
-	listeNiveau = [
-		'debutant',
-		'intermediaire',
-		'pro'
-	];
+  niveaux: Niveau[];
 
-	listeLieu = [
-		'piscine',
-		'gymnase',
-		'stade'
-	];
+  lieux: Lieu[];
 
-	creationCreneauForm() {
-		console.log(this.creationCreneau)
-	};
+  creationCreneauForm(creneau: CreneauJSON) {
+    creneau.heureDebut += ":00";
+    creneau.heureFin += ":00";
+    console.log(creneau);
+    this.web.creneaux.post(Adaptateur.Creneau.fromJSON(creneau)).subscribe(() => Utilitaire.createToastOk(this.toastCtrl).present(),
+      (err) => {
+        console.log(err);
+        Utilitaire.createAlertErreur(this.alertCtrl).present()
+      });
+  };
 
 }

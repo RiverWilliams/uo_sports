@@ -1,6 +1,6 @@
 <ion-content padding>
   <div padding>
-    <form #f="ngForm" (ngSubmit)="modificationSportForm()">
+    <form *ngIf="sport" #f="ngForm" (ngSubmit)="modificationSportForm()">
       <ion-item>
         <ion-label color="primary" floating>Nom du sport :</ion-label>
         <ion-input [(ngModel)]="sport.nom" type="text" name="nom" required clearInput></ion-input>

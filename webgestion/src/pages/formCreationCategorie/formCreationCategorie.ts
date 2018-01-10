@@ -4,8 +4,6 @@ import {Utilitaire} from "../../common/utilitaire";
 import {AlertController, ToastController} from "ionic-angular";
 import {CategorieSport} from "../../common/model";
 
-class Categorie {
-}
 
 @Component({
   selector: 'page-formcreationcategorie',

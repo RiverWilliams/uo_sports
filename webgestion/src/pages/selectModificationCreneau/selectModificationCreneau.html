@@ -1,11 +1,28 @@
 <p ion-text color="primary" floating>Choisir le créneau à modifier : </p>
-<ion-searchbar placeholder="Activité :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
-<form #f="ngForm" (ngSubmit)="SelectModificationCreneau(f.value)">
-	<ion-list radio-group ngModel name="choixModificationCreneau" required>
-		<ion-item *ngFor="let creneau of listeCreneau">
-			<ion-label>{{creneau}}</ion-label>
-			<ion-radio value="{{creneau}}"></ion-radio>
-		</ion-item>
-	</ion-list>
-	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
+<ion-searchbar placeholder="Activite :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
+<form #f="ngForm" (ngSubmit)="SelectModificationCreneau(f.value.creneau)">
+  <ion-list radio-group ngModel name="creneau" required>
+    <ion-list-header><ion-row>
+      <ion-col>Activité</ion-col>
+      <ion-col>Niveau</ion-col>
+      <ion-col>Jour</ion-col>
+      <ion-col>Début</ion-col>
+      <ion-col>Fin</ion-col>
+      <ion-col>Responsable</ion-col>
+    </ion-row></ion-list-header>
+    <ion-item *ngFor="let creneau of creneaux">
+      <ion-label>
+        <ion-row>
+          <ion-col>{{creneau.activite.nom}}</ion-col>
+          <ion-col>{{creneau.niveau.nom}}</ion-col>
+          <ion-col>{{creneau.jour|dayOfWeek}}</ion-col>
+          <ion-col>{{creneau.heureDebut|date:'HH:mm'}}</ion-col>
+          <ion-col>{{creneau.heureFin|date:'HH:mm'}}</ion-col>
+          <ion-col>{{creneau.responsable.nom}} {{creneau.responsable.prenom}}</ion-col>
+        </ion-row>
+      </ion-label>
+      <ion-radio [value]="creneau"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <button ion-button [disabled]="!f.valid" type="submit" block>Valider</button>
 </form>

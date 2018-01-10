@@ -1,45 +1,47 @@
 <form #f="ngForm" (ngSubmit)="creationCreneauForm(f.value)">
-	<ion-item>
-		<ion-label color="primary" floating>Activité : </ion-label>
-			<ion-select ngModel name="nomActivite" okText="Ok" cancelText="Annuler" multiple="false" required>
-				<ion-option *ngFor="let activite of listeActivite">{{ activite }}</ion-option>
-			</ion-select>
-	</ion-item>
-	<ion-item>
-		<ion-label color="primary" floating>Responsable : </ion-label>
-		<ion-select ngModel name="responsableCreneau" okText="Ok" cancelText="Annuler" multiple="true" required>
-				<ion-option *ngFor="let responsable of listeResponsable">{{ responsable }}</ion-option>
-			</ion-select>
-	</ion-item>
-	<ion-item>
-		<ion-label color="primary" floating>Jour : </ion-label>
-		<ion-select ngModel name="jour" okText="Ok" cancelText="Annuler" multiple="true" required>
-				<ion-option *ngFor="let jour of listeJour">{{ jour }}</ion-option>
-			</ion-select>
-	</ion-item>
-	<ion-item>
-		<ion-label color="primary" floating>Heure de début : </ion-label>
-		<ion-datetime ngModel name="heure_debut" displayFormat="HH/mm" required></ion-datetime>
-	</ion-item>
-	<ion-item>
-		<ion-label color="primary" floating>Heure de fin : </ion-label>
-		<ion-datetime ngModel name="heure_fin" displayFormat="HH/mm" required></ion-datetime>
-	</ion-item>
-	<ion-item>
-		<ion-label color="primary" floating>Effectif : </ion-label>
-		<ion-input ngModel name="effectif" type="number" required></ion-input>
-	</ion-item>
-	<ion-item>
-		<ion-label color="primary" floating>Niveau : </ion-label>
-		<ion-select ngModel name="niveauCreneau" okText="Ok" cancelText="Annuler" multiple="false" required>
-				<ion-option *ngFor="let niveau of listeNiveau">{{ niveau }}</ion-option>
-			</ion-select>
-	</ion-item>
-	<ion-item>
-		<ion-label color="primary" floating>Lieu : </ion-label>
-			<ion-select ngModel name="lieuCreneau" okText="Ok" cancelText="Annuler" multiple="false" required>
-				<ion-option *ngFor="let lieu of listeLieu">{{ lieu }}</ion-option>
-			</ion-select>
-	</ion-item>
-	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Créer le créneau</button>
+  <ion-item>
+    <ion-label color="primary" floating>Activité :</ion-label>
+    <ion-select ngModel name="activite" okText="Ok" cancelText="Annuler" required>
+      <ion-option *ngFor="let activite of activites" [value]="activite">{{activite.nom}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Responsable :</ion-label>
+    <ion-select ngModel name="responsable" okText="Ok" cancelText="Annuler" required>
+      <ion-option *ngFor="let responsable of responsables" [value]="responsable">{{ responsable.nom }}
+        {{responsable.prenom}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Jour :</ion-label>
+    <ion-select ngModel name="jour" okText="Ok" cancelText="Annuler" required>
+      <ion-option *ngFor="let jour of jours; index as i" [value]="i">{{ jour|dayOfWeek }}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Heure de début :</ion-label>
+    <ion-datetime ngModel name="heureDebut" displayFormat="HH:mm" required></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Heure de fin :</ion-label>
+    <ion-datetime ngModel name="heureFin" displayFormat="HH:mm" required></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Effectif :</ion-label>
+    <ion-input ngModel name="effectif" type="number" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Niveau :</ion-label>
+    <ion-select ngModel name="niveau" okText="Ok" cancelText="Annuler" required>
+      <ion-option *ngFor="let niveau of niveaux" [value]="niveau">{{ niveau.nom }}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Lieu :</ion-label>
+    <ion-select ngModel name="lieu" okText="Ok" cancelText="Annuler" required>
+      <ion-option *ngFor="let lieu of lieux" [value]="lieu">{{ lieu.nom }}</ion-option>
+    </ion-select>
+  </ion-item>
+  <button ion-button [disabled]="!f.valid" type="submit" block>Créer le créneau</button>
 </form>

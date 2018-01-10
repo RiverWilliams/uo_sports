@@ -139,7 +139,7 @@ class CreneauProvider {
     }
 
     public put(creneau: Creneau): Observable<void> {
-        return this.http.post<void>(Urls.CRENEAUX, Adaptateur.Creneau.toJSON(creneau));
+        return this.http.put<void>(Urls.CRENEAUX, Adaptateur.Creneau.toJSON(creneau));
     }
 
     public delete(id: number): Observable<void> {

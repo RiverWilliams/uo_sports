@@ -13,7 +13,7 @@ import {Utilitaire} from "../../common/utilitaire";
 export class modificationCategoriePage {
   public idCategorie;
 
-  categorie: CategorieSport = {nom: ''};
+  categorie: CategorieSport;
 
   constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider, private alertCtrl: AlertController) {
     this.idCategorie = navParams.get("idCategorie");

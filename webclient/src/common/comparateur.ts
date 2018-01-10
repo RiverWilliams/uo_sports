@@ -10,7 +10,7 @@ export namespace Comparateur {
     export namespace Creneau {
 
         export function activite(a: Creneau, b: Creneau): number {
-            return Activite.nom(<Activite>a.activite, <Activite>b.activite);
+            return Activite.nom(a.activite, b.activite);
         }
 
         export function activiteChronologique(a: Creneau, b: Creneau): number {
@@ -22,7 +22,7 @@ export namespace Comparateur {
         }
 
         export function ville(a: Creneau, b: Creneau): number {
-            return Lieu.ville(<Lieu>a.lieu, <Lieu>b.lieu);
+            return Lieu.ville(a.lieu, b.lieu);
         }
 
         export function jour(a: Creneau, b: Creneau): number {

@@ -1,55 +1,57 @@
-import { Component } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {AlertController, ToastController} from 'ionic-angular';
+import {Creneau} from "../../common/model";
+import {FormControl} from "@angular/forms";
+import {Comparateur} from "../../common/comparateur";
+import {WebserviceProvider} from "../../common/webservice";
+import {Utilitaire} from "../../common/utilitaire";
 
 @Component({
-	selector: 'page-selectsuppressioncreneau',
-	templateUrl: 'selectSuppressionCreneau.html'
+  selector: 'page-selectsuppressioncreneau',
+  templateUrl: 'selectSuppressionCreneau.html'
 })
-export class selectSuppressionCreneauPage {
+export class selectSuppressionCreneauPage implements OnInit {
 
-	selectSuppressionCreneau = {
-		choixSuppressionCreneau: ''
-	};
+  search = new FormControl();
+  creneaux: Creneau[];
 
-	listeCreneau = [
-		'Natation',
-		'Foot',
-		'Course',
-	];
+  // Suppression d'un creneau
+  constructor(public alertCtrl: AlertController, private web: WebserviceProvider, private toastCtrl: ToastController) {
+  }
 
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listeCreneau = this.listeCreneau.filter(function(creneau) {
-				return creneau.toLowerCase().includes(val.toLowerCase());
-			});
-		}
-	}
+  ngOnInit(): void {
+    this.web.creneaux.getAll().subscribe(d => this.creneaux = d.sort(Comparateur.Creneau.activiteChronologique));
+    this.search.valueChanges.subscribe(search => this.web.creneaux.getAll().subscribe(creneaux => {
+      const s = search.toLowerCase();
+      return this.creneaux = creneaux.filter(v => (v.activite).nom.toLowerCase().includes(s)).sort(Comparateur.Creneau.activiteChronologique);
+    }));
+  }
 
-	// Suppression d'un creneau
-	constructor(public alertCtrl: AlertController) {}
-
-	SupprimerCreneau() {
-		console.log(this.selectSuppressionCreneau)
-		console.log(this.selectSuppressionCreneau.choixSuppressionCreneau)
-		let alert = this.alertCtrl.create({
-			title: 'Etes-vous sûr de supprimer ce créneau?',
-			message: 'Ce sera irréversible! Si des étudiants sont encore inscrits ils seront perdus à jamais!',
-			buttons: [
-				{
-					text: 'Annuler',
-						handler: () => {
-							console.log('Annuler clicked');
-						}
-				},
-				{
-					text: 'Ok',
-						handler: () => {
-							console.log('Ok clicked');
-						}
-				}
-			]
-		});
-		alert.present();
-	}
+  SupprimerCreneau(creneau: Creneau) {
+    let alert = this.alertCtrl.create({
+      title: 'Etes-vous sûr de vouloir supprimer ce créneau?',
+      message: creneau.activite.nom,
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.web.creneaux.delete(creneau.id).subscribe(() => {
+              Utilitaire.createToastOk(this.toastCtrl).present();
+              this.search.setValue(this.search.value, {emitEvent: true});
+            }, (err) => {
+              const alert2 = Utilitaire.createAlertErreur(this.alertCtrl);
+              if (err.error.erreur) alert2.setMessage(err.error.erreur.message);
+              alert2.present();
+            });
+            return true;
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }

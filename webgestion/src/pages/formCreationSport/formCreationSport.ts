@@ -3,6 +3,7 @@ import {AlertController, ToastController} from "ionic-angular";
 import {WebserviceProvider} from "../../common/webservice";
 import {CategorieSport} from "../../common/model";
 import {Utilitaire} from "../../common/utilitaire";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
   selector: 'page-formcreationsport',
@@ -14,7 +15,7 @@ export class formCreationSportPage {
   categories: CategorieSport[];
 
   constructor(private alertCtrl: AlertController, private web: WebserviceProvider, private toastCtrl: ToastController) {
-    web.categoriesSports.getAll().subscribe(d => this.categories = d);
+    web.categoriesSports.getAll().subscribe(d => this.categories = d.sort(Comparateur.CategorieSport.nom));
   }
 
   CreationSportForm(s) {

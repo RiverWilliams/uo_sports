@@ -1,4 +1,4 @@
-import {Activite, Actualite, CategorieSport, Creneau, Lieu, Sport} from "./model";
+import {Activite, Actualite, CategorieSport, Creneau, Lieu, Niveau, Responsable, Sport} from "./model";
 
 export namespace Comparateur {
     export namespace Activite {
@@ -8,8 +8,21 @@ export namespace Comparateur {
     }
 
     export namespace Creneau {
+
+        export function activite(a: Creneau, b: Creneau): number {
+            return Activite.nom(a.activite, b.activite);
+        }
+
+        export function activiteChronologique(a: Creneau, b: Creneau): number {
+            const ac = activite(a, b);
+            if (ac != 0) {
+                return ac;
+            }
+            return chronologique(a, b);
+        }
+
         export function ville(a: Creneau, b: Creneau): number {
-            return Lieu.ville(<Lieu>a.lieu, <Lieu>b.lieu);
+            return Lieu.ville(a.lieu, b.lieu);
         }
 
         export function jour(a: Creneau, b: Creneau): number {
@@ -36,10 +49,12 @@ export namespace Comparateur {
             return chronologique(a, b);
         }
 
-        export namespace Lieu {
-            export function ville(a: Lieu, b: Lieu): number {
-                return a.ville.localeCompare(b.ville);
-            }
+
+    }
+
+    export namespace Lieu {
+        export function ville(a: Lieu, b: Lieu): number {
+            return a.ville.localeCompare(b.ville);
         }
     }
 
@@ -68,4 +83,29 @@ export namespace Comparateur {
             return a.nom.localeCompare(b.nom);
         }
     }
+
+    export namespace Responsable {
+        export function nom(a: Responsable, b: Responsable): number {
+            return a.nom.localeCompare(b.nom);
+        }
+
+        export function prenom(a: Responsable, b: Responsable): number {
+            return a.prenom.localeCompare(b.prenom);
+        }
+
+        export function nomPrenom(a: Responsable, b: Responsable): number {
+            const n = nom(a, b);
+            if (n != 0) {
+                return n;
+            }
+            return prenom(a, b);
+        }
+    }
+
+    export namespace Niveau {
+        export function nom(a: Niveau, b: Niveau): number {
+            return a.nom.localeCompare(b.nom);
+        }
+    }
+
 }

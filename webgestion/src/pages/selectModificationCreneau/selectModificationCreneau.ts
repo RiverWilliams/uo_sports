@@ -1,39 +1,34 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { modificationCreneauPage } from '../modificationCreneau/modificationCreneau';
+import {Component, OnInit} from '@angular/core';
+import {NavController} from 'ionic-angular';
+import {modificationCreneauPage} from '../modificationCreneau/modificationCreneau';
+import {Creneau} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
+import {FormControl} from "@angular/forms";
+import {Observable} from "rxjs/Observable";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
-	selector: 'page-selectmodificationcreneau',
-	templateUrl: 'selectModificationCreneau.html'
+  selector: 'page-selectmodificationcreneau',
+  templateUrl: 'selectModificationCreneau.html'
 })
 
-export class selectModificationCreneauPage {
-	constructor(public navCtrl: NavController) {
+export class selectModificationCreneauPage implements OnInit {
 
-	}
+  ngOnInit(): void {
+    this.web.creneaux.getAll().subscribe(d => this.creneaux = d.sort(Comparateur.Creneau.activiteChronologique));
+    Observable.combineLatest(this.search.valueChanges, this.web.creneaux.getAll(), (search: string, creneaux: Creneau[]) => {
+      const s = search.toLowerCase();
+      return creneaux.filter(v => (v.activite).nom.toLowerCase().includes(s)).sort(Comparateur.Creneau.activiteChronologique);
+    }).subscribe(d => this.creneaux = d);
+  }
 
-	selectModificationCreneau = {
-		choixModificationCreneau: ''
-	};
+  constructor(public navCtrl: NavController, private web: WebserviceProvider) {
+  }
 
-	listeCreneau = [
-		'Natation',
-		'Foot',
-		'Course',
-	];
+  search = new FormControl();
+  creneaux: Creneau[];
 
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listeCreneau = this.listeCreneau.filter(function(creneau) {
-				return creneau.toLowerCase().includes(val.toLowerCase());
-			});
-		}
-	}
-
-	SelectModificationCreneau() {
-		console.log(this.selectModificationCreneau);
-		console.log(this.selectModificationCreneau.choixModificationCreneau);
-		this.navCtrl.push(modificationCreneauPage, {liste: this.selectModificationCreneau.choixModificationCreneau});		
-	};
+  SelectModificationCreneau(creneau: Creneau) {
+    this.navCtrl.push(modificationCreneauPage, {idCreneau: creneau.id});
+  };
 }
