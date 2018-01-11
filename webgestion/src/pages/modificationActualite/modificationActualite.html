@@ -27,8 +27,8 @@
       </ion-item>
       <ion-item>
         <ion-label color="primary" floating>Concerne les sports :</ion-label>
-        <ion-select [(ngModel)]="actualite.sports" name="sports" multiple="true" [compareWith]="compareFn">
-          <ion-option *ngFor="let s of sports" [value]="s.id">{{s.nom}}</ion-option>
+        <ion-select [(ngModel)]="nouveauSport" name="sports" multiple="true" [compareWith]="compareFn">
+          <ion-option *ngFor="let a of ancienSport" [value]="a">{{a.nom}}</ion-option>
         </ion-select>
       </ion-item>
       <button ion-button type="submit" [disabled]="!f.valid" block>Valider</button>

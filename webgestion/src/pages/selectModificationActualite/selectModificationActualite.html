@@ -1,7 +1,7 @@
 <p ion-text color="primary" floating>Choisir l'actualité à modifier :</p>
 <ion-searchbar placeholder="Actualité :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SelectModificationActualite(f.value.idActualite)">
-  <ion-list radio-group ngModel name="actu" required>
+  <ion-list radio-group ngModel name="idActualite" required>
     <ion-item *ngFor="let actu of listeActualite">
       <ion-label>{{actu.titre}}</ion-label>
       <ion-radio value="{{actu.id}}"></ion-radio>
