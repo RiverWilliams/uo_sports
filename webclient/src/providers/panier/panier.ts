@@ -25,12 +25,10 @@ export class PanierProvider {
     }
 
     ajouter(creneau: Creneau) {
-        this.inscriptions.push({creneau: creneau, nombreHeures: 0, demande: false, enAttente: true, ects: 0});
+        this.inscriptions.push({creneau: creneau, nombreHeures: 0, demande: false, enAttente: true, ects: 0,personne:null});
     }
 
-    supprimer(id: number | Creneau) {
-        if (typeof id != "number")
-            id = id.id;
+    supprimer(id: number) {
         const index = this.inscriptions.findIndex(value => {
             return value.creneau.id === id;
         });
