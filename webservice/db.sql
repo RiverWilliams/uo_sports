@@ -213,10 +213,10 @@ ALTER TABLE creneau ADD CONSTRAINT FK_creneau_id_activite FOREIGN KEY (id_activi
 ALTER TABLE inscription ADD CONSTRAINT FK_inscription_id_personne FOREIGN KEY (id_personne) REFERENCES personne(id);
 ALTER TABLE inscription ADD CONSTRAINT FK_inscription_id_creneau FOREIGN KEY (id_creneau) REFERENCES creneau(id);
 ALTER TABLE demande ADD CONSTRAINT FK_demande_id_piece_inscription FOREIGN KEY (id_piece_inscription) REFERENCES piece_inscription(id);
-ALTER TABLE demande ADD CONSTRAINT FK_demande_id_categorie_personne FOREIGN KEY (id_categorie_personne) REFERENCES categorie_personne(id);
+ALTER TABLE demande ADD CONSTRAINT FK_demande_id_categorie_personne FOREIGN KEY (id_categorie_personne) REFERENCES categorie_personne(id) ON DELETE CASCADE;
 ALTER TABLE appartient ADD CONSTRAINT FK_appartient_id_categorie_sport FOREIGN KEY (id_categorie_sport) REFERENCES categorie_sport(id);
-ALTER TABLE appartient ADD CONSTRAINT FK_appartient_id_sport FOREIGN KEY (id_sport) REFERENCES sport(id);
+ALTER TABLE appartient ADD CONSTRAINT FK_appartient_id_sport FOREIGN KEY (id_sport) REFERENCES sport(id) ON DELETE CASCADE;
 ALTER TABLE concerne ADD CONSTRAINT FK_concerne_id_sport FOREIGN KEY (id_sport) REFERENCES sport(id);
-ALTER TABLE concerne ADD CONSTRAINT FK_concerne_id_actualite FOREIGN KEY (id_actualite) REFERENCES actualite(id);
+ALTER TABLE concerne ADD CONSTRAINT FK_concerne_id_actualite FOREIGN KEY (id_actualite) REFERENCES actualite(id) ON DELETE CASCADE;
 ALTER TABLE de_type ADD CONSTRAINT FK_de_type_id_sport FOREIGN KEY (id_sport) REFERENCES sport(id);
-ALTER TABLE de_type ADD CONSTRAINT FK_de_type_id_activite FOREIGN KEY (id_activite) REFERENCES activite(id);
+ALTER TABLE de_type ADD CONSTRAINT FK_de_type_id_activite FOREIGN KEY (id_activite) REFERENCES activite(id) ON DELETE CASCADE;
