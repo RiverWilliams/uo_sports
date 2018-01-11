@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Activite } from "../../common/model";
-import { Personne } from "../../common/model";
 import { Inscription } from "../../common/model";
+import { Activite } from "../../common/model";
+import { Creneau } from "../../common/model";
 import { WebserviceProvider } from "../../common/webservice";
 
 @Component({
@@ -11,22 +11,24 @@ import { WebserviceProvider } from "../../common/webservice";
 
 export class listeInscriptionPage {
 
-  listeActivite: Activite[];
-  listePersonne: Personne[];
+
   listeInscription: Inscription[];
+
+  listeCreneau: Creneau[];
 
   constructor(private web: WebserviceProvider) {
 
   }
 
   ngOnInit(): void {
-    //this.web.activites.getAll().subscribe(d => this.listeActivite = d);
-    //this.web.inscriptions.getAll().subscribe(d => this.listeInscription = d);
-
+    //this.web.creneaux.getEnAttentes(1).subscribe(f => this.listeInscription = f);
+    //this.web.creneaux.getAll().subscribe(d => d.forEach(e => console.log("id : ",e.id)));
+    //this.web.creneaux.getAll().subscribe(d => d.forEach(e => this.web.creneaux.getEnAttentes(e.id).subscribe(f => console.log("test : ",f))));
+    this.web.creneaux.getAll().subscribe(d => d.forEach(e => this.web.creneaux.getEnAttentes(e.id).subscribe(f => this.listeInscription = f)));
   }
 
   ListeInscriptionForm() {
-        //console.log(this.listeInscription.length);
+    console.log(this.listeInscription.length);
+    console.log(this.listeInscription);
   }
-
 }

@@ -1,69 +1,62 @@
 <ion-content padding>
-	<div padding>
-		<p ion-text color="primary" floating>Etudiant(s) ou personnel(s) en attente d'inscription à l'activité : </p>
-		<form #f="ngForm" (ngSubmit)="ListeAttenteForm(f.value)">
-			<ion-grid>
-				<ion-row>
-					<ion-col col-4>
-					</ion-col>
-					<ion-col col-2>
-						<p ion-text align="center" color="primary">Nom de l'étudiant: </p>
-					</ion-col>
-					<ion-col>
-						<p ion-text align="right" color="primary">Inscription : </p>
-					</ion-col>
-					<ion-col>
-						<p ion-text align="right" color="primary">Inscription UE : </p>
-					</ion-col>
-					<ion-col col-4>
-					</ion-col>
-				</ion-row>
-				<ion-row *ngFor="let p of personne">
-					<ion-col col-4>
-					</ion-col>
-					<ion-col col-2>
-						<ion-item no-lines>
-							<p ion-text align="center" color="primary">{{p.nom}} {{p.prenom}}</p>
-						</ion-item>
-					</ion-col>
-					<!--<ion-col>
-						<ion-item no-lines>
-							<ion-toggle ngModel name="nom" required></ion-toggle>
-						</ion-item>
-					</ion-col>
-					<ion-col>
-						<ion-item no-lines>
-							<ion-toggle disabled="!inscription.demande" [(ngModel)]="inscrit.demande" name="inscrit.demande" required></ion-toggle>
-						</ion-item>
-					</ion-col>
-					<ion-col col-4>
-						<ion-item *ngIf="inscrit.demande">
-							<ion-input placeholder="ECTS" ngModel name="ects" clearInput required></ion-input>
-						</ion-item>
-					</ion-col>-->
-				</ion-row>
-			</ion-grid>
-			<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
-		</form>
-		<button ion-button (click)="goback()" block>Retour</button>
-	</div>
+  <div padding>
+    <p ion-text color="primary" floating>Etudiant(s) ou personnel(s) en attente d'inscription à l'activité : </p>
+    <form #f="ngForm" (ngSubmit)="ListeAttenteForm(f.value)">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+          </ion-col>
+          <ion-col col-2><p ion-text align="center" color="primary">Nom de l'étudiant: </p></ion-col>
+          <ion-col><p ion-text align="right" color="primary">Inscription : </p></ion-col>
+          <ion-col><p ion-text align="right" color="primary">Inscription UE : </p></ion-col>
+          <ion-col col-4>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let attent of listeInscription">
+          <ion-col col-4></ion-col>
+          <ion-col col-2>
+            <ion-item no-lines>
+              <p ion-text align="center">{{attent.personne.nom}} {{attent.personne.prenom}}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item no-lines>
+              <ion-toggle ngModel name="nom" required></ion-toggle>
+            </ion-item>
+          </ion-col>
+          <!--<ion-col>
+            <ion-item no-lines>
+              <ion-toggle disabled="!inscription.demande" [(ngModel)]="inscrit.demande" name="inscrit.demande" required></ion-toggle>
+            </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item *ngIf="inscrit.demande">
+              <ion-input placeholder="ECTS" ngModel name="ects" clearInput required></ion-input>
+            </ion-item>
+          </ion-col>-->
+        </ion-row>
+      </ion-grid>
+      <button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
+    </form>
+    <button ion-button (click)="goback()" block>Retour</button>
+  </div>
 </ion-content>
 <!-- 
 
-			<ion-list>
-				<ion-item *ngFor="let inscrit of listeInscrit1">
-					<ion-label color="primary">{{ inscrit }}</ion-label>
-					<ion-toggle ngModel name="nom" required></ion-toggle>
-					<ion-label color="primary">UE</ion-label>
-					<ion-toggle ngModel name="ue" required></ion-toggle>
-				</ion-item>
-			</ion-list>
+      <ion-list>
+        <ion-item *ngFor="let inscrit of listeInscrit1">
+          <ion-label color="primary">{{ inscrit }}</ion-label>
+          <ion-toggle ngModel name="nom" required></ion-toggle>
+          <ion-label color="primary">UE</ion-label>
+          <ion-toggle ngModel name="ue" required></ion-toggle>
+        </ion-item>
+      </ion-list>
 
-			<ion-item>
-				<ion-label color="primary" floating>Nom(s) : </ion-label>
-				<ion-select [(ngModel)]="listeAttente.choixListeAttente" name="choixListeAttente" okText="Ok" cancelText="Annuler" multiple="true">
-					<ion-option *ngFor="let inscrit of listeInscrit1">{{ inscrit }}</ion-option>
-				</ion-select>
-			</ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Nom(s) : </ion-label>
+        <ion-select [(ngModel)]="listeAttente.choixListeAttente" name="choixListeAttente" okText="Ok" cancelText="Annuler" multiple="true">
+          <ion-option *ngFor="let inscrit of listeInscrit1">{{ inscrit }}</ion-option>
+        </ion-select>
+      </ion-item>
 
-			-->
+      -->
