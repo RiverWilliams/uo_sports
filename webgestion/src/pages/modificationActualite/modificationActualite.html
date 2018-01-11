@@ -1,0 +1,9 @@
+<ion-content padding>
+  <div padding>
+    <form *ngIf="sport" #f="ngForm" (ngSubmit)="modificationActualiteForm()">
+      <p>A FAIRE</p>
+      <button ion-button type="submit" [disabled]="!f.valid" block>Valider</button>
+    </form>
+    <button ion-button (click)="goback()" block>Retour</button>
+  </div>
+</ion-content>

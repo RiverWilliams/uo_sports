@@ -17,19 +17,12 @@
 			<div>
 				<div padding>
 					<ion-segment [(ngModel)]="listActionInscriptions">
-						<ion-segment-button value="listeInscription">Listes d'inscriptions à SUAPSE</ion-segment-button>
 						<ion-segment-button value="listeAttente">Listes d'attentes des activités</ion-segment-button>
 						<ion-segment-button value="listeEffectif">Listes des Effectifs des activités</ion-segment-button>
 					</ion-segment>
 				</div>
 			</div>
 			<div [ngSwitch]="listActionInscriptions">
-				<ion-list *ngSwitchCase="'listeInscription'">
-					<div>
-						<page-listeinscription></page-listeinscription>
-					</div>
-				</ion-list>
-
 				<ion-list *ngSwitchCase="'listeAttente'">
 					<div>
 						<page-selectlisteattente></page-selectlisteattente>
@@ -195,8 +188,29 @@
 		<!-- ##################################################################################################################################### -->
 		<!-- Pour l'option actualites juste un formulaire de création d'actualités, titre, date début, date fin, date création et les descriptions -->
 		<ion-list *ngSwitchCase="'actualites'">
-			<div>
-				<page-formcreationactualite></page-formcreationactualite>
+			<div padding>
+				<ion-segment [(ngModel)]="listActionActualites">
+					<ion-segment-button value="creationActualite">Création Actualité</ion-segment-button>
+					<ion-segment-button value="modificationActualite">Modification Actualité</ion-segment-button>
+					<ion-segment-button value="suppressionActualite">Supperssion Actualité</ion-segment-button>
+				</ion-segment>
+			</div>
+			<div [ngSwitch]="listActionActualites">
+				<ion-list *ngSwitchCase="'creationActualite'">
+					<div>
+						<page-formcreationactualite></page-formcreationactualite>
+					</div>
+				</ion-list>
+				<ion-list *ngSwitchCase="'modificationActualite'">
+					<div>
+						<page-modificationactualite></page-modificationactualite>
+					</div>
+				</ion-list>
+				<ion-list *ngSwitchCase="'suppressionActualite'">
+					<div>
+						<page-selectsuppressionactualite></page-selectsuppressionactualite>
+					</div>
+				</ion-list>
 			</div>
 		</ion-list>
 		<!-- ##################################################################################################################################### -->
@@ -206,15 +220,13 @@
 		<!-- Pour options à nouveau un menu dessous avec partie responsable et partie personne, chaque menu a encore sous propoe menu avec gémeralement ajout, vérification si la personne est inscrit ou responsable quelque part, et suppression.
 		Formulaire de création -->
 		<ion-list *ngSwitchCase="'options'">
-			<div>
-				<div padding>
-					<ion-segment [(ngModel)]="listActionOptions">
-						<ion-segment-button value="gestionResponsablePersonne">Gestion Responsable/Personne</ion-segment-button>
-						<ion-segment-button value="gestionUtilisateurTarif">Gestion utilisateurs et tarifs</ion-segment-button>
-						<ion-segment-button value="gestionLieu">Gestion des lieux</ion-segment-button>
-						<ion-segment-button value="gestionPiece">Gestion des pieces</ion-segment-button>
-					</ion-segment>
-				</div>
+			<div padding>
+				<ion-segment [(ngModel)]="listActionOptions">
+					<ion-segment-button value="gestionResponsablePersonne">Gestion Responsable/Personne</ion-segment-button>
+					<ion-segment-button value="gestionUtilisateurTarif">Gestion utilisateurs et tarifs</ion-segment-button>
+					<ion-segment-button value="gestionLieu">Gestion des lieux</ion-segment-button>
+					<ion-segment-button value="gestionPiece">Gestion des pieces</ion-segment-button>
+				</ion-segment>
 			</div>
 			<div [ngSwitch]="listActionOptions">
 				<ion-list *ngSwitchCase="'gestionResponsablePersonne'">

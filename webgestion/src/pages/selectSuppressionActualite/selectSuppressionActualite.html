@@ -1,0 +1,6 @@
+<p ion-text color="primary" floating>Choisir l'actualité à supprimer : </p>
+<ion-searchbar placeholder="Actualité :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
+<form #f="ngForm" (ngSubmit)="SupprimerActualite(f.value)">
+  <p>A FAIRE</p>
+  <button ion-button type="submit" [disabled]="!f.valid" block>Supprimer</button>
+</form>

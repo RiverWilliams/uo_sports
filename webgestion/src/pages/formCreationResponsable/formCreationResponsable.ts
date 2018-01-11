@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WebserviceProvider } from "../../common/webservice";
 
 @Component({
 	selector: 'page-formcreationresponsable',
@@ -6,15 +7,9 @@ import { Component } from '@angular/core';
 })
 export class formCreationResponsablePage {
 
-	// Creation responsable
-	creationResponsable = {
-		nomResponsable: '',
-		prenomResponsable: '',
-		emailResponsable: '',
-	};
 
 	creationResponsableForm() {
-		console.log(this.creationResponsable)
+
 	};
 
 }

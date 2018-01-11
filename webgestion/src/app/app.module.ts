@@ -7,8 +7,6 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
 
-import {listeInscriptionPage} from "../pages/listeInscription/listeInscription";
-
 import {selectListeAttentePage} from "../pages/selectListeAttente/selectListeAttente";
 import {selectListeAttenteCreneauPage} from "../pages/selectListeAttenteCreneau/selectListeAttenteCreneau";
 import {listeAttentePage} from "../pages/listeAttente/listeAttente";
@@ -38,6 +36,9 @@ import {modificationCreneauPage} from "../pages/modificationCreneau/modification
 import {selectSuppressionCreneauPage} from "../pages/selectSuppressionCreneau/selectSuppressionCreneau";
 
 import {formCreationActualitePage} from "../pages/formCreationActualite/formCreationActualite";
+import {selectModificationActualitePage} from "../pages/selectModificationActualite/selectModificationActualite";
+import {modificationActualitePage} from "../pages/modificationActualite/modificationActualite";
+import {selectSuppressionActualitePage} from "../pages/selectSuppressionActualite/selectSuppressionActualite";
 
 import {formCreationResponsablePage} from "../pages/formCreationResponsable/formCreationResponsable";
 import {selectVerificationResponsablePage} from "../pages/selectVerificationResponsable/selectVerificationResponsable";
@@ -74,8 +75,6 @@ import {PipesModule} from "../pipes/pipes.module";
     MyApp,
     HomePage,
 
-    listeInscriptionPage,
-
     selectListeAttentePage,
     selectListeAttenteCreneauPage,
     listeAttentePage,
@@ -105,6 +104,9 @@ import {PipesModule} from "../pipes/pipes.module";
     selectSuppressionCreneauPage,
 
     formCreationActualitePage,
+    selectModificationActualitePage,
+    modificationActualitePage,
+    selectSuppressionActualitePage,
 
     formCreationResponsablePage,
     selectVerificationResponsablePage,
@@ -144,8 +146,6 @@ import {PipesModule} from "../pipes/pipes.module";
     MyApp,
     HomePage,
 
-    listeInscriptionPage,
-
     selectListeAttentePage,
     selectListeAttenteCreneauPage,
     listeAttentePage,
@@ -175,6 +175,9 @@ import {PipesModule} from "../pipes/pipes.module";
     selectSuppressionCreneauPage,
 
     formCreationActualitePage,
+    selectModificationActualitePage,
+    modificationActualitePage,
+    selectSuppressionActualitePage,
 
     formCreationResponsablePage,
     selectVerificationResponsablePage,
