@@ -18,31 +18,34 @@
 					<ion-col col-4>
 					</ion-col>
 				</ion-row>
-				<ion-row *ngFor="let inscrit of listeInscrit1">
+				<ion-row *ngFor="let p of personne">
 					<ion-col col-4>
 					</ion-col>
 					<ion-col col-2>
 						<ion-item no-lines>
-							<p ion-text align="center" color="primary">{{ inscrit }}</p>
+							<p ion-text align="center" color="primary">{{p.nom}} {{p.prenom}}</p>
 						</ion-item>
 					</ion-col>
-					<ion-col>
+					<!--<ion-col>
 						<ion-item no-lines>
 							<ion-toggle ngModel name="nom" required></ion-toggle>
 						</ion-item>
 					</ion-col>
 					<ion-col>
 						<ion-item no-lines>
-							<ion-toggle ngModel name="ue" required></ion-toggle>
+							<ion-toggle disabled="!inscription.demande" [(ngModel)]="inscrit.demande" name="inscrit.demande" required></ion-toggle>
 						</ion-item>
 					</ion-col>
 					<ion-col col-4>
-					</ion-col>
+						<ion-item *ngIf="inscrit.demande">
+							<ion-input placeholder="ECTS" ngModel name="ects" clearInput required></ion-input>
+						</ion-item>
+					</ion-col>-->
 				</ion-row>
 			</ion-grid>
 			<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
-			<button ion-button (click)="goback()" block>Retour</button>
 		</form>
+		<button ion-button (click)="goback()" block>Retour</button>
 	</div>
 </ion-content>
 <!-- 

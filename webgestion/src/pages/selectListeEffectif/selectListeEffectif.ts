@@ -1,37 +1,37 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { selectListeEffectifCreneauPage } from '../selectListeEffectifCreneau/selectListeEffectifCreneau';
+import {Activite} from "../../common/model";
+import {Observable} from "rxjs/Observable";
+import {FormControl} from "@angular/forms";
+import "rxjs/add/operator/debounceTime";
+import "rxjs/add/operator/switchMap";
+import "rxjs/add/observable/combineLatest";
+import {WebserviceProvider} from "../../common/webservice";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
 	selector: 'page-selectlisteeffectif',
 	templateUrl: 'selectListeEffectif.html'
 })
 export class selectListeEffectifPage {
-	constructor(public navCtrl: NavController) {
+
+	listeActivite: Activite[]
+	search = new FormControl();
+
+	constructor(public navCtrl: NavController, private web: WebserviceProvider) {
 
 	}
 
-	selectListeEffectif = {
-		choixListeEffectif: ''
-	};
-
-	listeActivite = [
-		'activite1',
-		'activite2',
-	];
-
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listeActivite = this.listeActivite.filter(function(activite) {
-				return activite.toLowerCase().includes(val.toLowerCase());
-			});
-		}
+	ngOnInit(): void {
+		this.web.activites.getAll().subscribe(d => this.listeActivite = d);
+		Observable.combineLatest(this.search.valueChanges, this.web.activites.getAll(), (search: string, activites: Activite[]) => {
+			const s = search.toLowerCase();
+			return activites.filter(activite => activite.nom.toLowerCase().includes(s)).sort(Comparateur.Activite.nom);
+		}).subscribe(d => this.listeActivite = d);
 	}
 
-	ListeEffectif() {
-		console.log(this.selectListeEffectif);
-		console.log(this.selectListeEffectif.choixListeEffectif);
-		this.navCtrl.push(selectListeEffectifCreneauPage, {liste: this.selectListeEffectif.choixListeEffectif});
+	ListeEffectif(id: number) {
+		this.navCtrl.push(selectListeEffectifCreneauPage, {idActivite: id});
 	};
 }

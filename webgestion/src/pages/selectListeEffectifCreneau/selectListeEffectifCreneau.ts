@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { listeEffectifPage } from '../listeEffectif/listeEffectif';
+import { Creneau } from "../../common/model";
+import { Activite } from "../../common/model";
+import { WebserviceProvider } from "../../common/webservice";
 
 @Component({
 	selector: 'page-selectlisteeffectifcreneau',
@@ -9,30 +12,20 @@ import { listeEffectifPage } from '../listeEffectif/listeEffectif';
 })
 
 export class selectListeEffectifCreneauPage {
-	public nomliste;
+	public idActivite;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams){
-		this.nomliste = navParams.get("liste");
-		console.log("Parametre ",this.nomliste);
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//il faut importer la bonne liste des Creneaux suivant le string liste
-		//on fait en attendant avec la liste items1 dans l'html
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	listeCreneau: Creneau[];
+
+	constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider){
+		this.idActivite = navParams.get("idActivite");
 	}
 
-	listeCreneau1 = [
-		'lundi 8h',
-		'mercredi 12h'
-	];
+	ngOnInit(): void {
+		this.web.activites.getCreneaux(this.idActivite).subscribe(d => this.listeCreneau = d);
+	}
 
-	selectlisteCreneau = {
-		choixSelectListeCreneau : ''
-	};
-
-	SelectListeCreneauForm() {
-		console.log("Selected Item", this.selectlisteCreneau);
-		console.log(this.selectlisteCreneau.choixSelectListeCreneau);
-		this.navCtrl.push(listeEffectifPage, {liste: this.selectlisteCreneau.choixSelectListeCreneau});
+	SelectListeEffectifCreneauForm(id: number) {
+		this.navCtrl.push(listeEffectifPage, {idCreneau: id});
 	}
 
 	goback() {

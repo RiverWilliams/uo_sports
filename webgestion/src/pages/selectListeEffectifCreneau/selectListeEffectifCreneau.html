@@ -1,15 +1,36 @@
 <ion-content padding>
 	<div padding>
 		<p ion-text color="primary" floating>Créneau de l'activité : </p>
-		<form #f="ngForm" (ngSubmit)="SelectListeCreneauForm(f.value)">
-			<ion-list radio-group ngModel name="choixSelectListeCreneau" required>
-				<ion-item *ngFor="let creneau of listeCreneau1">
-					<ion-label>{{creneau}}</ion-label>
-					<ion-radio value="{{creneau}}"></ion-radio>
+		<form #f="ngForm" (ngSubmit)="SelectListeEffectifCreneauForm(f.value.idCreneau)">
+			<ion-list radio-group ngModel name="idCreneau" required>
+				<ion-item>
+					<ion-row>
+						<ion-col><p ion-text color="primary">Activité</p></ion-col>
+						<ion-col><p ion-text color="primary">Jour</p></ion-col>
+						<ion-col><p ion-text color="primary">Début</p></ion-col>
+						<ion-col><p ion-text color="primary">Fin</p></ion-col>
+						<ion-col><p ion-text color="primary">Responsable</p></ion-col>
+						<ion-col><p ion-text color="primary">Effectif</p></ion-col>
+						<ion-col><p ion-text color="primary">Lieu</p></ion-col>
+					</ion-row>
+				</ion-item>
+				<ion-item *ngFor="let creneau of listeCreneau">
+					<ion-label>
+						<ion-row>
+							<ion-col><p>{{creneau.activite.nom}}</p></ion-col>
+							<ion-col><p>{{creneau.jour|dayOfWeek}}</p></ion-col>
+							<ion-col><p>{{creneau.heureDebut|date:'HH:mm'}}</p></ion-col>
+							<ion-col><p>{{creneau.heureFin|date:'HH:mm'}}</p></ion-col>
+							<ion-col><p>{{creneau.responsable.nom}} {{creneau.responsable.prenom}}</p></ion-col>
+							<ion-col><p>{{creneau.effectif}}</p></ion-col>
+							<ion-col><p>{{creneau.lieu.nom}} {{creneau.lieu.adresse}} {{creneau.lieu.ville}}</p></ion-col>
+						</ion-row>
+					</ion-label>
+					<ion-radio value="{{creneau.id}}"></ion-radio>
 				</ion-item>
 			</ion-list>
 			<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
-			<button ion-button (click)="goback()" block>Retour</button>
 		</form>
+		<button ion-button (click)="goback()" block>Retour</button>
 	</div>
 </ion-content>

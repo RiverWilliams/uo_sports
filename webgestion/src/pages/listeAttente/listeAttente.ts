@@ -1,51 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Inscription, Personne, Creneau } from '../../common/model';
 import { HomePage } from '../home/home';
+import { WebserviceProvider } from "../../common/webservice";
 
 @Component({
 	selector: 'page-listeAttente',
 	templateUrl: 'listeAttente.html'
 })
 
-export class listeAttentePage {
-	public nomliste;
+export class listeAttentePage implements OnInit {
+	public idCreneau;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams){
-		this.nomliste = navParams.get("liste");
-		console.log("Parametre ",this.nomliste);
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//il faut importer la bonne liste d'attente suivant le string liste
-		//on fait en attendant avec la liste items1 dans l'html
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider){
+		this.idCreneau = navParams.get("idCreneau");
 	}
 
-	listeInscrit1 = [
-		'francis',
-		'tony',
-		'lois',
-		'clark',
-		'david',
-		'goliat',
-		'victor'
-	];
 
-	listeInscrit2 = [
-		'xxxxx',
-		'Metroixxxxxd',
-		'Megxxxxa Mxxxxan',
-		'Txxxxxhe Legxxxxxend of Zelda',
-		'Paxxxc-Man',
-		'GTA',
-		'Halo'
-	];
+    ngOnInit(): void {
 
-	listeAttente = {
-		choixListeAttente : ''
-	};
+    }
+
+	@Input() inscription: Inscription;
+	@Input() personne : Personne;
 
 	ListeAttenteForm() {
-		console.log("Selected Item", this.listeAttente);
-		console.log(this.listeAttente.choixListeAttente);
+
 	}
 
 	goback() {
