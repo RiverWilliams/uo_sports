@@ -1,60 +1,34 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AlertController, ToastController} from "ionic-angular";
+import {WebserviceProvider} from "../../common/webservice";
+import {Activite, Sport} from "../../common/model";
+import {Comparateur} from "../../common/comparateur";
+import {Utilitaire} from "../../common/utilitaire";
 
 @Component({
-	selector: 'page-formcreationactivite',
-	templateUrl: 'formCreationActivite.html'
+  selector: 'page-formcreationactivite',
+  templateUrl: 'formCreationActivite.html'
 })
-export class formCreationActivitePage {
+export class formCreationActivitePage implements OnInit {
+  ngOnInit(): void {
+    this.web.sports.getAll().subscribe(d => this.sports = d.sort(Comparateur.Sport.nom));
+  }
 
-	// Creation d'activite
-	creationActivite = {
-		nomActivite: '',
-		responsableActivite: '',
-		jourActivite: '',
-		heureDebutActivite: '',
-		heureFinActivite: '',
-		effectifActivite: '',
-		niveauActivite: '',
-		lieuActivite: '',
+  sports: Sport[];
 
-	};
+  constructor(private toastCtrl: ToastController, private alertCtrl: AlertController, private web: WebserviceProvider) {
+  }
 
-	listeActivite = [
-		'50m haie',
-		'Javelot',
-		'Hockey'
-	];
-
-	listeResponsable = [
-		'mr zen',
-		'mrs peace',
-		'kid war'
-	];
-
-	listeJour = [
-		'lundi',
-		'mardi',
-		'mercredi',
-		'jeudi',
-		'vendredi',
-		'samedi',
-		'dimanche'
-	];
-
-	listeNiveau = [
-		'debutant',
-		'intermediaire',
-		'pro'
-	];
-
-	listeLieu = [
-		'piscine',
-		'gymnase',
-		'stade'
-	];
-
-	creationActiviteForm() {
-		console.log(this.creationActivite)
-	};
+  creationActiviteForm(value) {
+    let a: Activite = {nom: value.nom};
+    this.web.activites.post(a).subscribe((id) => {
+        value.sports.forEach(s => this.web.activites.addSport(id, s.id).subscribe(() => {
+          }, () => Utilitaire.createAlertErreur(this.alertCtrl).present()
+        ));
+        Utilitaire.createToastOk(this.toastCtrl).present();
+      },
+      () => Utilitaire.createAlertErreur(this.alertCtrl).present()
+    );
+  };
 
 }

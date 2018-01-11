@@ -15,7 +15,7 @@ export class modificationSportPage implements OnInit {
   public idSport;
   // Modification d'un sport
   sport: Sport;
-  idCategoriesDuSport: CategorieSport[] = [];
+  categoriesDuSport: CategorieSport[] = [];
   categoriesSports: CategorieSport[];
   nouvelleCategorie: CategorieSport[];
 
@@ -26,7 +26,7 @@ export class modificationSportPage implements OnInit {
   ngOnInit(): void {
     this.web.sports.get(this.idSport).subscribe(d => this.sport = d);
     this.web.categoriesSports.getAll().subscribe(d => this.categoriesSports = d.sort(Comparateur.CategorieSport.nom));
-    this.web.sports.getCategoriesSport(this.idSport).subscribe(d => this.nouvelleCategorie = Array.from(this.idCategoriesDuSport = d));
+    this.web.sports.getCategoriesSport(this.idSport).subscribe(d => this.nouvelleCategorie = Array.from(this.categoriesDuSport = d));
   }
 
   compareFn(a: any, b: any) {

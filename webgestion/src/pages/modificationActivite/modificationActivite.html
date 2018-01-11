@@ -1,58 +1,16 @@
-<ion-content padding>
-<div padding>
-	<div>
-		<form (ngSubmit)="modificationActiviteForm()">
-			<ion-item>
-				<ion-label color="primary" floating>Nom activité : </ion-label>
-				<ion-input [(ngModel)]="modificationActivite.nomActivite" name="nomActivite" type="text" clearInput>{{items1[0]}}</ion-input>
-			</ion-item>
-			<ion-item>
-				<ion-label color="primary" floating>Responsable : </ion-label>
-					<ion-select [(ngModel)]="modificationActivite.responsableActivite" name="responsableActivite" okText="Ok" cancelText="Annuler" multiple="true">
-						<ion-option value="testprof1">TestProf1</ion-option>
-						<ion-option value="testprof2">TestProf2</ion-option>
-					</ion-select>
-			</ion-item>
-			<ion-item>
-				<ion-label color="primary" floating>Jour : </ion-label>
-				<ion-select [(ngModel)]="modificationActivite.jourActivite" name="jourActivite" okText="Ok" cancelText="Annuler" multiple="true">
-						<ion-option value="lundi">Lundi</ion-option>
-						<ion-option value="mardi">Mardi</ion-option>
-						<ion-option value="mercredi">Mercredi</ion-option>
-						<ion-option value="jeudi">Jeudi</ion-option>
-						<ion-option value="vendredi">Vendredi</ion-option>
-						<ion-option value="samedi">Samedi</ion-option>
-						<ion-option value="dimanche">Dimanche</ion-option>
-					</ion-select>
-			</ion-item>
-			<ion-item>
-				<ion-label color="primary" floating>Heure de début : </ion-label>
-				<ion-datetime [(ngModel)]="modificationActivite.heureDebutActivite" name="heureDebutActivite" displayFormat="HH/mm"></ion-datetime>
-			</ion-item>
-			<ion-item>
-				<ion-label color="primary" floating>Heure de fin : </ion-label>
-				<ion-datetime [(ngModel)]="modificationActivite.heureFinActivite" name="heureFinActivite" displayFormat="HH/mm"></ion-datetime>
-			</ion-item>
-			<ion-item>
-				<ion-label color="primary" floating>Effectif : </ion-label>
-				<ion-input [(ngModel)]="modificationActivite.effectifActivite" name="effectifActivite" type="number"></ion-input>
-			</ion-item>
-			<ion-item>
-				<ion-label color="primary" floating>Lieu : </ion-label>
-					<ion-select [(ngModel)]="modificationActivite.lieuActivite" name="lieuActivite" okText="Ok" cancelText="Annuler" multiple="false">
-						<ion-option value="testLlieu1">TestLieu1</ion-option>
-						<ion-option value="testLlieu2">TestLieu2</ion-option>
-					</ion-select>
-			</ion-item>
-			<button ion-button type="submit" block>Modifier l'activité</button>
-		</form>
-	</div>
-	<button ion-button (click)="goback()" block>Retour</button>
-</div>
-</ion-content>
-
-
-<div>
-	<h5>Parametre passé:</h5>
-	<pre>selections: [{{liste}}]</pre>
-</div>
+<script src="../selectSuppressionSport/selectSuppressionSport.ts"></script>
+<form #f="ngForm" (ngSubmit)="modificationActiviteForm()">
+  <ion-item>
+    <ion-label color="primary" floating>Nom activité :</ion-label>
+    <ion-input *ngIf="activite" [(ngModel)]="activite.nom" name="nom" type="text" clearInput required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Concerne le sport :</ion-label>
+    <ion-select [(ngModel)]="nouveauSport" name="sports" okText="Ok" cancelText="Annuler" multiple="true"
+                [compareWith]="compareFn">
+      <ion-option *ngFor="let s of sports" [value]="s">{{s.nom}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <button ion-button [disabled]="!f.valid" type="submit" block>Modifier l'activité</button>
+</form>
+<button ion-button (click)="goback()" block>Retour</button>

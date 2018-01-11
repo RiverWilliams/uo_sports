@@ -15,13 +15,13 @@ export class selectSuppressionSportPage implements OnInit {
   listeSport: Sport[];
 
   ngOnInit(): void {
-    this.web.sports.getAll().subscribe(d => this.listeSport = d);
     this.search.valueChanges.subscribe((search) => {
       const s = search.toLowerCase();
       this.web.sports.getAll().subscribe(sports => {
         this.listeSport = sports.filter(sport => sport.nom.toLowerCase().includes(s)).sort(Comparateur.Sport.nom);
       });
     });
+    this.search.setValue('', {emitEvent: true});
   }
 
 // Suppression d'une Sport

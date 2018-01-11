@@ -182,7 +182,7 @@ class ActiviteProvider {
     }
 
     public put(activite: Activite): Observable<void> {
-        return this.http.post<void>(Urls.CRENEAUX, activite);
+        return this.http.put<void>(Urls.ACTIVITES, activite);
     }
 
     public delete(id: number): Observable<void> {

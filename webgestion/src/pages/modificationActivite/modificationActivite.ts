@@ -1,49 +1,53 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import {Component, OnInit} from '@angular/core';
+import {AlertController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {HomePage} from '../home/home';
+import {Activite, Sport} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
+import {Comparateur} from "../../common/comparateur";
+import {Utilitaire} from "../../common/utilitaire";
 
 @Component({
-	selector: 'page-modificationActivite',
-	templateUrl: 'modificationActivite.html'
+  selector: 'page-modificationActivite',
+  templateUrl: 'modificationActivite.html'
 })
 
-export class modificationActivitePage {
-	public nomliste;
+export class modificationActivitePage implements OnInit {
+  private idActivite;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams){
-		this.nomliste = navParams.get("liste");
-		console.log("Parametre ",this.nomliste);
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//il faut importer la bonne liste d'attente suivant le string liste
-		//on fait en attendant avec la liste items1 dans l'html
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	}
+  ngOnInit(): void {
+    this.web.activites.get(this.idActivite).subscribe(d => this.activite = d);
+    this.web.sports.getAll().subscribe(d => this.sports = d.sort(Comparateur.Sport.nom));
+    this.web.activites.getSports(this.idActivite).subscribe(d => this.nouveauSport = Array.from(this.sportActuel = d));
+  }
 
-	modificationActivite = {
-		nomActivite: '',
-		responsableActivite: '',
-		jourActivite: '',
-		heureDebutActivite: '',
-		heureFinActivite: '',
-		effectifActivite: '',
-		lieuActivite: '',
-	};
+  constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider, private toastCtrl: ToastController, private alertCtrl: AlertController) {
+    this.idActivite = navParams.get("idActivite");
+  }
 
-	modificationActiviteForm() {
-		console.log(this.modificationActivite)
-	};
+  activite: Activite;
+  private sportActuel: Sport[];
+  nouveauSport: Sport[];
+  sports: Sport[];
 
-	items1 = [
-		'Natation',
-		'Dupond',
-		'Lundi',
-		'13/00',
-		'15/00',
-		'20',
-		'Piscine'
-	];
+  compareFn(a: any, b: any) {
+    return a.id === b.id;
+  }
 
-	goback() {
-		this.navCtrl.push(HomePage);
-	}
+  modificationActiviteForm() {
+    console.log(this.activite)
+
+    this.web.activites.put(this.activite).subscribe();
+
+    const del = this.sportActuel.filter(value => !this.nouveauSport.find(value2 => value2.id === value.id));
+    const add = this.nouveauSport.filter(value => !this.sportActuel.find(value2 => value2.id === value.id));
+
+    del.forEach(value => this.web.activites.deleteSport(this.idActivite, value.id).subscribe());
+    add.forEach(value => this.web.activites.addSport(this.idActivite, value.id).subscribe());
+    Utilitaire.createToastOk(this.toastCtrl).present();
+
+  };
+
+  goback() {
+    this.navCtrl.push(HomePage);
+  }
 }

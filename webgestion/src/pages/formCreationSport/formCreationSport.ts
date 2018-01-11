@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AlertController, ToastController} from "ionic-angular";
 import {WebserviceProvider} from "../../common/webservice";
-import {CategorieSport} from "../../common/model";
+import {Activite, CategorieSport} from "../../common/model";
 import {Utilitaire} from "../../common/utilitaire";
 import {Comparateur} from "../../common/comparateur";
 
@@ -19,12 +19,12 @@ export class formCreationSportPage {
   }
 
   CreationSportForm(s) {
-    this.web.sports.post(s).subscribe((id) => {
+    let a: Activite = {nom: s.nom};
+    this.web.sports.post(a).subscribe((id) => {
         if (Array.isArray(s.categories))
           s.categories.forEach(s => this.web.sports.addCategorie(id, s).subscribe(() => {
             }, () => Utilitaire.createAlertErreur(this.alertCtrl).present()
-          ))
-          ;
+          ));
         Utilitaire.createToastOk(this.toastCtrl).present();
       }, () => {
         Utilitaire.createAlertErreur(this.alertCtrl).present();

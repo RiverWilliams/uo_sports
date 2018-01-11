@@ -1,15 +1,13 @@
 <form #f="ngForm" (ngSubmit)="creationActiviteForm(f.value)">
-	<ion-item>
-		<ion-label color="primary" floating>Nom activité : </ion-label>
-		<ion-select ngModel name="nom" okText="Ok" cancelText="Annuler" multiple="false" required>
-			<ion-option *ngFor="let activite of listeActivite">{{ activite }}</ion-option>
-		</ion-select>
-	</ion-item>
-	<ion-item>
-		<ion-label color="primary" floating>Concerne le sport :</ion-label>
-		<ion-select ngModel name="sports" okText="Ok" cancelText="Annuler" multiple="false" required>
-			<ion-option *ngFor="let s of sports" [value]="s.id">{{s.nom}}</ion-option>
-		</ion-select>
-	</ion-item>
-	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Créer l'activité</button>
+  <ion-item>
+    <ion-label color="primary" floating>Nom activité :</ion-label>
+    <ion-input ngModel name="nom" type="text" clearInput required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Concerne le sport :</ion-label>
+    <ion-select ngModel name="sports" okText="Ok" cancelText="Annuler" multiple="true">
+      <ion-option *ngFor="let s of sports" [value]="s">{{s.nom}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <button ion-button [disabled]="!f.valid" type="submit" block>Créer l'activité</button>
 </form>

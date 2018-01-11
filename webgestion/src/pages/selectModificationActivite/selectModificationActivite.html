@@ -1,11 +1,11 @@
-<p ion-text color="primary" floating>Choisir l'activité à modifier : (champ à préremplir??)</p>
-<ion-searchbar placeholder="Activité :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
-<form #f="ngForm" (ngSubmit)="SelectModificationActivite(f.value)">
-	<ion-list radio-group ngModel name="descCourte" required>
-		<ion-item *ngFor="let activite of listeActivite">
-			<ion-label>{{activite}}</ion-label>
-			<ion-radio value="{{activite}}"></ion-radio>
-		</ion-item>
-	</ion-list>
-	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
+<p ion-text color="primary" floating>Choisir l'activité à modifier :</p>
+<ion-searchbar placeholder="Activite :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
+<form #f="ngForm" (ngSubmit)="SelectModificationActivite(f.value.idActivite)">
+  <ion-list radio-group ngModel name="idActivite" required>
+    <ion-item *ngFor="let activite of listeActivite">
+      <ion-label>{{activite.nom}}</ion-label>
+      <ion-radio [value]="activite.id"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <button ion-button [disabled]="!f.valid" type="submit" block>Valider</button>
 </form>

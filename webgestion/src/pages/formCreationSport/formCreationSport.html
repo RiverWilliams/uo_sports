@@ -2,7 +2,7 @@
   <form #f="ngForm" (ngSubmit)="CreationSportForm(f.value)">
     <ion-item>
       <ion-label color="primary" floating>Nom du sport :</ion-label>
-      <ion-input ngModel name="nom" type="text" clearInput></ion-input>
+      <ion-input ngModel name="nom" type="text" clearInput required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" floating>A les catégories :</ion-label>

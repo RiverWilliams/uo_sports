@@ -1,11 +1,11 @@
-<p ion-text color="primary" floating>Choisir l'activité à supprimer : </p>
-<ion-searchbar placeholder="Activité :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
-<form #f="ngForm" (ngSubmit)="SupprimerActivite(f.value)">
-	<ion-list radio-group ngModel name="choixSuppressionActivite" required>
-		<ion-item *ngFor="let activite of listeActivite">
-			<ion-label>{{activite}}</ion-label>
-			<ion-radio value="{{activite}}"></ion-radio>
-		</ion-item>
-	</ion-list>
-	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Choisir cette liste d'attente</button>
+<p ion-text color="primary" floating>Choisir le sport à supprimer : </p>
+<ion-searchbar placeholder="Activite :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
+<form #f="ngForm" (ngSubmit)="SupprimerActivite(f.value.sport)">
+  <ion-list radio-group ngModel name="sport" required>
+    <ion-item *ngFor="let activite of listeActivite">
+      <ion-label>{{activite.nom}}</ion-label>
+      <ion-radio [value]="activite"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <button ion-button type="submit" [disabled]="!f.valid" block>Supprimer</button>
 </form>

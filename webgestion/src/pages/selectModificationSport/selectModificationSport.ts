@@ -25,7 +25,7 @@ export class selectModificationSportPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.web.sports.getAll().subscribe(d => this.listeSport = d);
+    this.web.sports.getAll().subscribe(d => this.listeSport = d.sort(Comparateur.Sport.nom));
     Observable.combineLatest(this.search.valueChanges, this.web.sports.getAll(), (search: string, sports: Sport[]) => {
       const s = search.toLowerCase();
       return sports.filter(sport => sport.nom.toLowerCase().includes(s)).sort(Comparateur.Sport.nom);
