@@ -3,8 +3,6 @@ import {AlertController, ToastController} from 'ionic-angular';
 import {Actualite} from "../../common/model";
 import {FormControl} from "@angular/forms";
 import {WebserviceProvider} from "../../common/webservice";
-import {Comparateur} from "../../common/comparateur";
-import {Utilitaire} from "../../common/utilitaire";
 
 @Component({
   selector: 'page-selectsuppressionactualite',

@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
-import { listeEffectifPage } from '../listeEffectif/listeEffectif';
-import { Creneau } from "../../common/model";
-import { Activite } from "../../common/model";
-import { WebserviceProvider } from "../../common/webservice";
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {HomePage} from '../home/home';
+import {listeEffectifPage} from '../listeEffectif/listeEffectif';
+import {Creneau} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
 
 @Component({
 	selector: 'page-selectlisteeffectifcreneau',

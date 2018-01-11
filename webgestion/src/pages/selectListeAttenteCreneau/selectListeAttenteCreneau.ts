@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
-import { listeAttentePage } from '../listeAttente/listeAttente';
-import { Creneau } from "../../common/model";
-import { Activite } from "../../common/model";
-import { WebserviceProvider } from "../../common/webservice";
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {HomePage} from '../home/home';
+import {listeAttentePage} from '../listeAttente/listeAttente';
+import {Creneau} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
 	selector: 'page-selectlisteattentecreneau',
@@ -21,7 +21,7 @@ export class selectListeAttenteCreneauPage {
 	}
 
 	ngOnInit(): void {
-		this.web.activites.getCreneaux(this.idActivite).subscribe(d => this.listeCreneau = d);
+		this.web.activites.getCreneaux(this.idActivite).subscribe(d => this.listeCreneau = d.sort(Comparateur.Creneau.activiteChronologique));
 	}
 
 	SelectListeAttenteCreneauForm(id: number) {

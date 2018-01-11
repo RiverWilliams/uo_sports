@@ -40,7 +40,7 @@ public class InscriptionDAO extends AbstractDao implements IInscriptionDAO {
     @Override
     public List<Inscription> getEnAttentesByIdCreneau(Long id) {
         //language=SQL
-        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_creneau=? AND en_attente ) inscription JOIN personne ON inscription.id_personne=personne.id JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id";
+        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_creneau=? AND en_attente ) inscription JOIN personne ON inscription.id_personne=personne.id JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id JOIN creneau ON inscription.id_creneau=creneau.id JOIN responsable ON creneau.id_responsable = responsable.id JOIN niveau ON creneau.id_niveau = niveau.id JOIN activite ON creneau.id_activite = activite.id JOIN lieu ON creneau.id_lieu = lieu.id";
         return getJdbcTemplate().query(sql, inscriptionRowMapper, id);
     }
 
@@ -58,14 +58,14 @@ public class InscriptionDAO extends AbstractDao implements IInscriptionDAO {
     @Override
     public List<Inscription> getInscriptionsByIdPersonne(Long id) {
         //language=SQL
-        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_personne=?) inscription JOIN creneau ON inscription.id_creneau=creneau.id JOIN responsable ON creneau.id_responsable = responsable.id JOIN niveau ON creneau.id_niveau = niveau.id JOIN activite ON creneau.id_activite = activite.id JOIN lieu ON creneau.id_lieu = lieu.id JOIN personne ON personne.id=inscription.id_personne";
+        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_personne=?) inscription JOIN creneau ON inscription.id_creneau=creneau.id JOIN responsable ON creneau.id_responsable = responsable.id JOIN niveau ON creneau.id_niveau = niveau.id JOIN activite ON creneau.id_activite = activite.id JOIN lieu ON creneau.id_lieu = lieu.id JOIN personne ON personne.id=inscription.id_personne JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id";
         return getJdbcTemplate().query(sql, inscriptionRowMapper, id);
     }
 
     @Override
     public List<Inscription> getInscritsByIdCreneau(Long id) {
         //language=SQL
-        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_creneau=? AND NOT en_attente ) inscription JOIN personne ON inscription.id_personne=personne.id JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id";
+        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_creneau=? AND NOT en_attente ) inscription JOIN personne ON inscription.id_personne=personne.id JOIN categorie_personne ON personne.id_categorie_personne = categorie_personne.id JOIN creneau ON inscription.id_creneau=creneau.id JOIN responsable ON creneau.id_responsable = responsable.id JOIN niveau ON creneau.id_niveau = niveau.id JOIN activite ON creneau.id_activite = activite.id JOIN lieu ON creneau.id_lieu = lieu.id";
         return getJdbcTemplate().query(sql, inscriptionRowMapper, id);
     }
 

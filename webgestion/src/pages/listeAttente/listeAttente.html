@@ -1,47 +1,51 @@
 <ion-content padding>
   <div padding>
     <p ion-text color="primary" floating>Etudiant(s) ou personnel(s) en attente d'inscription à l'activité : </p>
-    <form #f="ngForm" (ngSubmit)="ListeAttenteForm(f.value)">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-4>
-          </ion-col>
-          <ion-col col-2><p ion-text align="center" color="primary">Nom de l'étudiant: </p></ion-col>
-          <ion-col><p ion-text align="right" color="primary">Inscription : </p></ion-col>
-          <ion-col><p ion-text align="right" color="primary">Inscription UE : </p></ion-col>
-          <ion-col col-4>
-          </ion-col>
-        </ion-row>
-        <ion-row *ngFor="let attent of listeInscription">
-          <ion-col col-4></ion-col>
-          <ion-col col-2>
-            <ion-item no-lines>
-              <p ion-text align="center">{{attent.personne.nom}} {{attent.personne.prenom}}</p>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item no-lines>
-              <ion-toggle ngModel name="nom" required></ion-toggle>
-            </ion-item>
-          </ion-col>
-          <!--<ion-col>
-            <ion-item no-lines>
-              <ion-toggle disabled="!inscription.demande" [(ngModel)]="inscrit.demande" name="inscrit.demande" required></ion-toggle>
-            </ion-item>
-          </ion-col>
-          <ion-col col-4>
-            <ion-item *ngIf="inscrit.demande">
-              <ion-input placeholder="ECTS" ngModel name="ects" clearInput required></ion-input>
-            </ion-item>
-          </ion-col>-->
-        </ion-row>
-      </ion-grid>
-      <button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
+    <form #f="ngForm" (ngSubmit)="ListeAttenteForm()">
+      <ion-list>
+        <ion-list-header>
+          <ion-row>
+            <ion-col>Nom</ion-col>
+            <ion-col>Prénom</ion-col>
+            <ion-col>Accepter</ion-col>
+            <ion-col>ECTS</ion-col>
+            <ion-col>Nombre d'heures</ion-col>
+          </ion-row>
+        </ion-list-header>
+        <ion-item *ngFor="let inscription of listeInscription">
+          <ion-label>
+            <ion-row>
+              <ion-col>{{inscription.personne.nom}}</ion-col>
+              <ion-col>{{inscription.personne.prenom}}</ion-col>
+              <ion-col>
+                <ion-item no-lines>
+                  <ion-toggle [ngModel]="!inscription.enAttente"
+                              (ionChange)="inscription.enAttente=!inscription.enAttente" name="enAttente"></ion-toggle>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item no-lines *ngIf="inscription.demande">
+                  <ion-input placeholder="ECTS" (ngModel)="inscription.ects" name="ects" clearInput
+                             [required]="!inscription.enAttente"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item no-lines *ngIf="inscription.demande">
+                  <ion-input placeholder="Nombre d'heures" (ngModel)="inscription.nombreHeures" name="nbHeures"
+                             clearInput
+                             [required]="!inscription.enAttente"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <button ion-button [disabled]="!f.valid" type="submit" block>Valider</button>
     </form>
     <button ion-button (click)="goback()" block>Retour</button>
   </div>
 </ion-content>
-<!-- 
+<!--
 
       <ion-list>
         <ion-item *ngFor="let inscrit of listeInscrit1">

@@ -22,9 +22,10 @@ export class formCreationActivitePage implements OnInit {
   creationActiviteForm(value) {
     let a: Activite = {nom: value.nom};
     this.web.activites.post(a).subscribe((id) => {
-        value.sports.forEach(s => this.web.activites.addSport(id, s.id).subscribe(() => {
-          }, () => Utilitaire.createAlertErreur(this.alertCtrl).present()
-        ));
+        if (Array.isArray(value.sport))
+          value.sports.forEach(s => this.web.activites.addSport(id, s.id).subscribe(() => {
+            }, () => Utilitaire.createAlertErreur(this.alertCtrl).present()
+          ));
         Utilitaire.createToastOk(this.toastCtrl).present();
       },
       () => Utilitaire.createAlertErreur(this.alertCtrl).present()

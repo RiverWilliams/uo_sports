@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {HomePage} from '../home/home';
-import {Actualite} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
-import {Utilitaire} from "../../common/utilitaire";
-import {Comparateur} from "../../common/comparateur";
 
 @Component({
   selector: 'page-modificationactualite',

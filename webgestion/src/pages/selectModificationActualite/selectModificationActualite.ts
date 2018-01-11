@@ -3,9 +3,7 @@ import {NavController} from 'ionic-angular';
 import {modificationActualitePage} from '../modificationActualite/modificationActualite';
 import {Activite} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
-import {Comparateur} from "../../common/comparateur";
 import {FormControl} from "@angular/forms";
-import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'page-selectmodificationactualite',
