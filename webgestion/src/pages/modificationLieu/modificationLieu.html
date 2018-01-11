@@ -13,8 +13,8 @@
 				<ion-label color="primary" floating>Ville : </ion-label>
 				<ion-input ngModel name="ville" type="text" clearInput></ion-input>
 			</ion-item>
-			<button ion-button [disabled]="!f.valid || valider" type="submit" block>Créer le lieu</button>
-			<button ion-button (click)="goback()" block>Retour</button>
+			<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
 		</form>
+		<button ion-button (click)="goback()" block>Retour</button>
 	</div>
 </ion-content>

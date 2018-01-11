@@ -1,0 +1,6 @@
+<p ion-text color="primary" floating>Choisir la personne à modifier :</p>
+<ion-searchbar placeholder="Personne :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+<form #f="ngForm" (ngSubmit)="SelectModificationPersonne(f.value)">
+	<h1>A FAIRE</h1>
+	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
+</form>

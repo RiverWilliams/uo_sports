@@ -1,6 +1,7 @@
 <p ion-text color="primary" floating>Choisir le responsable à supprimer : </p>
 <ion-searchbar placeholder="Nom :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SuppressionResponsable(f.value)">
+		<h1>A FAIRE</h1>
 	<ion-list radio-group ngModel name="choixSuppressionResponsable" required>
 		<ion-item *ngFor="let responsable of listeResponsable">
 			<ion-label>{{responsable}}</ion-label>

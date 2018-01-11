@@ -41,11 +41,15 @@ import {modificationActualitePage} from "../pages/modificationActualite/modifica
 import {selectSuppressionActualitePage} from "../pages/selectSuppressionActualite/selectSuppressionActualite";
 
 import {formCreationResponsablePage} from "../pages/formCreationResponsable/formCreationResponsable";
+import {selectModificationResponsablePage} from "../pages/selectModificationResponsable/selectModificationResponsable";
+import {modificationResponsablePage} from "../pages/modificationResponsable/modificationResponsable";
 import {selectVerificationResponsablePage} from "../pages/selectVerificationResponsable/selectVerificationResponsable";
 import {verificationResponsablePage} from "../pages/verificationResponsable/verificationResponsable";
 import {selectSuppressionResponsablePage} from "../pages/selectSuppressionResponsable/selectSuppressionResponsable";
 
 import {formCreationPersonnePage} from "../pages/formCreationPersonne/formCreationPersonne";
+import {selectModificationPersonnePage} from "../pages/selectModificationPersonne/selectModificationPersonne";
+import {modificationPersonnePage} from "../pages/modificationPersonne/modificationPersonne";
 import {selectDesinscriptionPersonnePage} from "../pages/selectDesinscriptionPersonne/selectDesinscriptionPersonne";
 import {desinscriptionPersonnePage} from "../pages/desinscriptionPersonne/desinscriptionPersonne";
 import {selectSuppressionPersonnePage} from "../pages/selectSuppressionPersonne/selectSuppressionPersonne";
@@ -109,11 +113,15 @@ import {PipesModule} from "../pipes/pipes.module";
     selectSuppressionActualitePage,
 
     formCreationResponsablePage,
+    selectModificationResponsablePage,
+    modificationResponsablePage,
     selectVerificationResponsablePage,
     verificationResponsablePage,
     selectSuppressionResponsablePage,
 
     formCreationPersonnePage,
+    selectModificationPersonnePage,
+    modificationPersonnePage,
     selectDesinscriptionPersonnePage,
     desinscriptionPersonnePage,
     selectSuppressionPersonnePage,
@@ -180,11 +188,15 @@ import {PipesModule} from "../pipes/pipes.module";
     selectSuppressionActualitePage,
 
     formCreationResponsablePage,
+    selectModificationResponsablePage,
+    modificationResponsablePage,
     selectVerificationResponsablePage,
     verificationResponsablePage,
     selectSuppressionResponsablePage,
 
     formCreationPersonnePage,
+    selectModificationPersonnePage,
+    modificationPersonnePage,
     selectDesinscriptionPersonnePage,
     desinscriptionPersonnePage,
     selectSuppressionPersonnePage,

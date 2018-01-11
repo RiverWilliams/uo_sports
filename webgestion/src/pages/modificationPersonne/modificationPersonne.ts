@@ -3,18 +3,17 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
 @Component({
-	selector: 'page-verificationresponsable',
-	templateUrl: 'verificationResponsable.html'
+	selector: 'page-modificationpersonne',
+	templateUrl: 'modificationPersonne.html'
 })
 
-export class verificationResponsablePage {
-	public nomliste;
+export class modificationPersonnePage {
 
 	constructor(public navCtrl: NavController, public navParams: NavParams){
 
 	}
 
-	VerificationResponsableForm() {
+	modificationPersonneForm() {
 
 	};
 
