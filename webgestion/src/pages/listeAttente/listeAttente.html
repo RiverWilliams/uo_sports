@@ -25,13 +25,14 @@
               </ion-col>
               <ion-col>
                 <ion-item no-lines *ngIf="inscription.demande">
-                  <ion-input placeholder="ECTS" (ngModel)="inscription.ects" name="ects" clearInput
+                  <ion-input type="number" placeholder="ECTS" (ngModel)="inscription.ects" name="ects" clearInput
                              [required]="!inscription.enAttente"></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col>
                 <ion-item no-lines *ngIf="inscription.demande">
-                  <ion-input placeholder="Nombre d'heures" (ngModel)="inscription.nombreHeures" name="nbHeures"
+                  <ion-input type="number" placeholder="Nombre d'heures" (ngModel)="inscription.nombreHeures"
+                             name="nbHeures"
                              clearInput
                              [required]="!inscription.enAttente"></ion-input>
                 </ion-item>

@@ -18,10 +18,7 @@ export class modificationActualitePage implements OnInit {
   }
 
   ngOnInit(): void {
-  /*  this.web.sports.get(this.idSport).subscribe(d => this.sport = d);
-    this.web.categoriesSports.getAll().subscribe(d => this.categoriesSports = d.sort(Comparateur.CategorieSport.nom));
-    this.web.sports.getCategoriesSport(this.idSport).subscribe(d => this.nouvelleCategorie = Array.from(this.categoriesDuSport = d));
-    */
+
   }
 
   compareFn(a: any, b: any) {
@@ -29,14 +26,7 @@ export class modificationActualitePage implements OnInit {
   }
 
   modificationActualiteForm() {
-  /*  this.web.sports.put(this.sport).subscribe();
 
-    const del = this.categoriesSports.filter(value => !this.nouvelleCategorie.find(value2 => value2.id === value.id));
-    const add = this.nouvelleCategorie.filter(value => !this.categoriesSports.find(value2 => value2.id === value.id));
-
-    del.forEach(value => this.web.sports.deleteCategoriesSport(this.idSport, value.id).subscribe());
-    add.forEach(value => this.web.sports.addCategorie(this.idSport, value.id).subscribe());
-    Utilitaire.createToastOk(this.toastCtrl).present();*/
   };
 
   goback() {

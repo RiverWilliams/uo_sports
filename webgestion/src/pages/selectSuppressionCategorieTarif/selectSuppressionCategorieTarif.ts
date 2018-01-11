@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController } from 'ionic-angular';
-import { WebserviceProvider } from "../../common/webservice";
-import { FormControl } from "@angular/forms";
-import { Comparateur } from "../../common/comparateur";
-import { Observable } from "rxjs/Observable";
+import {Component} from '@angular/core';
+import {AlertController} from 'ionic-angular';
+import {FormControl} from "@angular/forms";
 
 @Component({
 	selector: 'page-selectsuppressioncategorietarif',
@@ -15,7 +12,7 @@ export class selectSuppressionCategorieTarifPage {
 
 
 	// Suppression d'activite
-	constructor(public alertCtrl: AlertController, private web: WebserviceProvider) {
+	constructor(public alertCtrl: AlertController) {
 
 	}
 

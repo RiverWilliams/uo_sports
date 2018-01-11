@@ -24,12 +24,12 @@ export interface ActualiteJSON {
 }
 
 export interface InscriptionJSON {
-    personne?: Personne;
+    personne: Personne;
     demande: boolean;
     ects: number;
     enAttente: boolean;
     nombreHeures: number;
-    creneau?: CreneauJSON;
+    creneau: CreneauJSON;
 }
 
 export namespace Adaptateur {
@@ -48,7 +48,7 @@ export namespace Adaptateur {
         export function fromJSON(inscription: InscriptionJSON): Inscription {
             return {
                 personne: inscription.personne,
-                creneau: Creneau.fromJSON(<CreneauJSON>inscription.creneau),
+                creneau: Creneau.fromJSON(inscription.creneau),
                 demande: inscription.demande,
                 enAttente: inscription.enAttente,
                 nombreHeures: inscription.nombreHeures,

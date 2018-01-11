@@ -1,25 +1,29 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
-import { WebserviceProvider } from "../../common/webservice";
+import {Component, OnInit} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {HomePage} from '../home/home';
+import {WebserviceProvider} from "../../common/webservice";
+import {Inscription} from "../../common/model";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
-	selector: 'page-listeEffectif',
-	templateUrl: 'listeEffectif.html'
+  selector: 'page-listeEffectif',
+  templateUrl: 'listeEffectif.html'
 })
 
-export class listeEffectifPage {
-	public idCreneau;
+export class listeEffectifPage implements OnInit {
+  ngOnInit(): void {
+    this.web.creneaux.getInscrits(this.idCreneau).subscribe(d => this.inscriptions = d.sort(Comparateur.Inscription.personneNomPrenom));
+  }
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider){
-		this.idCreneau = navParams.get("idCreneau");
-	}
+  public idCreneau;
 
-	ListeEffectifForm() {
+  inscriptions: Inscription[];
 
-	}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider) {
+    this.idCreneau = navParams.get("idCreneau");
+  }
 
-	goback() {
-		this.navCtrl.push(HomePage);
-	}
+  goback() {
+    this.navCtrl.push(HomePage);
+  }
 }

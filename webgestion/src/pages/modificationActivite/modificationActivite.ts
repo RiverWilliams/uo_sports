@@ -5,6 +5,7 @@ import {Activite, Sport} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
 import {Comparateur} from "../../common/comparateur";
 import {Utilitaire} from "../../common/utilitaire";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'page-modificationActivite',
@@ -20,7 +21,7 @@ export class modificationActivitePage implements OnInit {
     this.web.activites.getSports(this.idActivite).subscribe(d => this.nouveauSport = Array.from(this.sportActuel = d));
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider, private toastCtrl: ToastController, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private web: WebserviceProvider, private toastCtrl: ToastController) {
     this.idActivite = navParams.get("idActivite");
   }
 
@@ -36,13 +37,15 @@ export class modificationActivitePage implements OnInit {
   modificationActiviteForm() {
     console.log(this.activite)
 
-    this.web.activites.put(this.activite).subscribe();
 
     const del = this.sportActuel.filter(value => !this.nouveauSport.find(value2 => value2.id === value.id));
     const add = this.nouveauSport.filter(value => !this.sportActuel.find(value2 => value2.id === value.id));
 
-    del.forEach(value => this.web.activites.deleteSport(this.idActivite, value.id).subscribe());
-    add.forEach(value => this.web.activites.addSport(this.idActivite, value.id).subscribe());
+    const oDel = Observable.of(del).flatMap(v => v).map(value => this.web.activites.deleteSport(this.idActivite, value.id)).combineAll();
+    const oAdd = Observable.of(add).flatMap(v => v).map(value => this.web.activites.addSport(this.idActivite, value.id)).combineAll();
+
+    this.web.activites.put(this.activite).subscribe({complete: () => Observable.of(oDel, oAdd).combineAll().subscribe()});
+
     Utilitaire.createToastOk(this.toastCtrl).present();
 
   };

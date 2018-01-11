@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController } from 'ionic-angular';
-import { WebserviceProvider } from "../../common/webservice";
-import { FormControl } from "@angular/forms";
-import { Comparateur } from "../../common/comparateur";
-import { Observable } from "rxjs/Observable";
+import {Component} from '@angular/core';
+import {AlertController} from 'ionic-angular';
+import {FormControl} from "@angular/forms";
 
 @Component({
 	selector: 'page-selectsuppressionpiece',
@@ -13,17 +10,11 @@ export class selectSuppressionPiecePage {
 
 	search = new FormControl();
 
-	constructor(public alertCtrl: AlertController, private web: WebserviceProvider) {
+	constructor(public alertCtrl: AlertController) {
 
 	}
 
-	ngOnInit(): void {
-	/*	Observable.combineLatest(this.search.valueChanges, this.web.sports.getAll(), (search: string, sports: Sport[]) => {
-		const s = search.toLowerCase();
-	  	return sports.filter(sport => sport.nom.toLowerCase().includes(s)).sort(Comparateur.Sport.nom);
-		}).subscribe(d => this.listeSport = d);
-		*/
-	}
+
 
 	SupprimerPiece() {
 		let alert = this.alertCtrl.create({

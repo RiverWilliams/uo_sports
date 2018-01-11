@@ -1,22 +1,39 @@
 <ion-content padding>
-	<div padding>
-		<p ion-text color="primary" floating>Etudiant(s) ou personnel(s) inscrit(s) à l'activité : </p>
-		<form #f="ngForm" (ngSubmit)="ListeEffectifForm(f.value)">
-			<ion-grid>
-				<ion-row *ngFor="let inscrit of listeEffectif1">
-					<ion-col>
-						<ion-item>
-							<p ion-text>{{inscrit}}</p>
-						</ion-item>
-					</ion-col>
-				</ion-row>
-			</ion-grid>
-			<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
-		</form>
-		<button ion-button (click)="goback()" block>Retour</button>
-	</div>
+  <div padding>
+    <p ion-text color="primary" floating>Personnes inscrits au créneau : </p>
+    <ion-grid>
+      <ion-row>
+        <ion-col>Nom</ion-col>
+        <ion-col>Prenom</ion-col>
+        <ion-col>Telephone</ion-col>
+        <ion-col>Option Sport</ion-col>
+        <ion-col>Nombre d'heure</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let inscription of inscriptions">
+        <ion-col>
+          {{inscription.personne.nom}}
+        </ion-col>
+        <ion-col>
+          {{inscription.personne.prenom}}
+        </ion-col>
+        <ion-col>
+          {{inscription.personne.telephone}}
+        </ion-col>
+        <ion-col>
+          <ng-container *ngIf="inscription.demande">
+            Option Sport
+          </ng-container>
+        </ion-col>
+        <ion-col>
+          <ng-container *ngIf="inscription.demande">
+            {{inscription.nombreHeures}}
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <button ion-button (click)="goback()" block>Retour</button>
+  </div>
 </ion-content>
-
 
 
 <!--
