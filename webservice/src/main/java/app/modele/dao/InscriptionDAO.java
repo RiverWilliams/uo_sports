@@ -58,7 +58,7 @@ public class InscriptionDAO extends AbstractDao implements IInscriptionDAO {
     @Override
     public List<Inscription> getInscriptionsByIdPersonne(Long id) {
         //language=SQL
-        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_personne=?) inscription JOIN creneau ON inscription.id_creneau=creneau.id JOIN responsable ON creneau.id_responsable = responsable.id JOIN niveau ON creneau.id_niveau = niveau.id JOIN activite ON creneau.id_activite = activite.id JOIN lieu ON creneau.id_lieu = lieu.id";
+        final String sql = "SELECT * FROM (SELECT * FROM inscription WHERE id_personne=?) inscription JOIN creneau ON inscription.id_creneau=creneau.id JOIN responsable ON creneau.id_responsable = responsable.id JOIN niveau ON creneau.id_niveau = niveau.id JOIN activite ON creneau.id_activite = activite.id JOIN lieu ON creneau.id_lieu = lieu.id JOIN personne ON personne.id=inscription.id_personne";
         return getJdbcTemplate().query(sql, inscriptionRowMapper, id);
     }
 
