@@ -32,7 +32,7 @@ Pieces à fournir : <br/>
     #end
 </ul>
 <br/>
-Un chèque de ${personne.categoriePersonne.prix} euros. <br/>
+Un chèque de ${personne.categoriePersonne.prix} €. <br/>
 <br/>
 Pour valider l'inscription, merci d'ajouter la demande aux adhésions via l'application de gestion des sports. <br/>
 <br/>

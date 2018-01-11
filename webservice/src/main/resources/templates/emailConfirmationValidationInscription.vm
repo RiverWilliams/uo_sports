@@ -33,7 +33,7 @@ Pour valider l'inscription, merci de vous présenter au secrétariat SUAPSE, bur
         <li> $p.nom </li>
     #end
 </ul>
-un chèque de ${personne.categoriePersonne.prix} à l'ordre de l'agent comptable de l'université d'Orléans. <br/>
+un chèque de ${personne.categoriePersonne.prix} € à l'ordre de l'agent comptable de l'université d'Orléans. <br/>
 <br/>
 <br/>
 Ceci est un mail automatique, merci de ne pas répondre. <br/>
