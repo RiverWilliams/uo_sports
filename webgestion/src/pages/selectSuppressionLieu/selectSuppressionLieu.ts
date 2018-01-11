@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController } from 'ionic-angular';
+import { WebserviceProvider } from "../../common/webservice";
+import { FormControl } from "@angular/forms";
+import { Comparateur } from "../../common/comparateur";
+import { Observable } from "rxjs/Observable";
 
 @Component({
 	selector: 'page-selectsuppressionlieu',
@@ -7,31 +11,21 @@ import { AlertController } from 'ionic-angular';
 })
 export class selectSuppressionLieuPage {
 
-	selectSuppressionLieu = {
-		choixSuppressionLieu: ''
-	};
+	search = new FormControl();
 
-	listeLieu = [
-		'Gymnase',
-		'Stage',
-		'Piscine',
-	];
+	constructor(public alertCtrl: AlertController, private web: WebserviceProvider) {
 
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listeLieu = this.listeLieu.filter(function(lieu) {
-				return lieu.toLowerCase().includes(val.toLowerCase());
-			});
-		}
 	}
 
-	// Suppression d'un lieu
-	constructor(public alertCtrl: AlertController) {}
+	ngOnInit(): void {
+		Observable.combineLatest(this.search.valueChanges, this.web.sports.getAll(), (search: string, sports: Sport[]) => {
+		const s = search.toLowerCase();
+	  	return sports.filter(sport => sport.nom.toLowerCase().includes(s)).sort(Comparateur.Sport.nom);
+		}).subscribe(d => this.listeSport = d);
+	}
 
 	SupprimerLieu() {
-		console.log(this.selectSuppressionLieu)
-		console.log(this.selectSuppressionLieu.choixSuppressionLieu)
+
 		let alert = this.alertCtrl.create({
 			title: 'Etes-vous sûr de supprimer cette activité?',
 			message: '',

@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController } from 'ionic-angular';
+import { WebserviceProvider } from "../../common/webservice";
+import { FormControl } from "@angular/forms";
+import { Comparateur } from "../../common/comparateur";
+import { Observable } from "rxjs/Observable";
 
 @Component({
 	selector: 'page-selectsuppressioncategorietarif',
@@ -7,32 +11,15 @@ import { AlertController } from 'ionic-angular';
 })
 export class selectSuppressionCategorieTarifPage {
 
-	selectSuppressionCategorieTarif = {
-		choixSuppressionCategorieTarif: ''
-	};
+	search = new FormControl();
 
-	listeCategorie = [
-		'Étudiant, IRFMK, Psychomotricité, Infirmières',
-		'Personnel de l\'Université',
-		'Personnel du CROUS / Radio Campus',
-		'Personnel du CNRS / DREAL / CCNO',
-	];
-
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listeCategorie = this.listeCategorie.filter(function(categorie) {
-				return categorie.toLowerCase().includes(val.toLowerCase());
-			});
-		}
-	}
 
 	// Suppression d'activite
-	constructor(public alertCtrl: AlertController) {}
+	constructor(public alertCtrl: AlertController, private web: WebserviceProvider) {
+
+	}
 
 	SupprimerCategorieTarifForm() {
-		console.log(this.selectSuppressionCategorieTarif)
-		console.log(this.selectSuppressionCategorieTarif.choixSuppressionCategorieTarif)
 		let alert = this.alertCtrl.create({
 			title: 'Etes-vous sûr de supprimer cette catégorie?',
 			message: '',

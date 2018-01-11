@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WebserviceProvider } from "../../common/webservice";
 
 @Component({
 	selector: 'page-formcreationlieu',
@@ -7,14 +8,12 @@ import { Component } from '@angular/core';
 export class formCreationLieuPage {
 
 	// Creation d'un lieu
-	creationLieu = {
-		nomLieu: '',
-		adresseLieu: '',
-		villeLieu: ''
-	};
+	ngOnInit(): void {
+
+	}
 
 	CreationLieuForm() {
-		console.log(this.creationLieu)
+
 	};
 
 }

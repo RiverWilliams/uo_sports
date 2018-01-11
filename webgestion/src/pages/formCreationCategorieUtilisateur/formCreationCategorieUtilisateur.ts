@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WebserviceProvider } from "../../common/webservice";
 
 @Component({
 	selector: 'page-formcreationcategorieutilisateur',
@@ -6,42 +7,12 @@ import { Component } from '@angular/core';
 })
 export class formCreationCategorieUtilisateurPage {
 
-	// Creation d'activite
-	creationCategorieUtilisateur = {
-		nomCategorieUtilisateur: '',
-		tarifUtilisateur: ''
-	};
+	ngOnInit(): void {
 
-	listeResponsable = [
-		'mr zen',
-		'mrs peace',
-		'kid war'
-	];
-
-	listeJour = [
-		'lundi',
-		'mardi',
-		'mercredi',
-		'jeudi',
-		'vendredi',
-		'samedi',
-		'dimanche'
-	];
-
-	listeNiveau = [
-		'debutant',
-		'intermediaire',
-		'pro'
-	];
-
-	listeLieu = [
-		'piscine',
-		'gymnase',
-		'stade'
-	];
+	}
 
 	CreationCategorieUtilisateur() {
-		console.log(this.creationCategorieUtilisateur)
+
 	};
 
 }

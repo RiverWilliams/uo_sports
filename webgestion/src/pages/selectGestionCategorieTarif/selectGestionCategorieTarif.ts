@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { WebserviceProvider } from "../../common/webservice";
+import { FormControl } from "@angular/forms";
+import { Comparateur } from "../../common/comparateur";
+import { Observable } from "rxjs/Observable";
 import { gestionCategorieTarifPage } from '../gestionCategorieTarif/gestionCategorieTarif';
 
 @Component({
@@ -8,34 +12,24 @@ import { gestionCategorieTarifPage } from '../gestionCategorieTarif/gestionCateg
 })
 
 export class selectGestionCategorieTarifPage {
-	constructor(public navCtrl: NavController) {
+
+	search = new FormControl();
+
+	constructor(public navCtrl: NavController, private web: WebserviceProvider) {
 
 	}
 
-	//Modification d'un catégorie utilisateur
-	listeCategorie = [
-		'Étudiant, IRFMK, Psychomotricité, Infirmières',
-		'Personnel de l\'Université',
-		'Personnel du CROUS / Radio Campus',
-		'Personnel du CNRS / DREAL / CCNO',
-	];
-
-	gestionCategorieTarif = {
-		choixGestionCategorieTarif: ''
-	};
+	ngOnInit(): void {
+		Observable.combineLatest(this.search.valueChanges, this.web.sports.getAll(), (search: string, sports: Sport[]) => {
+		const s = search.toLowerCase();
+	  	return sports.filter(sport => sport.nom.toLowerCase().includes(s)).sort(Comparateur.Sport.nom);
+		}).subscribe(d => this.listeSport = d);
+	}
 	
 	GestionCategorieTarifForm() {
-		console.log("Selected Item", this.gestionCategorieTarif);
-		console.log(this.gestionCategorieTarif.choixGestionCategorieTarif);
-		this.navCtrl.push(gestionCategorieTarifPage, {liste: this.gestionCategorieTarif.choixGestionCategorieTarif});
+
+		this.navCtrl.push(gestionCategorieTarifPage);
 	}
 
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listeCategorie = this.listeCategorie.filter(function(personnel) {
-				return personnel.toLowerCase().includes(val.toLowerCase());
-			});
-		}
-	}
+
 }

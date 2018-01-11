@@ -1,6 +1,7 @@
 <p ion-text color="primary" floating>Choisir la catégorie personnel à supprimer : </p>
 <ion-searchbar placeholder="Catégorie personnel :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SupprimerCategorieTarifForm(f.value)">
+	 	<h1>A FAIRE</h1>
 	<ion-list radio-group ngModel name="choixSuppressionCategorieTarif" required>
 		<ion-item *ngFor="let categorie of listeCategorie">
 			<ion-label>{{categorie}}</ion-label>

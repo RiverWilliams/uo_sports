@@ -7,12 +7,10 @@ import { Component } from '@angular/core';
 export class formCreationPiecePage {
 
 	// Creation d'une piece
-	creationPiece = {
-		nom: ''
-	};
+
 
 	CreationPieceForm() {
-		console.log(this.creationPiece)
+
 	};
 
 }

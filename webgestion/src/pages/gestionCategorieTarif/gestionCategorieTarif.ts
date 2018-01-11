@@ -11,21 +11,13 @@ export class gestionCategorieTarifPage {
 	public nomliste;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams){
-		this.nomliste = navParams.get("liste");
-		console.log("Parametre ",this.nomliste);
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//il faut importer la bonne liste d'attente suivant le string liste
-		//on fait en attendant avec la liste items1 dans l'html
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	}
 
-	gestionCategorieTarif = {
-		categorie: '',
-		tarif: ''
-	};
+
 
 	GestionCategorieTarifForm() {
-		console.log(this.gestionCategorieTarif)
+
 	};
 
 	goback() {

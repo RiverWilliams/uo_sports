@@ -1,6 +1,7 @@
 <p ion-text color="primary" floating>Choisir le lieu à modifier :</p>
-<ion-searchbar placeholder="Lieu :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+<ion-searchbar placeholder="Lieu :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SelectModificationLieu(f.value)">
+	 	<h1>A FAIRE</h1>
 	<ion-list radio-group ngModel name="choixModificationLieu" required>
 		<ion-item *ngFor="let lieu of listeLieu">
 			<ion-label>{{lieu}}</ion-label>

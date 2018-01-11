@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { WebserviceProvider } from "../../common/webservice";
+import { FormControl } from "@angular/forms";
+import { Comparateur } from "../../common/comparateur";
+import { Observable } from "rxjs/Observable";
 import { modificationLieuPage } from '../modificationLieu/modificationLieu';
 
 @Component({
@@ -8,32 +12,22 @@ import { modificationLieuPage } from '../modificationLieu/modificationLieu';
 })
 
 export class selectModificationLieuPage {
-	constructor(public navCtrl: NavController) {
+
+	search = new FormControl();
+	
+	constructor(public navCtrl: NavController, private web: WebserviceProvider) {
 
 	}
 
-	selectModificationLieu = {
-		choixModificationLieu: ''
-	};
-
-	listeLieu = [
-		'Gymnase',
-		'Stage',
-		'Piscine',
-	];
-
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listeLieu = this.listeLieu.filter(function(lieu) {
-				return lieu.toLowerCase().includes(val.toLowerCase());
-			});
-		}
+	ngOnInit(): void {
+		Observable.combineLatest(this.search.valueChanges, this.web.sports.getAll(), (search: string, sports: Sport[]) => {
+		const s = search.toLowerCase();
+	  	return sports.filter(sport => sport.nom.toLowerCase().includes(s)).sort(Comparateur.Sport.nom);
+		}).subscribe(d => this.listeSport = d);
 	}
 
 	SelectModificationLieu() {
-		console.log(this.selectModificationLieu);
-		console.log(this.selectModificationLieu.choixModificationLieu);
-		this.navCtrl.push(modificationLieuPage, {liste: this.selectModificationLieu.choixModificationLieu});		
+
+		this.navCtrl.push(modificationLieuPage,);		
 	};
 }
