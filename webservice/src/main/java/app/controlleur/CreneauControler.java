@@ -45,7 +45,6 @@ public class CreneauControler {
     }
 
     @GetMapping("/{id}/inscrits")
-    @JsonView(Inscription.Views.Personne.class)
     public List<Inscription> getInscrits(@PathVariable Long id) {
         return creneauService.getInscrits(id);
     }

@@ -3,19 +3,16 @@ package app.modele.relation;
 import app.modele.entity.Creneau;
 import app.modele.entity.Personne;
 import app.modele.service.InscriptionService;
-import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 public class Inscription {
 
-    @JsonView(Views.Personne.class)
     @Valid
     @NotNull(groups = {Insert.class, Delete.class})
     private Personne personne;
 
-    @JsonView(Views.Creneau.class)
     @Valid
     @NotNull(groups = {Insert.class, InscriptionService.DemandeInscription.Insert.class, Delete.class})
     private Creneau creneau;

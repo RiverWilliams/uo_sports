@@ -39,16 +39,8 @@ public class InscriptionRowMapper extends AbstractRowMapper<Inscription> {
         inscription.setEnAttente(rs.getBoolean("en_attente"));
         inscription.setEcts(rs.getInt("ects"));
         inscription.setNombreHeures(rs.getInt("nombre_heures"));
-        try {
-            inscription.setPersonne(personneRowMapper.mapRow(rs, rowNum));
-        } catch (SQLException e) {
-            inscription.setPersonne(null);
-        }
-        try {
-            inscription.setCreneau(creneauRowMapper.mapRow(rs, rowNum));
-        } catch (SQLException e) {
-            inscription.setCreneau(null);
-        }
+        inscription.setPersonne(personneRowMapper.mapRow(rs, rowNum));
+        inscription.setCreneau(creneauRowMapper.mapRow(rs, rowNum));
         return inscription;
     }
 }
