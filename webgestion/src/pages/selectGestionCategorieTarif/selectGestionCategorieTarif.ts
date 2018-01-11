@@ -20,10 +20,11 @@ export class selectGestionCategorieTarifPage {
 	}
 
 	ngOnInit(): void {
-		Observable.combineLatest(this.search.valueChanges, this.web.sports.getAll(), (search: string, sports: Sport[]) => {
+	/*	Observable.combineLatest(this.search.valueChanges, this.web.sports.getAll(), (search: string, sports: Sport[]) => {
 		const s = search.toLowerCase();
 	  	return sports.filter(sport => sport.nom.toLowerCase().includes(s)).sort(Comparateur.Sport.nom);
 		}).subscribe(d => this.listeSport = d);
+		*/
 	}
 	
 	GestionCategorieTarifForm() {

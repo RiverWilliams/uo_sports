@@ -1,7 +1,36 @@
 <ion-content padding>
   <div padding>
-    <form *ngIf="sport" #f="ngForm" (ngSubmit)="modificationActualiteForm()">
-      <p>A FAIRE</p>
+    <form *ngIf="actualite" #f="ngForm" (ngSubmit)="modificationActualiteForm()">
+      <ion-item>
+        <ion-label color="primary" floating>Titre :</ion-label>
+        <ion-input [(ngModel)]="actualite.titre" type="text" name="titre" clearInput required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Date de début :</ion-label>
+        <ion-datetime [(ngModel)]="actualite.dateDebut" displayFormat="DD/MM/YYYY" name="dateDebut" min="2000" max="2030" required></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Date de fin :</ion-label>
+        <ion-datetime [(ngModel)]="actualite.dateFin" displayFormat="DD/MM/YYYY" name="dateFin" min="2000" max="2030" required></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Description courte :</ion-label>
+        <ion-input [(ngModel)]="actualite.descCourte" name="descCourte" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Description longue :</ion-label>
+        <ion-textarea [(ngModel)]="actualite.descLongue" name="descLongue" required></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Chemin de l'image :</ion-label>
+        <ion-input [(ngModel)]="actualite.image" name="image" clearInput required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Concerne les sports :</ion-label>
+        <ion-select [(ngModel)]="actualite.sports" name="sports" multiple="true" [compareWith]="compareFn">
+          <ion-option *ngFor="let s of sports" [value]="s.id">{{s.nom}}</ion-option>
+        </ion-select>
+      </ion-item>
       <button ion-button type="submit" [disabled]="!f.valid" block>Valider</button>
     </form>
     <button ion-button (click)="goback()" block>Retour</button>

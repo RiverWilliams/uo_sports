@@ -3,6 +3,9 @@ import {AlertController, ToastController} from 'ionic-angular';
 import {Actualite} from "../../common/model";
 import {FormControl} from "@angular/forms";
 import {WebserviceProvider} from "../../common/webservice";
+import {Comparateur} from "../../common/comparateur";
+import {Utilitaire} from "../../common/utilitaire";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'page-selectsuppressionactualite',
@@ -11,19 +14,18 @@ import {WebserviceProvider} from "../../common/webservice";
 export class selectSuppressionActualitePage implements OnInit {
 
   search = new FormControl();
-
-  ngOnInit(): void {
-  /*  this.search.valueChanges.subscribe((search) => {
-      const s = search.toLowerCase();
-      this.web.activites.getAll().subscribe(activite => {
-        this.listeActivite = activite.filter(sport => sport.nom.toLowerCase().includes(s)).sort(Comparateur.Activite.nom);
-      });
-    });
-    this.search.setValue('', {emitEvent: true});*/
-  }
+  listeActualite: Actualite[];
 
   constructor(public  alertCtrl: AlertController, private  web: WebserviceProvider, private  toastCtrl: ToastController) {
 
+  }
+
+  ngOnInit(): void {
+    this.web.actualites.getAll().subscribe(d => this.listeActualite = d.sort(Comparateur.Actualite.debut));
+    Observable.combineLatest(this.search.valueChanges, this.web.actualites.getAll(), (search: string, actualites: Actualite[]) => {
+      const s = search.toLowerCase();
+      return actualites.filter(actualite => actualite.titre.toLowerCase().includes(s)).sort(Comparateur.Actualite.debut);
+    }).subscribe(d => this.listeActualite = d);
   }
 
   SupprimerActualite(actualite: Actualite) {

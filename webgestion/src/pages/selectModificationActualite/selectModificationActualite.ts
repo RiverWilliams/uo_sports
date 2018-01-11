@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {modificationActualitePage} from '../modificationActualite/modificationActualite';
-import {Activite} from "../../common/model";
+import {Actualite} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";
 import {FormControl} from "@angular/forms";
+import {Comparateur} from "../../common/comparateur";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'page-selectmodificationactualite',
@@ -12,23 +14,21 @@ import {FormControl} from "@angular/forms";
 
 export class selectModificationActualitePage implements OnInit {
   search = new FormControl();
-  listeActivite: Activite[];
+  listeActualite: Actualite[];
 
   constructor(public navCtrl: NavController, private web: WebserviceProvider) {
 
   }
 
   ngOnInit(): void {
-/*    this.web.activites.getAll().subscribe(d => this.listeActivite = d.sort(Comparateur.Activite.nom));
-    this.web.activites.getAll().subscribe(d => this.listeActivite = d.sort(Comparateur.Activite.nom));
-    Observable.combineLatest(this.search.valueChanges, this.web.activites.getAll(), (search: string, activites: Activite[]) => {
+    this.web.actualites.getAll().subscribe(d => this.listeActualite = d.sort(Comparateur.Actualite.debut));
+    Observable.combineLatest(this.search.valueChanges, this.web.actualites.getAll(), (search: string, actualites: Actualite[]) => {
       const s = search.toLowerCase();
-      return activites.filter(activite => activite.nom.toLowerCase().includes(s)).sort(Comparateur.Sport.nom);
-    }).subscribe(d => this.listeActivite = d);*/
+      return actualites.filter(actualite => actualite.titre.toLowerCase().includes(s)).sort(Comparateur.Actualite.debut);
+    }).subscribe(d => this.listeActualite = d);
   }
 
-  SelectModificationActivite(id) {
+  SelectModificationActualite(id: number) {
     this.navCtrl.push(modificationActualitePage, {idActualite: id});
-    console.log("coucou")
   };
 }

@@ -1,6 +1,11 @@
 <p ion-text color="primary" floating>Choisir l'actualité à supprimer : </p>
 <ion-searchbar placeholder="Actualité :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
-<form #f="ngForm" (ngSubmit)="SupprimerActualite(f.value)">
-  <p>A FAIRE</p>
-  <button ion-button type="submit" [disabled]="!f.valid" block>Supprimer</button>
+<form #f="ngForm" (ngSubmit)="SupprimerActualite(f.value.idActualite)">
+  <ion-list radio-group ngModel name="actu" required>
+    <ion-item *ngFor="let actu of listeActualite">
+      <ion-label>{{actu.titre}}</ion-label>
+      <ion-radio [value]="actu"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <button ion-button [disabled]="!f.valid" type="submit" block>Supprimer</button>
 </form>
