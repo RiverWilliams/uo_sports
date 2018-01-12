@@ -76,7 +76,7 @@ public class ActiviteDAO extends AbstractDao implements IActiviteDAO {
                 "      FROM (SELECT id_sport" +
                 "            FROM appartient" +
                 "            WHERE id_categorie_sport = ?) a" +
-                "        JOIN de_type ON a.id_sport = de_type.id_activite) c" +
+                "        JOIN de_type ON a.id_sport = de_type.id_sport) c" +
                 "  JOIN activite ON c.id_activite = activite.id";
 
         return getJdbcTemplate().query(sql, activiteRowMapper, idCategorie);
