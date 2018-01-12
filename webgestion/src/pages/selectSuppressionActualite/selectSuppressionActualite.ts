@@ -29,9 +29,9 @@ export class selectSuppressionActualitePage implements OnInit {
   }
 
   SupprimerActualite(actualite: Actualite) {
- /*   let alert = this.alertCtrl.create({
-      title: 'Etes-vous sûr de supprimer l\'activite?',
-      message: activite.nom,
+    let alert = this.alertCtrl.create({
+      title: 'Etes-vous sûr de supprimer l\'actualite?',
+      message: actualite.titre,
       buttons: [
         {
           text: 'Annuler',
@@ -40,7 +40,7 @@ export class selectSuppressionActualitePage implements OnInit {
         {
           text: 'Ok',
           handler: () => {
-            this.web.activites.delete(activite.id).subscribe(() => {
+            this.web.actualites.delete(actualite.id).subscribe(() => {
               Utilitaire.createToastOk(this.toastCtrl).present();
               this.search.setValue(this.search.value, {emitEvent: true});
             }, (err) => {
@@ -53,6 +53,6 @@ export class selectSuppressionActualitePage implements OnInit {
         }
       ]
     });
-    alert.present();*/
+    alert.present();
   }
 }

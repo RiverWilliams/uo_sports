@@ -16,7 +16,6 @@ import {Utilitaire} from "../../common/utilitaire";
 export class modificationActualitePage implements OnInit {
   public idActualite;
   actualite: ActualiteJSON;
-  //actualite: Actualite;
   nouveauSport: Sport[];
   ancienSport: Sport[];
   categorieSport: CategorieSport[];
