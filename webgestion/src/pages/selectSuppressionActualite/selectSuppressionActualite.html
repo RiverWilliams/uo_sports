@@ -3,7 +3,7 @@
 <form #f="ngForm" (ngSubmit)="SupprimerActualite(f.value.idActualite)">
   <ion-list radio-group ngModel name="idActualite" required>
     <ion-item *ngFor="let actu of listeActualite">
-      <ion-label>{{actu.titre}}</ion-label>
+      <ion-label>{{actu.titre}} {{actu.dateMiseEnLigne}}</ion-label>
       <ion-radio [value]="actu"></ion-radio>
     </ion-item>
   </ion-list>

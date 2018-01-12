@@ -21,11 +21,11 @@ export class selectSuppressionActualitePage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.web.actualites.getAll().subscribe(d => this.listeActualite = d.sort(Comparateur.Actualite.debut));
     Observable.combineLatest(this.search.valueChanges, this.web.actualites.getAll(), (search: string, actualites: Actualite[]) => {
       const s = search.toLowerCase();
       return actualites.filter(actualite => actualite.titre.toLowerCase().includes(s)).sort(Comparateur.Actualite.debut);
     }).subscribe(d => this.listeActualite = d);
+    this.search.setValue('', {emitEvent: true});
   }
 
   SupprimerActualite(actualite: Actualite) {

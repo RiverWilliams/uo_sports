@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {HomePage} from '../home/home';
 import {Activite, Sport} from "../../common/model";
 import {WebserviceProvider} from "../../common/webservice";

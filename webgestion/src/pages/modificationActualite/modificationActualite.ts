@@ -2,9 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {HomePage} from '../home/home';
 import {WebserviceProvider} from "../../common/webservice";
-import { Sport } from "../../common/model";
-import { CategorieSport } from "../../common/model";
-import {Adaptateur, ActualiteJSON} from "../../common/adaptateur";
+import {Sport} from "../../common/model";
+import {ActualiteJSON, Adaptateur} from "../../common/adaptateur";
 import {Comparateur} from "../../common/comparateur";
 import {Utilitaire} from "../../common/utilitaire";
 
@@ -18,7 +17,6 @@ export class modificationActualitePage implements OnInit {
   actualite: ActualiteJSON;
   nouveauSport: Sport[];
   ancienSport: Sport[];
-  categorieSport: CategorieSport[];
 
   // Modification d'une actualité
 

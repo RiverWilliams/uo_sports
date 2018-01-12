@@ -18,13 +18,13 @@ export class selectSuppressionCategoriePage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.web.categoriesSports.getAll().subscribe(d => this.listeCategorie = d);
     this.search.valueChanges.subscribe((search) => {
       const s = search.toLowerCase();
       this.web.categoriesSports.getAll().subscribe(categorie => {
         this.listeCategorie = categorie.filter(v => v.nom.toLowerCase().includes(s)).sort(Comparateur.CategorieSport.nom);
       });
     });
+    this.search.setValue('', {emitEvent: true});
   }
 
   search = new FormControl();

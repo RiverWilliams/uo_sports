@@ -20,11 +20,11 @@ export class selectSuppressionCreneauPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.web.creneaux.getAll().subscribe(d => this.creneaux = d.sort(Comparateur.Creneau.activiteChronologique));
     this.search.valueChanges.subscribe(search => this.web.creneaux.getAll().subscribe(creneaux => {
       const s = search.toLowerCase();
       return this.creneaux = creneaux.filter(v => (v.activite).nom.toLowerCase().includes(s)).sort(Comparateur.Creneau.activiteChronologique);
     }));
+    this.search.setValue('', {emitEvent: true});
   }
 
   SupprimerCreneau(creneau: Creneau) {
