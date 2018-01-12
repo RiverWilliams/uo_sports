@@ -1,5 +1,5 @@
 <p ion-text color="primary" floating>Choisir le sport à supprimer : </p>
-<ion-searchbar placeholder="Activite :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
+<ion-searchbar placeholder="Activité :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SupprimerActivite(f.value.sport)">
   <ion-list radio-group ngModel name="sport" required>
     <ion-item *ngFor="let activite of listeActivite">

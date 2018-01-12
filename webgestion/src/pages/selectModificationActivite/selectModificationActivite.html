@@ -1,5 +1,5 @@
 <p ion-text color="primary" floating>Choisir l'activité à modifier :</p>
-<ion-searchbar placeholder="Activite :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
+<ion-searchbar placeholder="Activité :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SelectModificationActivite(f.value.idActivite)">
   <ion-list radio-group ngModel name="idActivite" required>
     <ion-item *ngFor="let activite of listeActivite">
