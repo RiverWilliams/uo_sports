@@ -1,5 +1,5 @@
 <p ion-text color="primary" floating>Choisir le créneau à modifier : </p>
-<ion-searchbar placeholder="Activite :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
+<ion-searchbar placeholder="Créneau :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SupprimerCreneau(f.value.creneau)">
   <ion-list radio-group ngModel name="creneau" required>
     <ion-list-header><ion-row>
