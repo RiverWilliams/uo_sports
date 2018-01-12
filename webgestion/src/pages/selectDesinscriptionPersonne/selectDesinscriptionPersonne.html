@@ -1,6 +1,7 @@
 <p ion-text color="primary" floating>Choisir la personne à qui on va enlever une activité : </p>
-<ion-searchbar placeholder="Nom :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+<ion-searchbar placeholder="Personne :" showCancelButton color="danger" [formControl]="search"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SelectDesinscriptionPersonne(f.value)">
+	<h1>A FAIRE</h1>
 	<ion-list radio-group ngModel name="choixDesinscriptionPersonne" required>
 		<ion-item *ngFor="let personne of listePersonne">
 			<ion-label>{{personne}}</ion-label>

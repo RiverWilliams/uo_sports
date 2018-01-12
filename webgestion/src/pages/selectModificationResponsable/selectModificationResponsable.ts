@@ -8,6 +8,7 @@ import { modificationResponsablePage } from '../modificationResponsable/modifica
 })
 
 export class selectModificationResponsablePage {
+	
 	constructor(public navCtrl: NavController) {
 
 	}

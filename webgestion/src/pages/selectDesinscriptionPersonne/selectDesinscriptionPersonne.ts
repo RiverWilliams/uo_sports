@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { desinscriptionPersonnePage } from '../desinscriptionPersonne/desinscriptionPersonne';
+import {Creneau} from "../../common/model";
+import {WebserviceProvider} from "../../common/webservice";
+import {FormControl} from "@angular/forms";
+import {Observable} from "rxjs/Observable";
+import {Comparateur} from "../../common/comparateur";
 
 @Component({
 	selector: 'page-selectdesinscriptionpersonne',
@@ -8,36 +13,22 @@ import { desinscriptionPersonnePage } from '../desinscriptionPersonne/desinscrip
 })
 export class selectDesinscriptionPersonnePage {
 
-	constructor(public navCtrl: NavController) {
+	search = new FormControl();
+  	creneaux: Creneau[];
+
+	constructor(public navCtrl: NavController, private web: WebserviceProvider) {
 
 	}
 
-	selectDesinscriptionPersonne = {
-		choixDesinscriptionPersonne: ''
-	};
-
-	listePersonne = [
-		'andré',
-		'martin',
-		'sophie',
-		'bacassine',
-		'denis',
-		'john'
-	];
+	ngOnInit(): void {
+	    this.web.creneaux.getAll().subscribe(d => this.creneaux = d.sort(Comparateur.Creneau.activiteChronologique));
+	    Observable.combineLatest(this.search.valueChanges, this.web.creneaux.getAll(), (search: string, creneaux: Creneau[]) => {
+	      const s = search.toLowerCase();
+	      return creneaux.filter(v => (v.activite).nom.toLowerCase().includes(s)).sort(Comparateur.Creneau.activiteChronologique);
+	    }).subscribe(d => this.creneaux = d);
+	}
 
 	SelectDesinscriptionPersonne() {
-		console.log("Selected Item", this.selectDesinscriptionPersonne);
-		console.log(this.selectDesinscriptionPersonne.choixDesinscriptionPersonne);
-		this.navCtrl.push(desinscriptionPersonnePage, {listePersonne: this.selectDesinscriptionPersonne.choixDesinscriptionPersonne});
+		this.navCtrl.push(desinscriptionPersonnePage);
 	}
-
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listePersonne = this.listePersonne.filter(function(personne) {
-				return personne.toLowerCase().includes(val.toLowerCase());
-			});
-		}
-	}
-
 }

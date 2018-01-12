@@ -2,5 +2,11 @@
 <ion-searchbar placeholder="Personne :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SelectModificationPersonne(f.value)">
 	<h1>A FAIRE</h1>
-	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
+	<ion-list radio-group ngModel name="choixModificationPersonne" required>
+		<ion-item *ngFor="let personne of listePersonne">
+			<ion-label>{{personne}}</ion-label>
+			<ion-radio value={{personne}}></ion-radio>
+		</ion-item>
+	</ion-list>
+	<button ion-button [disabled]="!f.valid" type="submit" block>Valider</button>
 </form>

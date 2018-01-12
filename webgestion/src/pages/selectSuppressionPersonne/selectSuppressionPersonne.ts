@@ -1,40 +1,33 @@
 import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
+import {WebserviceProvider} from "../../common/webservice";
+import {Comparateur} from "../../common/comparateur";
+import {Observable} from "rxjs/Observable";
+import {FormControl} from "@angular/forms";
+import {Personne} from "../../common/model";
 
 @Component({
 	selector: 'page-selectsuppressionpersonne',
 	templateUrl: 'selectSuppressionPersonne.html'
 })
 export class selectSuppressionPersonnePage {
-
-	selectSuppressionPersonne = {
-		choixSuppressionPersonne: ''
-	};
-
-	listePersonne = [
-		'andré',
-		'martin',
-		'sophie',
-		'bacassine',
-		'denis',
-		'john'
-	];
-
-	filterItems(ev: any) {
-		let val = ev.target.value;
-		if (val && val.trim() !== '') {
-			this.listePersonne = this.listePersonne.filter(function(personne) {
-				return personne.toLowerCase().includes(val.toLowerCase());
-			});
-		}
-	}
+	search = new FormControl();
+    listePersonne: Personne[];
 
 	// Suppression d'une personne
-	constructor(public alertCtrl: AlertController) {}
+	constructor(public alertCtrl: AlertController, private  web: WebserviceProvider) {
+
+	}
+
+	ngOnInit(): void {
+	    Observable.combineLatest(this.search.valueChanges, this.web.personnes.getAll(), (search: string, personnes: Personne[]) => {
+	      const s = search.toLowerCase();
+	      return personnes.filter(pers => pers.nom.toLowerCase().includes(s)).sort(Comparateur.Personne.nom);
+    	}).subscribe(d => this.listePersonne = d);
+    	
+	}
 
 	SuppressionPersonne() {
-		console.log(this.selectSuppressionPersonne)
-		console.log(this.selectSuppressionPersonne.choixSuppressionPersonne)
 		let alert = this.alertCtrl.create({
 			title: 'Etes-vous sûr de supprimer cette personne?',
 			message: 'Avez-vous vérifié s\'elle n\'est pas encore inscrite dans une activité?',

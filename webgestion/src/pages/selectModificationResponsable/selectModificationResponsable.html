@@ -2,5 +2,11 @@
 <ion-searchbar placeholder="Responsable :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="SelectModificationResponsable(f.value)">
 	<h1>A FAIRE</h1>
+	<ion-list radio-group ngModel name="choixModificationResponsable" required>
+		<ion-item *ngFor="let responsable of listeResponsable">
+			<ion-label>{{responsable}}</ion-label>
+			<ion-radio value={{responsable}}></ion-radio>
+		</ion-item>
+	</ion-list>
 	<button ion-button [disabled]="!f.valid || valider" type="submit" block>Valider</button>
 </form>

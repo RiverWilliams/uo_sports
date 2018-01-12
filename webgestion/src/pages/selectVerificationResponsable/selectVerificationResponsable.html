@@ -1,5 +1,5 @@
 <p ion-text color="primary" floating>Choisir le responsable à vérifier : </p>
-<ion-searchbar placeholder="Nom :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
+<ion-searchbar placeholder="Responsable :" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>
 <form #f="ngForm" (ngSubmit)="VerifResponsableForm(f.value)">
 		<h1>A FAIRE</h1>
 	<ion-list radio-group ngModel name="choixVerifResponsable" required>
