@@ -14,7 +14,7 @@
     <br/>
     Activités demandées : <br/>
 <ul>
-    #foreach ($i in $inscriprions)
+    #foreach ($i in $inscriptions)
         #set ($c = $i.creneau)
         <li>
             ${c.activite.nom} <br/>
